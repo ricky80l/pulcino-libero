@@ -23,6 +23,13 @@ func _ready():
 func chicco_raccolto():
 	chicchi_presi += 1
 	_aggiorna_contatore()
+	# il contatore fa un piccolo "boing"
+	var tween := Tween.new()
+	add_child(tween)
+	tween.interpolate_property(contatore, "rect_scale", Vector2(3.3, 3.3), Vector2(2.5, 2.5), 0.3, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	tween.queue_free()
 
 
 func nido_raggiunto(nido):
@@ -43,6 +50,7 @@ func _on_uscita_body_entered(corpo):
 		player.set_physics_process(false)
 		testo_fine.text = "Sei scappato dal pollaio!\n\nChicchi: %d / %d\n\nPremi salto per rigiocare" % [chicchi_presi, chicchi_totali]
 		messaggio.visible = true
+		Suoni.suona("fine", 0.0)
 
 
 func _process(_delta):

@@ -13,6 +13,10 @@ config_version=4
 config/name="Il Pulcino Libero"
 run/main_scene="res://scenes/livello_1.tscn"
 
+[autoload]
+
+Suoni="*res://scripts/suoni.gd"
+
 [display]
 
 window/size/width=1280

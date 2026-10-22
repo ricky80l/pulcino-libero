@@ -1,6 +1,8 @@
 extends Area2D
 # Chicco di mais da raccogliere: ondeggia su e giù, sparisce con un "pop" quando il pulcino lo prende.
 
+const Effetti = preload("res://scripts/effetti.gd")
+
 export var ampiezza_ondeggio := 4.0  # quanto sale e scende (pixel)
 
 var tempo := 0.0
@@ -36,6 +38,8 @@ func _on_body_entered(corpo):
 		return
 	raccolto = true
 	get_tree().call_group("livello", "chicco_raccolto")
+	Suoni.suona("chicco", 0.12)
+	Effetti.sbuffo(get_parent(), position, Color(1.0, 0.9, 0.3), 10, 160.0)
 	# Pop: si gonfia e svanisce
 	var tween := Tween.new()
 	add_child(tween)

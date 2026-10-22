@@ -25,6 +25,14 @@ func _on_body_entered(corpo):
 func accendi():
 	acceso = true
 	update()
+	Suoni.suona("nido", 0.0)
+	# piccolo saltello di gioia del nido
+	var tween := Tween.new()
+	add_child(tween)
+	tween.interpolate_property(self, "scale", Vector2(1.4, 0.7), Vector2.ONE, 0.5, Tween.TRANS_ELASTIC, Tween.EASE_OUT)
+	tween.start()
+	yield(tween, "tween_all_completed")
+	tween.queue_free()
 
 
 func spegni():
