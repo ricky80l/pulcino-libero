@@ -24,6 +24,27 @@ var inseguendo := false
 var tempo := 0.0
 var pulcino = null
 
+const Parti = preload("res://scripts/parti.gd")
+const CORPO = preload("res://assets/grafica/topo/corpo.svg")
+const ORECCHIO = preload("res://assets/grafica/topo/orecchio.svg")
+const CODA = preload("res://assets/grafica/topo/coda.svg")
+const ZAMPA = preload("res://assets/grafica/topo/zampa.svg")
+const OCCHIO = preload("res://assets/grafica/topo/occhio.svg")
+const OCCHIO_SPAVENTATO = preload("res://assets/grafica/topo/occhio_spaventato.svg")
+const SOPRACCIGLIO = preload("res://assets/grafica/topo/sopracciglio.svg")
+const ESCLAMATIVO = preload("res://assets/grafica/topo/esclamativo.svg")
+
+# pezzi del disegno, dentro "aspetto" che si gira verso la direzione di marcia
+var aspetto := Node2D.new()
+var coda: Sprite
+var zampa_dietro: Sprite
+var zampa_davanti: Sprite
+var corpo: Sprite
+var orecchio: Sprite
+var occhio: Sprite
+var sopracciglio: Sprite
+var esclamativo: Sprite
+
 
 func _ready():
 	partenza_x = position.x
@@ -33,6 +54,16 @@ func _ready():
 	forma.shape = rettangolo
 	forma.position = Vector2(0, -18)
 	add_child(forma)
+	# monta il disegno: i primi pezzi stanno dietro
+	add_child(aspetto)
+	coda = Parti.crea(aspetto, CODA, Vector2(66, 50), Vector2(-28, -12))
+	zampa_dietro = Parti.crea(aspetto, ZAMPA, Vector2(11, 7), Vector2(-14, -3))
+	zampa_davanti = Parti.crea(aspetto, ZAMPA, Vector2(11, 7), Vector2(14, -3))
+	orecchio = Parti.crea(aspetto, ORECCHIO, Vector2(20, 34), Vector2(12, -36))
+	corpo = Parti.crea(aspetto, CORPO, Vector2(66, 96), Vector2.ZERO)
+	occhio = Parti.crea(aspetto, OCCHIO, Vector2(10, 10), Vector2(22, -27))
+	sopracciglio = Parti.crea(aspetto, SOPRACCIGLIO, Vector2(15, 7), Vector2(22, -36))
+	esclamativo = Parti.crea(aspetto, ESCLAMATIVO, Vector2(11, 56), Vector2(6, -58))
 
 
 func _physics_process(delta):
@@ -88,54 +119,41 @@ func _physics_process(delta):
 			attesa_spavento = 1.5
 			Suoni.suona("squittio")
 
-	for corpo in get_overlapping_bodies():
-		if corpo.is_in_group("pulcino") and corpo.colpito(global_position.x):
+	for altro in get_overlapping_bodies():
+		if altro.is_in_group("pulcino") and altro.colpito(global_position.x):
 			Suoni.suona("squittio", 0.05, -3.0)
-	update()
+	_aggiorna_aspetto()
 
 
-func _draw():
-	var d := direzione
+# Muove i pezzi del disegno secondo l'umore del topo
+func _aggiorna_aspetto():
 	var offeso := timer_pausa > 0
 	var spaventato := timer_balzo > 0
 	var su := 0.0
 	if spaventato:
 		su = -sin(PI * (1.0 - timer_balzo / DURATA_BALZO)) * altezza_balzo
 	if timer_allarme > 0:
-		# "!" di sorpresa e saltino quando si accorge del pulcino
-		su -= sin(PI * timer_allarme / DURATA_ALLARME) * 8.0
-		var cima := Vector2(10 * d, -78 + su)
-		draw_rect(Rect2(cima.x - 3, cima.y, 6, 18), Color(0.85, 0.15, 0.1))
-		draw_circle(cima + Vector2(0, 26), 3.5, Color(0.85, 0.15, 0.1))
-	var o := Vector2(0, su)
+		su -= sin(PI * timer_allarme / DURATA_ALLARME) * 8.0  # saltino di sorpresa
+	aspetto.position.y = su
+	aspetto.scale.x = direzione
+
 	var veloce := 18.0 if inseguendo else 10.0  # zampette più svelte quando insegue
-	var passo := 0.0 if (offeso or spaventato) else sin(tempo * veloce) * 2.0
-	var gonfio := 1.18 if offeso else 1.0
-	var grigio := Color(0.58, 0.56, 0.6)
-	var rosa := Color(0.95, 0.68, 0.72)
-	# coda: dritta e tesa se spaventato
-	var punta_coda := Vector2(-56 * d, -44) if spaventato else Vector2(-52 * d, -24 + passo * 2)
-	draw_line(o + Vector2(-28 * d, -10), o + punta_coda, rosa, 3.0)
-	# zampette
-	draw_circle(o + Vector2(-14 + passo, -2), 5, rosa)
-	draw_circle(o + Vector2(14 - passo, -2), 5, rosa)
-	# pancione: ellisse
-	draw_set_transform(o + Vector2(0, -20), 0, Vector2(1.6 * gonfio, 1.0 * gonfio))
-	draw_circle(Vector2.ZERO, 20, grigio)
-	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
-	# orecchio
-	draw_circle(o + Vector2(12 * d, -40), 10, grigio)
-	draw_circle(o + Vector2(12 * d, -40), 6, rosa)
-	# occhio: enorme quando è spaventato
-	if spaventato:
-		draw_circle(o + Vector2(22 * d, -27), 7, Color.white)
-		draw_circle(o + Vector2(23 * d, -27), 3, Color.black)
-	else:
-		draw_circle(o + Vector2(22 * d, -26), 3, Color.black)
-	# naso e baffi
-	draw_circle(o + Vector2(34 * d, -18), 4, rosa)
-	draw_line(o + Vector2(32 * d, -18), o + Vector2(44 * d, -22), Color(0.3, 0.3, 0.3), 1.0)
-	draw_line(o + Vector2(32 * d, -18), o + Vector2(44 * d, -14), Color(0.3, 0.3, 0.3), 1.0)
-	# sopracciglio offeso
-	if offeso:
-		draw_line(o + Vector2(17 * d, -34), o + Vector2(27 * d, -30), Color.black, 2.0)
+	var passo := 0.0 if (offeso or spaventato) else sin(tempo * veloce)
+	zampa_dietro.position.x = -14 + passo * 3
+	zampa_davanti.position.x = 14 - passo * 3
+	aspetto.position.y -= abs(passo) * 2  # sobbalza camminando
+	zampa_dietro.position.y = -3 + abs(passo) * 2  # le zampe restano a terra
+	zampa_davanti.position.y = -3 + abs(passo) * 2
+
+	# si gonfia offeso ai bordi
+	var gonfio := 1.15 if offeso else 1.0
+	corpo.scale = Vector2(0.5 * gonfio, 0.5 * gonfio)
+
+	# coda: dritta e tesa se spaventato, altrimenti scodinzola
+	coda.rotation = 0.9 if spaventato else sin(tempo * 4.0) * 0.15
+	orecchio.rotation = sin(tempo * 7.0) * 0.08
+
+	occhio.texture = OCCHIO_SPAVENTATO if spaventato else OCCHIO
+	occhio.offset = Vector2(-16, -16) if spaventato else Vector2(-10, -10)
+	sopracciglio.visible = offeso
+	esclamativo.visible = timer_allarme > 0

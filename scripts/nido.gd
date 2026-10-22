@@ -2,11 +2,22 @@ extends Area2D
 # Nido di paglia: punto sicuro. Quando il pulcino ci passa si illumina e diventa il punto di ripartenza.
 # La posizione è il centro del nido, appoggiato a terra.
 
+const Parti = preload("res://scripts/parti.gd")
+const NIDO = preload("res://assets/grafica/oggetti/nido.svg")
+const NIDO_ACCESO = preload("res://assets/grafica/oggetti/nido_acceso.svg")
+const BAGLIORE = preload("res://assets/grafica/oggetti/bagliore.svg")
+
 var acceso := false
+var tempo := 0.0
+var bagliore: Sprite
+var disegno: Sprite
 
 
 func _ready():
 	add_to_group("nidi")
+	bagliore = Parti.crea(self, BAGLIORE, Vector2(80, 80), Vector2(0, -14))
+	bagliore.visible = false
+	disegno = Parti.crea(self, NIDO, Vector2(70, 56), Vector2.ZERO)
 	var rettangolo := RectangleShape2D.new()
 	# Zona alta: vale anche se il pulcino ci passa sopra saltando
 	rettangolo.extents = Vector2(32, 220)
@@ -24,7 +35,7 @@ func _on_body_entered(corpo):
 
 func accendi():
 	acceso = true
-	update()
+	_aggiorna()
 	Suoni.suona("nido", 0.0)
 	# piccolo saltello di gioia del nido
 	var tween := Tween.new()
@@ -37,20 +48,17 @@ func accendi():
 
 func spegni():
 	acceso = false
-	update()
+	_aggiorna()
 
 
-func _draw():
+func _aggiorna():
+	disegno.texture = NIDO_ACCESO if acceso else NIDO
+	bagliore.visible = acceso
+
+
+func _process(delta):
+	# il bagliore del nido acceso "respira"
 	if acceso:
-		draw_circle(Vector2(0, -14), 44, Color(1.0, 0.95, 0.5, 0.45))  # bagliore
-	var paglia := Color(0.95, 0.8, 0.35) if acceso else Color(0.75, 0.6, 0.3)
-	var scuro := Color(0.6, 0.45, 0.2) if acceso else Color(0.5, 0.38, 0.18)
-	# conca del nido: mezza ellisse
-	draw_set_transform(Vector2(0, -10), 0, Vector2(1.0, 0.45))
-	draw_circle(Vector2.ZERO, 32, scuro)
-	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
-	draw_rect(Rect2(-32, -24, 64, 14), paglia)
-	# fili di paglia
-	for i in range(7):
-		var x := -28 + i * 9
-		draw_line(Vector2(x, -26), Vector2(x + 6, -12), scuro, 2.0)
+		tempo += delta
+		var r := 0.5 * (1.0 + sin(tempo * 3.0) * 0.08)
+		bagliore.scale = Vector2(r, r)

@@ -2,11 +2,14 @@ extends Area2D
 # Chicco di mais da raccogliere: ondeggia su e giù, sparisce con un "pop" quando il pulcino lo prende.
 
 const Effetti = preload("res://scripts/effetti.gd")
+const Parti = preload("res://scripts/parti.gd")
+const IMMAGINE = preload("res://assets/grafica/oggetti/chicco.svg")
 
 export var ampiezza_ondeggio := 4.0  # quanto sale e scende (pixel)
 
 var tempo := 0.0
 var raccolto := false
+var disegno: Sprite
 
 
 func _ready():
@@ -17,20 +20,14 @@ func _ready():
 	var forma := CollisionShape2D.new()
 	forma.shape = cerchio
 	add_child(forma)
+	disegno = Parti.crea(self, IMMAGINE, Vector2(15, 19), Vector2.ZERO)
 	connect("body_entered", self, "_on_body_entered")
 
 
 func _process(delta):
 	tempo += delta
-	update()
-
-
-func _draw():
-	var y := sin(tempo * 3.0) * ampiezza_ondeggio
-	draw_set_transform(Vector2(0, y), 0, Vector2(0.75, 1.0))
-	draw_circle(Vector2.ZERO, 11, Color(0.95, 0.75, 0.1))
-	draw_circle(Vector2(-3, -4), 4, Color(1.0, 0.92, 0.55))  # riflesso
-	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+	disegno.position.y = sin(tempo * 3.0) * ampiezza_ondeggio
+	disegno.rotation = sin(tempo * 2.0) * 0.15
 
 
 func _on_body_entered(corpo):

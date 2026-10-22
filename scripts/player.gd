@@ -57,6 +57,7 @@ func colpito(da_x := 0.0) -> bool:
 	var lato := 1.0 if position.x >= da_x else -1.0
 	velocita = Vector2(lato * 260, -560)
 	Suoni.suona("colpito")
+	aspetto.pigola()
 	return true
 
 
@@ -116,6 +117,7 @@ func _physics_process(delta):
 		timer_coyote = 0
 		deformazione = Vector2(1.0 - allunga_salto * 0.6, 1.0 + allunga_salto)
 		Suoni.suona("salto")
+		aspetto.pigola()
 		Effetti.sbuffo(get_parent(), position + Vector2(0, 20), COLORE_POLVERE, 6, 90.0)
 
 	# Salto più basso se lasci presto il tasto
