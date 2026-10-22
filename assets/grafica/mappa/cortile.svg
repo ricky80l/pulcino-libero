@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="200" viewBox="0 0 240 200">
+<ellipse cx="120" cy="188" rx="100" ry="11" fill="#000000" fill-opacity="0.12"/>
+<ellipse cx="120" cy="146" rx="106" ry="44" fill="#D8B47A" stroke="#8F5F2A" stroke-width="4"/>
+<path d="M18 132 Q120 74 222 132" fill="none" stroke="#B07A3E" stroke-width="6" stroke-linecap="round"/>
+<path d="M34 120 L34 142 M66 104 L66 126 M100 96 L100 118 M140 96 L140 118 M174 104 L174 126 M206 120 L206 142" stroke="#5A3E14" stroke-width="6" stroke-linecap="round"/>
+<rect x="132" y="116" width="46" height="30" rx="8" fill="#EBC85A" stroke="#8A6420" stroke-width="4"/>
+<path d="M146 118 L146 144 M162 118 L162 144" stroke="#C9A040" stroke-width="3"/>
+<path d="M66 116 L96 116 L91 146 L71 146 Z" fill="#8FA3B5" stroke="#3E4E5C" stroke-width="4" stroke-linejoin="round"/>
+<g fill="#F2C230"><circle cx="104" cy="160" r="3"/><circle cx="116" cy="166" r="3"/><circle cx="126" cy="158" r="3"/></g>
+<path d="M22 162 Q120 214 218 162" fill="none" stroke="#B07A3E" stroke-width="6" stroke-linecap="round"/>
+<path d="M36 166 L36 188 M76 178 L76 200 M120 182 L120 200 M164 178 L164 200 M204 166 L204 188" stroke="#5A3E14" stroke-width="6" stroke-linecap="round"/>
+</svg>

@@ -2,7 +2,5 @@
 
 [ext_resource path="res://scripts/mappa.gd" type="Script" id=1]
 
-[node name="Mappa" type="Control"]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Mappa" type="Node2D"]
 script = ExtResource( 1 )

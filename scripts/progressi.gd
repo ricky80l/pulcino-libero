@@ -20,7 +20,8 @@ const LIVELLI := [
 
 var sbloccato := 1  # numero del livello più avanti che si può giocare
 var record := {}  # numero livello (come testo) -> {"presi": n, "totale": n}
-var ultimo_giocato := 1
+var ultimo_giocato := 1  # dove sta il pulcino sulla mappa
+var nebbia_vista := 1  # fin dove la mappa ha già mostrato la nebbia che si dirada
 
 
 func _ready():
@@ -41,6 +42,7 @@ func finito(numero: int) -> bool:
 
 func gioca(numero: int):
 	ultimo_giocato = numero
+	salva()
 	get_tree().change_scene(LIVELLI[numero - 1]["scena"])
 
 
@@ -51,7 +53,8 @@ func torna_alla_mappa():
 func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
-		f.store_string(to_json({"sbloccato": sbloccato, "record": record}))
+		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista}))
 		f.close()
 
 
@@ -64,3 +67,5 @@ func carica():
 	if typeof(dati) == TYPE_DICTIONARY:
 		sbloccato = int(dati.get("sbloccato", 1))
 		record = dati.get("record", {})
+		ultimo_giocato = int(dati.get("ultimo_giocato", 1))
+		nebbia_vista = int(dati.get("nebbia_vista", 1))
