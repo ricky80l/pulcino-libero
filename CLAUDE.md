@@ -42,7 +42,15 @@ res://
 
 Nomi di file e cartelle in minuscolo con trattini bassi. Commenti nel codice in italiano, brevi.
 
-## Tappe del livello 1 (pollaio)
+## Scelte già fatte (non cambiarle senza chiedermelo)
+
+- **Grafica:** stile cartoon vettoriale. Immagini SVG in `assets/grafica/`, disegnate al doppio della grandezza; i personaggi sono a pezzi animati da codice. I pezzi lunghi del livello (pavimenti, pareti) si disegnano da codice nello stesso stile.
+- **Inquadratura:** telecamera con zoom 0.7, perché il pulcino si veda bene sul telefono.
+- **Animazioni e suoni:** schiaccia-e-allunga, polvere, versi buffi. I suoni sono segnaposto sintetici creati da `strumenti/genera_suoni.py`.
+- **Testi:** font Fredoka (licenza OFL, in `assets/font/`).
+- **Pubblicazione:** dopo ogni modifica il gioco va esportato in `docs/` e caricato su GitHub. Si gioca su https://ricky80l.github.io/pulcino-libero/.
+
+## Tappe del livello 1 (pollaio) — completato
 
 Costruiamo solo il livello 1. La mappa e il livello 2 vengono dopo.
 
@@ -69,3 +77,55 @@ Chicchi di mais da raccogliere con un contatore, e un primo nemico buffo e lento
 ### Tappa 6 — Grafica vera
 Solo ora si sostituiscono i segnaposto con la grafica del pulcino e del pollaio. Prima di iniziare, proponimi lo stile e come produrre le immagini.
 **STOP:** fine del livello 1.
+
+## Tappe della mappa
+
+### Tappa 7 — Più livelli e salvataggio
+Il gioco passa da un livello solo a tanti.
+- Finire un livello riporta alla mappa (per ora una schermata provvisoria) e sblocca il livello successivo.
+- I livelli già finiti si possono sempre rigiocare.
+- Il telefono ricorda i livelli sbloccati e il record di chicchi di ogni livello, anche chiudendo il browser.
+
+**STOP:** finisco il pollaio, chiudo il browser, lo riapro e il progresso c'è ancora.
+
+### Tappa 8 — La mappa disegnata
+La fattoria vista dall'alto, in stile cartoon, con un sentiero che collega i dieci luoghi.
+- Il pulcino cammina lungo il sentiero fino al luogo scelto.
+- I luoghi non ancora sbloccati sono coperti dalla nebbia.
+- Sotto ogni luogo finito si vede il record di chicchi (per esempio 17 / 20).
+- Comandi: frecce per spostarsi e salto per entrare; sul telefono si può anche toccare direttamente il luogo.
+
+Prima di iniziare, mostrami un bozzetto.
+**STOP:** la mappa è chiara e si usa bene dal telefono.
+
+## Tappe del livello 2 (cortile)
+
+Nel cortile il pulcino impara la **beccata**, che serve a rompere ostacoli (sacchi di mangime, balle di paglia, gusci…) per aprire passaggi o far uscire chicchi. La beccata non ha effetto sui nemici.
+
+Il nemico nuovo è l'**oca arrabbiata**: starnazza, abbassa il collo e carica di corsa in linea retta. Si schiva saltando, e se sbatte contro qualcosa resta stordita.
+
+### Tappa 9 — La beccata
+Nuova azione di input `peck`, usata sia dalla tastiera sia dal pulsante a schermo.
+- Sul PC si becca con il tasto X.
+- Sul telefono c'è un nuovo pulsante accanto al salto.
+- L'animazione è esagerata: il pulcino si sbilancia in avanti col becco e fa un verso buffo. Si può beccare anche in aria.
+- Gli ostacoli rompibili vanno in pezzi che volano via.
+- Si prova in una piccola area di prova.
+
+**STOP:** la beccata è piacevole da usare e il nuovo pulsante è comodo sul telefono.
+
+### Tappa 10 — Il cortile
+Il livello del cortile: più grande e più in verticale del pollaio.
+- Insegna la beccata un passo alla volta: prima un ostacolo da rompere per passare, poi ostacoli in alto, poi la beccata in aria.
+- Ci sono chicchi, nidi e un'uscita.
+- Si disegna subito nello stile cartoon già scelto, ma prima di disegnarli mostrami i pezzi nuovi del cortile.
+
+**STOP:** il livello si completa dall'inizio alla fine ed è divertente.
+
+### Tappa 11 — L'oca arrabbiata
+L'oca, con le sue animazioni esagerate e i suoi versi, sistemata nel cortile dove rende il livello più vivo senza frustrare. Se tocca il pulcino, lui riparte dall'ultimo nido, come con il topo.
+**STOP:** l'oca è buffa e la difficoltà è giusta.
+
+### Tappa 12 — Il pulcino cresce
+Dopo il pollaio il pulcino cresce un po': proponimi il nuovo aspetto (per esempio ciuffo più grande o prime piume sulle ali). L'aspetto dipende da quanto è avanti nel gioco e si vede sia nella mappa sia nel cortile.
+**STOP:** fine del livello 2.
