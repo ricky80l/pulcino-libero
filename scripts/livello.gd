@@ -10,6 +10,7 @@ onready var player := $Player
 onready var messaggio := $Interfaccia/Messaggio
 onready var testo_fine := $Interfaccia/Messaggio/Testo
 onready var contatore := $Interfaccia/Contatore
+onready var numero_chicchi := $Interfaccia/Contatore/Numero
 
 
 func _ready():
@@ -26,7 +27,7 @@ func chicco_raccolto():
 	# il contatore fa un piccolo "boing"
 	var tween := Tween.new()
 	add_child(tween)
-	tween.interpolate_property(contatore, "rect_scale", Vector2(3.3, 3.3), Vector2(2.5, 2.5), 0.3, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.interpolate_property(contatore, "rect_scale", Vector2(1.3, 1.3), Vector2.ONE, 0.3, Tween.TRANS_BACK, Tween.EASE_OUT)
 	tween.start()
 	yield(tween, "tween_all_completed")
 	tween.queue_free()
@@ -41,7 +42,7 @@ func nido_raggiunto(nido):
 
 
 func _aggiorna_contatore():
-	contatore.text = "Chicchi: %d / %d" % [chicchi_presi, chicchi_totali]
+	numero_chicchi.text = "%d / %d" % [chicchi_presi, chicchi_totali]
 
 
 func _on_uscita_body_entered(corpo):
