@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://assets/grafica/oggetti/chicco.svg" type="Texture" id=9]
 [ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]
 [ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
+[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -325,6 +326,9 @@ smoothing_speed = 6.0
 zoom = Vector2( 0.7, 0.7 )
 
 [node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
 
 [node name="Interfaccia" type="CanvasLayer" parent="."]
 layer = 2

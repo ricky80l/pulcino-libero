@@ -61,7 +61,7 @@ nidi = [(1160, 640), (1560, 640), (2230, 640), (3270, 640)]
 topi = [(1680, 640, 240)]
 
 out = []
-out.append("[gd_scene load_steps=13 format=2]\n")
+out.append("[gd_scene load_steps=14 format=2]\n")
 out.append('[ext_resource path="res://scripts/livello.gd" type="Script" id=1]')
 out.append('[ext_resource path="res://scripts/blocco.gd" type="Script" id=2]')
 out.append('[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]')
@@ -72,7 +72,8 @@ out.append('[ext_resource path="res://scripts/topo.gd" type="Script" id=7]')
 out.append('[ext_resource path="res://assets/grafica/oggetti/etichetta.svg" type="Texture" id=8]')
 out.append('[ext_resource path="res://assets/grafica/oggetti/chicco.svg" type="Texture" id=9]')
 out.append('[ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]')
-out.append('[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]\n')
+out.append('[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]')
+out.append('[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]\n')
 out.append('[sub_resource type="RectangleShape2D" id=1]\nextents = Vector2( 30, 30 )\n')
 out.append('[node name="Livello1" type="Node2D"]\nscript = ExtResource( 1 )\n')
 out.append('[node name="Pollaio" type="Node2D" parent="."]\n')
@@ -121,6 +122,9 @@ smoothing_speed = 6.0
 zoom = Vector2( 0.7, 0.7 )
 
 [node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
 
 [node name="Interfaccia" type="CanvasLayer" parent="."]
 layer = 2
