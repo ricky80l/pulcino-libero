@@ -139,8 +139,8 @@ func _crea_luogo(numero: int):
 	cartello.add_font_override("font", FONT_CARTELLI)
 	cartello.add_color_override("font_color", Stile.CREMA)
 	cartello.align = Label.ALIGN_CENTER
-	cartello.rect_size = Vector2(170, 0)
-	cartello.rect_position = base + Vector2(-85, -178)
+	cartello.rect_size = Vector2(200, 0)
+	cartello.rect_position = base + Vector2(-100, -186)
 	add_child(cartello)
 	cartelli.append(cartello)
 
@@ -167,7 +167,7 @@ func _crea_titolo_e_aiuto():
 	aiuto.add_font_override("font", FONT_CARTELLI)
 	aiuto.add_color_override("font_color", Stile.CREMA)
 	aiuto.add_stylebox_override("normal", _tavola(Stile.CONTORNO, 3))
-	aiuto.rect_position = Vector2(340, 680)
+	aiuto.rect_position = Vector2(270, 672)
 	add_child(aiuto)
 
 
