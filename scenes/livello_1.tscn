@@ -21,7 +21,15 @@ z_index = -10
 position = Vector2( 0, 0 )
 script = ExtResource( 2 )
 tipo = 6
-dimensioni = Vector2( 3700, 720 )
+dimensioni = Vector2( 3715, 720 )
+solido = false
+
+[node name="Fuori" type="StaticBody2D" parent="Pollaio"]
+z_index = -10
+position = Vector2( 3715, 0 )
+script = ExtResource( 2 )
+tipo = 9
+dimensioni = Vector2( 525, 720 )
 solido = false
 
 [node name="GabbiaSbarre" type="StaticBody2D" parent="Pollaio"]
@@ -48,7 +56,13 @@ dimensioni = Vector2( 160, 20 )
 position = Vector2( 2160, 640 )
 script = ExtResource( 2 )
 tipo = 0
-dimensioni = Vector2( 2040, 80 )
+dimensioni = Vector2( 1555, 80 )
+
+[node name="Prato" type="StaticBody2D" parent="Pollaio"]
+position = Vector2( 3715, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 525, 80 )
 
 [node name="MuroSinistro" type="StaticBody2D" parent="Pollaio"]
 position = Vector2( 0, 0 )
@@ -288,7 +302,7 @@ script = ExtResource( 7 )
 distanza = 240.0
 
 [node name="Uscita" type="Area2D" parent="."]
-position = Vector2( 3760, 610 )
+position = Vector2( 3900, 610 )
 
 [node name="Forma" type="CollisionShape2D" parent="Uscita"]
 shape = SubResource( 1 )

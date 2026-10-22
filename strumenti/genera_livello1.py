@@ -1,16 +1,18 @@
 import sys
 
-PAV, LEG, CAS, MAN, POS, SBA, PAR, RET = range(8)
+PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO = range(10)
 
 # nome, x, y, larghezza, altezza, tipo, extra
 pezzi = [
     # sfondo (decorazioni)
-    ("ParetePollaio", 0, 0, 3700, 720, PAR, {"solido": "false", "z_index": "-10"}),
+    ("ParetePollaio", 0, 0, 3715, 720, PAR, {"solido": "false", "z_index": "-10"}),
+    ("Fuori", 3715, 0, 525, 720, FUO, {"solido": "false", "z_index": "-10"}),
     ("GabbiaSbarre", 316, 436, 368, 204, SBA, {"solido": "false", "z_index": "-5"}),
     # pavimento e muri
     ("PavimentoA", 0, 640, 2000, 80, PAV, {}),
     ("FondoFosso", 2000, 700, 160, 20, PAV, {}),
-    ("PavimentoB", 2160, 640, 2040, 80, PAV, {}),
+    ("PavimentoB", 2160, 640, 1555, 80, PAV, {}),
+    ("Prato", 3715, 640, 525, 80, ERB, {}),
     ("MuroSinistro", 0, 0, 40, 640, LEG, {}),
     ("MuroDestro", 4200, 0, 40, 720, LEG, {}),
     # gabbia di partenza: si esce saltando il bordo basso a destra
@@ -96,7 +98,7 @@ for i, (x, y, dist) in enumerate(topi, 1):
     out.append(f'[node name="Topo{i}" type="Area2D" parent="Nemici"]\nposition = Vector2( {x}, {y} )\nscript = ExtResource( 7 )\ndistanza = {dist}.0\n')
 
 out.append('''[node name="Uscita" type="Area2D" parent="."]
-position = Vector2( 3760, 610 )
+position = Vector2( 3900, 610 )
 
 [node name="Forma" type="CollisionShape2D" parent="Uscita"]
 shape = SubResource( 1 )
