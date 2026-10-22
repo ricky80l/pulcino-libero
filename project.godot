@@ -11,11 +11,12 @@ config_version=4
 [application]
 
 config/name="Il Pulcino Libero"
-run/main_scene="res://scenes/livello_1.tscn"
+run/main_scene="res://scenes/mappa.tscn"
 
 [autoload]
 
 Suoni="*res://scripts/suoni.gd"
+Progressi="*res://scripts/progressi.gd"
 
 [display]
 

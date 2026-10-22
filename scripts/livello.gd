@@ -1,5 +1,9 @@
 extends Node2D
 # Livello: conta i chicchi, accende i nidi e mostra il messaggio di fine quando il pulcino esce.
+# A fine livello salva i progressi e, premendo salto, torna alla mappa.
+
+export var numero := 1  # posizione del livello nel viaggio (1 = pollaio)
+export var frase_fine := "Sei scappato dal pollaio!"  # cosa dice il messaggio di fine
 
 var completato := false
 var chicchi_presi := 0
@@ -49,12 +53,13 @@ func _on_uscita_body_entered(corpo):
 	if corpo == player and not completato:
 		completato = true
 		player.set_physics_process(false)
-		testo_fine.text = "Sei scappato dal pollaio!\n\nChicchi: %d / %d\n\nPremi salto per rigiocare" % [chicchi_presi, chicchi_totali]
+		Progressi.livello_finito(numero, chicchi_presi, chicchi_totali)
+		testo_fine.text = "%s\n\nChicchi: %d / %d\n\nPremi salto per tornare alla mappa" % [frase_fine, chicchi_presi, chicchi_totali]
 		messaggio.visible = true
 		Suoni.suona("fine", 0.0)
 
 
 func _process(_delta):
-	# A livello finito, il tasto salto fa ricominciare
+	# A livello finito, il tasto salto riporta alla mappa
 	if completato and Input.is_action_just_pressed("jump"):
-		get_tree().reload_current_scene()
+		Progressi.torna_alla_mappa()
