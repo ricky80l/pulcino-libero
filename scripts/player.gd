@@ -29,6 +29,10 @@ export var durata_beccata := 0.28  # quanto dura il colpo di becco (secondi)
 export var pausa_beccata := 0.1  # attesa minima prima della beccata successiva
 export var portata_beccata := 30.0  # quanto arriva lontano il becco davanti al pulcino (pixel)
 
+# --- Doppio salto ---
+export var puo_doppio_salto := false  # il livello lo attiva quando il pulcino ha imparato il doppio salto
+export var forza_doppio_salto := 660.0  # spinta del secondo salto: un po' meno del primo
+
 # --- Animazioni esagerate ---
 export var allunga_salto := 0.35  # quanto si allunga saltando (0 = niente)
 export var schiaccia_atterraggio := 0.4  # quanto si schiaccia atterrando (0 = niente)
@@ -48,6 +52,7 @@ var tempo := 0.0
 var timer_beccata := 0.0
 var attesa_beccata := 0.0
 var colpiti := []  # ostacoli già colpiti in questa beccata
+var doppio_usato := false  # il secondo salto si può fare una sola volta prima di toccare terra
 
 onready var aspetto := $Aspetto
 
@@ -75,6 +80,7 @@ func riparti():
 	velocita = Vector2.ZERO
 	timer_sbalzo = 0.0
 	timer_beccata = 0.0
+	doppio_usato = false
 	timer_invulnerabile = tempo_invulnerabile
 	aspetto.rotation = 0.0
 	deformazione = Vector2.ONE
@@ -115,12 +121,17 @@ func _physics_process(delta):
 	# Margine coyote: resta "a terra" per un attimo dopo aver lasciato il bordo
 	if a_terra:
 		timer_coyote = tempo_coyote
+		doppio_usato = false
 	else:
 		timer_coyote -= delta
 
 	# Salto prenotato: ricorda la pressione per un attimo
 	if Input.is_action_just_pressed("jump"):
 		timer_prenota = tempo_prenota_salto
+		# in aria (e oltre il margine coyote): secondo salto con un battito d'ali
+		if puo_doppio_salto and timer_coyote <= 0 and not doppio_usato:
+			_doppio_salto()
+			timer_prenota = 0
 	else:
 		timer_prenota -= delta
 
@@ -171,6 +182,15 @@ func _physics_process(delta):
 	# Se cade fuori dallo schermo, riparte dall'ultimo punto sicuro
 	if position.y > 1000:
 		riparti()
+
+
+func _doppio_salto():
+	doppio_usato = true
+	velocita.y = -forza_doppio_salto
+	deformazione = Vector2(1.0 + allunga_salto * 0.5, 1.0 - allunga_salto * 0.3)  # si gonfia come per spiccare il volo
+	Suoni.suona("doppio", 0.08)
+	aspetto.sbatti_ali()
+	Effetti.sbuffo(get_parent(), position + Vector2(0, 10), Color(1.0, 0.93, 0.62), 10, 140.0)
 
 
 # Beccata: col tasto X (o il pulsante col becco) colpisce quello che ha davanti, anche in aria

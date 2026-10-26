@@ -23,6 +23,7 @@ script = ExtResource( 1 )
 numero = 2
 frase_fine = "Hai attraversato il cortile!"
 beccata = true
+abilita_nuova = "beccata"
 
 [node name="Cortile" type="Node2D" parent="."]
 

@@ -8,7 +8,7 @@ const FILE := "user://progressi.json"
 const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
-	{"nome": "L'orto", "scena": ""},
+	{"nome": "L'orto", "scena": "res://scenes/prova_doppio_salto.tscn"},  # provvisorio: area di prova del doppio salto (Tappa 13)
 	{"nome": "Il prato", "scena": ""},
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
@@ -22,6 +22,17 @@ var sbloccato := 1  # numero del livello più avanti che si può giocare
 var record := {}  # numero livello (come testo) -> {"presi": n, "totale": n}
 var ultimo_giocato := 1  # dove sta il pulcino sulla mappa
 var nebbia_vista := 1  # fin dove la mappa ha già mostrato la nebbia che si dirada
+var abilita_viste := []  # abilità di cui il giocatore ha già visto l'avviso "Nuova abilità!"
+
+
+func abilita_vista(nome: String) -> bool:
+	return abilita_viste.has(nome)
+
+
+func segna_abilita_vista(nome: String):
+	if not abilita_viste.has(nome):
+		abilita_viste.append(nome)
+		salva()
 
 
 func _ready():
@@ -89,7 +100,7 @@ func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
-				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista}))
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste}))
 		f.close()
 
 
@@ -104,3 +115,4 @@ func carica():
 		record = dati.get("record", {})
 		ultimo_giocato = int(dati.get("ultimo_giocato", 1))
 		nebbia_vista = int(dati.get("nebbia_vista", 1))
+		abilita_viste = dati.get("abilita_viste", [])

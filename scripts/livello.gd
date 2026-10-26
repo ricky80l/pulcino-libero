@@ -5,6 +5,8 @@ extends Node2D
 export var numero := 1  # posizione del livello nel viaggio (1 = pollaio)
 export var frase_fine := "Sei scappato dal pollaio!"  # cosa dice il messaggio di fine
 export var beccata := false  # true se in questo livello il pulcino sa già beccare
+export var doppio_salto := false  # true se in questo livello il pulcino sa già fare il doppio salto
+export var abilita_nuova := ""  # abilità che si impara in questo livello ("beccata", "doppio_salto"): mostra l'avviso
 export var salva_progressi := true  # false per le aree di prova: niente record e niente sblocchi
 
 var completato := false
@@ -26,7 +28,14 @@ func _ready():
 	chicchi_totali = get_tree().get_nodes_in_group("chicchi").size()
 	_aggiorna_contatore()
 	player.puo_beccare = beccata
+	player.puo_doppio_salto = doppio_salto
 	$ControlliTouch/Becco.visible = beccata
+	# avviso "Nuova abilità!" la prima volta (nelle aree di prova ogni volta)
+	if abilita_nuova != "" and (not salva_progressi or not Progressi.abilita_vista(abilita_nuova)):
+		var annuncio = CanvasLayer.new()
+		annuncio.set_script(preload("res://scripts/annuncio.gd"))
+		add_child(annuncio)
+		annuncio.mostra(abilita_nuova, salva_progressi)
 
 
 func chicco_raccolto():

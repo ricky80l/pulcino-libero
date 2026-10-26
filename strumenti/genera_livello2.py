@@ -79,6 +79,7 @@ proprieta = {
     "numero": 2,
     "frase_fine": '"Hai attraversato il cortile!"',
     "beccata": "true",
+    "abilita_nuova": '"beccata"',
 }
 
 scrivi_livello(sys.argv[1], "Livello2", "Cortile", pezzi, chicchi, nidi, rompibili=rompibili,

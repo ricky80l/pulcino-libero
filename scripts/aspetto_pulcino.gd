@@ -75,6 +75,15 @@ func pigola():
 	timer_becco = 0.2
 
 
+# Doppio salto: le ali sbattono fortissimo per un attimo
+var timer_ali := 0.0
+
+
+func sbatti_ali():
+	timer_ali = 0.4
+	pigola()
+
+
 func _process(delta):
 	tempo += delta
 	timer_becco -= delta
@@ -98,8 +107,11 @@ func _process(delta):
 		zampa_davanti.rotation = lerp(zampa_davanti.rotation, 0.0, morbido)
 		zampa_dietro.rotation = lerp(zampa_dietro.rotation, 0.0, morbido)
 
-	# Ala: sbatte forte in aria, dondola camminando
-	if sbalzato or not a_terra:
+	# Ala: sbatte fortissimo nel doppio salto, forte in aria, dondola camminando
+	timer_ali -= delta
+	if timer_ali > 0:
+		ala.rotation = -1.0 + sin(tempo * 55.0) * 0.9
+	elif sbalzato or not a_terra:
 		ala.rotation = -0.5 + sin(tempo * 35.0) * 0.6
 	elif vx > 30:
 		ala.rotation = sin(tempo * 18.0) * 0.15
