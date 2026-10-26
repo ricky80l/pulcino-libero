@@ -170,6 +170,15 @@ func _crea_titolo_e_aiuto():
 	aiuto.rect_position = Vector2(270, 672)
 	add_child(aiuto)
 
+	var crediti := Button.new()
+	crediti.text = "Crediti"
+	crediti.focus_mode = Control.FOCUS_NONE  # non ruba le frecce al pulcino
+	crediti.rect_position = Vector2(1120, 16)
+	crediti.rect_min_size = Vector2(140, 56)
+	Stile.pulsante_legno(crediti, FONT_CARTELLI)
+	crediti.connect("pressed", get_tree(), "change_scene", ["res://scenes/crediti.tscn"])
+	add_child(crediti)
+
 
 func _crea_nuvole():
 	for i in range(3):
