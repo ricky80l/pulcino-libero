@@ -335,12 +335,14 @@ func _arrivato():
 
 
 func _unhandled_input(evento):
-	# tocco o clic su un luogo
+	# tocco o clic su un luogo: vale il disegno e anche il suo cartello
 	if evento is InputEventMouseButton and evento.pressed and evento.button_index == BUTTON_LEFT:
 		var punto := get_global_mouse_position()
 		for i in range(POSIZIONI.size()):
 			var zona := Rect2(POSIZIONI[i] + Vector2(-75, -120), Vector2(150, 150))
-			if not zona.has_point(punto):
+			var cartello: Label = cartelli[i]
+			var sul_cartello: bool = cartello.visible and cartello.get_global_rect().has_point(punto)
+			if not zona.has_point(punto) and not sul_cartello:
 				continue
 			var numero := i + 1
 			if nebbie[i].visible:
