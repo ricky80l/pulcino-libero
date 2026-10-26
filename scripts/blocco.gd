@@ -4,12 +4,21 @@ extends StaticBody2D
 # La posizione è l'angolo in alto a sinistra.
 # Cassette, mangiatoie e posatoi usano un disegno vettoriale; i pezzi lunghi si disegnano da codice.
 
-enum Tipo { PAVIMENTO, LEGNO, CASSETTA, MANGIATOIA, POSATOIO, SBARRE, PARETE, RETE, ERBA, FUORI }
+enum Tipo { PAVIMENTO, LEGNO, CASSETTA, MANGIATOIA, POSATOIO, SBARRE, PARETE, RETE, ERBA, FUORI,
+		TERRA, BOTTE, CARRETTO, TETTOIA, CEPPI, ABBEVERATOIO, STECCATO, FIENILE, CANCELLO }
 
 const IMMAGINI := {
 	Tipo.CASSETTA: preload("res://assets/grafica/pollaio/cassetta.svg"),
 	Tipo.MANGIATOIA: preload("res://assets/grafica/pollaio/mangiatoia.svg"),
 	Tipo.POSATOIO: preload("res://assets/grafica/pollaio/posatoio.svg"),
+	Tipo.BOTTE: preload("res://assets/grafica/cortile/botte.svg"),
+	Tipo.CARRETTO: preload("res://assets/grafica/cortile/carretto.svg"),
+	Tipo.TETTOIA: preload("res://assets/grafica/cortile/tettoia.svg"),
+	Tipo.CEPPI: preload("res://assets/grafica/cortile/ceppi.svg"),
+	Tipo.ABBEVERATOIO: preload("res://assets/grafica/cortile/abbeveratoio.svg"),
+	Tipo.STECCATO: preload("res://assets/grafica/cortile/steccato.svg"),
+	Tipo.FIENILE: preload("res://assets/grafica/cortile/fienile.svg"),
+	Tipo.CANCELLO: preload("res://assets/grafica/cortile/cancello.svg"),
 }
 
 # colori del pollaio
@@ -92,6 +101,8 @@ func _draw():
 			_disegna_erba()
 		Tipo.FUORI:
 			_disegna_fuori()
+		Tipo.TERRA:
+			_disegna_terra()
 
 
 # Parete di assi verticali con chiodi e nodi del legno
@@ -229,6 +240,28 @@ func _disegna_erba():
 			var ang := a * TAU / 5
 			draw_circle(fiore + Vector2(cos(ang), sin(ang)) * 4, 3, petali)
 		draw_circle(fiore, 2.5, Color("f29e1f"))
+
+
+# Terra battuta del cortile, con sassolini e ciuffi d'erba
+func _disegna_terra():
+	var rng := _caso()
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h), Color("c9a06a"))
+	draw_rect(Rect2(0, h * 0.55, w, h * 0.45), Color("b08650"))
+	draw_line(Vector2(0, 2), Vector2(w, 2), Color("a8834e"), 4.0)
+	# sassolini
+	for _n in range(int(w / 40)):
+		var c := Vector2(rng.randf_range(4, w - 4), rng.randf_range(10, h - 10))
+		var r := rng.randf_range(3, 6)
+		_ellisse(c, Vector2(r * 1.4, r), Color("8e877c"))
+		_ellisse(c + Vector2(-1, -1), Vector2(r * 1.1, r * 0.7), Color("b5afa4"))
+	# ciuffi d'erba sul bordo
+	for _n in range(int(w / 90)):
+		var x := rng.randf_range(10, w - 10)
+		var ciuffo := PoolVector2Array([Vector2(x - 9, 2), Vector2(x - 6, -10), Vector2(x - 2, 0), Vector2(x + 1, -14),
+				Vector2(x + 4, 0), Vector2(x + 8, -9), Vector2(x + 10, 2)])
+		draw_colored_polygon(ciuffo, Color("6dbe45"), PoolVector2Array(), null, null, true)
 
 
 # Paesaggio fuori: colline, sole e nuvole (il cielo è il colore di sfondo)

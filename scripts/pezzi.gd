@@ -26,9 +26,12 @@ func lancia(tipo: int, verso: float, quanti: int, misura: Vector2):
 			else:
 				p["forma"] = "chicco"
 				p["colore"] = Color("f2c230")
-		else:  # balla: fili di paglia
+		elif tipo == 1:  # balla: fili di paglia
 			p["forma"] = "filo"
 			p["colore"] = Color("ebc85a") if i % 2 == 0 else Color("d9b04a")
+		else:  # vaso: cocci di terracotta e un po' di terra
+			p["forma"] = "coccio" if i % 4 != 0 else "chicco"
+			p["colore"] = Color("d9824a") if i % 4 != 0 else Color("7a5230")
 		pezzi.append(p)
 
 
@@ -62,4 +65,7 @@ func _draw():
 				draw_rect(Rect2(-5.5, -3.5, 11, 7), col)
 			"filo":
 				draw_line(Vector2(-10, 0), Vector2(10, 0), col, 3.0, true)
+			"coccio":
+				draw_colored_polygon(PoolVector2Array([Vector2(-9, -6), Vector2(9, -3), Vector2(2, 8)]), bordo)
+				draw_colored_polygon(PoolVector2Array([Vector2(-6, -4), Vector2(6, -2), Vector2(1, 5)]), col)
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)

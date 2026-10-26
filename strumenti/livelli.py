@@ -2,9 +2,10 @@
 # Lo usano genera_livello1.py, genera_prova_beccata.py e i livelli futuri.
 
 # tipi di pezzo (stesso ordine di Tipo in scripts/blocco.gd)
-PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO = range(10)
+(PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO,
+ TER, BOT, CAR, TET, CEP, ABB, STE, FIE, CAN) = range(19)
 # tipi di ostacolo rompibile (stesso ordine di Tipo in scripts/rompibile.gd)
-SACCO, BALLA = range(2)
+SACCO, BALLA, VASO = range(3)
 
 INTERFACCIA = '''[node name="Interfaccia" type="CanvasLayer" parent="."]
 layer = 2

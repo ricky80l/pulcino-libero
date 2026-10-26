@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pezzi del cortile</title>
+<style>
+:root { --testo:#3a2a10; --sfondo:#fbf6ea; --carta:#ffffff; --bordo:#e2d6bd; }
+@media (prefers-color-scheme: dark) { :root { --testo:#f4ead6; --sfondo:#22201b; --carta:#2e2b24; --bordo:#4a4436; } }
+body { margin:0; padding:16px; font-family: system-ui, sans-serif; background:var(--sfondo); color:var(--testo); }
+h1 { font-size:22px; font-weight:600; margin:0 0 4px; }
+p.nota { margin:0 0 16px; opacity:.8; }
+.griglia { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:12px; }
+.scheda { background:var(--carta); border:1px solid var(--bordo); border-radius:12px; padding:12px; text-align:center; }
+.disegno { height:150px; display:flex; align-items:center; justify-content:center; }
+.disegno svg { max-width:100%; height:auto; }
+.scheda p { margin:8px 0 0; font-size:14px; }
+.scena-box { overflow-x:auto; margin:8px 0 24px; border-radius:12px; border:1px solid var(--bordo); }
+.scena { position:relative; width:940px; height:340px; background:linear-gradient(#8cc8f2 0 88%, #c9a06a 88%); }
+.scena::after { content:""; position:absolute; left:0; right:0; top:300px; height:10px; background:#7cc24e; }
+</style></head><body>
+<h1>Il cortile: i pezzi nuovi</h1>
+<p class="nota">Scena d'esempio (scorri di lato sul telefono), poi i pezzi uno per uno. Riusiamo anche sacchi, balle, chicchi e nidi.</p>
+<div class="scena-box"><div class="scena"><div style="position:absolute;left:520px;top:60.0px"><svg viewBox="0 0 560 480" width="280" height="240">
+<path d="M30 470 L30 190 L280 40 L530 190 L530 470 Z" fill="#C2553A" stroke="#6E2416" stroke-width="6" stroke-linejoin="round"/>
+<path d="M14 196 L280 30 L546 196" fill="none" stroke="#E8DCC4" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M60 210 L60 460 M110 180 L110 460 M160 150 L160 460 M400 150 L400 460 M450 180 L450 460 M500 210 L500 460" stroke="#A84630" stroke-width="4"/>
+<rect x="200" y="300" width="160" height="170" fill="#8A3020" stroke="#6E2416" stroke-width="5"/>
+<path d="M200 300 L360 470 M360 300 L200 470" stroke="#E8DCC4" stroke-width="12"/>
+<rect x="200" y="300" width="160" height="170" fill="none" stroke="#E8DCC4" stroke-width="12"/>
+<rect x="236" y="150" width="88" height="80" fill="#5A2010" stroke="#E8DCC4" stroke-width="10"/>
+<path d="M240 228 Q262 196 280 224 Q296 194 320 228 Z" fill="#EBC85A" stroke="#8A6420" stroke-width="3"/></svg></div><div style="position:absolute;left:40px;top:240.0px"><svg viewBox="0 0 240 120" width="120" height="60">
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4">
+<rect x="4" y="34" width="232" height="18" rx="4"/>
+<rect x="4" y="80" width="232" height="18" rx="4"/>
+<path d="M14 116 L14 20 L28 6 L42 20 L42 116 Z"/>
+<path d="M106 116 L106 20 L120 6 L134 20 L134 116 Z"/>
+<path d="M198 116 L198 20 L212 6 L226 20 L226 116 Z"/>
+</g></svg></div><div style="position:absolute;left:160px;top:240.0px"><svg viewBox="0 0 240 120" width="120" height="60">
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4">
+<rect x="4" y="34" width="232" height="18" rx="4"/>
+<rect x="4" y="80" width="232" height="18" rx="4"/>
+<path d="M14 116 L14 20 L28 6 L42 20 L42 116 Z"/>
+<path d="M106 116 L106 20 L120 6 L134 20 L134 116 Z"/>
+<path d="M198 116 L198 20 L212 6 L226 20 L226 116 Z"/>
+</g></svg></div><div style="position:absolute;left:280px;top:240.0px"><svg viewBox="0 0 240 120" width="120" height="60">
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4">
+<rect x="4" y="34" width="232" height="18" rx="4"/>
+<rect x="4" y="80" width="232" height="18" rx="4"/>
+<path d="M14 116 L14 20 L28 6 L42 20 L42 116 Z"/>
+<path d="M106 116 L106 20 L120 6 L134 20 L134 116 Z"/>
+<path d="M198 116 L198 20 L212 6 L226 20 L226 116 Z"/>
+</g></svg></div><div style="position:absolute;left:120px;top:225.0px"><svg viewBox="0 0 120 150" width="60" height="75">
+<rect x="10" y="8" width="100" height="136" rx="22" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<path d="M38 12 Q30 76 38 140 M60 10 L60 142 M82 12 Q90 76 82 140" fill="none" stroke="#8F5F2A" stroke-width="3"/>
+<rect x="6" y="28" width="108" height="12" rx="5" fill="#7D858F" stroke="#3E4E5C" stroke-width="3"/>
+<rect x="6" y="110" width="108" height="12" rx="5" fill="#7D858F" stroke="#3E4E5C" stroke-width="3"/>
+<ellipse cx="60" cy="12" rx="46" ry="8" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/></svg></div><div style="position:absolute;left:240px;top:200.0px"><svg viewBox="0 0 360 200" width="180" height="100">
+<rect x="10" y="40" width="300" height="56" rx="8" fill="#C98F4E" stroke="#5A3E14" stroke-width="5"/>
+<path d="M20 58 L300 58 M20 76 L300 76" stroke="#8F5F2A" stroke-width="3"/>
+<rect x="6" y="30" width="308" height="16" rx="6" fill="#DDA562" stroke="#5A3E14" stroke-width="4"/>
+<path d="M310 70 L354 92" stroke="#5A3E14" stroke-width="10" stroke-linecap="round"/>
+<path d="M310 70 L354 92" stroke="#B07A3E" stroke-width="5" stroke-linecap="round"/>
+<circle cx="110" cy="140" r="52" fill="none" stroke="#5A3E14" stroke-width="12"/>
+<circle cx="110" cy="140" r="52" fill="none" stroke="#B07A3E" stroke-width="6"/>
+<path d="M110 92 L110 188 M62 140 L158 140 M76 106 L144 174 M144 106 L76 174" stroke="#8F5F2A" stroke-width="5"/>
+<circle cx="110" cy="140" r="12" fill="#7D858F" stroke="#3E4E5C" stroke-width="4"/>
+<rect x="250" y="96" width="14" height="96" rx="4" fill="#B07A3E" stroke="#5A3E14" stroke-width="4"/></svg></div><div style="position:absolute;left:300px;top:143.0px"><svg viewBox="0 0 320 64" width="160" height="32">
+<path d="M8 12 L312 12 L300 44 L20 44 Z" fill="#D2553A" stroke="#7A2A18" stroke-width="5" stroke-linejoin="round"/>
+<path d="M60 12 Q66 28 58 44 M120 12 Q126 28 118 44 M180 12 Q186 28 178 44 M240 12 Q246 28 238 44" fill="none" stroke="#B3402A" stroke-width="4"/>
+<rect x="18" y="44" width="284" height="14" rx="4" fill="#B07A3E" stroke="#5A3E14" stroke-width="4"/></svg></div><div style="position:absolute;left:440px;top:220.0px"><svg viewBox="0 0 240 160" width="120" height="80">
+<g stroke="#5A3E14" stroke-width="4">
+<rect x="10" y="96" width="220" height="56" rx="26" fill="#A8743C"/>
+<rect x="30" y="44" width="180" height="56" rx="26" fill="#B07A3E"/>
+<rect x="60" y="4" width="120" height="44" rx="20" fill="#A8743C"/>
+</g>
+<g fill="#E8C48A" stroke="#5A3E14" stroke-width="4">
+<circle cx="38" cy="124" r="24"/><circle cx="90" cy="124" r="24"/><circle cx="142" cy="124" r="24"/><circle cx="194" cy="124" r="24"/>
+<circle cx="60" cy="72" r="24"/><circle cx="112" cy="72" r="24"/><circle cx="164" cy="72" r="24"/>
+<circle cx="96" cy="26" r="19"/><circle cx="144" cy="26" r="19"/>
+</g>
+<g fill="none" stroke="#C99A5C" stroke-width="2.5"><circle cx="38" cy="124" r="12"/><circle cx="90" cy="124" r="12"/><circle cx="142" cy="124" r="12"/><circle cx="194" cy="124" r="12"/><circle cx="60" cy="72" r="12"/><circle cx="112" cy="72" r="12"/><circle cx="164" cy="72" r="12"/></g></svg></div><div style="position:absolute;left:600px;top:238.0px"><svg viewBox="0 0 110 124" width="55" height="62">
+<path d="M20 30 L90 30 L80 118 L30 118 Z" fill="#D9824A" stroke="#7A3A16" stroke-width="5" stroke-linejoin="round"/>
+<rect x="12" y="22" width="86" height="18" rx="6" fill="#E89A62" stroke="#7A3A16" stroke-width="4"/>
+<path d="M30 70 L80 70" stroke="#B8622E" stroke-width="4"/>
+<path d="M55 22 Q52 6 56 0" stroke="#3E7A22" stroke-width="4" fill="none"/>
+<ellipse cx="44" cy="12" rx="12" ry="6" fill="#6DBE45" stroke="#3E7A22" stroke-width="2.5" transform="rotate(-25 44 12)"/>
+<circle cx="62" cy="6" r="7" fill="#FF9EC0" stroke="#B3407A" stroke-width="2.5"/></svg></div><div style="position:absolute;left:670px;top:245.0px"><svg viewBox="0 0 300 110" width="150" height="55">
+<path d="M10 20 L290 20 L276 104 L24 104 Z" fill="#A9A49A" stroke="#5E5446" stroke-width="5" stroke-linejoin="round"/>
+<rect x="24" y="22" width="252" height="18" rx="6" fill="#5DB4E3" stroke="#2F7FAF" stroke-width="3"/>
+<path d="M60 30 Q80 26 100 30 M170 30 Q190 26 210 30" stroke="#8FD0F2" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M60 60 L80 64 M150 78 L180 72 M220 56 L236 60" stroke="#8E877C" stroke-width="4" stroke-linecap="round"/>
+<rect x="4" y="12" width="292" height="14" rx="6" fill="#C2BCB0" stroke="#5E5446" stroke-width="4"/></svg></div><div style="position:absolute;left:800px;top:200.0px"><svg viewBox="0 0 260 200" width="130" height="100">
+<rect x="8" y="10" width="26" height="188" rx="5" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<rect x="226" y="10" width="26" height="188" rx="5" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4" transform="translate(34 0) skewY(14) scale(0.45 1)">
+<rect x="0" y="40" width="220" height="16" rx="4"/><rect x="0" y="120" width="220" height="16" rx="4"/>
+<rect x="10" y="30" width="22" height="130" rx="4"/><rect x="100" y="30" width="22" height="130" rx="4"/><rect x="190" y="30" width="22" height="130" rx="4"/>
+</g>
+<circle cx="21" cy="14" r="10" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/><circle cx="239" cy="14" r="10" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/></svg></div><div style="position:absolute;left:60px;top:250px"><svg viewBox="0 0 70 70" width="56" height="56"><circle cx="35" cy="38" r="24" fill="#FFD447" stroke="#7A4E12" stroke-width="3"/><ellipse cx="38" cy="46" rx="14" ry="10" fill="#FFE58A"/><circle cx="42" cy="32" r="5" fill="#fff" stroke="#7A4E12" stroke-width="2"/><circle cx="44" cy="32" r="2.6" fill="#2A1A08"/><path d="M58 34 L68 38 L58 42 Z" fill="#FF8C1A" stroke="#7A4E12" stroke-width="2"/><path d="M32 15 q-4 -9 2 -10 q0 5 3 7" fill="#FFD447" stroke="#7A4E12" stroke-width="2"/></svg></div></div></div>
+<div class="griglia"><div class="scheda"><div class="disegno"><svg viewBox="0 0 120 150" width="96" height="120">
+<rect x="10" y="8" width="100" height="136" rx="22" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<path d="M38 12 Q30 76 38 140 M60 10 L60 142 M82 12 Q90 76 82 140" fill="none" stroke="#8F5F2A" stroke-width="3"/>
+<rect x="6" y="28" width="108" height="12" rx="5" fill="#7D858F" stroke="#3E4E5C" stroke-width="3"/>
+<rect x="6" y="110" width="108" height="12" rx="5" fill="#7D858F" stroke="#3E4E5C" stroke-width="3"/>
+<ellipse cx="60" cy="12" rx="46" ry="8" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/></svg></div><p>Botte: ci si sale sopra</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 360 200" width="216" height="120">
+<rect x="10" y="40" width="300" height="56" rx="8" fill="#C98F4E" stroke="#5A3E14" stroke-width="5"/>
+<path d="M20 58 L300 58 M20 76 L300 76" stroke="#8F5F2A" stroke-width="3"/>
+<rect x="6" y="30" width="308" height="16" rx="6" fill="#DDA562" stroke="#5A3E14" stroke-width="4"/>
+<path d="M310 70 L354 92" stroke="#5A3E14" stroke-width="10" stroke-linecap="round"/>
+<path d="M310 70 L354 92" stroke="#B07A3E" stroke-width="5" stroke-linecap="round"/>
+<circle cx="110" cy="140" r="52" fill="none" stroke="#5A3E14" stroke-width="12"/>
+<circle cx="110" cy="140" r="52" fill="none" stroke="#B07A3E" stroke-width="6"/>
+<path d="M110 92 L110 188 M62 140 L158 140 M76 106 L144 174 M144 106 L76 174" stroke="#8F5F2A" stroke-width="5"/>
+<circle cx="110" cy="140" r="12" fill="#7D858F" stroke="#3E4E5C" stroke-width="4"/>
+<rect x="250" y="96" width="14" height="96" rx="4" fill="#B07A3E" stroke="#5A3E14" stroke-width="4"/></svg></div><p>Carretto: piattaforma con ruota</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 320 64" width="192" height="38">
+<path d="M8 12 L312 12 L300 44 L20 44 Z" fill="#D2553A" stroke="#7A2A18" stroke-width="5" stroke-linejoin="round"/>
+<path d="M60 12 Q66 28 58 44 M120 12 Q126 28 118 44 M180 12 Q186 28 178 44 M240 12 Q246 28 238 44" fill="none" stroke="#B3402A" stroke-width="4"/>
+<rect x="18" y="44" width="284" height="14" rx="4" fill="#B07A3E" stroke="#5A3E14" stroke-width="4"/></svg></div><p>Tettoia: ci si salta sopra da sotto</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 240 160" width="192" height="128">
+<g stroke="#5A3E14" stroke-width="4">
+<rect x="10" y="96" width="220" height="56" rx="26" fill="#A8743C"/>
+<rect x="30" y="44" width="180" height="56" rx="26" fill="#B07A3E"/>
+<rect x="60" y="4" width="120" height="44" rx="20" fill="#A8743C"/>
+</g>
+<g fill="#E8C48A" stroke="#5A3E14" stroke-width="4">
+<circle cx="38" cy="124" r="24"/><circle cx="90" cy="124" r="24"/><circle cx="142" cy="124" r="24"/><circle cx="194" cy="124" r="24"/>
+<circle cx="60" cy="72" r="24"/><circle cx="112" cy="72" r="24"/><circle cx="164" cy="72" r="24"/>
+<circle cx="96" cy="26" r="19"/><circle cx="144" cy="26" r="19"/>
+</g>
+<g fill="none" stroke="#C99A5C" stroke-width="2.5"><circle cx="38" cy="124" r="12"/><circle cx="90" cy="124" r="12"/><circle cx="142" cy="124" r="12"/><circle cx="194" cy="124" r="12"/><circle cx="60" cy="72" r="12"/><circle cx="112" cy="72" r="12"/><circle cx="164" cy="72" r="12"/></g></svg></div><p>Catasta di ceppi: un gradino</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 300 110" width="240" height="88">
+<path d="M10 20 L290 20 L276 104 L24 104 Z" fill="#A9A49A" stroke="#5E5446" stroke-width="5" stroke-linejoin="round"/>
+<rect x="24" y="22" width="252" height="18" rx="6" fill="#5DB4E3" stroke="#2F7FAF" stroke-width="3"/>
+<path d="M60 30 Q80 26 100 30 M170 30 Q190 26 210 30" stroke="#8FD0F2" stroke-width="3" fill="none" stroke-linecap="round"/>
+<path d="M60 60 L80 64 M150 78 L180 72 M220 56 L236 60" stroke="#8E877C" stroke-width="4" stroke-linecap="round"/>
+<rect x="4" y="12" width="292" height="14" rx="6" fill="#C2BCB0" stroke="#5E5446" stroke-width="4"/></svg></div><p>Abbeveratoio di pietra</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 110 124" width="88" height="99">
+<path d="M20 30 L90 30 L80 118 L30 118 Z" fill="#D9824A" stroke="#7A3A16" stroke-width="5" stroke-linejoin="round"/>
+<rect x="12" y="22" width="86" height="18" rx="6" fill="#E89A62" stroke="#7A3A16" stroke-width="4"/>
+<path d="M30 70 L80 70" stroke="#B8622E" stroke-width="4"/>
+<path d="M55 22 Q52 6 56 0" stroke="#3E7A22" stroke-width="4" fill="none"/>
+<ellipse cx="44" cy="12" rx="12" ry="6" fill="#6DBE45" stroke="#3E7A22" stroke-width="2.5" transform="rotate(-25 44 12)"/>
+<circle cx="62" cy="6" r="7" fill="#FF9EC0" stroke="#B3407A" stroke-width="2.5"/></svg></div><p>Vaso di coccio: si rompe a beccate</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 240 120" width="192" height="96">
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4">
+<rect x="4" y="34" width="232" height="18" rx="4"/>
+<rect x="4" y="80" width="232" height="18" rx="4"/>
+<path d="M14 116 L14 20 L28 6 L42 20 L42 116 Z"/>
+<path d="M106 116 L106 20 L120 6 L134 20 L134 116 Z"/>
+<path d="M198 116 L198 20 L212 6 L226 20 L226 116 Z"/>
+</g></svg></div><p>Steccato (sfondo o muretto)</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 260 200" width="208" height="160">
+<rect x="8" y="10" width="26" height="188" rx="5" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<rect x="226" y="10" width="26" height="188" rx="5" fill="#B07A3E" stroke="#5A3E14" stroke-width="5"/>
+<g fill="#E8DCC4" stroke="#5A3E14" stroke-width="4" transform="translate(34 0) skewY(14) scale(0.45 1)">
+<rect x="0" y="40" width="220" height="16" rx="4"/><rect x="0" y="120" width="220" height="16" rx="4"/>
+<rect x="10" y="30" width="22" height="130" rx="4"/><rect x="100" y="30" width="22" height="130" rx="4"/><rect x="190" y="30" width="22" height="130" rx="4"/>
+</g>
+<circle cx="21" cy="14" r="10" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/><circle cx="239" cy="14" r="10" fill="#C99A5C" stroke="#5A3E14" stroke-width="4"/></svg></div><p>Cancelletto aperto: l'uscita</p></div>
+<div class="scheda"><div class="disegno"><svg viewBox="0 0 560 480" width="336" height="288">
+<path d="M30 470 L30 190 L280 40 L530 190 L530 470 Z" fill="#C2553A" stroke="#6E2416" stroke-width="6" stroke-linejoin="round"/>
+<path d="M14 196 L280 30 L546 196" fill="none" stroke="#E8DCC4" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M60 210 L60 460 M110 180 L110 460 M160 150 L160 460 M400 150 L400 460 M450 180 L450 460 M500 210 L500 460" stroke="#A84630" stroke-width="4"/>
+<rect x="200" y="300" width="160" height="170" fill="#8A3020" stroke="#6E2416" stroke-width="5"/>
+<path d="M200 300 L360 470 M360 300 L200 470" stroke="#E8DCC4" stroke-width="12"/>
+<rect x="200" y="300" width="160" height="170" fill="none" stroke="#E8DCC4" stroke-width="12"/>
+<rect x="236" y="150" width="88" height="80" fill="#5A2010" stroke="#E8DCC4" stroke-width="10"/>
+<path d="M240 228 Q262 196 280 224 Q296 194 320 228 Z" fill="#EBC85A" stroke="#8A6420" stroke-width="3"/></svg></div><p>Fienile sullo sfondo</p></div></div>
+</body></html>

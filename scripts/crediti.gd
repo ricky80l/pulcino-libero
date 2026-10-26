@@ -11,6 +11,8 @@ const TESTO := """IL PULCINO LIBERO
 
 Ideato e diretto da Riccardo.
 
+Sviluppato con l'assistenza di strumenti di intelligenza artificiale (Claude, Anthropic).
+
 Realizzato con Godot Engine (godotengine.org).
 
 Carattere Fredoka: Copyright 2016 The Fredoka Project Authors (https://github.com/hafontia/Fredoka-One), distribuito con licenza SIL Open Font License, versione 1.1 (scripts.sil.org/OFL).

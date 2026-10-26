@@ -6,13 +6,14 @@ extends StaticBody2D
 const Parti = preload("res://scripts/parti.gd")
 const PEZZI = preload("res://scripts/pezzi.gd")
 
-enum Tipo { SACCO, BALLA }
+enum Tipo { SACCO, BALLA, VASO }
 
 const IMMAGINI := {
 	Tipo.SACCO: preload("res://assets/grafica/ostacoli/sacco.svg"),
 	Tipo.BALLA: preload("res://assets/grafica/ostacoli/balla.svg"),
+	Tipo.VASO: preload("res://assets/grafica/cortile/vaso.svg"),
 }
-const MISURE := {Tipo.SACCO: Vector2(60, 70), Tipo.BALLA: Vector2(90, 60)}
+const MISURE := {Tipo.SACCO: Vector2(60, 70), Tipo.BALLA: Vector2(90, 60), Tipo.VASO: Vector2(55, 62)}
 
 export(Tipo) var tipo := Tipo.SACCO  # che ostacolo è
 export var resistenza := 1  # quante beccate servono per romperlo

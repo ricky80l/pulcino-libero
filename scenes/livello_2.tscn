@@ -1,0 +1,498 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/livello.gd" type="Script" id=1]
+[ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/controlli_touch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/chicco.gd" type="Script" id=5]
+[ext_resource path="res://scripts/nido.gd" type="Script" id=6]
+[ext_resource path="res://scripts/topo.gd" type="Script" id=7]
+[ext_resource path="res://assets/grafica/oggetti/etichetta.svg" type="Texture" id=8]
+[ext_resource path="res://assets/grafica/oggetti/chicco.svg" type="Texture" id=9]
+[ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
+[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
+[ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[node name="Livello2" type="Node2D"]
+script = ExtResource( 1 )
+numero = 2
+frase_fine = "Hai attraversato il cortile!"
+beccata = true
+
+[node name="Cortile" type="Node2D" parent="."]
+
+[node name="Paesaggio" type="StaticBody2D" parent="Cortile"]
+z_index = -10
+position = Vector2( 0, 0 )
+script = ExtResource( 2 )
+tipo = 9
+dimensioni = Vector2( 4440, 720 )
+solido = false
+
+[node name="Fienile" type="StaticBody2D" parent="Cortile"]
+z_index = -8
+position = Vector2( 2240, 400 )
+script = ExtResource( 2 )
+tipo = 17
+dimensioni = Vector2( 280, 240 )
+solido = false
+
+[node name="SteccatoFondo1" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 0, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo2" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 120, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo3" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 240, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo4" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 360, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo5" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 480, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo6" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 600, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo7" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3300, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo8" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3420, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo9" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3540, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo10" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3660, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo11" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3780, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo12" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 3900, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="SteccatoFondo13" type="StaticBody2D" parent="Cortile"]
+z_index = -5
+position = Vector2( 4020, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+solido = false
+
+[node name="Terra" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 0, 640 )
+script = ExtResource( 2 )
+tipo = 10
+dimensioni = Vector2( 4440, 80 )
+
+[node name="MuroSinistro" type="StaticBody2D" parent="Cortile"]
+position = Vector2( -40, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 720 )
+
+[node name="MuroDestro" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 4400, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 720 )
+
+[node name="Palizzata1" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 700, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 568 )
+
+[node name="Botte1" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 900, 565 )
+script = ExtResource( 2 )
+tipo = 11
+dimensioni = Vector2( 60, 75 )
+
+[node name="Carretto1" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 1250, 540 )
+script = ExtResource( 2 )
+tipo = 12
+dimensioni = Vector2( 180, 100 )
+
+[node name="TettoiaCarretto" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 1300, 410 )
+script = ExtResource( 2 )
+tipo = 13
+dimensioni = Vector2( 160, 32 )
+attraversabile_da_sotto = true
+
+[node name="Palizzata2" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 1550, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 572 )
+
+[node name="Ceppi1" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 1850, 560 )
+script = ExtResource( 2 )
+tipo = 14
+dimensioni = Vector2( 120, 80 )
+
+[node name="Carretto2" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 1990, 540 )
+script = ExtResource( 2 )
+tipo = 12
+dimensioni = Vector2( 180, 100 )
+
+[node name="Tettoia1" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2200, 440 )
+script = ExtResource( 2 )
+tipo = 13
+dimensioni = Vector2( 160, 32 )
+attraversabile_da_sotto = true
+
+[node name="Tettoia2" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2400, 330 )
+script = ExtResource( 2 )
+tipo = 13
+dimensioni = Vector2( 160, 32 )
+attraversabile_da_sotto = true
+
+[node name="Tettoia3" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2620, 230 )
+script = ExtResource( 2 )
+tipo = 13
+dimensioni = Vector2( 160, 32 )
+attraversabile_da_sotto = true
+
+[node name="Muro3Alto" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 3100, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 60, 490 )
+
+[node name="Muro3Basso" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 3100, 560 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 60, 80 )
+
+[node name="Abbeveratoio" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 3350, 585 )
+script = ExtResource( 2 )
+tipo = 15
+dimensioni = Vector2( 150, 55 )
+
+[node name="SteccatoBasso" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 3760, 580 )
+script = ExtResource( 2 )
+tipo = 16
+dimensioni = Vector2( 120, 60 )
+
+[node name="Cancello" type="StaticBody2D" parent="Cortile"]
+z_index = -4
+position = Vector2( 4130, 540 )
+script = ExtResource( 2 )
+tipo = 18
+dimensioni = Vector2( 130, 100 )
+solido = false
+
+[node name="Rompibili" type="Node2D" parent="."]
+
+[node name="Rompibile1" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 720, 640 )
+script = ExtResource( 13 )
+tipo = 0
+resistenza = 1
+
+[node name="Rompibile2" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1060, 640 )
+script = ExtResource( 13 )
+tipo = 2
+resistenza = 1
+
+[node name="Rompibile3" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1120, 640 )
+script = ExtResource( 13 )
+tipo = 2
+resistenza = 1
+
+[node name="Rompibile4" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1180, 640 )
+script = ExtResource( 13 )
+tipo = 2
+resistenza = 1
+
+[node name="Rompibile5" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1570, 640 )
+script = ExtResource( 13 )
+tipo = 1
+resistenza = 2
+
+[node name="Rompibile6" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 3130, 560 )
+script = ExtResource( 13 )
+tipo = 0
+resistenza = 1
+
+[node name="Rompibile7" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 3600, 640 )
+script = ExtResource( 13 )
+tipo = 2
+resistenza = 1
+
+[node name="Rompibile8" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 3660, 640 )
+script = ExtResource( 13 )
+tipo = 2
+resistenza = 1
+
+[node name="Rompibile9" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 3950, 640 )
+script = ExtResource( 13 )
+tipo = 1
+resistenza = 2
+
+[node name="Nidi" type="Node2D" parent="."]
+
+[node name="Nido1" type="Area2D" parent="Nidi"]
+position = Vector2( 1720, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido2" type="Area2D" parent="Nidi"]
+position = Vector2( 2900, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido3" type="Area2D" parent="Nidi"]
+position = Vector2( 3550, 640 )
+script = ExtResource( 6 )
+
+[node name="Chicchi" type="Node2D" parent="."]
+
+[node name="Chicco1" type="Area2D" parent="Chicchi"]
+position = Vector2( 320, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco2" type="Area2D" parent="Chicchi"]
+position = Vector2( 400, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco3" type="Area2D" parent="Chicchi"]
+position = Vector2( 800, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco4" type="Area2D" parent="Chicchi"]
+position = Vector2( 930, 530 )
+script = ExtResource( 5 )
+
+[node name="Chicco5" type="Area2D" parent="Chicchi"]
+position = Vector2( 1060, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco6" type="Area2D" parent="Chicchi"]
+position = Vector2( 1120, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco7" type="Area2D" parent="Chicchi"]
+position = Vector2( 1180, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco8" type="Area2D" parent="Chicchi"]
+position = Vector2( 1290, 510 )
+script = ExtResource( 5 )
+
+[node name="Chicco9" type="Area2D" parent="Chicchi"]
+position = Vector2( 1340, 510 )
+script = ExtResource( 5 )
+
+[node name="Chicco10" type="Area2D" parent="Chicchi"]
+position = Vector2( 1380, 380 )
+script = ExtResource( 5 )
+
+[node name="Chicco11" type="Area2D" parent="Chicchi"]
+position = Vector2( 1650, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco12" type="Area2D" parent="Chicchi"]
+position = Vector2( 1880, 530 )
+script = ExtResource( 5 )
+
+[node name="Chicco13" type="Area2D" parent="Chicchi"]
+position = Vector2( 2280, 410 )
+script = ExtResource( 5 )
+
+[node name="Chicco14" type="Area2D" parent="Chicchi"]
+position = Vector2( 2480, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco15" type="Area2D" parent="Chicchi"]
+position = Vector2( 2660, 200 )
+script = ExtResource( 5 )
+
+[node name="Chicco16" type="Area2D" parent="Chicchi"]
+position = Vector2( 2740, 200 )
+script = ExtResource( 5 )
+
+[node name="Chicco17" type="Area2D" parent="Chicchi"]
+position = Vector2( 3200, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco18" type="Area2D" parent="Chicchi"]
+position = Vector2( 3420, 550 )
+script = ExtResource( 5 )
+
+[node name="Chicco19" type="Area2D" parent="Chicchi"]
+position = Vector2( 3820, 545 )
+script = ExtResource( 5 )
+
+[node name="Chicco20" type="Area2D" parent="Chicchi"]
+position = Vector2( 4050, 610 )
+script = ExtResource( 5 )
+
+[node name="Nemici" type="Node2D" parent="."]
+
+[node name="Uscita" type="Area2D" parent="."]
+position = Vector2( 4220, 610 )
+
+[node name="Forma" type="CollisionShape2D" parent="Uscita"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 200, 610 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 4400
+limit_bottom = 720
+smoothing_enabled = true
+smoothing_speed = 6.0
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="Interfaccia" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Contatore" type="Control" parent="Interfaccia"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 176.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 80, 28 )
+mouse_filter = 2
+
+[node name="Tavola" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_right = 160.0
+margin_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Icona" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_left = 18.0
+margin_top = 11.0
+margin_right = 44.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Numero" type="Label" parent="Interfaccia/Contatore"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 152.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "0 / 0"
+align = 1
+valign = 1
+
+[node name="Messaggio" type="Control" parent="Interfaccia"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Sfondo" type="ColorRect" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="Testo" type="Label" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "Sei scappato dal pollaio!
+
+Premi salto per rigiocare"
+align = 1
+valign = 1
