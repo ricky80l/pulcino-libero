@@ -12,6 +12,7 @@ const ELENCO := {
 	"becco": preload("res://assets/suoni/becco.wav"),
 	"botta": preload("res://assets/suoni/botta.wav"),
 	"rotto": preload("res://assets/suoni/rotto.wav"),
+	"starnazzo": preload("res://assets/suoni/starnazzo.wav"),
 }
 
 var lettori := []

@@ -84,4 +84,8 @@ salva("becco", mescola(rumore(0.03, volume=0.9, morbidezza=0.2), tono(700, 500, 
 salva("botta", mescola(tono(180, 90, 0.12, armonica=0.6, volume=0.7), rumore(0.06, volume=0.5, morbidezza=0.6)))
 # "scrunch" di un ostacolo che va in pezzi
 salva("rotto", mescola(rumore(0.28, volume=0.8, morbidezza=0.35), tono(220, 70, 0.2, armonica=0.5, volume=0.5)))
+# "QUA-QUA!" nasale dell'oca arrabbiata
+def starnazzo(f0, f1, durata):
+    return tono(f0, f1, durata, vibrato_hz=35, vibrato_ampiezza=0.04, armonica=1.4, attacco=0.01, volume=0.55)
+salva("starnazzo", starnazzo(420, 330, 0.16) + silenzio(0.05) + starnazzo(460, 300, 0.22))
 print("suoni creati in", os.path.abspath(CARTELLA))

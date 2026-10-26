@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -13,6 +13,7 @@
 [ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
 [ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
 [ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
+[ext_resource path="res://scripts/oca.gd" type="Script" id=14]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -297,24 +298,6 @@ script = ExtResource( 13 )
 tipo = 0
 resistenza = 1
 
-[node name="Rompibile7" type="StaticBody2D" parent="Rompibili"]
-position = Vector2( 3600, 640 )
-script = ExtResource( 13 )
-tipo = 2
-resistenza = 1
-
-[node name="Rompibile8" type="StaticBody2D" parent="Rompibili"]
-position = Vector2( 3660, 640 )
-script = ExtResource( 13 )
-tipo = 2
-resistenza = 1
-
-[node name="Rompibile9" type="StaticBody2D" parent="Rompibili"]
-position = Vector2( 3950, 640 )
-script = ExtResource( 13 )
-tipo = 1
-resistenza = 2
-
 [node name="Nidi" type="Node2D" parent="."]
 
 [node name="Nido1" type="Area2D" parent="Nidi"]
@@ -322,11 +305,15 @@ position = Vector2( 1720, 640 )
 script = ExtResource( 6 )
 
 [node name="Nido2" type="Area2D" parent="Nidi"]
-position = Vector2( 2900, 640 )
+position = Vector2( 2230, 640 )
 script = ExtResource( 6 )
 
 [node name="Nido3" type="Area2D" parent="Nidi"]
-position = Vector2( 3550, 640 )
+position = Vector2( 3230, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido4" type="Area2D" parent="Nidi"]
+position = Vector2( 3950, 640 )
 script = ExtResource( 6 )
 
 [node name="Chicchi" type="Node2D" parent="."]
@@ -412,6 +399,16 @@ position = Vector2( 4050, 610 )
 script = ExtResource( 5 )
 
 [node name="Nemici" type="Node2D" parent="."]
+
+[node name="Oca1" type="KinematicBody2D" parent="Nemici"]
+position = Vector2( 2450, 640 )
+script = ExtResource( 14 )
+distanza = 300.0
+
+[node name="Oca2" type="KinematicBody2D" parent="Nemici"]
+position = Vector2( 3560, 640 )
+script = ExtResource( 14 )
+distanza = 140.0
 
 [node name="Uscita" type="Area2D" parent="."]
 position = Vector2( 4220, 610 )

@@ -70,9 +70,9 @@ valign = 1
 
 
 def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=(), topi=(), rompibili=(),
-                   uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None):
+                   uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None, oche=()):
     """pezzi: (nome, x, y, larghezza, altezza, tipo, extra); rompibili: (x, y, tipo, resistenza);
-    proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
+    oche: (x, y, distanza); proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
     risorse = [
         ("res://scripts/livello.gd", "Script"),
         ("res://scripts/blocco.gd", "Script"),
@@ -88,7 +88,10 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         ("res://scripts/pausa.gd", "Script"),
     ]
     if rompibili:
-        risorse.append(("res://scripts/rompibile.gd", "Script"))  # id 13
+        risorse.append(("res://scripts/rompibile.gd", "Script"))
+    if oche:
+        risorse.append(("res://scripts/oca.gd", "Script"))
+    id_di = {path: i for i, (path, _t) in enumerate(risorse, 1)}
 
     out = [f"[gd_scene load_steps={len(risorse) + 2} format=2]\n"]
     for i, (path, tipo) in enumerate(risorse, 1):
@@ -118,7 +121,8 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         out.append('[node name="Rompibili" type="Node2D" parent="."]\n')
         for i, (x, y, tipo, resistenza) in enumerate(rompibili, 1):
             out.append(f'[node name="Rompibile{i}" type="StaticBody2D" parent="Rompibili"]\n'
-                       f'position = Vector2( {x}, {y} )\nscript = ExtResource( 13 )\ntipo = {tipo}\nresistenza = {resistenza}\n')
+                       f'position = Vector2( {x}, {y} )\nscript = ExtResource( {id_di["res://scripts/rompibile.gd"]} )\n'
+                       f'tipo = {tipo}\nresistenza = {resistenza}\n')
 
     out.append('[node name="Nidi" type="Node2D" parent="."]\n')
     for i, (x, y) in enumerate(nidi, 1):
@@ -131,6 +135,9 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     out.append('[node name="Nemici" type="Node2D" parent="."]\n')
     for i, (x, y, dist) in enumerate(topi, 1):
         out.append(f'[node name="Topo{i}" type="Area2D" parent="Nemici"]\nposition = Vector2( {x}, {y} )\nscript = ExtResource( 7 )\ndistanza = {dist}.0\n')
+    for i, (x, y, dist) in enumerate(oche, 1):
+        out.append(f'[node name="Oca{i}" type="KinematicBody2D" parent="Nemici"]\nposition = Vector2( {x}, {y} )\n'
+                   f'script = ExtResource( {id_di["res://scripts/oca.gd"]} )\ndistanza = {dist}.0\n')
 
     out.append(f'''[node name="Uscita" type="Area2D" parent="."]
 position = Vector2( {uscita[0]}, {uscita[1]} )

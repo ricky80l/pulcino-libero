@@ -38,7 +38,7 @@ pezzi += [
     # 3: varco in alto chiuso da un sacco: si becca saltando, poi si sale sul gradino
     ("Muro3Alto", 3100, 0, 60, 490, LEG, {}),
     ("Muro3Basso", 3100, 560, 60, 80, LEG, {}),
-    # ultimo tratto: abbeveratoio, vasi, uno steccato basso da saltare
+    # ultimo tratto: abbeveratoio e steccato basso, con l'oca in mezzo
     ("Abbeveratoio", 3350, 585, 150, 55, ABB, {}),
     ("SteccatoBasso", 3760, 580, 120, 60, STE, {}),
     # il cancelletto aperto verso l'orto
@@ -50,9 +50,11 @@ rompibili = [
     (1060, 640, VASO, 1), (1120, 640, VASO, 1), (1180, 640, VASO, 1),
     (1570, 640, BALLA, 2),
     (3130, 560, SACCO, 1),
-    (3600, 640, VASO, 1), (3660, 640, VASO, 1),
-    (3950, 640, BALLA, 2),
 ]
+
+# oche arrabbiate: x di partenza, y a terra, quanto passeggiano verso destra
+# ognuna ha un ostacolo a ogni lato, contro cui può sbattere caricando
+oche = [(2450, 640, 300), (3560, 640, 140)]
 
 chicchi = [
     (320, 610), (400, 610),                 # partenza
@@ -71,7 +73,7 @@ chicchi = [
     (4050, 610),                            # davanti al cancello
 ]
 
-nidi = [(1720, 640), (2900, 640), (3550, 640)]
+nidi = [(1720, 640), (2230, 640), (3230, 640), (3950, 640)]
 
 proprieta = {
     "numero": 2,
@@ -80,4 +82,5 @@ proprieta = {
 }
 
 scrivi_livello(sys.argv[1], "Livello2", "Cortile", pezzi, chicchi, nidi, rompibili=rompibili,
-               uscita=(4220, 610), partenza=(200, 610), limite_destro=4400, proprieta_livello=proprieta)
+               uscita=(4220, 610), partenza=(200, 610), limite_destro=4400, proprieta_livello=proprieta,
+               oche=oche)

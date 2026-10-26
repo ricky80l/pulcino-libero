@@ -211,7 +211,7 @@ func _aggiorna_cartelli():
 			var r: Dictionary = Progressi.record[str(numero)]
 			testo += "\n%d / %d" % [int(r["presi"]), int(r["totale"])]
 		elif Progressi.LIVELLI[i]["scena"] == "":
-			testo += "\npresto!"
+			testo += "\nin arrivo!"  # sbloccato ma non ancora costruito
 		else:
 			testo += "\nnuovo!"
 		cartello.text = testo
@@ -355,7 +355,7 @@ func _unhandled_input(evento):
 
 func _entra(numero: int):
 	if Progressi.LIVELLI[numero - 1]["scena"] == "":
-		_scuoti(cartelli[numero - 1])  # "presto!": il livello non c'è ancora
+		_scuoti(cartelli[numero - 1])  # "in arrivo!": il livello non c'è ancora
 		Suoni.suona("squittio", 0.1, -4.0)
 		return
 	set_process(false)
