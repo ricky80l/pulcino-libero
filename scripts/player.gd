@@ -31,7 +31,7 @@ export var portata_beccata := 30.0  # quanto arriva lontano il becco davanti al 
 
 # --- Doppio salto ---
 export var puo_doppio_salto := false  # il livello lo attiva quando il pulcino ha imparato il doppio salto
-export var forza_doppio_salto := 660.0  # spinta del secondo salto: un po' meno del primo
+export var forza_doppio_salto := 760.0  # spinta del secondo salto: sempre piena, anche con un tocco veloce
 
 # --- Animazioni esagerate ---
 export var allunga_salto := 0.35  # quanto si allunga saltando (0 = niente)
@@ -144,8 +144,8 @@ func _physics_process(delta):
 		aspetto.pigola()
 		Effetti.sbuffo(get_parent(), position + Vector2(0, 20), COLORE_POLVERE, 6, 90.0)
 
-	# Salto più basso se lasci presto il tasto
-	if Input.is_action_just_released("jump") and velocita.y < 0:
+	# Salto più basso se lasci presto il tasto (non vale per il doppio salto, che è sempre pieno)
+	if Input.is_action_just_released("jump") and velocita.y < 0 and not doppio_usato:
 		velocita.y *= taglio_salto
 
 	# Gravità: più forte in discesa
