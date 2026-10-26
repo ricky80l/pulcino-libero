@@ -7,7 +7,7 @@ const FILE := "user://progressi.json"
 # I dieci luoghi del viaggio. "scena" vuota = livello non ancora costruito.
 const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
-	{"nome": "Il cortile", "scena": ""},
+	{"nome": "Il cortile", "scena": "res://scenes/prova_beccata.tscn"},  # provvisorio: area di prova della beccata (Tappa 9)
 	{"nome": "L'orto", "scena": ""},
 	{"nome": "Il prato", "scena": ""},
 	{"nome": "Il bosco", "scena": ""},

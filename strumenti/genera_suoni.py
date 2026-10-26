@@ -77,4 +77,11 @@ fanfara = []
 for nota, durata in [(784, 0.12), (988, 0.12), (1175, 0.12), (1568, 0.45)]:
     fanfara += tono(nota, nota, durata, armonica=0.5, volume=0.45)
 salva("fine", fanfara)
+# "tok!" secco della beccata, con un pigolio corto
+salva("becco", mescola(rumore(0.03, volume=0.9, morbidezza=0.2), tono(700, 500, 0.05, armonica=0.8, volume=0.5))
+      + tono(1500, 1900, 0.06, volume=0.3))
+# botta sorda su un ostacolo che resiste
+salva("botta", mescola(tono(180, 90, 0.12, armonica=0.6, volume=0.7), rumore(0.06, volume=0.5, morbidezza=0.6)))
+# "scrunch" di un ostacolo che va in pezzi
+salva("rotto", mescola(rumore(0.28, volume=0.8, morbidezza=0.35), tono(220, 70, 0.2, armonica=0.5, volume=0.5)))
 print("suoni creati in", os.path.abspath(CARTELLA))

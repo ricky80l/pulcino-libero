@@ -18,9 +18,17 @@ script = ExtResource( 1 )
 simbolo = 1
 
 [node name="Salto" type="TouchScreenButton" parent="."]
-position = Vector2( 1170, 610 )
+position = Vector2( 1180, 615 )
 action = "jump"
 script = ExtResource( 1 )
 simbolo = 2
 raggio = 80.0
-zona_tocco = Vector2( 140, 150 )
+zona_tocco = Vector2( 100, 145 )
+
+[node name="Becco" type="TouchScreenButton" parent="."]
+position = Vector2( 980, 575 )
+action = "peck"
+script = ExtResource( 1 )
+simbolo = 3
+raggio = 62.0
+zona_tocco = Vector2( 90, 125 )

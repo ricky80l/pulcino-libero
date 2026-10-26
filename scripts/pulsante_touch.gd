@@ -1,7 +1,7 @@
 extends TouchScreenButton
 # Pulsante a schermo rotondo e semitrasparente. Preme la stessa azione della tastiera.
 
-enum Simbolo { SINISTRA, DESTRA, SALTO }
+enum Simbolo { SINISTRA, DESTRA, SALTO, BECCO }
 
 export(Simbolo) var simbolo := Simbolo.SINISTRA  # disegno sul pulsante
 export var raggio := 70.0  # grandezza del cerchio disegnato
@@ -33,4 +33,10 @@ func _draw():
 			punti = PoolVector2Array([Vector2(s, 0), Vector2(-s * 0.6, -s), Vector2(-s * 0.6, s)])
 		Simbolo.SALTO:
 			punti = PoolVector2Array([Vector2(0, -s), Vector2(-s, s * 0.6), Vector2(s, s * 0.6)])
+		Simbolo.BECCO:
+			# becco aperto che guarda a destra: due triangoli
+			var col := Color(0.95, 0.5, 0.1, alfa + 0.3)
+			draw_colored_polygon(PoolVector2Array([Vector2(-s * 0.8, -s * 0.7), Vector2(s, -s * 0.15), Vector2(-s * 0.8, -s * 0.05)]), col)
+			draw_colored_polygon(PoolVector2Array([Vector2(-s * 0.8, s * 0.15), Vector2(s * 0.8, s * 0.45), Vector2(-s * 0.8, s * 0.7)]), col)
+			return
 	draw_colored_polygon(punti, Color(0.2, 0.15, 0.1, alfa + 0.2))

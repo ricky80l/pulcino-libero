@@ -9,6 +9,9 @@ const ELENCO := {
 	"squittio": preload("res://assets/suoni/squittio.wav"),
 	"nido": preload("res://assets/suoni/nido.wav"),
 	"fine": preload("res://assets/suoni/fine.wav"),
+	"becco": preload("res://assets/suoni/becco.wav"),
+	"botta": preload("res://assets/suoni/botta.wav"),
+	"rotto": preload("res://assets/suoni/rotto.wav"),
 }
 
 var lettori := []

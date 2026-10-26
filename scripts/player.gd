@@ -23,6 +23,12 @@ export var tempo_prenota_salto := 0.1  # se premi salto poco prima di atterrare,
 export var tempo_invulnerabile := 1.2  # secondi in cui lampeggia e i nemici non lo toccano, dopo essere ripartito
 export var durata_sbalzo := 0.7  # secondi in cui vola via girando quando il topo lo tocca
 
+# --- Beccata ---
+export var puo_beccare := false  # il livello lo attiva quando il pulcino ha imparato la beccata
+export var durata_beccata := 0.28  # quanto dura il colpo di becco (secondi)
+export var pausa_beccata := 0.1  # attesa minima prima della beccata successiva
+export var portata_beccata := 30.0  # quanto arriva lontano il becco davanti al pulcino (pixel)
+
 # --- Animazioni esagerate ---
 export var allunga_salto := 0.35  # quanto si allunga saltando (0 = niente)
 export var schiaccia_atterraggio := 0.4  # quanto si schiaccia atterrando (0 = niente)
@@ -39,6 +45,9 @@ var verso := 1.0  # 1 = guarda a destra, -1 = a sinistra
 var deformazione := Vector2.ONE
 var era_a_terra := true
 var tempo := 0.0
+var timer_beccata := 0.0
+var attesa_beccata := 0.0
+var colpiti := []  # ostacoli già colpiti in questa beccata
 
 onready var aspetto := $Aspetto
 
@@ -65,6 +74,7 @@ func riparti():
 	position = punto_sicuro
 	velocita = Vector2.ZERO
 	timer_sbalzo = 0.0
+	timer_beccata = 0.0
 	timer_invulnerabile = tempo_invulnerabile
 	aspetto.rotation = 0.0
 	deformazione = Vector2.ONE
@@ -89,6 +99,9 @@ func _physics_process(delta):
 		aspetto.visible = timer_invulnerabile <= 0 or fmod(timer_invulnerabile, 0.2) > 0.1
 
 	var a_terra := is_on_floor()
+
+	if puo_beccare:
+		_gestisci_beccata(delta)
 
 	# Camminata con accelerazione e frenata morbide
 	var direzione := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -142,12 +155,50 @@ func _physics_process(delta):
 
 	# Torna piano piano alla forma normale; ondeggia camminando
 	deformazione = deformazione.linear_interpolate(Vector2.ONE, min(1.0, ritorno_forma * delta))
-	if a_terra_ora and abs(velocita.x) > 30:
+	if timer_beccata > 0:
+		# beccata: si sbilancia in avanti col becco e torna su
+		var fase := sin((1.0 - timer_beccata / durata_beccata) * PI)
+		aspetto.rotation = verso * fase * 0.6
+		aspetto.position.x = verso * fase * 8.0
+	elif a_terra_ora and abs(velocita.x) > 30:
 		aspetto.rotation = sin(tempo * 18.0) * dondolio_camminata
+		aspetto.position.x = 0.0
 	else:
 		aspetto.rotation = lerp(aspetto.rotation, 0.0, min(1.0, 15.0 * delta))
+		aspetto.position.x = 0.0
 	aspetto.scale = Vector2(verso * deformazione.x, deformazione.y)
 
 	# Se cade fuori dallo schermo, riparte dall'ultimo punto sicuro
 	if position.y > 1000:
 		riparti()
+
+
+# Beccata: col tasto X (o il pulsante col becco) colpisce quello che ha davanti, anche in aria
+func _gestisci_beccata(delta):
+	attesa_beccata -= delta
+	if timer_beccata > 0:
+		timer_beccata -= delta
+		if timer_beccata > durata_beccata * 0.4:  # il becco colpisce nella prima parte del movimento
+			_colpisci()
+	elif attesa_beccata <= 0 and Input.is_action_just_pressed("peck"):
+		timer_beccata = durata_beccata
+		attesa_beccata = durata_beccata + pausa_beccata
+		colpiti = []
+		deformazione = Vector2(1.2, 0.88)
+		Suoni.suona("becco", 0.1)
+		aspetto.pigola()
+		_colpisci()
+
+
+func _colpisci():
+	var zona := RectangleShape2D.new()
+	zona.extents = Vector2(portata_beccata * 0.5 + 6, 16)
+	var domanda := Physics2DShapeQueryParameters.new()
+	domanda.set_shape(zona)
+	domanda.transform = Transform2D(0, global_position + Vector2(verso * (20 + portata_beccata * 0.5), -4))
+	domanda.exclude = [self]
+	for risultato in get_world_2d().direct_space_state.intersect_shape(domanda, 8):
+		var cosa = risultato["collider"]
+		if cosa.has_method("becca") and not colpiti.has(cosa):
+			colpiti.append(cosa)
+			cosa.becca(verso)

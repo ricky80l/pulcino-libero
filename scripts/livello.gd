@@ -4,6 +4,8 @@ extends Node2D
 
 export var numero := 1  # posizione del livello nel viaggio (1 = pollaio)
 export var frase_fine := "Sei scappato dal pollaio!"  # cosa dice il messaggio di fine
+export var beccata := false  # true se in questo livello il pulcino sa già beccare
+export var salva_progressi := true  # false per le aree di prova: niente record e niente sblocchi
 
 var completato := false
 var chicchi_presi := 0
@@ -23,6 +25,8 @@ func _ready():
 	$Uscita.connect("body_entered", self, "_on_uscita_body_entered")
 	chicchi_totali = get_tree().get_nodes_in_group("chicchi").size()
 	_aggiorna_contatore()
+	player.puo_beccare = beccata
+	$ControlliTouch/Becco.visible = beccata
 
 
 func chicco_raccolto():
@@ -53,7 +57,8 @@ func _on_uscita_body_entered(corpo):
 	if corpo == player and not completato:
 		completato = true
 		player.set_physics_process(false)
-		Progressi.livello_finito(numero, chicchi_presi, chicchi_totali)
+		if salva_progressi:
+			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali)
 		testo_fine.text = "%s\n\nChicchi: %d / %d\n\nPremi salto per tornare alla mappa" % [frase_fine, chicchi_presi, chicchi_totali]
 		messaggio.visible = true
 		Suoni.suona("fine", 0.0)

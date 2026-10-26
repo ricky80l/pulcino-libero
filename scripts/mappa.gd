@@ -211,6 +211,8 @@ func _aggiorna_cartelli():
 			cartello.add_stylebox_override("normal", _tavola(Color("ffd84a"), 5))
 		else:
 			cartello.add_stylebox_override("normal", _tavola(Stile.CONTORNO, 3))
+		# ricalcola l'altezza: con due righe il cartello deve crescere
+		cartello.rect_size = Vector2(200, 0)
 
 
 # ---------------- disegno del paesaggio ----------------
