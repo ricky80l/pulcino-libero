@@ -34,6 +34,10 @@ var tempo := 0.0
 
 
 func _ready():
+	# la nebbia si dirada solo sui luoghi già costruiti (gli altri sono "in arrivo")
+	var ultimo := Progressi.ultimo_giocabile()
+	if Progressi.nebbia_vista > ultimo:
+		Progressi.nebbia_vista = ultimo
 	_prepara_sentiero()
 	_prepara_alberi()
 	for i in range(DISEGNI.size()):
@@ -48,7 +52,7 @@ func _ready():
 
 	pulcino = PULCINO.new()
 	add_child(pulcino)
-	luogo_attuale = int(clamp(Progressi.ultimo_giocato, 1, Progressi.sbloccato))
+	luogo_attuale = int(clamp(Progressi.ultimo_giocato, 1, ultimo))
 	meta = luogo_attuale
 	distanza_pulcino = distanze[luogo_attuale - 1]
 	pulcino.position = sentiero.interpolate_baked(distanza_pulcino)
@@ -57,15 +61,15 @@ func _ready():
 	_aggiorna_cartelli()
 	update()
 
-	# Luoghi appena sbloccati: la nebbia si dirada e il pulcino ci va da solo
-	if Progressi.sbloccato > Progressi.nebbia_vista:
+	# Luoghi appena sbloccati e già costruiti: la nebbia si dirada e il pulcino ci va da solo
+	if ultimo > Progressi.nebbia_vista:
 		yield(get_tree().create_timer(0.8), "timeout")
-		for n in range(Progressi.nebbia_vista + 1, Progressi.sbloccato + 1):
+		for n in range(Progressi.nebbia_vista + 1, ultimo + 1):
 			_dirada_nebbia(n)
-		Progressi.nebbia_vista = Progressi.sbloccato
+		Progressi.nebbia_vista = ultimo
 		Progressi.salva()
 		yield(get_tree().create_timer(0.9), "timeout")
-		_vai_a(Progressi.sbloccato)
+		_vai_a(ultimo)
 
 
 func _colora_farfalle():
@@ -148,7 +152,7 @@ func _crea_luogo(numero: int):
 	nebbia.texture = NEBBIA
 	nebbia.scale = Vector2(0.62, 0.62)
 	nebbia.position = base + Vector2(0, -52)
-	nebbia.visible = numero > Progressi.nebbia_vista
+	nebbia.visible = numero > Progressi.nebbia_vista or not Progressi.costruito(numero)
 	add_child(nebbia)
 	nebbie.append(nebbia)
 
@@ -210,8 +214,6 @@ func _aggiorna_cartelli():
 		if Progressi.finito(numero):
 			var r: Dictionary = Progressi.record[str(numero)]
 			testo += "\n%d / %d" % [int(r["presi"]), int(r["totale"])]
-		elif Progressi.LIVELLI[i]["scena"] == "":
-			testo += "\nin arrivo!"  # sbloccato ma non ancora costruito
 		else:
 			testo += "\nnuovo!"
 		cartello.text = testo
@@ -247,7 +249,7 @@ func _draw():
 	draw_polyline(fiume, Color("8fd0f2"), 6.0, true)
 	# sentiero: la parte già sbloccata è piena, il resto più pallido
 	var punti := sentiero.get_baked_points()
-	var fine_sbloccata: float = distanze[Progressi.sbloccato - 1]
+	var fine_sbloccata: float = distanze[Progressi.ultimo_giocabile() - 1]
 	var aperto := PoolVector2Array()
 	var chiuso := PoolVector2Array()
 	for i in range(punti.size()):
@@ -321,7 +323,7 @@ func _in_cammino() -> bool:
 
 func _vai_a(numero: int):
 	# si può andare solo dove la nebbia è (o sta per essere) diradata
-	if numero < 1 or numero > Progressi.sbloccato or numero > Progressi.nebbia_vista:
+	if not Progressi.giocabile(numero) or numero > Progressi.nebbia_vista:
 		return
 	meta = numero
 
@@ -357,7 +359,7 @@ func _unhandled_input(evento):
 
 func _entra(numero: int):
 	if Progressi.LIVELLI[numero - 1]["scena"] == "":
-		_scuoti(cartelli[numero - 1])  # "in arrivo!": il livello non c'è ancora
+		_scuoti(cartelli[numero - 1])  # il livello non c'è ancora
 		Suoni.suona("squittio", 0.1, -4.0)
 		return
 	set_process(false)

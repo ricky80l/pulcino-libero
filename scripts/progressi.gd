@@ -40,13 +40,48 @@ func finito(numero: int) -> bool:
 	return record.has(str(numero))
 
 
+# Un luogo si può giocare se è sbloccato e il suo livello è già costruito
+func giocabile(numero: int) -> bool:
+	return numero >= 1 and numero <= sbloccato and LIVELLI[numero - 1]["scena"] != ""
+
+
+func costruito(numero: int) -> bool:
+	return numero >= 1 and numero <= LIVELLI.size() and LIVELLI[numero - 1]["scena"] != ""
+
+
+# Il luogo più avanti che si può giocare
+func ultimo_giocabile() -> int:
+	var n := sbloccato
+	while n > 1 and not giocabile(n):
+		n -= 1
+	return n
+
+
+# Crescita del pulcino: stadio per ogni livello (vedi CLAUDE.md). Esistono già i disegni degli stadi 1 e 2.
+const STADIO_DEL_LIVELLO := [1, 2, 2, 3, 3, 4, 4, 5, 5, 6]
+
+
+func stadio_di(numero: int) -> int:
+	return STADIO_DEL_LIVELLO[int(clamp(numero, 1, LIVELLI.size())) - 1]
+
+
+# Stadio da mostrare: nella mappa quello del luogo più avanti, nei livelli quello del livello giocato
+var in_mappa := true
+
+
+func stadio_in_gioco() -> int:
+	return stadio_di(ultimo_giocabile() if in_mappa else ultimo_giocato)
+
+
 func gioca(numero: int):
 	ultimo_giocato = numero
+	in_mappa = false
 	salva()
 	get_tree().change_scene(LIVELLI[numero - 1]["scena"])
 
 
 func torna_alla_mappa():
+	in_mappa = true
 	get_tree().change_scene("res://scenes/mappa.tscn")
 
 

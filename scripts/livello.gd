@@ -59,7 +59,10 @@ func _on_uscita_body_entered(corpo):
 		player.set_physics_process(false)
 		if salva_progressi:
 			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali)
-		testo_fine.text = "%s\n\nChicchi: %d / %d\n\nPremi salto per tornare alla mappa" % [frase_fine, chicchi_presi, chicchi_totali]
+		var testo := "%s\n\nChicchi: %d / %d\n\n" % [frase_fine, chicchi_presi, chicchi_totali]
+		if salva_progressi and not Progressi.costruito(numero + 1):
+			testo += "Per ora il viaggio si ferma qui:\nnuovi luoghi in arrivo!\n\n"
+		testo_fine.text = testo + "Premi salto per tornare alla mappa"
 		messaggio.visible = true
 		Suoni.suona("fine", 0.0)
 

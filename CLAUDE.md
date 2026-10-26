@@ -88,6 +88,8 @@ Il gioco passa da un livello solo a tanti.
 
 **STOP:** finisco il pollaio, chiudo il browser, lo riapro e il progresso c'è ancora.
 
+I luoghi sbloccati ma non ancora costruiti restano nella nebbia. Finito l'ultimo livello costruito, il messaggio di fine dice: «Per ora il viaggio si ferma qui: nuovi luoghi in arrivo!».
+
 ### Tappa 8 — La mappa disegnata
 La fattoria vista dall'alto, in stile cartoon, con un sentiero che collega i dieci luoghi.
 - Il pulcino cammina lungo il sentiero fino al luogo scelto.
@@ -125,6 +127,20 @@ Il livello del cortile: più grande e più in verticale del pollaio.
 ### Tappa 11 — L'oca arrabbiata
 L'oca, con le sue animazioni esagerate e i suoi versi, sistemata nel cortile dove rende il livello più vivo senza frustrare. Se tocca il pulcino, lui riparte dall'ultimo nido, come con il topo.
 **STOP:** l'oca è buffa e la difficoltà è giusta.
+
+### Crescita del pulcino (scelta da Riccardo)
+Il pulcino cresce a tappe lungo tutto il viaggio, a piccoli passi. Ogni stadio aggiunge qualcosa al precedente. Nei livelli l'aspetto dipende dal livello che si sta giocando; sulla mappa, da quanto si è andati avanti.
+
+| Stadio | Livelli | Aspetto |
+|---|---|---|
+| 1 | pollaio | batuffolo tondo, ciuffetto, alucce corte |
+| 2 | cortile, orto | ciuffo grande a tre riccioli, ala con le prime penne a punta, codina di piume, zampe un po' più lunghe |
+| 3 | prato, bosco | in più: piumette chiare sul dorso, giallo più caldo, corpo un po' più grande |
+| 4 | stagno, collina | in più: una piccola cresta rossa, ali più lunghe, colore che schiarisce verso il crema |
+| 5 | grotta, paese | quasi pollo: corpo ovale color crema, cresta più grande, piccoli bargigli, coda di penne |
+| 6 | campanile | giovane pollo con cresta, bargigli e coda (il disegno «alla fine del viaggio» dell'anteprima) |
+
+I disegni di ogni stadio si fanno quando si costruisce il primo livello in cui compare.
 
 ### Tappa 12 — Il pulcino cresce
 Dopo il pollaio il pulcino cresce un po': proponimi il nuovo aspetto (per esempio ciuffo più grande o prime piume sulle ali). L'aspetto dipende da quanto è avanti nel gioco e si vede sia nella mappa sia nel cortile.
