@@ -145,3 +145,33 @@ I disegni di ogni stadio si fanno quando si costruisce il primo livello in cui c
 ### Tappa 12 — Il pulcino cresce
 Dopo il pollaio il pulcino cresce un po': proponimi il nuovo aspetto (per esempio ciuffo più grande o prime piume sulle ali). L'aspetto dipende da quanto è avanti nel gioco e si vede sia nella mappa sia nel cortile.
 **STOP:** fine del livello 2.
+
+## Tappe del livello 3 (orto)
+
+Nell'orto il pulcino impara il **doppio salto**: un secondo salto a mezz'aria, con un battito d'ali buffo e un verso. Si usa lo stesso pulsante del salto, quindi non serve un pulsante nuovo. Le abilità imparate restano: nell'orto si può ancora beccare.
+
+Il nemico nuovo è la **talpa dispettosa**: spunta all'improvviso dalle buche nel terreno con un «bu!» e si rintana. Bisogna passare quando è sotto terra.
+
+La novità dell'orto sono le **piante che si piegano**: girasoli e canne del mais su cui si atterra, che si piegano sotto il peso e fanno rimbalzare un po', come trampolini morbidi.
+
+Il pulcino resta allo stadio 2 di crescita, come nel cortile.
+
+### Tappa 13 — Il doppio salto
+Il secondo salto si fa premendo di nuovo salto mentre si è in aria, una sola volta prima di toccare terra.
+- L'animazione è esagerata: ali che sbattono forte, un piccolo sbuffo di piume e un verso.
+- È disponibile solo dai livelli in cui il pulcino l'ha imparato.
+- Si prova in una piccola area di prova, come per la beccata.
+
+**STOP:** il doppio salto è piacevole e si controlla bene, anche dal telefono.
+
+### Tappa 14 — L'orto
+Il livello dell'orto, con le piante che si piegano.
+- Insegna il doppio salto un passo alla volta: prima un ostacolo alto un po' più di un salto normale, poi salti più lunghi, poi il doppio salto partendo da una pianta che rimbalza.
+- Ci sono chicchi, nidi e un'uscita, e qualche ostacolo da beccare per non dimenticare la beccata.
+- Si disegna subito nello stile cartoon, ma prima di disegnarli mostrami i pezzi nuovi dell'orto.
+
+**STOP:** il livello si completa dall'inizio alla fine ed è divertente.
+
+### Tappa 15 — La talpa dispettosa
+La talpa, con le sue animazioni esagerate e il suo «bu!», sistemata nell'orto dove rende il livello più vivo senza frustrare. Si vede un attimo prima da dove sta per spuntare, per esempio dalla terra che si muove. Se tocca il pulcino, lui riparte dall'ultimo nido.
+**STOP:** fine del livello 3.
