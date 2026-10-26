@@ -8,9 +8,16 @@ export var raggio := 70.0  # grandezza del cerchio disegnato
 export var zona_tocco := Vector2(95, 130)  # metà larghezza e metà altezza della zona sensibile, più grande del cerchio
 export var trasparenza := 0.35  # 0 = invisibile, 1 = pieno
 export var trasparenza_premuto := 0.65  # quanto si illumina mentre lo tieni premuto
+export var scala_telefono := 0.85  # grandezza sui telefoni (1 = com'è disegnato)
+export var scala_pc := 0.6  # grandezza giocando dal PC, dove si usa la tastiera
 
 
 func _ready():
+	# Più piccolo su PC, un po' più piccolo su telefono; resta ancorato all'angolo più vicino in basso
+	var s := scala_telefono if _e_telefono() else scala_pc
+	var angolo := Vector2(0 if position.x < 640 else 1280, 720)
+	position = angolo + (position - angolo) * s
+	scale = Vector2(s, s)
 	# Zona sensibile rettangolare: il pollice non deve centrare il cerchio
 	var rettangolo := RectangleShape2D.new()
 	rettangolo.extents = zona_tocco
@@ -19,6 +26,11 @@ func _ready():
 	shape_centered = false
 	connect("pressed", self, "update")
 	connect("released", self, "update")
+
+
+static func _e_telefono() -> bool:
+	# schermo touch, e non il gioco avviato direttamente sul PC
+	return OS.has_touchscreen_ui_hint() and not OS.has_feature("pc")
 
 
 func _draw():
