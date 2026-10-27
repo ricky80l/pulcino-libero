@@ -55,6 +55,13 @@ rompibili = [
     (2170, 640, ZUCCA, 2),
 ]
 
+# talpe dispettose: centro della buca, a terra
+talpe = [
+    (700, 640),    # la prima, tra il cavolo e il muretto: si impara a conoscerla con calma
+    (2410, 640),   # dopo la zucca, prima del pozzo
+    (4170, 640),   # davanti al cancelletto
+]
+
 chicchi = [
     (300, 610), (360, 610),                    # partenza
     (840, 405),                                # in cima al muretto di cassette
@@ -70,7 +77,7 @@ chicchi = [
     (3700, 610),
     (3857, 545),                               # sulla carriola
     (4050, 560),                               # sopra le fragole
-    (4200, 610),
+    (4240, 610),
 ]
 
 nidi = [(1430, 640), (2300, 640), (2750, 640), (3650, 640)]
@@ -85,4 +92,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello3", "Orto", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4380, 610), partenza=(200, 610), limite_destro=4600, proprieta_livello=proprieta,
-               piante=piante)
+               piante=piante, talpe=talpe)

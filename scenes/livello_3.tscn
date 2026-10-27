@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
 [ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
 [ext_resource path="res://scripts/pianta.gd" type="Script" id=14]
+[ext_resource path="res://scripts/talpa.gd" type="Script" id=15]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -346,10 +347,22 @@ position = Vector2( 4050, 560 )
 script = ExtResource( 5 )
 
 [node name="Chicco20" type="Area2D" parent="Chicchi"]
-position = Vector2( 4200, 610 )
+position = Vector2( 4240, 610 )
 script = ExtResource( 5 )
 
 [node name="Nemici" type="Node2D" parent="."]
+
+[node name="Talpa1" type="Area2D" parent="Nemici"]
+position = Vector2( 700, 640 )
+script = ExtResource( 15 )
+
+[node name="Talpa2" type="Area2D" parent="Nemici"]
+position = Vector2( 2410, 640 )
+script = ExtResource( 15 )
+
+[node name="Talpa3" type="Area2D" parent="Nemici"]
+position = Vector2( 4170, 640 )
+script = ExtResource( 15 )
 
 [node name="Uscita" type="Area2D" parent="."]
 position = Vector2( 4380, 610 )
