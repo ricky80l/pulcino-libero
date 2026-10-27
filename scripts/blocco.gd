@@ -5,7 +5,8 @@ extends StaticBody2D
 # Cassette, mangiatoie e posatoi usano un disegno vettoriale; i pezzi lunghi si disegnano da codice.
 
 enum Tipo { PAVIMENTO, LEGNO, CASSETTA, MANGIATOIA, POSATOIO, SBARRE, PARETE, RETE, ERBA, FUORI,
-		TERRA, BOTTE, CARRETTO, TETTOIA, CEPPI, ABBEVERATOIO, STECCATO, FIENILE, CANCELLO }
+		TERRA, BOTTE, CARRETTO, TETTOIA, CEPPI, ABBEVERATOIO, STECCATO, FIENILE, CANCELLO,
+		TERRA_ORTO, ACQUA, INVISIBILE, CAVOLO, CARRIOLA, POMODORI, ANNAFFIATOIO, SPAVENTAPASSERI, FRAGOLE, POZZO }
 
 const IMMAGINI := {
 	Tipo.CASSETTA: preload("res://assets/grafica/pollaio/cassetta.svg"),
@@ -19,6 +20,13 @@ const IMMAGINI := {
 	Tipo.STECCATO: preload("res://assets/grafica/cortile/steccato.svg"),
 	Tipo.FIENILE: preload("res://assets/grafica/cortile/fienile.svg"),
 	Tipo.CANCELLO: preload("res://assets/grafica/cortile/cancello.svg"),
+	Tipo.CAVOLO: preload("res://assets/grafica/orto/cavolo.svg"),
+	Tipo.CARRIOLA: preload("res://assets/grafica/orto/carriola.svg"),
+	Tipo.POMODORI: preload("res://assets/grafica/orto/pomodori.svg"),
+	Tipo.ANNAFFIATOIO: preload("res://assets/grafica/orto/annaffiatoio.svg"),
+	Tipo.SPAVENTAPASSERI: preload("res://assets/grafica/orto/spaventapasseri.svg"),
+	Tipo.FRAGOLE: preload("res://assets/grafica/orto/fragole.svg"),
+	Tipo.POZZO: preload("res://assets/grafica/orto/pozzo.svg"),
 }
 
 # colori del pollaio
@@ -103,6 +111,10 @@ func _draw():
 			_disegna_fuori()
 		Tipo.TERRA:
 			_disegna_terra()
+		Tipo.TERRA_ORTO:
+			_disegna_terra_orto()
+		Tipo.ACQUA:
+			_disegna_acqua()
 
 
 # Parete di assi verticali con chiodi e nodi del legno
@@ -262,6 +274,44 @@ func _disegna_terra():
 		var ciuffo := PoolVector2Array([Vector2(x - 9, 2), Vector2(x - 6, -10), Vector2(x - 2, 0), Vector2(x + 1, -14),
 				Vector2(x + 4, 0), Vector2(x + 8, -9), Vector2(x + 10, 2)])
 		draw_colored_polygon(ciuffo, Color("6dbe45"), PoolVector2Array(), null, null, true)
+
+
+# Terra scura dell'orto, con i solchi e le piantine appena spuntate
+func _disegna_terra_orto():
+	var rng := _caso()
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h), Color("7a5230"))
+	# bordo ondulato più chiaro
+	var punti := PoolVector2Array([Vector2(0, 12)])
+	var x := 0.0
+	while x <= w:
+		punti.append(Vector2(x, -2 + sin(x * 0.08) * 3))
+		x += 10.0
+	punti.append(Vector2(w, 12))
+	draw_colored_polygon(punti, Color("8a5e36"), PoolVector2Array(), null, null, true)
+	# solchi
+	for y in [28.0, 50.0]:
+		if y < h:
+			draw_line(Vector2(0, y), Vector2(w, y), Color("5e3e20"), 5.0)
+	# piantine appena spuntate
+	for _n in range(int(w / 80)):
+		var c := Vector2(rng.randf_range(10, w - 10), 2)
+		_ellisse(c + Vector2(-4, -3), Vector2(5, 3), Color("6dbe45"))
+		_ellisse(c + Vector2(4, -3), Vector2(5, 3), Color("6dbe45"))
+		draw_line(c, c + Vector2(0, -4), Color("3e7a22"), 2.0)
+
+
+# Acqua del canale d'irrigazione: ci si cade dentro e si riparte dal nido
+func _disegna_acqua():
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h), Color("5db4e3"))
+	draw_rect(Rect2(0, 0, w, 6), Color("8fd0f2"))
+	var x := 10.0
+	while x < w - 20:
+		draw_line(Vector2(x, 14), Vector2(x + 16, 14), Color("8fd0f2"), 3.0, true)
+		x += 46.0
 
 
 # Paesaggio fuori: colline, sole e nuvole (il cielo è il colore di sfondo)

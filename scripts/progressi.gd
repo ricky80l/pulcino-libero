@@ -8,7 +8,7 @@ const FILE := "user://progressi.json"
 const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
-	{"nome": "L'orto", "scena": "res://scenes/prova_doppio_salto.tscn"},  # provvisorio: area di prova del doppio salto (Tappa 13)
+	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
 	{"nome": "Il prato", "scena": ""},
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},

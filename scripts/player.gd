@@ -184,6 +184,15 @@ func _physics_process(delta):
 		riparti()
 
 
+# Rilanciato in alto da una pianta che si piega: dopo il rimbalzo si può di nuovo fare il doppio salto
+func rimbalza(forza: float):
+	velocita.y = -forza
+	doppio_usato = false
+	timer_coyote = 0
+	deformazione = Vector2(1.0 - allunga_salto * 0.6, 1.0 + allunga_salto)
+	aspetto.pigola()
+
+
 func _doppio_salto():
 	doppio_usato = true
 	velocita.y = -forza_doppio_salto

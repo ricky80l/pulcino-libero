@@ -91,4 +91,6 @@ salva("starnazzo", starnazzo(420, 330, 0.16) + silenzio(0.05) + starnazzo(460, 3
 # "frrr-pio!" del doppio salto: tre battiti d'ali e un pigolio che sale
 battito = rumore(0.035, volume=0.6, morbidezza=0.5) + silenzio(0.02)
 salva("doppio", battito + battito + battito + tono(1300, 2100, 0.12, vibrato_hz=30, vibrato_ampiezza=0.03, volume=0.5))
+# "boing" morbido della pianta che rimbalza
+salva("boing", tono(160, 520, 0.28, vibrato_hz=18, vibrato_ampiezza=0.12, armonica=0.4, attacco=0.01, volume=0.6))
 print("suoni creati in", os.path.abspath(CARTELLA))
