@@ -33,7 +33,7 @@ var nuvole := []
 var tempo := 0.0
 
 
-var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti: sopra il filtro dipinto, restano leggibili
+var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il paesaggio
 
 
 func _ready():
@@ -187,27 +187,6 @@ func _crea_titolo_e_aiuto():
 	Stile.pulsante_legno(crediti, FONT_CARTELLI)
 	crediti.connect("pressed", get_tree(), "change_scene", ["res://scenes/crediti.tscn"])
 	interfaccia.add_child(crediti)
-
-	pulsante_dipinto = Button.new()
-	pulsante_dipinto.focus_mode = Control.FOCUS_NONE
-	pulsante_dipinto.rect_position = Vector2(880, 16)
-	pulsante_dipinto.rect_min_size = Vector2(225, 56)
-	Stile.pulsante_legno(pulsante_dipinto, FONT_CARTELLI)
-	pulsante_dipinto.connect("pressed", self, "_alterna_dipinto")
-	interfaccia.add_child(pulsante_dipinto)
-	_aggiorna_dipinto()
-
-
-var pulsante_dipinto: Button
-
-
-func _alterna_dipinto():
-	Dipinto.alterna()
-	_aggiorna_dipinto()
-
-
-func _aggiorna_dipinto():
-	pulsante_dipinto.text = "Dipinto: " + ("sì" if Dipinto.attivo() else "no")
 
 
 func _crea_nuvole():

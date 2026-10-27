@@ -23,7 +23,6 @@ var record := {}  # numero livello (come testo) -> {"presi": n, "totale": n}
 var ultimo_giocato := 1  # dove sta il pulcino sulla mappa
 var nebbia_vista := 1  # fin dove la mappa ha già mostrato la nebbia che si dirada
 var abilita_viste := []  # abilità di cui il giocatore ha già visto l'avviso "Nuova abilità!"
-var dipinto := false  # modalità dipinto accesa o spenta
 
 
 func abilita_vista(nome: String) -> bool:
@@ -101,8 +100,7 @@ func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
-				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste,
-				"dipinto": dipinto}))
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste}))
 		f.close()
 
 
@@ -118,4 +116,3 @@ func carica():
 		ultimo_giocato = int(dati.get("ultimo_giocato", 1))
 		nebbia_vista = int(dati.get("nebbia_vista", 1))
 		abilita_viste = dati.get("abilita_viste", [])
-		dipinto = bool(dati.get("dipinto", false))
