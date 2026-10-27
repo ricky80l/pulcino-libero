@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!-- Pagina del gioco sul web (la usa Godot al posto della sua quando esporta, vedi export_presets.cfg).
+     Mentre il gioco si scarica, il pulcino zampetta lungo un sentiero e becca i chicchi:
+     quanto è avanti sul sentiero = quanto manca alla fine del caricamento. -->
+<html lang='it'>
+<head>
+	<meta charset='utf-8' />
+	<meta name='viewport' content='width=device-width, user-scalable=no' />
+	<title>$GODOT_PROJECT_NAME</title>
+	<style type='text/css'>
+		@font-face {
+			font-family: 'Fredoka';
+			src: url('fredoka.ttf') format('truetype');
+			font-display: swap;
+		}
+
+		body {
+			touch-action: none;
+			margin: 0;
+			border: 0 none;
+			padding: 0;
+			text-align: center;
+			background-color: #8cc7f2;
+			overflow: hidden;
+		}
+
+		#canvas {
+			display: block;
+			margin: 0;
+			color: white;
+		}
+
+		#canvas:focus {
+			outline: none;
+		}
+
+		/* Schermata di caricamento: cielo, colline, titolo, sentiero con il pulcino */
+
+		#caricamento {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			background: linear-gradient(to bottom, #8cc7f2 0%, #cfe9fb 70%);
+			font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+			transition: opacity 0.6s ease;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		#caricamento.sparisci {
+			opacity: 0;
+			pointer-events: none;
+		}
+
+		.collina {
+			position: absolute;
+			left: -10%;
+			right: -10%;
+			border-radius: 50% 50% 0 0;
+		}
+
+		.collina.lontana { bottom: -32vh; height: 60vh; background: #a8d977; }
+		.collina.vicina { bottom: -40vh; height: 58vh; left: 30%; right: -40%; background: #7cc24e; }
+
+		.nuvola {
+			position: absolute;
+			width: 90px;
+			height: 30px;
+			background: white;
+			border-radius: 30px;
+			opacity: 0.95;
+			animation: nuvola 40s linear infinite;
+		}
+
+		.nuvola::before, .nuvola::after {
+			content: '';
+			position: absolute;
+			background: white;
+			border-radius: 50%;
+		}
+
+		.nuvola::before { width: 44px; height: 44px; left: 12px; top: -22px; }
+		.nuvola::after { width: 34px; height: 34px; left: 44px; top: -14px; }
+
+		@keyframes nuvola {
+			from { transform: translateX(-30vw); }
+			to { transform: translateX(130vw); }
+		}
+
+		#titolo {
+			position: relative;
+			font-size: min(9vw, 64px);
+			font-weight: 600;
+			color: #fff5dc;
+			-webkit-text-stroke: 2px #7a4e12;
+			paint-order: stroke fill;
+			text-shadow: 0 4px 0 #7a4e12;
+			margin-bottom: min(6vh, 40px);
+			letter-spacing: 1px;
+		}
+
+		#sentiero-zona {
+			position: relative;
+			width: min(70vw, 560px);
+			height: 130px;
+		}
+
+		#sentiero {
+			position: absolute;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			height: 16px;
+			background: #c9a06a;
+			border: 3px solid #8f6a3a;
+			border-radius: 12px;
+			box-sizing: border-box;
+		}
+
+		.chicco {
+			position: absolute;
+			bottom: 18px;
+			width: 11px;
+			height: 15px;
+			margin-left: -5px;
+			background: #ffc21a;
+			border: 2.5px solid #8a5a00;
+			border-radius: 50%;
+			box-sizing: border-box;
+			transition: transform 0.35s ease-out, opacity 0.35s ease-out;
+		}
+
+		.chicco.beccato {
+			transform: translateY(-26px) scale(0.3);
+			opacity: 0;
+		}
+
+		/* il pulcino: la sua "x" è il punto tra le zampe */
+		#pulcino {
+			position: absolute;
+			bottom: 14px;
+			left: 0;
+			width: 96px;
+			height: 116px;
+			margin-left: -32px; /* le zampe sono a 32px dal bordo del disegno */
+			transition: left 0.5s linear;
+			overflow: visible;
+		}
+
+		#pulcino .salta { animation: salta 0.5s ease-in-out infinite; }
+		#pulcino .ombra { animation: ombra 0.5s ease-in-out infinite; }
+		#pulcino .ala { animation: ala 0.25s ease-in-out infinite alternate; }
+		#pulcino .zampa-avanti { animation: zampa 0.25s ease-in-out infinite alternate; }
+		#pulcino .zampa-dietro { animation: zampa 0.25s ease-in-out infinite alternate-reverse; }
+		#pulcino .ciuffo { animation: ciuffo 0.5s ease-in-out infinite alternate; }
+		#pulcino .occhio { animation: occhio 3.2s linear infinite; }
+
+		@keyframes salta {
+			0%   { transform: translateY(0) scale(1.1, 0.88); }
+			25%  { transform: translateY(-14px) scale(0.94, 1.07); }
+			50%  { transform: translateY(-20px) scale(1, 1); }
+			80%  { transform: translateY(-6px) scale(0.97, 1.03); }
+			100% { transform: translateY(0) scale(1.1, 0.88); }
+		}
+
+		@keyframes ombra {
+			0%, 100% { transform: scale(1); opacity: 0.25; }
+			50% { transform: scale(0.65); opacity: 0.12; }
+		}
+
+		@keyframes ala {
+			from { transform: rotate(-30deg); }
+			to { transform: rotate(18deg); }
+		}
+
+		@keyframes zampa {
+			from { transform: rotate(-28deg); }
+			to { transform: rotate(28deg); }
+		}
+
+		@keyframes ciuffo {
+			from { transform: rotate(-9deg); }
+			to { transform: rotate(9deg); }
+		}
+
+		@keyframes occhio {
+			0%, 90%, 100% { transform: scaleY(1); }
+			94% { transform: scaleY(0.1); }
+		}
+
+		#scritta {
+			position: relative;
+			margin-top: 18px;
+			font-size: min(5vw, 26px);
+			color: #7a4e12;
+		}
+
+		#avviso {
+			position: relative;
+			display: none;
+			margin: 18px 24px 0;
+			padding: 10px 16px;
+			background: #fff5dc;
+			border: 3px solid #7a4e12;
+			border-radius: 12px;
+			color: #7a4e12;
+			font-size: 18px;
+			line-height: 1.3;
+		}
+	</style>
+$GODOT_HEAD_INCLUDE
+</head>
+<body>
+	<canvas id='canvas'>
+		Il browser non riesce a mostrare il gioco.<br />
+		Prova ad aggiornarlo o a usarne un altro.
+	</canvas>
+
+	<div id='caricamento' oncontextmenu='event.preventDefault();'>
+		<div class='collina lontana'></div>
+		<div class='collina vicina'></div>
+		<div class='nuvola' style='top: 12vh; animation-delay: -8s;'></div>
+		<div class='nuvola' style='top: 24vh; animation-delay: -27s; animation-duration: 55s;'></div>
+
+		<div id='titolo'>Il Pulcino Libero</div>
+
+		<div id='sentiero-zona'>
+			<div id='sentiero'></div>
+			<!-- stesso disegno del pulcino nel gioco (assets/grafica/pulcino), montato come in aspetto_pulcino.gd -->
+			<svg id='pulcino' viewBox='-40 -135 120 145' xmlns='http://www.w3.org/2000/svg'>
+				<ellipse class='ombra' cx='0' cy='2' rx='26' ry='5' fill='#000' style='transform-origin: 0 2px;' />
+				<g class='salta'>
+					<g transform='translate(-14 -18)'><g class='zampa-dietro'><g transform='translate(-12 -2)' opacity='0.8'>
+						<path d='M12 2 L12 14 M12 14 L4 20 M12 14 L12 22 M12 14 L20 20' fill='none' stroke='#E07A10' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' />
+					</g></g></g>
+					<g transform='translate(12 -18)'><g class='zampa-avanti'><g transform='translate(-12 -2)'>
+						<path d='M12 2 L12 14 M12 14 L4 20 M12 14 L12 22 M12 14 L20 20' fill='none' stroke='#E07A10' stroke-width='4' stroke-linecap='round' stroke-linejoin='round' />
+					</g></g></g>
+					<g transform='translate(-2 -94)'><g class='ciuffo'><g transform='translate(-20 -32)'>
+						<path d='M20 33 C12 22 6 13 11 4 C15 11 18 16 20 21 C22 12 27 6 34 7 C28 13 24 22 20 33 Z' fill='#FFD447' stroke='#7A4E12' stroke-width='3.5' stroke-linejoin='round' />
+					</g></g></g>
+					<g transform='translate(-50 -106)'>
+						<circle cx='50' cy='50' r='44' fill='#FFD447' stroke='#7A4E12' stroke-width='5' />
+						<ellipse cx='56' cy='64' rx='27' ry='19' fill='#FFE58A' />
+						<circle cx='72' cy='58' r='6' fill='#FF9E9E' fill-opacity='0.75' />
+					</g>
+					<g transform='translate(2 -56)'><g class='ala'><g transform='translate(-38 -12)'>
+						<ellipse cx='22' cy='18' rx='19' ry='12' transform='rotate(-15 22 18)' fill='#F5BE2E' stroke='#7A4E12' stroke-width='4' />
+						<path d='M10 22 Q18 26 26 22' fill='none' stroke='#7A4E12' stroke-width='2.5' stroke-linecap='round' />
+					</g></g></g>
+					<g transform='translate(18 -70)'><g class='occhio'><g transform='translate(-14 -16)'>
+						<ellipse cx='14' cy='16' rx='10' ry='12' fill='#FFFFFF' stroke='#7A4E12' stroke-width='3' />
+						<circle cx='17' cy='17' r='6' fill='#2A1A08' />
+						<circle cx='19' cy='13.5' r='2.4' fill='#FFFFFF' />
+					</g></g></g>
+					<g transform='translate(35 -74)'>
+						<path d='M3 6 L32 14 L3 22 Z' fill='#FF8C1A' stroke='#7A4E12' stroke-width='3' stroke-linejoin='round' />
+					</g>
+				</g>
+			</svg>
+		</div>
+
+		<div id='scritta'>Il pulcino sta arrivando…</div>
+		<div id='avviso'></div>
+	</div>
+
+	<script type='text/javascript' src='$GODOT_URL'></script>
+	<script type='text/javascript'>//<![CDATA[
+
+		const GODOT_CONFIG = $GODOT_CONFIG;
+		var engine = new Engine(GODOT_CONFIG);
+
+		(function() {
+			var schermata = document.getElementById('caricamento');
+			var zona = document.getElementById('sentiero-zona');
+			var pulcino = document.getElementById('pulcino');
+			var scritta = document.getElementById('scritta');
+			var avviso = document.getElementById('avviso');
+
+			// chicchi sparsi lungo il sentiero: il pulcino li becca passando
+			var POSIZIONI = [0.12, 0.24, 0.36, 0.48, 0.6, 0.72, 0.84, 0.95];
+			var chicchi = POSIZIONI.map(function(p) {
+				var c = document.createElement('div');
+				c.className = 'chicco';
+				c.style.left = (p * 100) + '%';
+				zona.insertBefore(c, pulcino);
+				return c;
+			});
+
+			function avanza(quanto) {
+				pulcino.style.left = (quanto * 100) + '%';
+				POSIZIONI.forEach(function(p, i) {
+					if (quanto >= p - 0.03) {
+						chicchi[i].classList.add('beccato');
+					}
+				});
+			}
+
+			function mostraErrore(err) {
+				var msg = err.message || err;
+				console.error(msg);
+				scritta.textContent = 'Ops! Il gioco non è partito.';
+				avviso.textContent = msg;
+				avviso.style.display = 'block';
+			}
+
+			if (!Engine.isWebGLAvailable()) {
+				mostraErrore('Questo browser non supporta WebGL, che serve al gioco.');
+			} else {
+				avanza(0);
+				engine.startGame({
+					'onProgress': function (current, total) {
+						if (total > 0) {
+							avanza(current / total);
+							if (current === total) {
+								scritta.textContent = 'Quasi pronto… pio!';
+							}
+						}
+					},
+				}).then(function() {
+					schermata.classList.add('sparisci');
+					setTimeout(function() { schermata.style.display = 'none'; }, 700);
+				}, mostraErrore);
+			}
+		})();
+	//]]></script>
+</body>
+</html>
