@@ -12,7 +12,9 @@ const ZAMPA = preload("res://assets/grafica/talpa/zampa.svg")
 
 enum Stato { SOTTO, AVVISO, SU, GIU }
 
-export var attesa_sotto := 1.8  # quanto resta sotto terra tra una spuntata e l'altra (secondi)
+export var attesa_minima := 2.5  # quanto resta sotto terra tra una spuntata e l'altra: cambia ogni volta
+export var attesa_massima := 4.0
+export var distanza_udibile := 650.0  # oltre questa distanza dal pulcino la talpa non si sente
 export var durata_avviso := 0.9  # quanto trema la terra prima che spunti: il tempo per fermarsi
 export var durata_su := 1.1  # quanto resta fuori
 
@@ -34,7 +36,7 @@ var mucchio: Polygon2D  # il bordo di terra davanti, che trema prima che spunti
 
 func _ready():
 	z_index = 1  # il bordo davanti sta sopra il terreno
-	timer = attesa_sotto * 0.5 + fmod(position.x * 0.013, 1.5)  # le talpe non spuntano tutte insieme
+	timer = rand_range(0.5, attesa_massima)  # le talpe non spuntano tutte insieme
 	# buio della buca, dietro a tutto
 	var buio := _ellisse(Vector2(0, 0), Vector2(32, 9), Color("2a1a10"))
 	buio.z_index = -3
@@ -79,14 +81,14 @@ func _physics_process(delta):
 			if timer <= 0:
 				stato = Stato.AVVISO
 				timer = durata_avviso
-				Suoni.suona("scava", 0.1, -6.0)
+				_suona("scava", -8.0)
 		Stato.AVVISO:
 			if int(tempo * 10) != int((tempo - delta) * 10):
 				Effetti.sbuffo(get_parent(), position + Vector2(0, -4), COLORE_TERRA, 3, 110.0)
 			if timer <= 0:
 				stato = Stato.SU
 				timer = durata_su
-				Suoni.suona("bu", 0.1)
+				_suona("bu", -2.0)
 		Stato.SU:
 			su = move_toward(su, 1.0, delta * 7.0)  # spunta di scatto
 			if timer <= 0:
@@ -95,18 +97,28 @@ func _physics_process(delta):
 			su = move_toward(su, 0.0, delta * 5.0)
 			if su <= 0:
 				stato = Stato.SOTTO
-				timer = attesa_sotto
+				timer = rand_range(attesa_minima, attesa_massima)
 
+	if pulcino == null:
+		var trovati := get_tree().get_nodes_in_group("pulcino")
+		if trovati.size() > 0:
+			pulcino = trovati[0]
 	# fa male solo quando è fuori per più di metà
 	if su > 0.5:
-		if pulcino == null:
-			var trovati := get_tree().get_nodes_in_group("pulcino")
-			if trovati.size() > 0:
-				pulcino = trovati[0]
 		for altro in get_overlapping_bodies():
-			if altro == pulcino and pulcino.colpito(global_position.x):
-				Suoni.suona("bu", 0.05, -3.0)
+			if altro == pulcino:
+				pulcino.colpito(global_position.x)
 	_aggiorna_disegno()
+
+
+# Si sente solo se il pulcino è vicino, e più piano quanto più è lontano
+func _suona(nome: String, volume_base: float):
+	if pulcino == null:
+		return
+	var distanza: float = global_position.distance_to(pulcino.global_position)
+	if distanza > distanza_udibile:
+		return
+	Suoni.suona(nome, 0.15, volume_base - distanza / distanza_udibile * 14.0)
 
 
 func _aggiorna_disegno():

@@ -92,10 +92,10 @@ salva("starnazzo", starnazzo(420, 330, 0.16) + silenzio(0.05) + starnazzo(460, 3
 battito = rumore(0.035, volume=0.6, morbidezza=0.5) + silenzio(0.02)
 salva("doppio", battito + battito + battito + tono(1300, 2100, 0.12, vibrato_hz=30, vibrato_ampiezza=0.03, volume=0.5))
 # "bu!" buffo della talpa che spunta
-salva("bu", mescola(tono(330, 190, 0.3, vibrato_hz=12, vibrato_ampiezza=0.06, armonica=1.2, attacco=0.02, volume=0.6),
-                    rumore(0.05, volume=0.4, morbidezza=0.4)))
-# raspare della terra prima che la talpa spunti
-raspa = rumore(0.04, volume=0.35, morbidezza=0.3) + silenzio(0.05)
+salva("bu", mescola(tono(300, 210, 0.22, vibrato_hz=10, vibrato_ampiezza=0.04, armonica=0.5, attacco=0.03, volume=0.4),
+                    rumore(0.05, volume=0.15, morbidezza=0.7)))
+# raspare della terra prima che la talpa spunti (leggero)
+raspa = rumore(0.04, volume=0.18, morbidezza=0.6) + silenzio(0.05)
 salva("scava", raspa + raspa + raspa)
 # "boing" morbido della pianta che rimbalza
 salva("boing", tono(160, 520, 0.28, vibrato_hz=18, vibrato_ampiezza=0.12, armonica=0.4, attacco=0.01, volume=0.6))

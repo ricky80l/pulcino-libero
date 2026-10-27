@@ -34,7 +34,7 @@ func _ready():
 	velo.anchor_bottom = 1.0
 	pannello.add_child(velo)
 	var colonna := VBoxContainer.new()
-	colonna.rect_position = Vector2(440, 140)
+	colonna.rect_position = Vector2(440, 90)
 	colonna.rect_min_size = Vector2(400, 0)
 	colonna.add_constant_override("separation", 22)
 	pannello.add_child(colonna)
@@ -47,12 +47,26 @@ func _ready():
 	primo_pulsante = _voce(colonna, "Continua", "chiudi")
 	_voce(colonna, "Ricomincia", "_ricomincia")
 	_voce(colonna, "Torna alla mappa", "_mappa")
+	pulsante_dipinto = _voce(colonna, "", "_dipinto")
+	_aggiorna_dipinto()
+
+
+var pulsante_dipinto: Button
+
+
+func _dipinto():
+	Dipinto.alterna()
+	_aggiorna_dipinto()
+
+
+func _aggiorna_dipinto():
+	pulsante_dipinto.text = "Modalità dipinto: " + ("sì" if Dipinto.attivo() else "no")
 
 
 func _voce(colonna: Control, testo: String, metodo: String) -> Button:
 	var b := Button.new()
 	b.text = testo
-	b.rect_min_size = Vector2(400, 84)
+	b.rect_min_size = Vector2(400, 76)
 	Stile.pulsante_legno(b, FONT_PICCOLO)
 	b.connect("pressed", self, metodo)
 	colonna.add_child(b)

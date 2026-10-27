@@ -33,7 +33,12 @@ var nuvole := []
 var tempo := 0.0
 
 
+var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti: sopra il filtro dipinto, restano leggibili
+
+
 func _ready():
+	interfaccia.layer = 2
+	add_child(interfaccia)
 	# la nebbia si dirada solo sui luoghi già costruiti (gli altri sono "in arrivo")
 	var ultimo := Progressi.ultimo_giocabile()
 	if Progressi.nebbia_vista > ultimo:
@@ -145,7 +150,7 @@ func _crea_luogo(numero: int):
 	cartello.align = Label.ALIGN_CENTER
 	cartello.rect_size = Vector2(200, 0)
 	cartello.rect_position = base + Vector2(-100, -186)
-	add_child(cartello)
+	interfaccia.add_child(cartello)
 	cartelli.append(cartello)
 
 	var nebbia := Sprite.new()
@@ -164,7 +169,7 @@ func _crea_titolo_e_aiuto():
 	titolo.add_color_override("font_color", Stile.CREMA)
 	titolo.add_stylebox_override("normal", _tavola(Stile.CONTORNO, 4))
 	titolo.rect_position = Vector2(20, 14)
-	add_child(titolo)
+	interfaccia.add_child(titolo)
 
 	var aiuto := Label.new()
 	aiuto.text = "Tocca un luogo per andarci, toccalo di nuovo per entrare"
@@ -172,7 +177,7 @@ func _crea_titolo_e_aiuto():
 	aiuto.add_color_override("font_color", Stile.CREMA)
 	aiuto.add_stylebox_override("normal", _tavola(Stile.CONTORNO, 3))
 	aiuto.rect_position = Vector2(270, 672)
-	add_child(aiuto)
+	interfaccia.add_child(aiuto)
 
 	var crediti := Button.new()
 	crediti.text = "Crediti"
@@ -181,7 +186,28 @@ func _crea_titolo_e_aiuto():
 	crediti.rect_min_size = Vector2(140, 56)
 	Stile.pulsante_legno(crediti, FONT_CARTELLI)
 	crediti.connect("pressed", get_tree(), "change_scene", ["res://scenes/crediti.tscn"])
-	add_child(crediti)
+	interfaccia.add_child(crediti)
+
+	pulsante_dipinto = Button.new()
+	pulsante_dipinto.focus_mode = Control.FOCUS_NONE
+	pulsante_dipinto.rect_position = Vector2(880, 16)
+	pulsante_dipinto.rect_min_size = Vector2(225, 56)
+	Stile.pulsante_legno(pulsante_dipinto, FONT_CARTELLI)
+	pulsante_dipinto.connect("pressed", self, "_alterna_dipinto")
+	interfaccia.add_child(pulsante_dipinto)
+	_aggiorna_dipinto()
+
+
+var pulsante_dipinto: Button
+
+
+func _alterna_dipinto():
+	Dipinto.alterna()
+	_aggiorna_dipinto()
+
+
+func _aggiorna_dipinto():
+	pulsante_dipinto.text = "Dipinto: " + ("sì" if Dipinto.attivo() else "no")
 
 
 func _crea_nuvole():
