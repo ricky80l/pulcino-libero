@@ -1,6 +1,5 @@
 extends CanvasLayer
 # Pulsante di pausa in alto a destra e menu di pausa: Continua, Ricomincia, Torna alla mappa.
-# Nei luoghi che hanno la versione dipinta c'è anche il selettore dello stile (Cartoon / Dipinto).
 # Sul PC la pausa si apre e si chiude anche con il tasto Esc.
 
 const Stile = preload("res://scripts/stile.gd")
@@ -10,7 +9,6 @@ const FONT_GRANDE = preload("res://assets/font/fredoka_messaggio.tres")
 var pulsante_pausa := Button.new()
 var pannello := Control.new()
 var primo_pulsante: Button
-var selettore_stile: Button
 
 
 func _ready():
@@ -36,7 +34,7 @@ func _ready():
 	velo.anchor_bottom = 1.0
 	pannello.add_child(velo)
 	var colonna := VBoxContainer.new()
-	colonna.rect_position = Vector2(440, 100)
+	colonna.rect_position = Vector2(440, 140)
 	colonna.rect_min_size = Vector2(400, 0)
 	colonna.add_constant_override("separation", 22)
 	pannello.add_child(colonna)
@@ -49,7 +47,6 @@ func _ready():
 	primo_pulsante = _voce(colonna, "Continua", "chiudi")
 	_voce(colonna, "Ricomincia", "_ricomincia")
 	_voce(colonna, "Torna alla mappa", "_mappa")
-	selettore_stile = _voce(colonna, "", "_cambia_stile")
 
 
 func _voce(colonna: Control, testo: String, metodo: String) -> Button:
@@ -66,8 +63,6 @@ func apri():
 	get_tree().paused = true
 	pannello.visible = true
 	pulsante_pausa.visible = false
-	selettore_stile.visible = Pittura.disponibile()
-	_scrivi_stile()
 	primo_pulsante.grab_focus()
 
 
@@ -85,15 +80,6 @@ func _ricomincia():
 func _mappa():
 	get_tree().paused = false
 	Progressi.torna_alla_mappa()
-
-
-func _cambia_stile():
-	Pittura.imposta(not Progressi.dipinto)
-	_scrivi_stile()
-
-
-func _scrivi_stile():
-	selettore_stile.text = "Stile: Dipinto" if Progressi.dipinto else "Stile: Cartoon"
 
 
 func _unhandled_input(evento):

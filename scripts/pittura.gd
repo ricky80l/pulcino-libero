@@ -1,7 +1,7 @@
 extends Node
 # Modalità dipinta, sempre disponibile come "Pittura".
 # Scambia i disegni cartoon con le versioni ridipinte a pennellate (in assets/dipinto/, create da
-# strumenti/ridipingi.py). Si accende e si spegne dal menu di pausa; il telefono ricorda la scelta.
+# strumenti/ridipingi.py). Si accende e si spegne dalla mappa; il telefono ricorda la scelta.
 # Si vede solo nei luoghi che hanno anche il paesaggio dipinto (assets/dipinto/livelli/<scena>).
 
 signal cambiata
