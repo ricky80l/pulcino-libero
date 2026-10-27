@@ -34,6 +34,7 @@ var tempo := 0.0
 
 
 var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il paesaggio
+var selettore_stile := Button.new()  # Stile: Cartoon / Dipinto
 
 
 func _ready():
@@ -188,6 +189,24 @@ func _crea_titolo_e_aiuto():
 	Stile.pulsante_legno(crediti, FONT_CARTELLI)
 	crediti.connect("pressed", get_tree(), "change_scene", ["res://scenes/crediti.tscn"])
 	interfaccia.add_child(crediti)
+
+	# selettore dello stile (Cartoon / Dipinto): vale per i luoghi che hanno la versione dipinta
+	selettore_stile.focus_mode = Control.FOCUS_NONE
+	selettore_stile.rect_position = Vector2(1120 - 16 - 240, 16)
+	selettore_stile.rect_min_size = Vector2(240, 56)
+	Stile.pulsante_legno(selettore_stile, FONT_CARTELLI)
+	selettore_stile.connect("pressed", self, "_cambia_stile")
+	interfaccia.add_child(selettore_stile)
+	_scrivi_stile()
+
+
+func _cambia_stile():
+	Pittura.imposta(not Progressi.dipinto)
+	_scrivi_stile()
+
+
+func _scrivi_stile():
+	selettore_stile.text = "Stile: Dipinto" if Progressi.dipinto else "Stile: Cartoon"
 
 
 func _crea_nuvole():
