@@ -17,6 +17,7 @@ run/main_scene="res://scenes/mappa.tscn"
 
 Suoni="*res://scripts/suoni.gd"
 Progressi="*res://scripts/progressi.gd"
+Pittura="*res://scripts/pittura.gd"
 
 [display]
 

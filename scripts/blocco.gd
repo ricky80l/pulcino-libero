@@ -42,11 +42,17 @@ export var dimensioni := Vector2(100, 40) setget _set_dimensioni  # larghezza e 
 export var solido := true  # false = solo decorazione, ci si passa attraverso
 export var attraversabile_da_sotto := false  # true = ci salti sopra passando da sotto
 
+const MARGINE_DIPINTO := 16  # i pezzi dipinti sono fotografati con un po' di bordo intorno (vedi ridipingi.py)
+
 var disegno: Sprite = null
+var dipinto: Node2D = null  # versione dipinta dei pezzi disegnati da codice (modalità dipinta)
 
 
 func _ready():
 	_prepara_disegno()
+	if not Engine.editor_hint:
+		Pittura.connect("cambiata", self, "_mostra_dipinto")
+		_mostra_dipinto()
 	if Engine.editor_hint or not solido:
 		return
 	var rettangolo := RectangleShape2D.new()
@@ -86,6 +92,29 @@ func _prepara_disegno():
 		disegno.visible = false
 
 
+# Modalità dipinta: al posto del disegno da codice si vedono le strisce ridipinte di questo pezzo
+func _mostra_dipinto():
+	if dipinto:
+		dipinto.queue_free()
+		dipinto = null
+	if Pittura.attiva and not IMMAGINI.has(tipo):
+		var strisce: Array = Pittura.strisce(name)
+		if not strisce.empty():
+			var margine := 0.0 if tipo == Tipo.FUORI else float(MARGINE_DIPINTO)
+			dipinto = Node2D.new()
+			dipinto.position = Vector2(-margine, -margine)
+			add_child(dipinto)
+			var x := 0.0
+			for immagine in strisce:
+				var s := Sprite.new()
+				s.texture = immagine
+				s.centered = false
+				s.position.x = x
+				dipinto.add_child(s)
+				x += immagine.get_width()
+	update()
+
+
 # Numeri "casuali" ma sempre uguali per lo stesso pezzo, così il disegno non cambia a ogni avvio
 func _caso() -> RandomNumberGenerator:
 	var rng := RandomNumberGenerator.new()
@@ -94,6 +123,8 @@ func _caso() -> RandomNumberGenerator:
 
 
 func _draw():
+	if dipinto:
+		return
 	match tipo:
 		Tipo.PARETE:
 			_disegna_parete()

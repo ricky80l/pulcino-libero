@@ -23,6 +23,7 @@ onready var numero_chicchi := $Interfaccia/Contatore/Numero
 
 func _ready():
 	add_to_group("livello")
+	Pittura.entra(filename.get_file().get_basename())
 	messaggio.visible = false
 	$Uscita.connect("body_entered", self, "_on_uscita_body_entered")
 	chicchi_totali = get_tree().get_nodes_in_group("chicchi").size()

@@ -37,6 +37,7 @@ var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il pa
 
 
 func _ready():
+	Pittura.entra("mappa")
 	interfaccia.layer = 2
 	add_child(interfaccia)
 	# la nebbia si dirada solo sui luoghi già costruiti (gli altri sono "in arrivo")

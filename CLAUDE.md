@@ -48,6 +48,7 @@ Nomi di file e cartelle in minuscolo con trattini bassi. Commenti nel codice in 
 - **Inquadratura:** telecamera con zoom 0.7, perché il pulcino si veda bene sul telefono.
 - **Animazioni e suoni:** schiaccia-e-allunga, polvere, versi buffi. I suoni sono segnaposto sintetici creati da `strumenti/genera_suoni.py`.
 - **Testi:** font Fredoka (licenza OFL, in `assets/font/`).
+- **Modalità dipinta (in prova):** un selettore nel menu di pausa («Stile: Cartoon / Dipinto») scambia i disegni con versioni ridipinte a pennellate da `strumenti/ridipingi.py` (stile «delicato»), salvate in `assets/dipinto/`. Il telefono ricorda la scelta. Per ora c'è solo nel cortile; lo stile predefinito resta il cartoon.
 - **Pubblicazione:** dopo ogni modifica il gioco va esportato in `docs/` e caricato su GitHub. Si gioca su https://ricky80l.github.io/pulcino-libero/.
 
 ## Tappe del livello 1 (pollaio) — completato
