@@ -15,7 +15,7 @@ Sono Riccardo. Non scrivo codice a mano: descrivo cosa voglio e tu lo realizzi. 
 
 Platform 2D per telefono. Un pulcino scappa dal pollaio e, livello dopo livello, scopre un mondo sempre più grande fino a conquistare la propria libertà. Tono rilassante ma divertente, con una vena goliardica: animazioni esagerate, versi buffi, nemici ridicoli. Difficoltà gentile: punzecchia, non frustra.
 
-Struttura: livelli separati scelti da una mappa, ognuno sblocca il successivo. Dieci livelli previsti: pollaio, cortile, orto, prato, bosco, stagno, collina rocciosa, temporale o grotta, paese degli umani, campanile/tetto finale.
+Struttura: livelli separati scelti da una mappa, ognuno sblocca il successivo. Undici livelli previsti: pollaio, cortile, orto, magazzino filati, prato, bosco, stagno, collina rocciosa, temporale o grotta, paese degli umani, campanile/tetto finale.
 
 Il pulcino cresce: in ogni zona impara un'abilità (beccata, doppio salto, planata, galleggiare, scivolata) e cambia aspetto, da batuffolo a giovane pollo.
 
@@ -92,7 +92,7 @@ Il gioco passa da un livello solo a tanti.
 I luoghi sbloccati ma non ancora costruiti restano nella nebbia. Finito l'ultimo livello costruito, il messaggio di fine dice: «Per ora il viaggio si ferma qui: nuovi luoghi in arrivo!».
 
 ### Tappa 8 — La mappa disegnata
-La fattoria vista dall'alto, in stile cartoon, con un sentiero che collega i dieci luoghi.
+La fattoria vista dall'alto, in stile cartoon, con un sentiero che collega i luoghi del viaggio.
 - Il pulcino cammina lungo il sentiero fino al luogo scelto.
 - I luoghi non ancora sbloccati sono coperti dalla nebbia.
 - Sotto ogni luogo finito si vede il record di chicchi (per esempio 17 / 20).
@@ -135,7 +135,7 @@ Il pulcino cresce a tappe lungo tutto il viaggio, a piccoli passi. Ogni stadio a
 | Stadio | Livelli | Aspetto |
 |---|---|---|
 | 1 | pollaio | batuffolo tondo, ciuffetto, alucce corte |
-| 2 | cortile, orto | ciuffo grande a tre riccioli, ala con le prime penne a punta, codina di piume, zampe un po' più lunghe |
+| 2 | cortile, orto, magazzino filati | ciuffo grande a tre riccioli, ala con le prime penne a punta, codina di piume, zampe un po' più lunghe |
 | 3 | prato, bosco | in più: piumette chiare sul dorso, giallo più caldo, corpo un po' più grande |
 | 4 | stagno, collina | in più: una piccola cresta rossa, ali più lunghe, colore che schiarisce verso il crema |
 | 5 | grotta, paese | quasi pollo: corpo ovale color crema, cresta più grande, piccoli bargigli, coda di penne |
@@ -176,3 +176,38 @@ Il livello dell'orto, con le piante che si piegano.
 ### Tappa 15 — La talpa dispettosa
 La talpa, con le sue animazioni esagerate e il suo «bu!», sistemata nell'orto dove rende il livello più vivo senza frustrare. Si vede un attimo prima da dove sta per spuntare, per esempio dalla terra che si muove. Se tocca il pulcino, lui riparte dall'ultimo nido.
 **STOP:** fine del livello 3.
+
+## Tappe del livello 4 (magazzino filati)
+
+Il pulcino entra in un magazzino di filati, ispirato a quello vero di Riccardo: pareti di mattoni a due colori con gli oblò, soffitto di lamiera con i lucernari, scaffali blu pieni di coni di filato, colonne di scatoloni sui bancali, un transpallet arancione, il portone sezionale e il **soppalco azzurro** con la ringhiera. Sulle scatole niente marchi veri: solo scritte inventate.
+
+Qui non si impara un'abilità nuova. La novità sono **quattro operatori** in camice blu che aiutano il pulcino: ci si salta sulle mani e lo lanciano **in alto** (sopra le colonne di scatoloni, fino al soppalco) o **in avanti** (oltre un varco). **Ognuno ha la sua mossa**, esagerata e buffa:
+
+- **operatore italiano moro:** la «bagher», mani unite come a pallavolo, lancio dritto verso l'alto (il più alto);
+- **operatore italiano biondo:** il «tiro a canestro», lancio ad arco lungo in avanti;
+- **operatore indiano:** la «catapulta», si piega e lancia in diagonale verso l'alto, ottimo per salire sul soppalco;
+- **operatore marocchino con i capelli ricci:** la «giravolta», gira su se stesso e lancia lontanissimo in orizzontale.
+
+Gli operatori sono disegnati con rispetto e senza caricature: si distinguono per capelli, carnagione e piccoli dettagli. Esultano con versi in italiano («Op-là!», «Vai!», «Su!»).
+
+Il nemico nuovo sono i **coni di filato che rotolano**: cadono dal soppalco o dagli scaffali e rotolano sul pavimento srotolando il filo. Si saltano. Se un cono tocca il pulcino, lui riparte dall'ultimo nido. Le abilità imparate restano: si becca e si fa il doppio salto.
+
+Il pulcino resta allo stadio 2 di crescita, come nel cortile e nell'orto.
+
+### Tappa 16 — Gli operatori
+I quattro operatori con il camice blu, ognuno con la sua mossa, animati in modo esagerato (si piegano, caricano il lancio, esultano). Si provano in una piccola area di prova, come per la beccata.
+Prima di disegnarli mostrami i bozzetti.
+**STOP:** i lanci sono divertenti e si controllano bene, anche dal telefono.
+
+### Tappa 17 — Il magazzino
+Il livello del magazzino, più grande e più in verticale dell'orto, con il soppalco azzurro.
+- Insegna i lanci un passo alla volta: prima un lancio in alto su una colonna di scatoloni, poi un lancio in avanti oltre un varco, poi due lanci di fila fino al soppalco.
+- Ci sono chicchi, nidi e un'uscita (il portone), e qualche scatolone da beccare.
+- Sulla mappa compare il nuovo luogo, il magazzino, al quarto posto dopo l'orto; il prato e gli altri luoghi slittano di un posto.
+- Prima di disegnarli mostrami i pezzi nuovi del magazzino.
+
+**STOP:** il livello si completa dall'inizio alla fine ed è divertente.
+
+### Tappa 18 — I coni di filato che rotolano
+I coni di filato che cadono e rotolano, con il filo che si srotola dietro di loro, sistemati nel magazzino dove rendono il livello più vivo senza frustrare. Si vede un attimo prima da dove arrivano, per esempio un cono che traballa sullo scaffale.
+**STOP:** fine del livello 4.

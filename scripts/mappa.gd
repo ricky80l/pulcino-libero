@@ -35,18 +35,30 @@ var tempo := 0.0
 
 var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il paesaggio
 var selettore_stile := Button.new()  # Stile: Cartoon / Dipinto
+var sentiero_aperto_fino := 1  # ultimo luogo raggiungibile: fin lì il sentiero è pieno, poi pallido
+var sfondo_dipinto: Sprite = null  # prato ridipinto (modalità dipinta), al posto di quello disegnato da codice
+var solo_terreno := false  # true solo per gli strumenti: prepara prato, fiume, alberi e sentiero e basta
 
 
 func _ready():
+	if solo_terreno:
+		_prepara_sentiero()
+		_prepara_alberi()
+		set_process(false)
+		set_process_unhandled_input(false)
+		return
 	Pittura.entra("mappa")
 	interfaccia.layer = 2
 	add_child(interfaccia)
 	# la nebbia si dirada solo sui luoghi già costruiti (gli altri sono "in arrivo")
 	var ultimo := Progressi.ultimo_giocabile()
+	sentiero_aperto_fino = ultimo
 	if Progressi.nebbia_vista > ultimo:
 		Progressi.nebbia_vista = ultimo
 	_prepara_sentiero()
 	_prepara_alberi()
+	Pittura.connect("cambiata", self, "_mostra_dipinto")
+	_mostra_dipinto()
 	for i in range(DISEGNI.size()):
 		_crea_luogo(i + 1)
 	_crea_titolo_e_aiuto()
@@ -200,6 +212,22 @@ func _crea_titolo_e_aiuto():
 	_scrivi_stile()
 
 
+# Modalità dipinta: il prato ridipinto (con il sentiero aperto fin dove serve) al posto del disegno da codice
+func _mostra_dipinto():
+	if sfondo_dipinto:
+		sfondo_dipinto.queue_free()
+		sfondo_dipinto = null
+	if Pittura.attiva:
+		var strisce: Array = Pittura.strisce("Prato_%d" % sentiero_aperto_fino)
+		if not strisce.empty():
+			sfondo_dipinto = Sprite.new()
+			sfondo_dipinto.texture = strisce[0]
+			sfondo_dipinto.centered = false
+			add_child(sfondo_dipinto)
+			move_child(sfondo_dipinto, 0)
+	update()
+
+
 func _cambia_stile():
 	Pittura.imposta(not Progressi.dipinto)
 	_scrivi_stile()
@@ -254,6 +282,8 @@ func _aggiorna_cartelli():
 # ---------------- disegno del paesaggio ----------------
 
 func _draw():
+	if sfondo_dipinto:
+		return
 	var rng := RandomNumberGenerator.new()
 	rng.seed = 7
 	draw_rect(Rect2(0, 0, 1280, 720), Color("a8d977"))
@@ -274,7 +304,7 @@ func _draw():
 	draw_polyline(fiume, Color("8fd0f2"), 6.0, true)
 	# sentiero: la parte già sbloccata è piena, il resto più pallido
 	var punti := sentiero.get_baked_points()
-	var fine_sbloccata: float = distanze[Progressi.ultimo_giocabile() - 1]
+	var fine_sbloccata: float = distanze[sentiero_aperto_fino - 1]
 	var aperto := PoolVector2Array()
 	var chiuso := PoolVector2Array()
 	for i in range(punti.size()):

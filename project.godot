@@ -12,6 +12,7 @@ config_version=4
 
 config/name="Il Pulcino Libero"
 run/main_scene="res://scenes/mappa.tscn"
+config/icon="res://icona.png"
 
 [autoload]
 

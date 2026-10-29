@@ -4,6 +4,7 @@
 #      Le sottocartelle si ridipingono tutte. Se una cartella ha un info.json (pezzi disegnati da codice,
 #      fotografati più grandi), ogni immagine torna alla misura vera e si divide in strisce larghe al massimo
 #      LARGHEZZA_STRISCIA, salvate come nome_0.png, nome_1.png... (i telefoni non reggono immagini troppo larghe).
+#      Le immagini già dipinte si saltano: se il lavoro si interrompe, rilanciandolo riprende da dove era.
 #
 # Come un pittore: prima pennellate larghe per le masse di colore, poi via via più fini
 # solo dove il quadro si discosta ancora dal modello. Le pennellate seguono le forme
@@ -21,6 +22,7 @@ LUNGHEZZA = 4.0                # lunghezza di una pennellata, in raggi
 SOGLIA = [0.0, 0.06, 0.09]     # quanto deve essere diverso dal modello per ridipingere (per passata)
 VARIAZIONE_COLORE = 0.06       # quanto cambia il colore da una pennellata all'altra
 LARGHEZZA_STRISCIA = 2048      # larghezza massima di un'immagine nel gioco
+PUNTI_MASSIMI = 6_000_000      # oltre questa misura un pezzo si dipinge già rimpicciolito (la memoria del PC non basta)
 LUCE_IMPRESSIONISTA = 0.10     # quanto i colori virano verso toni chiari e luminosi
 
 
@@ -132,12 +134,19 @@ def main():
                 rgba = np.dstack([rgba, np.full(rgba.shape[:2], 255, np.uint8)])
             rng = np.random.default_rng(seme)
             base = nome[:-4]
+            fatto = os.path.join(uscita, nome if info is None else base + "_0.png")
+            if os.path.exists(fatto):
+                continue
             if info is None:
                 # disegni piccoli (occhi, becchi) con pennelli più fini
                 misura = float(np.clip(min(rgba.shape[:2]) / 240.0, 0.3, 1.0))
                 cv2.imwrite(os.path.join(uscita, nome), dipingi(rgba, rng, stile, misura))
             else:
                 scala = info[base]["scala"]
+                if scala != 1 and rgba.shape[0] * rgba.shape[1] > PUNTI_MASSIMI:
+                    alto, largo = rgba.shape[:2]
+                    rgba = cv2.resize(rgba, (round(largo / scala), round(alto / scala)), interpolation=cv2.INTER_AREA)
+                    scala = 1
                 # lo sfondo lontano (fotografato a misura vera) con pennellate più larghe
                 dipinto = dipingi(rgba, rng, stile, 1.0 if scala > 1 else 1.5)
                 if scala != 1:

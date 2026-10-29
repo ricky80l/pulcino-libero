@@ -9,7 +9,7 @@ const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
 	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
-	{"nome": "Il prato", "scena": ""},
+	{"nome": "Il magazzino filati", "scena": "res://scenes/prova_operatori.tscn"},  # provvisorio: area di prova degli operatori (Tappa 16)
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
 	{"nome": "La collina", "scena": ""},

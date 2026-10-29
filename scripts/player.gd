@@ -53,6 +53,11 @@ var timer_beccata := 0.0
 var attesa_beccata := 0.0
 var colpiti := []  # ostacoli già colpiti in questa beccata
 var doppio_usato := false  # il secondo salto si può fare una sola volta prima di toccare terra
+var tenuto := false  # in mano a un operatore del magazzino, che sta per lanciarlo
+var timer_lancio := 0.0  # dopo un lancio vola senza frenare finché non tocca terra
+
+# --- Lancio degli operatori ---
+export var controllo_lancio := 0.35  # quanto puoi correggere la direzione mentre vola dopo un lancio
 
 onready var aspetto := $Aspetto
 
@@ -65,7 +70,7 @@ func _ready():
 
 # Toccato da un nemico: vola via con un "pio-pio!" e torna all'ultimo nido. Restituisce true se colpito.
 func colpito(da_x := 0.0) -> bool:
-	if timer_invulnerabile > 0 or timer_sbalzo > 0:
+	if timer_invulnerabile > 0 or timer_sbalzo > 0 or tenuto:
 		return false
 	timer_sbalzo = durata_sbalzo
 	var lato := 1.0 if position.x >= da_x else -1.0
@@ -76,6 +81,8 @@ func colpito(da_x := 0.0) -> bool:
 
 
 func riparti():
+	tenuto = false
+	timer_lancio = 0.0
 	position = punto_sicuro
 	velocita = Vector2.ZERO
 	timer_sbalzo = 0.0
@@ -88,6 +95,12 @@ func riparti():
 
 func _physics_process(delta):
 	tempo += delta
+
+	# In mano a un operatore: è lui a tenerlo e a spostarlo
+	if tenuto:
+		aspetto.rotation = lerp(aspetto.rotation, 0.0, min(1.0, 15.0 * delta))
+		aspetto.scale = Vector2(verso * deformazione.x, deformazione.y)
+		return
 
 	# Sbalzato dal topo: vola girando, poi riparte dal nido
 	if timer_sbalzo > 0:
@@ -112,7 +125,15 @@ func _physics_process(delta):
 	# Camminata con accelerazione e frenata morbide
 	var direzione := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var fattore := 1.0 if a_terra else controllo_in_aria
-	if direzione != 0:
+	if timer_lancio > 0:
+		# lanciato: tiene lo slancio, le frecce lo correggono solo un po'
+		timer_lancio -= delta
+		if a_terra and velocita.y >= 0:
+			timer_lancio = 0.0
+		if direzione != 0:
+			velocita.x = move_toward(velocita.x, direzione * max(velocita_max, abs(velocita.x)), accelerazione * controllo_lancio * delta)
+			verso = sign(direzione)
+	elif direzione != 0:
 		velocita.x = move_toward(velocita.x, direzione * velocita_max, accelerazione * fattore * delta)
 		verso = sign(direzione)
 	else:
@@ -145,7 +166,7 @@ func _physics_process(delta):
 		Effetti.sbuffo(get_parent(), position + Vector2(0, 20), COLORE_POLVERE, 6, 90.0)
 
 	# Salto più basso se lasci presto il tasto (non vale per il doppio salto, che è sempre pieno)
-	if Input.is_action_just_released("jump") and velocita.y < 0 and not doppio_usato:
+	if Input.is_action_just_released("jump") and velocita.y < 0 and not doppio_usato and timer_lancio <= 0:
 		velocita.y *= taglio_salto
 
 	# Gravità: più forte in discesa
@@ -191,6 +212,29 @@ func rimbalza(forza: float):
 	timer_coyote = 0
 	deformazione = Vector2(1.0 - allunga_salto * 0.6, 1.0 + allunga_salto)
 	aspetto.pigola()
+
+
+# Un operatore lo prende al volo sulle mani
+func afferra():
+	tenuto = true
+	velocita = Vector2.ZERO
+	timer_beccata = 0.0
+	deformazione = Vector2(1.0 + schiaccia_atterraggio, 1.0 - schiaccia_atterraggio)
+	Effetti.sbuffo(get_parent(), position + Vector2(0, 20), COLORE_POLVERE, 5, 70.0)
+
+
+# ...e lo lancia: vola con lo slancio ricevuto, e dopo può ancora fare il doppio salto
+func lancia(spinta: Vector2):
+	tenuto = false
+	velocita = spinta
+	timer_lancio = 1.5
+	timer_coyote = 0
+	timer_prenota = 0
+	doppio_usato = false
+	if spinta.x != 0:
+		verso = sign(spinta.x)
+	deformazione = Vector2(1.0 - allunga_salto * 0.7, 1.0 + allunga_salto * 1.3)
+	aspetto.sbatti_ali()
 
 
 func _doppio_salto():

@@ -1,0 +1,295 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://scripts/livello.gd" type="Script" id=1]
+[ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/controlli_touch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/chicco.gd" type="Script" id=5]
+[ext_resource path="res://scripts/nido.gd" type="Script" id=6]
+[ext_resource path="res://scripts/topo.gd" type="Script" id=7]
+[ext_resource path="res://assets/grafica/oggetti/etichetta.svg" type="Texture" id=8]
+[ext_resource path="res://assets/grafica/oggetti/chicco.svg" type="Texture" id=9]
+[ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
+[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
+[ext_resource path="res://scripts/operatore.gd" type="Script" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[node name="ProvaOperatori" type="Node2D"]
+script = ExtResource( 1 )
+numero = 4
+frase_fine = "Hai provato tutti gli operatori!"
+beccata = true
+doppio_salto = true
+salva_progressi = false
+
+[node name="Magazzino" type="Node2D" parent="."]
+
+[node name="Paesaggio" type="StaticBody2D" parent="Magazzino"]
+z_index = -10
+position = Vector2( 0, 0 )
+script = ExtResource( 2 )
+tipo = 9
+dimensioni = Vector2( 3600, 720 )
+solido = false
+
+[node name="TerraA" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 0, 640 )
+script = ExtResource( 2 )
+tipo = 10
+dimensioni = Vector2( 1150, 80 )
+
+[node name="TerraB" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1500, 640 )
+script = ExtResource( 2 )
+tipo = 10
+dimensioni = Vector2( 950, 80 )
+
+[node name="TerraC" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2950, 640 )
+script = ExtResource( 2 )
+tipo = 10
+dimensioni = Vector2( 650, 80 )
+
+[node name="MuroSinistro" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( -40, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 720 )
+
+[node name="MuroDestro" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3600, 0 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 40, 720 )
+
+[node name="Cassetta1" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 520, 572 )
+script = ExtResource( 2 )
+tipo = 2
+dimensioni = Vector2( 80, 68 )
+
+[node name="Cassetta2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 520, 504 )
+script = ExtResource( 2 )
+tipo = 2
+dimensioni = Vector2( 80, 68 )
+
+[node name="Cassetta3" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 520, 436 )
+script = ExtResource( 2 )
+tipo = 2
+dimensioni = Vector2( 80, 68 )
+
+[node name="Cassetta4" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 520, 368 )
+script = ExtResource( 2 )
+tipo = 2
+dimensioni = Vector2( 80, 68 )
+
+[node name="Cassetta5" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 520, 300 )
+script = ExtResource( 2 )
+tipo = 2
+dimensioni = Vector2( 80, 68 )
+
+[node name="Soppalco" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1900, 330 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 400, 24 )
+attraversabile_da_sotto = true
+
+[node name="Palo1" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 1910, 354 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 16, 286 )
+solido = false
+
+[node name="Palo2" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 2274, 354 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 16, 286 )
+solido = false
+
+[node name="Cancello" type="StaticBody2D" parent="Magazzino"]
+z_index = -4
+position = Vector2( 3400, 540 )
+script = ExtResource( 2 )
+tipo = 18
+dimensioni = Vector2( 130, 100 )
+solido = false
+
+[node name="Operatori" type="Node2D" parent="."]
+
+[node name="Operatore1" type="Node2D" parent="Operatori"]
+position = Vector2( 450, 640 )
+script = ExtResource( 13 )
+chi = 0
+verso = 1.0
+potenza = 1.0
+
+[node name="Operatore2" type="Node2D" parent="Operatori"]
+position = Vector2( 1080, 640 )
+script = ExtResource( 13 )
+chi = 1
+verso = 1.0
+potenza = 1.0
+
+[node name="Operatore3" type="Node2D" parent="Operatori"]
+position = Vector2( 1750, 640 )
+script = ExtResource( 13 )
+chi = 2
+verso = 1.0
+potenza = 1.0
+
+[node name="Operatore4" type="Node2D" parent="Operatori"]
+position = Vector2( 2380, 640 )
+script = ExtResource( 13 )
+chi = 3
+verso = 1.0
+potenza = 1.0
+
+[node name="Nidi" type="Node2D" parent="."]
+
+[node name="Nido1" type="Area2D" parent="Nidi"]
+position = Vector2( 250, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido2" type="Area2D" parent="Nidi"]
+position = Vector2( 1620, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido3" type="Area2D" parent="Nidi"]
+position = Vector2( 3050, 640 )
+script = ExtResource( 6 )
+
+[node name="Chicchi" type="Node2D" parent="."]
+
+[node name="Chicco1" type="Area2D" parent="Chicchi"]
+position = Vector2( 560, 270 )
+script = ExtResource( 5 )
+
+[node name="Chicco2" type="Area2D" parent="Chicchi"]
+position = Vector2( 1250, 430 )
+script = ExtResource( 5 )
+
+[node name="Chicco3" type="Area2D" parent="Chicchi"]
+position = Vector2( 1350, 400 )
+script = ExtResource( 5 )
+
+[node name="Chicco4" type="Area2D" parent="Chicchi"]
+position = Vector2( 2000, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco5" type="Area2D" parent="Chicchi"]
+position = Vector2( 2100, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco6" type="Area2D" parent="Chicchi"]
+position = Vector2( 2200, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco7" type="Area2D" parent="Chicchi"]
+position = Vector2( 2650, 500 )
+script = ExtResource( 5 )
+
+[node name="Chicco8" type="Area2D" parent="Chicchi"]
+position = Vector2( 2800, 520 )
+script = ExtResource( 5 )
+
+[node name="Chicco9" type="Area2D" parent="Chicchi"]
+position = Vector2( 3250, 610 )
+script = ExtResource( 5 )
+
+[node name="Nemici" type="Node2D" parent="."]
+
+[node name="Uscita" type="Area2D" parent="."]
+position = Vector2( 3460, 610 )
+
+[node name="Forma" type="CollisionShape2D" parent="Uscita"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 150, 610 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 3600
+limit_bottom = 720
+smoothing_enabled = true
+smoothing_speed = 6.0
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="Interfaccia" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Contatore" type="Control" parent="Interfaccia"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 176.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 80, 28 )
+mouse_filter = 2
+
+[node name="Tavola" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_right = 160.0
+margin_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Icona" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_left = 18.0
+margin_top = 11.0
+margin_right = 44.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Numero" type="Label" parent="Interfaccia/Contatore"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 152.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "0 / 0"
+align = 1
+valign = 1
+
+[node name="Messaggio" type="Control" parent="Interfaccia"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Sfondo" type="ColorRect" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="Testo" type="Label" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "Sei scappato dal pollaio!
+
+Premi salto per rigiocare"
+align = 1
+valign = 1
