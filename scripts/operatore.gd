@@ -14,6 +14,16 @@ enum Chi { MORO, BIONDO, INDIANO, MAROCCHINO }
 enum Stato { PRONTO, CARICA, LANCIO, ESULTA }
 
 const NOMI := ["moro", "biondo", "indiano", "marocchino"]
+# gesti da fermo preferiti da ognuno (i ripetuti escono più spesso): così hanno un loro carattere
+const GESTI := [
+	["orologio", "guarda", "fischietta", "sistema", "guarda", "saluta"],
+	["saluta", "gratta", "stiracchia", "peso", "saluta", "fischietta"],
+	["guarda", "sistema", "orologio", "peso", "guarda", "gratta"],
+	["fischietta", "saluta", "stiracchia", "fischietta", "guarda", "peso"],
+]
+const DURATE := {"sistema": 1.2, "guarda": 2.2, "stiracchia": 1.8, "peso": 2.6, "saluta": 1.8,
+		"gratta": 1.6, "orologio": 1.8, "fischietta": 2.4}
+const PRESA := Vector2(0, -64)  # dove prende il pulcino: le mani unite, sempre lì anche durante un gesto
 const BATTUTE := ["Su!", "Vai!", "Op-là!", "Volaaa!"]
 # Lancio di ogni mossa (pixel al secondo; x verso dove guarda l'operatore):
 # bagher dritto in alto, canestro ad arco in avanti, catapulta in diagonale, giravolta lontanissimo in orizzontale
@@ -70,7 +80,7 @@ var prossimo_gesto := 2.0
 func _ready():
 	tempo = position.x * 0.01  # così non respirano tutti insieme
 	rng.randomize()
-	prossimo_gesto = rng.randf_range(1.0, 3.0)
+	prossimo_gesto = rng.randf_range(0.3, 1.5)
 	var nome: String = NOMI[chi]
 	var immagine_braccio: Texture = load("res://assets/grafica/operatori/braccio_%s.svg" % nome)
 	add_child(figura)
@@ -141,7 +151,10 @@ func _physics_process(delta):
 		posa[k] = lerp(posa_da[k], posa_a[k], t)
 	var extra := {"sx": 0.0, "dx": 0.0, "abbassa": 0.0, "x": 0.0, "inclina": 0.0, "testa": 0.0}
 	if stato == Stato.PRONTO:
+		# respira e dondola piano il peso da un fianco all'altro
 		extra["abbassa"] = sin(tempo * 1.6) * 1.2
+		extra["x"] = sin(tempo * 0.8) * 1.5
+		extra["inclina"] = sin(tempo * 0.8 + 1.0) * 1.2
 		_gesti(delta, extra)
 	elif stato == Stato.ESULTA:
 		extra["abbassa"] = -abs(sin(timer * 12.0)) * 8.0
@@ -170,9 +183,10 @@ func _gesti(delta: float, extra: Dictionary):
 			gesto = "invita"
 			durata_gesto = 1.1
 		else:
-			var scelte := ["sistema", "guarda", "stiracchia", "peso", "guarda"]
-			gesto = scelte[rng.randi() % scelte.size()]
-			durata_gesto = {"sistema": 1.2, "guarda": 2.2, "stiracchia": 1.8, "peso": 2.6}[gesto]
+			var scelte: Array = GESTI[chi]
+			var nuovo: String = scelte[rng.randi() % scelte.size()]
+			gesto = nuovo
+			durata_gesto = DURATE[gesto] * rng.randf_range(0.85, 1.2)
 		tempo_gesto = 0.0
 	tempo_gesto += delta
 	var f: float = clamp(tempo_gesto / durata_gesto, 0.0, 1.0)
@@ -194,11 +208,24 @@ func _gesti(delta: float, extra: Dictionary):
 			extra["dx"] -= 190.0 * su
 			extra["abbassa"] -= 4.0 * su
 		"peso":  # sposta il peso da un piede all'altro
-			extra["x"] = 3.0 * sin(TAU * f)
-			extra["inclina"] = 2.5 * sin(TAU * f)
+			extra["x"] += 4.0 * sin(TAU * f)
+			extra["inclina"] += 3.0 * sin(TAU * f)
+		"saluta":  # alza la mano e saluta, due volte, con calma
+			extra["dx"] -= 185.0 * e + 16.0 * sin(TAU * 2.0 * f) * e
+			extra["testa"] = -4.0 * e
+		"gratta":  # si gratta la testa, perplesso
+			extra["sx"] += 200.0 * e + 7.0 * sin(TAU * 3.0 * f) * e
+			extra["testa"] = 6.0 * e
+		"orologio":  # porta il polso davanti e guarda l'orologio
+			extra["dx"] += 72.0 * e
+			extra["testa"] = 7.0 * e
+			extra["abbassa"] += 2.0 * e
+		"fischietta":  # muove la testa a tempo, come se fischiettasse
+			extra["testa"] = 5.0 * sin(TAU * 3.0 * f) * e
+			extra["abbassa"] += 2.0 * abs(sin(TAU * 1.5 * f)) * e
 	if f >= 1.0:
 		gesto = ""
-		prossimo_gesto = rng.randf_range(1.5, 4.5)
+		prossimo_gesto = rng.randf_range(0.4, 1.5)
 
 
 func _vai(nuovo: int, verso_posa: Dictionary, durata: float):
@@ -220,7 +247,7 @@ func _mani() -> Vector2:
 func _pulcino_sulle_mani() -> bool:
 	if pulcino == null or pulcino.tenuto or pulcino.timer_sbalzo > 0 or pulcino.velocita.y <= 0:
 		return false
-	var mani := _mani()
+	var mani := global_position + PRESA
 	var piedi: Vector2 = pulcino.global_position + Vector2(0, 20)
 	return abs(piedi.x - mani.x) < 34 and piedi.y > mani.y - 24 and piedi.y < mani.y + 14
 
