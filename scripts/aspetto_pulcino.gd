@@ -4,6 +4,7 @@ extends Node2D
 # Il pulcino cresce a stadi lungo il viaggio (vedi CLAUDE.md, "Crescita del pulcino").
 
 const Parti = preload("res://scripts/parti.gd")
+const ACCESSORI = preload("res://scripts/accessori.gd")
 const CORPO = preload("res://assets/grafica/pulcino/corpo.png")
 const OCCHIO = preload("res://assets/grafica/pulcino/occhio.png")
 const OCCHIO_CHIUSO = preload("res://assets/grafica/pulcino/occhio_chiuso.png")
@@ -83,6 +84,30 @@ func imposta_stadio(nuovo: int):
 	ala = Parti.crea(self, s["ala"][0], s["ala"][1], Vector2(1, -28 - su) * k)
 	occhio = Parti.crea(self, OCCHIO, Vector2(14, 16), Vector2(9, -35 - su) * k)
 	becco = Parti.crea(self, BECCO, Vector2(3, 14), Vector2(19, -30 - su) * k)
+	aggiorna_accessori()
+
+
+# Gli accessori comprati alla bancarella e indossati, agganciati sopra il pulcino (crescono con lui)
+var accessori := []
+
+
+func aggiorna_accessori():
+	for a in accessori:
+		if is_instance_valid(a):
+			a.queue_free()
+	accessori = []
+	var s: Dictionary = STADI[stadio]
+	var su: float = s["alzata"]
+	var k: float = s["grandezza"]
+	for posto in ["collo", "occhi", "testa"]:
+		var nome: String = Progressi.indossati.get(posto, "")
+		if nome == "" or not ACCESSORI.ELENCO.has(nome):
+			continue
+		var a: Dictionary = ACCESSORI.ELENCO[nome]
+		var punto: Vector2 = a["punto"] / 2.0
+		var sprite := Parti.crea(self, a["immagine"], a["perno"], Vector2(punto.x, punto.y - su) * k)
+		sprite.rotation_degrees = a["angolo"]
+		accessori.append(sprite)
 
 
 # Apre il becco per un attimo: "pio!"

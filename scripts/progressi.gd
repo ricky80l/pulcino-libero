@@ -27,6 +27,28 @@ var abilita_viste := []  # abilità di cui il giocatore ha già visto l'avviso "
 var dipinto := false  # true = modalità dipinta accesa (vedi Pittura)
 var uova := []  # numeri dei luoghi dove l'uovo d'oro segreto è stato trovato
 var stelle := {}  # numero livello (come testo) -> [tutti i chicchi, uovo d'oro, mai preso]: le migliori ottenute
+var borsellino := 0  # chicchi da spendere alla bancarella: tutti quelli raccolti nelle partite finite
+var comprati := []  # accessori comprati (vedi scripts/accessori.gd)
+var indossati := {}  # posto ("testa", "occhi", "collo") -> accessorio indossato
+
+
+func compra(nome: String, prezzo: int) -> bool:
+	if comprati.has(nome) or borsellino < prezzo:
+		return false
+	borsellino -= prezzo
+	comprati.append(nome)
+	salva()
+	return true
+
+
+func indossa(nome: String, posto: String):
+	indossati[posto] = nome
+	salva()
+
+
+func togli(posto: String):
+	indossati.erase(posto)
+	salva()
 
 
 func uovo_trovato_in(numero: int) -> bool:
@@ -55,6 +77,7 @@ func _ready():
 
 func livello_finito(numero: int, presi: int, totale: int, nuove_stelle := [false, false, false]):
 	var chiave := str(numero)
+	borsellino += presi
 	var vecchie: Array = stelle.get(chiave, [false, false, false])
 	stelle[chiave] = [bool(vecchie[0]) or nuove_stelle[0], bool(vecchie[1]) or nuove_stelle[1], bool(vecchie[2]) or nuove_stelle[2]]
 	if not record.has(chiave) or presi > record[chiave]["presi"]:
@@ -116,7 +139,8 @@ func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
-				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova, "stelle": stelle}))
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova, "stelle": stelle,
+				"borsellino": borsellino, "comprati": comprati, "indossati": indossati}))
 		f.close()
 
 
@@ -134,6 +158,15 @@ func carica():
 		abilita_viste = dati.get("abilita_viste", [])
 		dipinto = bool(dati.get("dipinto", false))
 		stelle = dati.get("stelle", {})
+		comprati = dati.get("comprati", [])
+		indossati = dati.get("indossati", {})
+		if dati.has("borsellino"):
+			borsellino = int(dati["borsellino"])
+		else:
+			# primo avvio con la bancarella: nel borsellino i chicchi dei record già fatti
+			borsellino = 0
+			for r in record.values():
+				borsellino += int(r["presi"])
 		uova = []
 		for n in dati.get("uova", []):
 			uova.append(int(n))  # nel file i numeri tornano decimali

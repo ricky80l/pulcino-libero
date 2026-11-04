@@ -11,6 +11,7 @@ var aspetto: Node2D
 
 
 func _ready():
+	add_to_group("pulcino_mappa")  # così la bancarella gli cambia gli accessori
 	aspetto = Node2D.new()
 	aspetto.set_script(preload("res://scripts/aspetto_pulcino.gd"))
 	add_child(aspetto)

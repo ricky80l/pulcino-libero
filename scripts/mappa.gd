@@ -14,6 +14,7 @@ const STELLA = preload("res://assets/grafica/oggetti/stella.png")
 const STELLA_VUOTA = preload("res://assets/grafica/oggetti/stella_vuota.png")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
+const BANCARELLA = preload("res://scripts/bancarella.gd")
 
 const DISEGNI := ["pollaio", "cortile", "orto", "magazzino", "prato", "bosco", "stagno", "collina", "grotta", "paese", "campanile"]
 # dove sta ogni luogo (base del disegno, sul sentiero)
@@ -208,6 +209,16 @@ func _crea_titolo_e_aiuto():
 	crediti.connect("pressed", get_tree(), "change_scene", ["res://scenes/crediti.tscn"])
 	interfaccia.add_child(crediti)
 
+	# la bancarella: si spendono i chicchi per gli accessori del pulcino
+	var bancarella := Button.new()
+	bancarella.text = "Bancarella"
+	bancarella.focus_mode = Control.FOCUS_NONE
+	bancarella.rect_position = Vector2(1120 - 16 - 240 - 16 - 200, 16)
+	bancarella.rect_min_size = Vector2(200, 56)
+	Stile.pulsante_legno(bancarella, FONT_CARTELLI)
+	bancarella.connect("pressed", self, "_apri_bancarella")
+	interfaccia.add_child(bancarella)
+
 	# selettore dello stile (Cartoon / Dipinto): vale per i luoghi che hanno la versione dipinta
 	selettore_stile.focus_mode = Control.FOCUS_NONE
 	selettore_stile.rect_position = Vector2(1120 - 16 - 240, 16)
@@ -232,6 +243,13 @@ func _mostra_dipinto():
 			add_child(sfondo_dipinto)
 			move_child(sfondo_dipinto, 0)
 	update()
+
+
+func _apri_bancarella():
+	var b := CanvasLayer.new()
+	b.set_script(BANCARELLA)
+	add_child(b)
+	b.apri()
 
 
 func _cambia_stile():
