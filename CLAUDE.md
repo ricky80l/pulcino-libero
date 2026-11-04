@@ -178,9 +178,9 @@ Il livello dell'orto, con le piante che si piegano.
 La talpa, con le sue animazioni esagerate e il suo «bu!», sistemata nell'orto dove rende il livello più vivo senza frustrare. Si vede un attimo prima da dove sta per spuntare, per esempio dalla terra che si muove. Se tocca il pulcino, lui riparte dall'ultimo nido.
 **STOP:** fine del livello 3.
 
-## Tappe del livello 4 (Maglificio Madrid, il magazzino filati)
+## Tappe del livello 4 (Maglificio Granada, il magazzino filati)
 
-Il pulcino entra nel **Maglificio Madrid** (così si chiama il luogo sulla mappa), un magazzino di filati ispirato a quello vero di Riccardo: pareti di mattoni a due colori con gli oblò, soffitto di lamiera con i lucernari, scaffali blu pieni di coni di filato, colonne di scatoloni sui bancali, un transpallet arancione, il portone sezionale e il **soppalco azzurro** con la ringhiera. Sulle scatole niente marchi veri: solo scritte inventate.
+Il pulcino entra nel **Maglificio Granada** (così si chiama il luogo sulla mappa), un magazzino di filati ispirato a quello vero di Riccardo: pareti di mattoni a due colori con gli oblò, soffitto di lamiera con i lucernari, scaffali blu pieni di coni di filato, colonne di scatoloni sui bancali, un transpallet arancione, il portone sezionale e il **soppalco azzurro** con la ringhiera. Sulle scatole niente marchi veri: solo scritte inventate.
 
 Qui non si impara un'abilità nuova. La novità sono **quattro operatori** in camice blu che aiutano il pulcino: ci si salta sulle mani e lo lanciano **in alto** (sopra le colonne di scatoloni, fino al soppalco) o **in avanti** (oltre un varco). **Ognuno ha la sua mossa**, esagerata e buffa:
 
