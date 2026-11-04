@@ -7,6 +7,7 @@ const Stile = preload("res://scripts/stile.gd")
 const FONT_TITOLO = preload("res://assets/font/fredoka_messaggio.tres")
 const FONT_CARTELLI = preload("res://assets/font/fredoka_piccolo.tres")
 const NEBBIA = preload("res://assets/grafica/mappa/nebbia.svg")
+const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.svg")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 
@@ -30,6 +31,7 @@ var luogo_attuale := 1
 var meta := 1
 var distanza_pulcino := 0.0
 var nuvole := []
+var ombre_nuvole := []  # le nuvole sono alte: la loro ombra passa sul prato più in basso, ed è questo a dare profondità
 var tempo := 0.0
 
 
@@ -239,6 +241,26 @@ func _scrivi_stile():
 
 func _crea_nuvole():
 	for i in range(3):
+		var ombra := Sprite.new()
+		ombra.texture = NEBBIA
+		ombra.scale = Vector2(0.46, 0.34)
+		ombra.modulate = Color(0.1, 0.25, 0.08, 0.16)
+		add_child(ombra)
+		ombre_nuvole.append(ombra)
+	# luce calda e morbida ai bordi, sotto i cartelli
+	var luce := CanvasLayer.new()
+	luce.layer = 1
+	var velo := TextureRect.new()
+	velo.texture = VIGNETTA
+	velo.expand = true
+	velo.stretch_mode = TextureRect.STRETCH_SCALE
+	velo.anchor_right = 1.0
+	velo.anchor_bottom = 1.0
+	velo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+	velo.modulate.a = 0.25
+	luce.add_child(velo)
+	add_child(luce)
+	for i in range(3):
 		var n := Sprite.new()
 		n.texture = NEBBIA
 		n.scale = Vector2(0.4, 0.4)
@@ -320,7 +342,9 @@ func _draw():
 	if aperto.size() > 1:
 		draw_polyline(aperto, Color("c9a76a"), 30.0, true)
 		draw_polyline(aperto, Color("e8cb8e"), 20.0, true)
-	# alberi tondi
+	# alberi tondi, con la loro ombra sul prato
+	for a in alberi:
+		_ellisse(a + Vector2(12, 12), Vector2(26, 9), Color(0.1, 0.25, 0.05, 0.18))
 	for a in alberi:
 		draw_rect(Rect2(a.x - 5, a.y - 6, 10, 22), Color("7a4e22"))
 		_ellisse(a + Vector2(0, -18), Vector2(27, 27), Color("2f6b1a"))
@@ -344,10 +368,13 @@ func _process(delta):
 	for i in range(nebbie.size()):
 		var n: Sprite = nebbie[i]
 		n.position.x = POSIZIONI[i].x + sin(tempo * 0.8 + i) * 4
-	for n in nuvole:
+	for i in range(nuvole.size()):
+		var n: Sprite = nuvole[i]
 		n.position.x += 14 * delta
 		if n.position.x > 1400:
 			n.position.x = -120
+		# l'ombra cade più in basso e un po' di lato, come quella di una nuvola alta
+		ombre_nuvole[i].position = n.position + Vector2(90, 230)
 
 	# cammino verso la meta lungo il sentiero
 	var obiettivo: float = distanze[meta - 1]

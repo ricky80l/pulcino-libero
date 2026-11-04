@@ -9,7 +9,7 @@ var tempo := 0.0
 
 
 func _ready():
-	if tipo == "raggi":
+	if tipo in ["raggi", "fasci_lucernari", "fasci_fessure"]:
 		var luce := CanvasItemMaterial.new()
 		luce.blend_mode = CanvasItemMaterial.BLEND_MODE_ADD  # i raggi schiariscono quello che c'è dietro
 		material = luce
@@ -21,6 +21,10 @@ func _process(delta):
 		tempo += delta
 		rotation = sin(tempo * 0.35) * 0.04
 		modulate.a = 0.85 + sin(tempo * 0.8) * 0.15
+	elif tipo.begins_with("fasci"):
+		# la luce che entra respira piano, come se passasse una nuvola
+		tempo += delta
+		modulate.a = 0.8 + sin(tempo * 0.5) * 0.2
 
 
 func _draw():
@@ -38,6 +42,13 @@ func _draw():
 		"colline":
 			_colline(530.0, [[46.0, 2, 0.5], [18.0, 8, 1.7]], Color("86c45e"), Color("9bd06f"))
 			_case_e_alberi()
+		"campi":
+			_colline(530.0, [[46.0, 2, 0.5], [18.0, 8, 1.7]], Color("86c45e"), Color("9bd06f"))
+			_campi()
+		"fasci_lucernari":
+			_fasci_lucernari()
+		"fasci_fessure":
+			_fasci_fessure()
 		"siepi":
 			_siepi()
 
@@ -119,6 +130,51 @@ func _case_e_alberi():
 		draw_rect(Rect2(t - 4, ty - 26, 8, 26), Color("8a6a48"))
 		draw_circle(Vector2(t, ty - 40), 24, Color("5f9e45"))
 		draw_circle(Vector2(t - 7, ty - 47), 10, Color("78b85a"))
+
+
+# Campi coltivati a strisce sulle colline (orto), con qualche albero
+func _campi():
+	var colori := [Color("a7c95a"), Color("c9b45a"), Color("8fbf4e"), Color("d6a85a")]
+	var x := 0.0
+	var i := 0
+	while x < larghezza:
+		var largo := 150.0 + (i % 3) * 40.0
+		var y1: float = _y_collina(x) + 14
+		var y2: float = _y_collina(x + largo) + 14
+		var c: Color = colori[i % colori.size()]
+		draw_colored_polygon(PoolVector2Array([Vector2(x, y1), Vector2(x + largo, y2), Vector2(x + largo, y2 + 46), Vector2(x, y1 + 46)]), c)
+		# solchi
+		for k in range(1, 4):
+			draw_line(Vector2(x, y1 + k * 11), Vector2(x + largo, y2 + k * 11), c.darkened(0.12), 2.0)
+		x += largo + 30.0
+		i += 1
+	for t in [300.0, 980.0, 1500.0, 1840.0]:
+		var ty: float = _y_collina(t) + 10
+		draw_rect(Rect2(t - 4, ty - 26, 8, 26), Color("8a6a48"))
+		draw_circle(Vector2(t, ty - 40), 24, Color("5f9e45"))
+		draw_circle(Vector2(t - 7, ty - 47), 10, Color("78b85a"))
+
+
+# Fasci di luce dai lucernari del soffitto del magazzino (stessi punti di _disegna_lamiera in blocco.gd)
+func _fasci_lucernari():
+	var x := 180.0
+	while x < larghezza - 150:
+		var alto := 66.0
+		var basso := 640.0
+		draw_polygon(PoolVector2Array([Vector2(x + 10, alto), Vector2(x + 140, alto), Vector2(x + 220, basso), Vector2(x + 30, basso)]),
+				PoolColorArray([Color(1, 0.96, 0.82, 0.16), Color(1, 0.96, 0.82, 0.16), Color(1, 0.96, 0.82, 0.0), Color(1, 0.96, 0.82, 0.0)]))
+		x += 460.0
+
+
+# Lame di luce sottili che entrano dalle fessure tra le assi del pollaio
+func _fasci_fessure():
+	var x := 260.0
+	while x < larghezza - 600:
+		for d in [0.0, 46.0]:
+			var a: float = x + d
+			draw_polygon(PoolVector2Array([Vector2(a, 0), Vector2(a + 12, 0), Vector2(a + 150, 640), Vector2(a + 110, 640)]),
+					PoolColorArray([Color(1, 0.94, 0.75, 0.2), Color(1, 0.94, 0.75, 0.2), Color(1, 0.94, 0.75, 0.0), Color(1, 0.94, 0.75, 0.0)]))
+		x += 720.0
 
 
 func _siepi():

@@ -9,7 +9,7 @@ NON_SOLIDO = {"solido": "false", "z_index": "-6"}
 
 pezzi = [
     # sfondo e decorazioni
-    ("Paesaggio", 0, 0, 4640, 720, FUO, {"solido": "false", "z_index": "-10"}),
+    # il paesaggio lontano (cielo, colline con i campi, siepi) è a strati: vedi atmosfera="orto" qui sotto
     ("Spaventapasseri", 60, 460, 105, 180, SPA, NON_SOLIDO),
     ("Pomodori1", 400, 505, 65, 135, POM, NON_SOLIDO),
     ("Pomodori2", 470, 505, 65, 135, POM, NON_SOLIDO),
@@ -92,4 +92,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello3", "Orto", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4380, 610), partenza=(200, 610), limite_destro=4600, proprieta_livello=proprieta,
-               piante=piante, talpe=talpe)
+               piante=piante, talpe=talpe, atmosfera="orto")

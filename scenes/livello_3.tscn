@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
 [ext_resource path="res://scripts/pianta.gd" type="Script" id=14]
 [ext_resource path="res://scripts/talpa.gd" type="Script" id=15]
+[ext_resource path="res://scripts/atmosfera.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -28,14 +29,6 @@ doppio_salto = true
 abilita_nuova = "doppio_salto"
 
 [node name="Orto" type="Node2D" parent="."]
-
-[node name="Paesaggio" type="StaticBody2D" parent="Orto"]
-z_index = -10
-position = Vector2( 0, 0 )
-script = ExtResource( 2 )
-tipo = 9
-dimensioni = Vector2( 4640, 720 )
-solido = false
 
 [node name="Spaventapasseri" type="StaticBody2D" parent="Orto"]
 z_index = -6
@@ -363,6 +356,10 @@ script = ExtResource( 15 )
 [node name="Talpa3" type="Area2D" parent="Nemici"]
 position = Vector2( 4170, 640 )
 script = ExtResource( 15 )
+
+[node name="Atmosfera" type="Node" parent="."]
+script = ExtResource( 16 )
+tipo = "orto"
 
 [node name="Uscita" type="Area2D" parent="."]
 position = Vector2( 4380, 610 )

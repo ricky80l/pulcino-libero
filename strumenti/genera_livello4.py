@@ -104,4 +104,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello4", "Magazzino", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4975, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               operatori=operatori, coni=coni)
+               operatori=operatori, coni=coni, atmosfera="magazzino")

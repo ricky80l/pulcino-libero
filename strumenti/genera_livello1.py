@@ -7,7 +7,7 @@ from livelli import *
 pezzi = [
     # sfondo (decorazioni)
     ("ParetePollaio", 0, 0, 3715, 720, PAR, {"solido": "false", "z_index": "-10"}),
-    ("Fuori", 3715, 0, 525, 720, FUO, {"solido": "false", "z_index": "-10"}),
+    # fuori dall'uscita si vede il paesaggio a strati (atmosfera="pollaio" qui sotto)
     ("GabbiaSbarre", 316, 436, 368, 204, SBA, {"solido": "false", "z_index": "-5"}),
     # pavimento e muri
     ("PavimentoA", 0, 640, 2000, 80, PAV, {}),
@@ -62,4 +62,4 @@ nidi = [(1160, 640), (1560, 640), (2230, 640), (3270, 640)]
 topi = [(1680, 640, 240)]
 
 scrivi_livello(sys.argv[1], "Livello1", "Pollaio", pezzi, chicchi, nidi, topi,
-               uscita=(3900, 610), partenza=(450, 610), limite_destro=4200)
+               uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, atmosfera="pollaio")
