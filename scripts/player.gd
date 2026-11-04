@@ -54,7 +54,13 @@ var attesa_beccata := 0.0
 var colpiti := []  # ostacoli già colpiti in questa beccata
 var doppio_usato := false  # il secondo salto si può fare una sola volta prima di toccare terra
 var tenuto := false  # in mano a un operatore del magazzino, che sta per lanciarlo
+var planando := false  # sta scendendo ad ali aperte
 var timer_lancio := 0.0  # dopo un lancio vola senza frenare finché non tocca terra
+
+# --- Planata ---
+export var puo_planare := false  # il livello la attiva quando il pulcino ha imparato la planata
+export var caduta_planata := 110.0  # mentre plana scende al massimo così (pixel al secondo): più basso = plana più a lungo
+export var controllo_planata := 1.0  # quanto si guida a destra e a sinistra planando (1 = come a terra)
 
 # --- Lancio degli operatori ---
 export var controllo_lancio := 0.35  # quanto puoi correggere la direzione mentre vola dopo un lancio
@@ -82,6 +88,7 @@ func colpito(da_x := 0.0) -> bool:
 
 func riparti():
 	tenuto = false
+	planando = false
 	timer_lancio = 0.0
 	position = punto_sicuro
 	velocita = Vector2.ZERO
@@ -124,7 +131,15 @@ func _physics_process(delta):
 
 	# Camminata con accelerazione e frenata morbide
 	var direzione := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
-	var fattore := 1.0 if a_terra else controllo_in_aria
+	# Planata: scendendo con salto tenuto premuto apre le ali (non mentre sale, non a terra)
+	var prima := planando
+	planando = puo_planare and not a_terra and velocita.y > 0 and Input.is_action_pressed("jump")
+	if planando and not prima:
+		Suoni.suona("plana", 0.1, -4.0)
+		aspetto.pigola()
+		Effetti.sbuffo(get_parent(), position, Color(1.0, 0.95, 0.75), 6, 70.0)
+
+	var fattore := 1.0 if a_terra else (controllo_planata if planando else controllo_in_aria)
 	if timer_lancio > 0:
 		# lanciato: tiene lo slancio, le frecce lo correggono solo un po'
 		timer_lancio -= delta
@@ -169,9 +184,12 @@ func _physics_process(delta):
 	if Input.is_action_just_released("jump") and velocita.y < 0 and not doppio_usato and timer_lancio <= 0:
 		velocita.y *= taglio_salto
 
-	# Gravità: più forte in discesa
+	# Gravità: più forte in discesa; planando la caduta frena fino a un volo lento
 	var g := gravita if velocita.y < 0 else gravita_caduta
-	velocita.y = min(velocita.y + g * delta, velocita_caduta_max)
+	if planando:
+		velocita.y = move_toward(velocita.y + g * delta, caduta_planata, 3200.0 * delta)
+	else:
+		velocita.y = min(velocita.y + g * delta, velocita_caduta_max)
 
 	var caduta := velocita.y
 	velocita = move_and_slide(velocita, Vector2.UP)

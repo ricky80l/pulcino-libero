@@ -19,6 +19,12 @@ const TESTI := {
 		"pc": "Mentre sei in aria, premi di nuovo Spazio.",
 		"spiegazione": "Il pulcino sbatte le ali e fa un secondo salto:\ncosì superi muri alti e buche larghe.\nSi può fare una volta sola prima di toccare terra.",
 	},
+	"planata": {
+		"titolo": "Nuova abilità: la planata!",
+		"telefono": "Mentre scendi, tieni premuto il pulsante del salto.",
+		"pc": "Mentre scendi, tieni premuto Spazio.",
+		"spiegazione": "Il pulcino apre le ali e scende piano piano:\ncosì attraversi fossi larghissimi.\nLascia il tasto per ricadere giù.",
+	},
 }
 
 var abilita := ""

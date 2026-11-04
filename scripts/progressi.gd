@@ -10,7 +10,7 @@ const LIVELLI := [
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
 	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
 	{"nome": "Maglificio Granada", "scena": "res://scenes/livello_4.tscn", "senza_nuovo": true},  # nome lungo: niente «nuovo!» sul cartello
-	{"nome": "Il prato", "scena": ""},
+	{"nome": "Il prato", "scena": "res://scenes/prova_planata.tscn"},  # provvisorio: area di prova della planata (Tappa 20)
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
 	{"nome": "La collina", "scena": ""},

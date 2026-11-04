@@ -108,8 +108,11 @@ func _process(delta):
 	var vx: float = abs(p.velocita.x)
 	var morbido := min(1.0, 12.0 * delta)
 
-	# Zampe: zampettano camminando, si raccolgono in aria, si agitano se sbalzato
-	if sbalzato:
+	# Zampe: zampettano camminando, si raccolgono in aria, penzolano planando, si agitano se sbalzato
+	if p.planando:
+		zampa_davanti.rotation = lerp(zampa_davanti.rotation, 0.25, morbido) + sin(tempo * 6.0) * 0.1
+		zampa_dietro.rotation = lerp(zampa_dietro.rotation, 0.1, morbido) - sin(tempo * 6.0) * 0.1
+	elif sbalzato:
 		zampa_davanti.rotation = sin(tempo * 30.0) * 0.9
 		zampa_dietro.rotation = -sin(tempo * 30.0) * 0.9
 	elif a_terra and vx > 30:
@@ -122,9 +125,12 @@ func _process(delta):
 		zampa_davanti.rotation = lerp(zampa_davanti.rotation, 0.0, morbido)
 		zampa_dietro.rotation = lerp(zampa_dietro.rotation, 0.0, morbido)
 
-	# Ala: sbatte fortissimo nel doppio salto, forte in aria, dondola camminando
+	# Ala: sbatte fortissimo nel doppio salto, spalancata e fremente in planata, forte in aria, dondola camminando
 	timer_ali -= delta
-	if timer_ali > 0:
+	var plana: bool = p.planando
+	if plana and timer_ali <= 0:
+		ala.rotation = lerp(ala.rotation, -1.35, morbido) + sin(tempo * 40.0) * 0.07
+	elif timer_ali > 0:
 		ala.rotation = -1.0 + sin(tempo * 55.0) * 0.9
 	elif sbalzato or not a_terra:
 		ala.rotation = -0.5 + sin(tempo * 35.0) * 0.6
@@ -139,9 +145,11 @@ func _process(delta):
 	ciuffo_angolo += ciuffo_spinta * delta
 	ciuffo.rotation = ciuffo_angolo
 
-	# Codina (dallo stadio 2): scodinzola camminando, si alza saltando
+	# Codina (dallo stadio 2): scodinzola camminando, si alza saltando, fa da timone planando
 	if coda:
-		if sbalzato or not a_terra:
+		if plana:
+			coda.rotation = lerp(coda.rotation, -0.15, morbido) + sin(tempo * 9.0) * 0.08
+		elif sbalzato or not a_terra:
 			coda.rotation = lerp(coda.rotation, -0.4, morbido)
 		elif vx > 30:
 			coda.rotation = sin(tempo * 18.0) * 0.25

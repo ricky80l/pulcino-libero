@@ -104,4 +104,6 @@ tic = tono(950, 880, 0.03, armonica=0.8, volume=0.25) + silenzio(0.07)
 salva("traballa", tic + tic + tic)
 # "brrr" morbido del cono che atterra e comincia a rotolare
 salva("rotola", mescola(rumore(0.35, volume=0.22, morbidezza=0.92), tono(130, 90, 0.3, armonica=0.3, volume=0.25)))
+# "fffrrr" leggero quando il pulcino apre le ali e comincia a planare
+salva("plana", mescola(rumore(0.45, volume=0.3, morbidezza=0.9), tono(900, 1200, 0.12, vibrato_hz=25, vibrato_ampiezza=0.05, volume=0.18)))
 print("suoni creati in", os.path.abspath(CARTELLA))

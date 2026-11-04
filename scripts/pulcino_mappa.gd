@@ -5,6 +5,7 @@ extends Node2D
 var velocita := Vector2.ZERO  # in movimento le zampe zampettano
 var era_a_terra := true
 var timer_sbalzo := 0.0
+var planando := false  # sulla mappa non plana mai (serve all'aspetto del pulcino)
 var tempo := 0.0
 var aspetto: Node2D
 
