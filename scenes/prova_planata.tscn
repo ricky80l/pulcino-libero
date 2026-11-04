@@ -146,19 +146,19 @@ position = Vector2( 810, 310 )
 script = ExtResource( 5 )
 
 [node name="Chicco3" type="Area2D" parent="Chicchi"]
-position = Vector2( 1050, 420 )
+position = Vector2( 1060, 225 )
 script = ExtResource( 5 )
 
 [node name="Chicco4" type="Area2D" parent="Chicchi"]
-position = Vector2( 1200, 470 )
+position = Vector2( 1210, 280 )
 script = ExtResource( 5 )
 
 [node name="Chicco5" type="Area2D" parent="Chicchi"]
-position = Vector2( 1350, 520 )
+position = Vector2( 1360, 335 )
 script = ExtResource( 5 )
 
 [node name="Chicco6" type="Area2D" parent="Chicchi"]
-position = Vector2( 1500, 570 )
+position = Vector2( 1510, 390 )
 script = ExtResource( 5 )
 
 [node name="Chicco7" type="Area2D" parent="Chicchi"]
@@ -166,19 +166,19 @@ position = Vector2( 2325, 300 )
 script = ExtResource( 5 )
 
 [node name="Chicco8" type="Area2D" parent="Chicchi"]
-position = Vector2( 2550, 410 )
+position = Vector2( 2580, 215 )
 script = ExtResource( 5 )
 
 [node name="Chicco9" type="Area2D" parent="Chicchi"]
-position = Vector2( 2750, 460 )
+position = Vector2( 2730, 270 )
 script = ExtResource( 5 )
 
 [node name="Chicco10" type="Area2D" parent="Chicchi"]
-position = Vector2( 2950, 510 )
+position = Vector2( 2880, 325 )
 script = ExtResource( 5 )
 
 [node name="Chicco11" type="Area2D" parent="Chicchi"]
-position = Vector2( 3100, 560 )
+position = Vector2( 3030, 380 )
 script = ExtResource( 5 )
 
 [node name="Chicco12" type="Area2D" parent="Chicchi"]

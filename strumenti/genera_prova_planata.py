@@ -28,9 +28,9 @@ pezzi = [
 
 chicchi = [
     (300, 610), (810, 310),
-    (1050, 420), (1200, 470), (1350, 520), (1500, 570),     # lungo la planata sopra il primo fosso
+    (1060, 225), (1210, 280), (1360, 335), (1510, 390),     # sopra il primo fosso, sulla strada di una planata vera
     (2325, 300),
-    (2550, 410), (2750, 460), (2950, 510), (3100, 560),     # lungo la planata sopra il secondo fosso
+    (2580, 215), (2730, 270), (2880, 325), (3030, 380),     # sopra il secondo fosso, sulla strada di una planata vera
     (3500, 610),
 ]
 
