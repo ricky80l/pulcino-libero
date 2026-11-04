@@ -215,6 +215,29 @@ Il livello del magazzino, più grande e più in verticale dell'orto, con il sopp
 I coni di filato che cadono e rotolano, con il filo che si srotola dietro di loro, sistemati nel magazzino dove rendono il livello più vivo senza frustrare. Si vede un attimo prima da dove arrivano, per esempio un cono che traballa sullo scaffale.
 **STOP:** fine del livello 4.
 
+## Tappe per un viaggio più intrigante (scelte da Riccardo, prima del prato)
+
+Quattro novità che danno voglia di esplorare, rigiocare e arrivare alla fine. Valgono per i luoghi già fatti e per tutti quelli futuri.
+
+### Tappa 21 — Le uova d'oro segrete
+In ogni luogo c'è un **uovo d'oro** nascosto: dietro un muro da beccare, in cima a un posto difficile, in una stanzetta segreta. Prenderlo fa una festa di scintille e un verso speciale. Il telefono ricorda quali uova hai trovato; sulla mappa, sotto il cartello di ogni luogo, si vede l'uovo vuoto o pieno.
+Prima di nasconderle, mostrami dove le metto in ogni luogo.
+**STOP:** le uova sono difficili da trovare ma non impossibili, e trovarle dà soddisfazione.
+
+### Tappa 22 — Obiettivi e stelline
+Ogni livello ha **tre stelline** facoltative: tutti i chicchi, l'uovo d'oro, finire senza farsi prendere. Il messaggio di fine livello mostra le stelline prese, una alla volta con un suono; sulla mappa si vedono le migliori ottenute in ogni luogo.
+**STOP:** le stelline sono chiare e fanno venire voglia di rigiocare.
+
+### Tappa 23 — Chicchi da spendere
+I chicchi raccolti in ogni partita si mettono da parte nel **borsellino** del pulcino. Sulla mappa c'è una **bancarella** dove si spendono per gli **accessori** del pulcino (per esempio cappellino di paglia, berretto, fiocco, sciarpa, occhiali), che poi si vedono addosso a lui in ogni luogo e a ogni stadio di crescita. Niente soldi veri: solo chicchi.
+Prima di disegnarli mostrami gli accessori e la bancarella.
+**STOP:** comprare e indossare gli accessori è facile e divertente.
+
+### Tappa 24 — Le piume misteriose
+Alla fine di ogni luogo il pulcino trova una **piuma misteriosa**, sempre più grande, di qualcuno che lo aspetta al campanile. Una breve scena senza parole sulla mappa (pochi secondi, si può saltare) racconta il ritrovamento; le piume raccolte si vedono sulla mappa e tracciano la strada verso il campanile. Il mistero si scopre solo alla fine del viaggio.
+Prima di farle, mostrami la storia scena per scena.
+**STOP:** le scene sono brevi, poetiche e fanno venire voglia di andare avanti.
+
 ## Tappe del livello 5 (prato)
 
 Il pulcino esce all'aperto in un grande prato in una **giornata di sole** di primavera: fiori colorati, farfalle, cielo azzurro e colline lontane. È il primo luogo dello **stadio 3** di crescita (vedi la tabella «Crescita del pulcino»).
@@ -241,7 +264,7 @@ Tenendo premuto salto mentre scende, il pulcino apre le ali e plana.
 
 **STOP:** la planata è piacevole e si controlla bene, anche dal telefono.
 
-### Tappa 21 — Il prato
+### Tappa 25 — Il prato
 Il livello del prato, con le correnti d'aria e i soffioni giganti.
 - Insegna la planata un passo alla volta: prima una discesa planando oltre un fosso, poi una corrente d'aria che porta in alto, poi un soffione da beccare per crearsi la corrente da soli.
 - Ci sono chicchi, nidi e un'uscita, e qualche ostacolo da beccare e da superare col doppio salto per non dimenticarli.
@@ -249,6 +272,6 @@ Il livello del prato, con le correnti d'aria e i soffioni giganti.
 
 **STOP:** il livello si completa dall'inizio alla fine ed è divertente.
 
-### Tappa 22 — L'ape ronzante
+### Tappa 26 — L'ape ronzante
 L'ape, con le sue animazioni esagerate e il suo ronzio, sistemata nel prato dove rende il livello più vivo senza frustrare. Il suo giro si vede bene e il ronzio avvisa quando è vicina. Se tocca il pulcino, lui riparte dall'ultimo nido.
 **STOP:** fine del livello 5.
