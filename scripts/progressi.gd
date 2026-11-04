@@ -70,7 +70,7 @@ func ultimo_giocabile() -> int:
 	return n
 
 
-# Crescita del pulcino: stadio per ogni livello (vedi CLAUDE.md). Esistono già i disegni degli stadi 1 e 2.
+# Crescita del pulcino: stadio per ogni livello (vedi CLAUDE.md). Esistono già i disegni degli stadi 1, 2 e 3.
 const STADIO_DEL_LIVELLO := [1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6]
 
 

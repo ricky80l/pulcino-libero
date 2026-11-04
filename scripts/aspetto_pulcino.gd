@@ -11,21 +11,35 @@ const OCCHIO_X = preload("res://assets/grafica/pulcino/occhio_x.svg")
 const BECCO = preload("res://assets/grafica/pulcino/becco.svg")
 const BECCO_APERTO = preload("res://assets/grafica/pulcino/becco_aperto.svg")
 
-# Pezzi di ogni stadio: immagine e perno. "alzata" = quanto si alza il corpo sulle zampe più lunghe.
+# Pezzi di ogni stadio: immagine e perno. "alzata" = quanto si alza il corpo sulle zampe più lunghe;
+# "grandezza" = quanto si allargano i punti dove stanno i pezzi, attorno ai piedi (lo stadio 3 è un po' più grande).
 const STADI := {
 	1: {
+		"corpo": [CORPO, Vector2(50, 50)],
 		"zampa": [preload("res://assets/grafica/pulcino/zampa.svg"), Vector2(12, 2)],
 		"ciuffo": [preload("res://assets/grafica/pulcino/ciuffo.svg"), Vector2(20, 32)],
 		"ala": [preload("res://assets/grafica/pulcino/ala.svg"), Vector2(38, 12)],
 		"coda": null,
 		"alzata": 0.0,
+		"grandezza": 1.0,
 	},
 	2: {
+		"corpo": [CORPO, Vector2(50, 50)],
 		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.svg"), Vector2(12, 2)],
 		"ciuffo": [preload("res://assets/grafica/pulcino/stadio2/ciuffo.svg"), Vector2(22, 41)],
 		"ala": [preload("res://assets/grafica/pulcino/stadio2/ala.svg"), Vector2(46, 16)],
 		"coda": [preload("res://assets/grafica/pulcino/stadio2/coda.svg"), Vector2(30, 28)],
 		"alzata": 4.0,
+		"grandezza": 1.0,
+	},
+	3: {
+		"corpo": [preload("res://assets/grafica/pulcino/stadio3/corpo.svg"), Vector2(55, 55)],
+		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.svg"), Vector2(12, 2)],
+		"ciuffo": [preload("res://assets/grafica/pulcino/stadio3/ciuffo.svg"), Vector2(22, 41)],
+		"ala": [preload("res://assets/grafica/pulcino/stadio3/ala.svg"), Vector2(50, 16)],
+		"coda": [preload("res://assets/grafica/pulcino/stadio3/coda.svg"), Vector2(32, 30)],
+		"alzata": 4.0,
+		"grandezza": 1.1,
 	},
 }
 
@@ -56,18 +70,19 @@ func imposta_stadio(nuovo: int):
 		figlio.queue_free()
 	var s: Dictionary = STADI[stadio]
 	var su: float = s["alzata"]
+	var k: float = s["grandezza"]
 	# l'ordine conta: i primi stanno dietro
-	zampa_dietro = Parti.crea(self, s["zampa"][0], s["zampa"][1], Vector2(-7, -9 - su))
+	zampa_dietro = Parti.crea(self, s["zampa"][0], s["zampa"][1], Vector2(-7, -9 - su) * k)
 	zampa_dietro.modulate = Color(0.8, 0.8, 0.8)
-	zampa_davanti = Parti.crea(self, s["zampa"][0], s["zampa"][1], Vector2(6, -9 - su))
+	zampa_davanti = Parti.crea(self, s["zampa"][0], s["zampa"][1], Vector2(6, -9 - su) * k)
 	coda = null
 	if s["coda"] != null:
-		coda = Parti.crea(self, s["coda"][0], s["coda"][1], Vector2(-17, -26 - su))
-	ciuffo = Parti.crea(self, s["ciuffo"][0], s["ciuffo"][1], Vector2(-1, -47 - su))
-	Parti.crea(self, CORPO, Vector2(50, 50), Vector2(0, -28 - su))
-	ala = Parti.crea(self, s["ala"][0], s["ala"][1], Vector2(1, -28 - su))
-	occhio = Parti.crea(self, OCCHIO, Vector2(14, 16), Vector2(9, -35 - su))
-	becco = Parti.crea(self, BECCO, Vector2(3, 14), Vector2(19, -30 - su))
+		coda = Parti.crea(self, s["coda"][0], s["coda"][1], Vector2(-17, -26 - su) * k)
+	ciuffo = Parti.crea(self, s["ciuffo"][0], s["ciuffo"][1], Vector2(-1, -47 - su) * k)
+	Parti.crea(self, s["corpo"][0], s["corpo"][1], Vector2(0, -28 - su) * k)
+	ala = Parti.crea(self, s["ala"][0], s["ala"][1], Vector2(1, -28 - su) * k)
+	occhio = Parti.crea(self, OCCHIO, Vector2(14, 16), Vector2(9, -35 - su) * k)
+	becco = Parti.crea(self, BECCO, Vector2(3, 14), Vector2(19, -30 - su) * k)
 
 
 # Apre il becco per un attimo: "pio!"
