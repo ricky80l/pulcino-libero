@@ -1,5 +1,5 @@
 extends Node2D
-# Mappa della fattoria vista dall'alto: un sentiero collega i dieci luoghi del viaggio.
+# Mappa della fattoria vista dall'alto: un sentiero collega gli undici luoghi del viaggio.
 # Il pulcino cammina sul sentiero; i luoghi non ancora sbloccati sono nella nebbia.
 # Telefono: tocca un luogo per andarci, toccalo di nuovo per entrare. PC: frecce e spazio.
 
@@ -10,10 +10,10 @@ const NEBBIA = preload("res://assets/grafica/mappa/nebbia.svg")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 
-const DISEGNI := ["pollaio", "cortile", "orto", "prato", "bosco", "stagno", "collina", "grotta", "paese", "campanile"]
+const DISEGNI := ["pollaio", "cortile", "orto", "magazzino", "prato", "bosco", "stagno", "collina", "grotta", "paese", "campanile"]
 # dove sta ogni luogo (base del disegno, sul sentiero)
 const POSIZIONI := [
-	Vector2(150, 640), Vector2(380, 600), Vector2(620, 650), Vector2(860, 600), Vector2(1100, 640),
+	Vector2(150, 640), Vector2(360, 600), Vector2(570, 650), Vector2(780, 600), Vector2(990, 650), Vector2(1180, 600),
 	Vector2(1130, 420), Vector2(880, 380), Vector2(630, 410), Vector2(390, 330), Vector2(640, 190),
 ]
 const FIUME := [Vector2(1300, 110), Vector2(1235, 170), Vector2(1245, 255), Vector2(1195, 330), Vector2(1160, 380)]

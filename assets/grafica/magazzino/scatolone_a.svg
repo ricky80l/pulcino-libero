@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="150" viewBox="0 0 200 150">
+<rect x="3" y="3" width="194" height="144" rx="4" fill="#C99B62" stroke="#8E6A3E" stroke-width="5"/>
+<path d="M3 27 L197 27" stroke="#8E6A3E" stroke-width="3" opacity="0.6"/>
+<rect x="86" y="3" width="28" height="68" fill="#E2C695" opacity="0.85"/>
+<path d="M8 140 L192 140" stroke="#D9B07A" stroke-width="4" opacity="0.7"/>
+<text x="56" y="108" text-anchor="middle" font-family="Trebuchet MS, sans-serif" font-size="26" font-weight="700" fill="#8E6A3E" opacity="0.8">LANA</text>
+<rect x="120" y="84" width="44" height="30" rx="2" fill="#FAFAF5" stroke="#9A9A9A" stroke-width="1.5"/><path d="M126 91 L154 91 M126 97 L146 97" stroke="#777" stroke-width="2"/><rect x="126.0" y="102" width="2.4" height="8" fill="#333"/><rect x="129.2" y="102" width="1.6" height="8" fill="#333"/><rect x="132.4" y="102" width="1.6" height="8" fill="#333"/><rect x="135.6" y="102" width="2.4" height="8" fill="#333"/><rect x="138.8" y="102" width="1.6" height="8" fill="#333"/><rect x="142.0" y="102" width="1.6" height="8" fill="#333"/><rect x="145.2" y="102" width="2.4" height="8" fill="#333"/><rect x="148.4" y="102" width="1.6" height="8" fill="#333"/><rect x="151.6" y="102" width="1.6" height="8" fill="#333"/><rect x="154.8" y="102" width="2.4" height="8" fill="#333"/>
+</svg>

@@ -4,9 +4,10 @@
 # tipi di pezzo (stesso ordine di Tipo in scripts/blocco.gd)
 (PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO,
  TER, BOT, CAR, TET, CEP, ABB, STE, FIE, CAN,
- TOR, ACQ, INV, CAV, CRL, POM, ANN, SPA, FRA, POZ) = range(29)
+ TOR, ACQ, INV, CAV, CRL, POM, ANN, SPA, FRA, POZ,
+ MAT, LAM, CEM, FOS, SOP, PIL, SCA, SCB, SCC, BAN, CRT, SCF, TRP, POR, EST, USC) = range(45)
 # tipi di ostacolo rompibile (stesso ordine di Tipo in scripts/rompibile.gd)
-SACCO, BALLA, VASO, ZUCCA = range(4)
+SACCO, BALLA, VASO, ZUCCA, SCATOLA = range(5)
 # piante che rimbalzano (stesso ordine di Tipo in scripts/pianta.gd)
 GIRASOLE, MAIS = range(2)
 # operatori del magazzino (stesso ordine di Chi in scripts/operatore.gd)

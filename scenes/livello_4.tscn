@@ -1,0 +1,504 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/livello.gd" type="Script" id=1]
+[ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/controlli_touch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/chicco.gd" type="Script" id=5]
+[ext_resource path="res://scripts/nido.gd" type="Script" id=6]
+[ext_resource path="res://scripts/topo.gd" type="Script" id=7]
+[ext_resource path="res://assets/grafica/oggetti/etichetta.svg" type="Texture" id=8]
+[ext_resource path="res://assets/grafica/oggetti/chicco.svg" type="Texture" id=9]
+[ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
+[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
+[ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
+[ext_resource path="res://scripts/operatore.gd" type="Script" id=14]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[node name="Livello4" type="Node2D"]
+script = ExtResource( 1 )
+numero = 4
+frase_fine = "Sei uscito dal magazzino filati!"
+beccata = true
+doppio_salto = true
+
+[node name="Magazzino" type="Node2D" parent="."]
+
+[node name="Parete" type="StaticBody2D" parent="Magazzino"]
+z_index = -10
+position = Vector2( 0, 0 )
+script = ExtResource( 2 )
+tipo = 29
+dimensioni = Vector2( 5200, 720 )
+solido = false
+
+[node name="Soffitto" type="StaticBody2D" parent="Magazzino"]
+z_index = -9
+position = Vector2( 0, 0 )
+script = ExtResource( 2 )
+tipo = 30
+dimensioni = Vector2( 5200, 80 )
+solido = false
+
+[node name="PavimentoA" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 0, 640 )
+script = ExtResource( 2 )
+tipo = 31
+dimensioni = Vector2( 1680, 80 )
+
+[node name="Fossa1" type="StaticBody2D" parent="Magazzino"]
+z_index = -1
+position = Vector2( 1680, 640 )
+script = ExtResource( 2 )
+tipo = 32
+dimensioni = Vector2( 350, 80 )
+solido = false
+
+[node name="PavimentoB" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2030, 640 )
+script = ExtResource( 2 )
+tipo = 31
+dimensioni = Vector2( 620, 80 )
+
+[node name="Fossa2" type="StaticBody2D" parent="Magazzino"]
+z_index = -1
+position = Vector2( 2650, 640 )
+script = ExtResource( 2 )
+tipo = 32
+dimensioni = Vector2( 650, 80 )
+solido = false
+
+[node name="PavimentoC" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3300, 640 )
+script = ExtResource( 2 )
+tipo = 31
+dimensioni = Vector2( 1900, 80 )
+
+[node name="MuroSinistro" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( -40, 0 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 40, 720 )
+
+[node name="MuroDestro" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 5200, 0 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 40, 720 )
+
+[node name="Scaffale1" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 300, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Ripiano1a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 305, 498 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Ripiano1b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 305, 434 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Ripiano1c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 305, 370 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Estintore1" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 480, 585 )
+script = ExtResource( 2 )
+tipo = 43
+dimensioni = Vector2( 25, 55 )
+solido = false
+
+[node name="CartelloUscita" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 520, 230 )
+script = ExtResource( 2 )
+tipo = 44
+dimensioni = Vector2( 55, 28 )
+solido = false
+
+[node name="Cartoni1" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 560, 525 )
+script = ExtResource( 2 )
+tipo = 39
+dimensioni = Vector2( 130, 115 )
+
+[node name="Bancale1" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1080, 620 )
+script = ExtResource( 2 )
+tipo = 38
+dimensioni = Vector2( 120, 20 )
+
+[node name="Scatolone1a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1085, 545 )
+script = ExtResource( 2 )
+tipo = 35
+dimensioni = Vector2( 110, 75 )
+
+[node name="Scatolone1b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1090, 465 )
+script = ExtResource( 2 )
+tipo = 36
+dimensioni = Vector2( 100, 80 )
+
+[node name="Scatolone1c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1080, 400 )
+script = ExtResource( 2 )
+tipo = 37
+dimensioni = Vector2( 120, 65 )
+
+[node name="Scatolone1d" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 1085, 320 )
+script = ExtResource( 2 )
+tipo = 35
+dimensioni = Vector2( 110, 80 )
+
+[node name="Scaffale2" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 1300, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Soppalco" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3500, 330 )
+script = ExtResource( 2 )
+tipo = 33
+dimensioni = Vector2( 900, 16 )
+attraversabile_da_sotto = true
+
+[node name="Pilastro1" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 3520, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="Pilastro2" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 3943, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="Pilastro3" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 4366, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="ScaffaleSoppalco" type="StaticBody2D" parent="Magazzino"]
+z_index = -7
+position = Vector2( 4120, 195 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 80, 135 )
+solido = false
+
+[node name="Transpallet" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3700, 565 )
+script = ExtResource( 2 )
+tipo = 41
+dimensioni = Vector2( 115, 75 )
+
+[node name="Scatolone2a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3900, 560 )
+script = ExtResource( 2 )
+tipo = 36
+dimensioni = Vector2( 110, 80 )
+
+[node name="Cartoni2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 4550, 525 )
+script = ExtResource( 2 )
+tipo = 39
+dimensioni = Vector2( 130, 115 )
+
+[node name="Bancale2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 4720, 620 )
+script = ExtResource( 2 )
+tipo = 38
+dimensioni = Vector2( 120, 20 )
+
+[node name="Scatolone3a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 4725, 545 )
+script = ExtResource( 2 )
+tipo = 37
+dimensioni = Vector2( 110, 75 )
+
+[node name="Estintore2" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 4860, 585 )
+script = ExtResource( 2 )
+tipo = 43
+dimensioni = Vector2( 25, 55 )
+solido = false
+
+[node name="Portone" type="StaticBody2D" parent="Magazzino"]
+z_index = -4
+position = Vector2( 4900, 475 )
+script = ExtResource( 2 )
+tipo = 42
+dimensioni = Vector2( 150, 165 )
+solido = false
+
+[node name="Rompibili" type="Node2D" parent="."]
+
+[node name="Rompibile1" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 820, 640 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 1
+
+[node name="Rompibile2" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1460, 640 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 1
+
+[node name="Rompibile3" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 4010, 330 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 2
+
+[node name="Operatori" type="Node2D" parent="."]
+
+[node name="Operatore1" type="Node2D" parent="Operatori"]
+position = Vector2( 1000, 640 )
+script = ExtResource( 14 )
+chi = 0
+verso = 1.0
+potenza = 1.0
+
+[node name="Operatore2" type="Node2D" parent="Operatori"]
+position = Vector2( 1600, 640 )
+script = ExtResource( 14 )
+chi = 1
+verso = 1.0
+potenza = 1.1
+
+[node name="Operatore3" type="Node2D" parent="Operatori"]
+position = Vector2( 2560, 640 )
+script = ExtResource( 14 )
+chi = 3
+verso = 1.0
+potenza = 1.0
+
+[node name="Operatore4" type="Node2D" parent="Operatori"]
+position = Vector2( 3352, 640 )
+script = ExtResource( 14 )
+chi = 2
+verso = 1.0
+potenza = 1.0
+
+[node name="Nidi" type="Node2D" parent="."]
+
+[node name="Nido1" type="Area2D" parent="Nidi"]
+position = Vector2( 260, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido2" type="Area2D" parent="Nidi"]
+position = Vector2( 1350, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido3" type="Area2D" parent="Nidi"]
+position = Vector2( 2150, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido4" type="Area2D" parent="Nidi"]
+position = Vector2( 3600, 330 )
+script = ExtResource( 6 )
+
+[node name="Nido5" type="Area2D" parent="Nidi"]
+position = Vector2( 4480, 640 )
+script = ExtResource( 6 )
+
+[node name="Chicchi" type="Node2D" parent="."]
+
+[node name="Chicco1" type="Area2D" parent="Chicchi"]
+position = Vector2( 200, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco2" type="Area2D" parent="Chicchi"]
+position = Vector2( 380, 340 )
+script = ExtResource( 5 )
+
+[node name="Chicco3" type="Area2D" parent="Chicchi"]
+position = Vector2( 625, 495 )
+script = ExtResource( 5 )
+
+[node name="Chicco4" type="Area2D" parent="Chicchi"]
+position = Vector2( 900, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco5" type="Area2D" parent="Chicchi"]
+position = Vector2( 1140, 290 )
+script = ExtResource( 5 )
+
+[node name="Chicco6" type="Area2D" parent="Chicchi"]
+position = Vector2( 1140, 230 )
+script = ExtResource( 5 )
+
+[node name="Chicco7" type="Area2D" parent="Chicchi"]
+position = Vector2( 1760, 430 )
+script = ExtResource( 5 )
+
+[node name="Chicco8" type="Area2D" parent="Chicchi"]
+position = Vector2( 1880, 410 )
+script = ExtResource( 5 )
+
+[node name="Chicco9" type="Area2D" parent="Chicchi"]
+position = Vector2( 2300, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco10" type="Area2D" parent="Chicchi"]
+position = Vector2( 2850, 470 )
+script = ExtResource( 5 )
+
+[node name="Chicco11" type="Area2D" parent="Chicchi"]
+position = Vector2( 3050, 480 )
+script = ExtResource( 5 )
+
+[node name="Chicco12" type="Area2D" parent="Chicchi"]
+position = Vector2( 3650, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco13" type="Area2D" parent="Chicchi"]
+position = Vector2( 3800, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco14" type="Area2D" parent="Chicchi"]
+position = Vector2( 4200, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco15" type="Area2D" parent="Chicchi"]
+position = Vector2( 4300, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco16" type="Area2D" parent="Chicchi"]
+position = Vector2( 3757, 535 )
+script = ExtResource( 5 )
+
+[node name="Chicco17" type="Area2D" parent="Chicchi"]
+position = Vector2( 4615, 495 )
+script = ExtResource( 5 )
+
+[node name="Chicco18" type="Area2D" parent="Chicchi"]
+position = Vector2( 4780, 515 )
+script = ExtResource( 5 )
+
+[node name="Chicco19" type="Area2D" parent="Chicchi"]
+position = Vector2( 4700, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco20" type="Area2D" parent="Chicchi"]
+position = Vector2( 4975, 600 )
+script = ExtResource( 5 )
+
+[node name="Nemici" type="Node2D" parent="."]
+
+[node name="Uscita" type="Area2D" parent="."]
+position = Vector2( 4975, 610 )
+
+[node name="Forma" type="CollisionShape2D" parent="Uscita"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 150, 610 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 5200
+limit_bottom = 720
+smoothing_enabled = true
+smoothing_speed = 6.0
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="Interfaccia" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Contatore" type="Control" parent="Interfaccia"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 176.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 80, 28 )
+mouse_filter = 2
+
+[node name="Tavola" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_right = 160.0
+margin_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Icona" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_left = 18.0
+margin_top = 11.0
+margin_right = 44.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Numero" type="Label" parent="Interfaccia/Contatore"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 152.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "0 / 0"
+align = 1
+valign = 1
+
+[node name="Messaggio" type="Control" parent="Interfaccia"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Sfondo" type="ColorRect" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="Testo" type="Label" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "Sei scappato dal pollaio!
+
+Premi salto per rigiocare"
+align = 1
+valign = 1

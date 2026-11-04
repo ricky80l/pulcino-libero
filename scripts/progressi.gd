@@ -4,12 +4,13 @@ extends Node
 
 const FILE := "user://progressi.json"
 
-# I dieci luoghi del viaggio. "scena" vuota = livello non ancora costruito.
+# Gli undici luoghi del viaggio. "scena" vuota = livello non ancora costruito.
 const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
 	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
-	{"nome": "Il magazzino filati", "scena": "res://scenes/prova_operatori.tscn"},  # provvisorio: area di prova degli operatori (Tappa 16)
+	{"nome": "Il magazzino filati", "scena": "res://scenes/livello_4.tscn"},
+	{"nome": "Il prato", "scena": ""},
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
 	{"nome": "La collina", "scena": ""},
@@ -70,7 +71,7 @@ func ultimo_giocabile() -> int:
 
 
 # Crescita del pulcino: stadio per ogni livello (vedi CLAUDE.md). Esistono già i disegni degli stadi 1 e 2.
-const STADIO_DEL_LIVELLO := [1, 2, 2, 3, 3, 4, 4, 5, 5, 6]
+const STADIO_DEL_LIVELLO := [1, 2, 2, 2, 3, 3, 4, 4, 5, 5, 6]
 
 
 func stadio_di(numero: int) -> int:

@@ -6,7 +6,9 @@ extends StaticBody2D
 
 enum Tipo { PAVIMENTO, LEGNO, CASSETTA, MANGIATOIA, POSATOIO, SBARRE, PARETE, RETE, ERBA, FUORI,
 		TERRA, BOTTE, CARRETTO, TETTOIA, CEPPI, ABBEVERATOIO, STECCATO, FIENILE, CANCELLO,
-		TERRA_ORTO, ACQUA, INVISIBILE, CAVOLO, CARRIOLA, POMODORI, ANNAFFIATOIO, SPAVENTAPASSERI, FRAGOLE, POZZO }
+		TERRA_ORTO, ACQUA, INVISIBILE, CAVOLO, CARRIOLA, POMODORI, ANNAFFIATOIO, SPAVENTAPASSERI, FRAGOLE, POZZO,
+		MATTONI, LAMIERA, CEMENTO, FOSSA, SOPPALCO, PILASTRO, SCATOLONE_A, SCATOLONE_B, SCATOLONE_C, BANCALE,
+		CARTONI, SCAFFALE, TRANSPALLET, PORTONE, ESTINTORE, CARTELLO_USCITA }
 
 const IMMAGINI := {
 	Tipo.CASSETTA: preload("res://assets/grafica/pollaio/cassetta.svg"),
@@ -27,7 +29,24 @@ const IMMAGINI := {
 	Tipo.SPAVENTAPASSERI: preload("res://assets/grafica/orto/spaventapasseri.svg"),
 	Tipo.FRAGOLE: preload("res://assets/grafica/orto/fragole.svg"),
 	Tipo.POZZO: preload("res://assets/grafica/orto/pozzo.svg"),
+	Tipo.SCATOLONE_A: preload("res://assets/grafica/magazzino/scatolone_a.svg"),
+	Tipo.SCATOLONE_B: preload("res://assets/grafica/magazzino/scatolone_b.svg"),
+	Tipo.SCATOLONE_C: preload("res://assets/grafica/magazzino/scatolone_c.svg"),
+	Tipo.BANCALE: preload("res://assets/grafica/magazzino/bancale.svg"),
+	Tipo.CARTONI: preload("res://assets/grafica/magazzino/cartoni_piatti.svg"),
+	Tipo.SCAFFALE: preload("res://assets/grafica/magazzino/scaffale.svg"),
+	Tipo.TRANSPALLET: preload("res://assets/grafica/magazzino/transpallet.svg"),
+	Tipo.PORTONE: preload("res://assets/grafica/magazzino/portone.svg"),
+	Tipo.ESTINTORE: preload("res://assets/grafica/magazzino/estintore.svg"),
+	Tipo.CARTELLO_USCITA: preload("res://assets/grafica/magazzino/uscita.svg"),
 }
+const MATTONI_PIASTRELLA := preload("res://assets/grafica/magazzino/mattoni.svg")  # si ripete su tutta la parete
+
+# colori del magazzino
+const AZZURRO := Color("2f6db5")
+const AZZURRO_SCURO := Color("1c4a80")
+const GRIGIO := Color("a9b0b8")
+const GRIGIO_SCURO := Color("6e757d")
 
 # colori del pollaio
 const CONTORNO := Color("5a3e14")
@@ -146,6 +165,18 @@ func _draw():
 			_disegna_terra_orto()
 		Tipo.ACQUA:
 			_disegna_acqua()
+		Tipo.MATTONI:
+			_disegna_mattoni()
+		Tipo.LAMIERA:
+			_disegna_lamiera()
+		Tipo.CEMENTO:
+			_disegna_cemento()
+		Tipo.FOSSA:
+			_disegna_fossa()
+		Tipo.SOPPALCO:
+			_disegna_soppalco()
+		Tipo.PILASTRO:
+			_disegna_pilastro()
 
 
 # Parete di assi verticali con chiodi e nodi del legno
@@ -343,6 +374,97 @@ func _disegna_acqua():
 	while x < w - 20:
 		draw_line(Vector2(x, 14), Vector2(x + 16, 14), Color("8fd0f2"), 3.0, true)
 		x += 46.0
+
+
+# Parete del magazzino: mattoni a due colori (una piastrella ripetuta) e gli oblò in alto
+func _disegna_mattoni():
+	draw_set_transform(Vector2.ZERO, 0, Vector2(0.5, 0.5))  # la piastrella è disegnata al doppio
+	draw_texture_rect(MATTONI_PIASTRELLA, Rect2(Vector2.ZERO, dimensioni * 2), true)
+	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+	var x := 330.0
+	while x < dimensioni.x - 30:
+		var c := Vector2(x, 160)
+		draw_circle(c, 24, Color("8c9096"))
+		draw_circle(c, 20, Color("5e646a"))
+		draw_circle(c, 17, Color("eaf4fa"))
+		draw_arc(c, 11, -2.4, -1.2, 8, Color.white, 3.0, true)
+		x += 650.0
+
+
+# Soffitto di lamiera ondulata con i lucernari, la trave e le lampade
+func _disegna_lamiera():
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h - 12), Color("c9cccf"))
+	var x := 0.0
+	while x < w:
+		draw_rect(Rect2(x, 0, 6, h - 12), Color("b5babf"))
+		x += 12.0
+	x = 180.0
+	while x < w - 150:
+		draw_rect(Rect2(x, 8, 150, h - 30), Color("eef6fb"))
+		draw_rect(Rect2(x, 8, 150, h - 30), Color("9da3a8"), false, 3.0)
+		x += 460.0
+	draw_rect(Rect2(0, h - 14, w, 12), Color("a8adb3"))
+	draw_line(Vector2(0, h - 2), Vector2(w, h - 2), Color("7e848a"), 2.0)
+	x = 100.0
+	while x < w - 80:
+		draw_rect(Rect2(x, h - 2, 80, 6), Color("f5f8fa"))
+		draw_rect(Rect2(x, h - 2, 80, 6), Color("9da3a8"), false, 1.5)
+		x += 260.0
+
+
+# Pavimento di cemento grigio chiaro con i giunti
+func _disegna_cemento():
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h), Color("d8dcd8"))
+	draw_line(Vector2(0, 2), Vector2(w, 2), Color("a9aeaa"), 4.0)
+	draw_line(Vector2(0, 24), Vector2(w, 24), Color("c7ccc8"), 2.0)
+	var x := 160.0
+	while x < w:
+		draw_line(Vector2(x, 4), Vector2(x - 30, h), Color("c3c8c4"), 2.0)
+		x += 320.0
+
+
+# Fossa nel pavimento (la rampa di carico): ci si cade dentro e si riparte dal nido
+func _disegna_fossa():
+	var w := dimensioni.x
+	var h := dimensioni.y
+	draw_rect(Rect2(0, 0, w, h), Color("3a3d42"))
+	draw_rect(Rect2(0, 0, w, 10), Color("2a2c30"))
+	# bordi a strisce gialle e nere, come quelli di sicurezza
+	for lato in [0.0, w - 12.0]:
+		var y := 0.0
+		while y < h:
+			draw_rect(Rect2(lato, y, 12, 10), Color("f2c230"))
+			draw_rect(Rect2(lato, y + 10, 12, 10), Color("2a2a2a"))
+			y += 20.0
+
+
+# Soppalco azzurro: piano di grigliato, trave azzurra e la ringhiera
+func _disegna_soppalco():
+	var w := dimensioni.x
+	draw_rect(Rect2(0, 0, w, 6), GRIGIO)
+	draw_rect(Rect2(0, 6, w, dimensioni.y - 6), AZZURRO)
+	draw_rect(Rect2(0, 0, w, dimensioni.y), AZZURRO_SCURO, false, 2.5)
+	for y in [-52.0, -28.0]:
+		draw_line(Vector2(2, y), Vector2(w - 2, y), AZZURRO, 5.0)
+	var x := 3.0
+	while x < w:
+		draw_line(Vector2(x, 0), Vector2(x, -52), AZZURRO, 4.0)
+		x += 40.0
+	draw_line(Vector2(w - 3, 0), Vector2(w - 3, -52), AZZURRO, 4.0)
+
+
+# Pilastro azzurro del soppalco, con i bulloni
+func _disegna_pilastro():
+	draw_rect(Rect2(Vector2.ZERO, dimensioni), AZZURRO)
+	draw_rect(Rect2(Vector2.ZERO, dimensioni), AZZURRO_SCURO, false, 2.5)
+	var y := 20.0
+	while y < dimensioni.y:
+		draw_circle(Vector2(dimensioni.x / 2, y), 2.0, AZZURRO_SCURO)
+		y += 60.0
 
 
 # Paesaggio fuori: colline, sole e nuvole (il cielo è il colore di sfondo)

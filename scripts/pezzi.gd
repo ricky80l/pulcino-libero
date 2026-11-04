@@ -32,6 +32,9 @@ func lancia(tipo: int, verso: float, quanti: int, misura: Vector2):
 		elif tipo == 2:  # vaso: cocci di terracotta e un po' di terra
 			p["forma"] = "coccio" if i % 4 != 0 else "chicco"
 			p["colore"] = Color("d9824a") if i % 4 != 0 else Color("7a5230")
+		elif tipo == 4:  # scatola di cartone: brandelli di cartone e qualche chicco
+			p["forma"] = "brandello" if i % 3 != 0 else "chicco"
+			p["colore"] = Color("c99b62") if i % 3 != 0 else Color("f2c230")
 		else:  # zucca: pezzi arancioni e semi chiari
 			p["forma"] = "coccio" if i % 3 != 0 else "chicco"
 			p["colore"] = Color("f28c28") if i % 3 != 0 else Color("fff3c4")

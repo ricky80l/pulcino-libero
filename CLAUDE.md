@@ -49,6 +49,7 @@ Nomi di file e cartelle in minuscolo con trattini bassi. Commenti nel codice in 
 - **Animazioni e suoni:** schiaccia-e-allunga, polvere, versi buffi. I suoni sono segnaposto sintetici creati da `strumenti/genera_suoni.py`.
 - **Testi:** font Fredoka (licenza OFL, in `assets/font/`).
 - **Modalità dipinta (in prova):** un selettore sulla mappa, accanto a «Crediti» («Stile: Cartoon / Dipinto»; solo lì, non nel menu di pausa), scambia i disegni con versioni ridipinte a pennellate da `strumenti/ridipingi.py` (stile «delicato»), salvate in `assets/dipinto/`. Il telefono ricorda la scelta. Per ora c'è solo nel cortile; lo stile predefinito resta il cartoon.
+- **Telefono a schermo intero:** sul telefono, al primo tocco il gioco va a schermo intero e in orizzontale (dove il browser lo permette; su iPhone si ottiene aggiungendo il gioco alla schermata Home).
 - **Pubblicazione:** dopo ogni modifica il gioco va esportato in `docs/` e caricato su GitHub. Si gioca su https://ricky80l.github.io/pulcino-libero/.
 
 ## Tappe del livello 1 (pollaio) — completato

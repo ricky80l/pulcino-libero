@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="230" height="150" viewBox="0 0 230 150">
+<path d="M30 120 L220 120 L220 136 L30 136 Z" fill="#9AA0A6" stroke="#4A4F55" stroke-width="4"/>
+<circle cx="200" cy="140" r="8" fill="#333"/><circle cx="60" cy="140" r="9" fill="#333"/>
+<path d="M20 70 L56 70 L66 126 L24 126 Z" fill="#E8572A" stroke="#8A2A10" stroke-width="5" stroke-linejoin="round"/>
+<path d="M38 72 L8 6" stroke="#2A2A2A" stroke-width="9" stroke-linecap="round"/>
+<path d="M2 6 L22 2 L26 14 L6 18 Z" fill="#2A2A2A"/>
+<text x="140" y="132" text-anchor="middle" font-family="Trebuchet MS, sans-serif" font-size="11" font-weight="700" fill="#4A4F55">PORTATA 2000</text>
+</svg>

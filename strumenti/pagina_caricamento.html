@@ -6,6 +6,10 @@
 <head>
 	<meta charset='utf-8' />
 	<meta name='viewport' content='width=device-width, user-scalable=no' />
+	<!-- aggiunto alla schermata Home del telefono, si apre senza le barre del browser -->
+	<meta name='mobile-web-app-capable' content='yes' />
+	<meta name='apple-mobile-web-app-capable' content='yes' />
+	<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
 	<title>$GODOT_PROJECT_NAME</title>
 	<style type='text/css'>
 		@font-face {
@@ -20,7 +24,7 @@
 			border: 0 none;
 			padding: 0;
 			text-align: center;
-			background-color: #8cc7f2;
+			background-color: black;  /* come le bande ai lati del gioco quando lo schermo non è 16:9 */
 			overflow: hidden;
 		}
 
@@ -308,6 +312,27 @@ $GODOT_HEAD_INCLUDE
 				scritta.textContent = 'Ops! Il gioco non è partito.';
 				avviso.textContent = msg;
 				avviso.style.display = 'block';
+			}
+
+			// Sul telefono: al primo tocco il gioco va a schermo intero e in orizzontale
+			// (i browser lo permettono solo dopo un tocco; se si esce, torna al tocco successivo)
+			function schermoIntero() {
+				var el = document.documentElement;
+				var richiesta = el.requestFullscreen || el.webkitRequestFullscreen;
+				if (!richiesta || document.fullscreenElement || document.webkitFullscreenElement) {
+					return;
+				}
+				var promessa = richiesta.call(el, { navigationUI: 'hide' });
+				if (promessa && promessa.then) {
+					promessa.then(function() {
+						if (screen.orientation && screen.orientation.lock) {
+							screen.orientation.lock('landscape').catch(function() {});
+						}
+					}).catch(function() {});
+				}
+			}
+			if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+				document.addEventListener('touchend', schermoIntero, { passive: true });
 			}
 
 			if (!Engine.isWebGLAvailable()) {

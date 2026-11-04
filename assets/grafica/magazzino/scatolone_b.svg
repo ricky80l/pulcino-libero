@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="160" viewBox="0 0 180 160">
+<rect x="3" y="3" width="174" height="154" rx="4" fill="#C99B62" stroke="#8E6A3E" stroke-width="5"/>
+<path d="M3 29 L177 29" stroke="#8E6A3E" stroke-width="3" opacity="0.6"/>
+<rect x="76" y="3" width="28" height="72" fill="#E2C695" opacity="0.85"/>
+<path d="M8 150 L172 150" stroke="#D9B07A" stroke-width="4" opacity="0.7"/>
+<text x="50" y="115" text-anchor="middle" font-family="Trebuchet MS, sans-serif" font-size="27" font-weight="700" fill="#8E6A3E" opacity="0.8">FILATI</text>
+<path d="M130 114 L130 96 M124 102 L130 96 L136 102 M144 114 L144 96 M138 102 L144 96 L150 102 M126 118 L148 118" fill="none" stroke="#8E6A3E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
