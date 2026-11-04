@@ -212,3 +212,41 @@ Il livello del magazzino, più grande e più in verticale dell'orto, con il sopp
 ### Tappa 18 — I coni di filato che rotolano
 I coni di filato che cadono e rotolano, con il filo che si srotola dietro di loro, sistemati nel magazzino dove rendono il livello più vivo senza frustrare. Si vede un attimo prima da dove arrivano, per esempio un cono che traballa sullo scaffale.
 **STOP:** fine del livello 4.
+
+## Tappe del livello 5 (prato)
+
+Il pulcino esce all'aperto in un grande prato in una **giornata di sole** di primavera: fiori colorati, farfalle, cielo azzurro e colline lontane. È il primo luogo dello **stadio 3** di crescita (vedi la tabella «Crescita del pulcino»).
+
+Nel prato il pulcino impara la **planata**: mentre scende, tenendo premuto salto apre le ali e scende piano, planando lontano. Si usa lo stesso pulsante del salto. Le abilità imparate restano: si becca e si fa il doppio salto (si può fare il doppio salto e poi planare).
+
+La novità del prato sono i **soffioni e le correnti d'aria**:
+- **correnti d'aria:** colonne di vento con petali e semi che girano verso l'alto; se il pulcino ci plana dentro, lo sollevano, così arriva in posti alti;
+- **soffioni giganti:** beccandoli, i semi volano via e creano per qualche secondo una corrente d'aria in quel punto.
+
+Il nemico nuovo è l'**ape ronzante**: vola avanti e indietro tra i fiori seguendo il suo giro, con un ronzio buffo che si sente solo da vicino. Non insegue il pulcino: si passa sotto o sopra quando è lontana. Se tocca il pulcino, lui riparte dall'ultimo nido.
+
+### Tappa 19 — Il pulcino cresce ancora
+Lo stadio 3: piumette chiare sul dorso, giallo più caldo, corpo un po' più grande. Si vede dal prato in poi e sulla mappa quando il prato è raggiunto.
+Prima di disegnarlo mostrami un bozzetto accanto agli stadi 1 e 2.
+**STOP:** il nuovo aspetto mi piace.
+
+### Tappa 20 — La planata
+Tenendo premuto salto mentre scende, il pulcino apre le ali e plana.
+- L'animazione è buffa: ali spalancate che fremono, piumette che si arruffano, un «frrr» leggero.
+- Mentre plana scende piano e si controlla bene a destra e a sinistra; lasciando il tasto ricade normalmente.
+- Compare l'avviso «Nuova abilità!» con le istruzioni, come per la beccata e il doppio salto.
+- È disponibile solo dai livelli in cui il pulcino l'ha imparata. Si prova in una piccola area di prova.
+
+**STOP:** la planata è piacevole e si controlla bene, anche dal telefono.
+
+### Tappa 21 — Il prato
+Il livello del prato, con le correnti d'aria e i soffioni giganti.
+- Insegna la planata un passo alla volta: prima una discesa planando oltre un fosso, poi una corrente d'aria che porta in alto, poi un soffione da beccare per crearsi la corrente da soli.
+- Ci sono chicchi, nidi e un'uscita, e qualche ostacolo da beccare e da superare col doppio salto per non dimenticarli.
+- Prima di disegnarli mostrami i pezzi nuovi del prato.
+
+**STOP:** il livello si completa dall'inizio alla fine ed è divertente.
+
+### Tappa 22 — L'ape ronzante
+L'ape, con le sue animazioni esagerate e il suo ronzio, sistemata nel prato dove rende il livello più vivo senza frustrare. Il suo giro si vede bene e il ronzio avvisa quando è vicina. Se tocca il pulcino, lui riparte dall'ultimo nido.
+**STOP:** fine del livello 5.
