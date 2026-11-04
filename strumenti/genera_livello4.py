@@ -97,7 +97,7 @@ nidi = [(260, 640), (1350, 640), (2150, 640), (3600, 330), (4480, 640)]
 
 proprieta = {
     "numero": 4,
-    "frase_fine": '"Sei uscito dal magazzino filati!"',
+    "frase_fine": '"Sei uscito dal Maglificio Madrid!"',
     "beccata": "true",
     "doppio_salto": "true",
 }

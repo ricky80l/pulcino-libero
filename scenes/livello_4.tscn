@@ -22,7 +22,7 @@ extents = Vector2( 30, 30 )
 [node name="Livello4" type="Node2D"]
 script = ExtResource( 1 )
 numero = 4
-frase_fine = "Sei uscito dal magazzino filati!"
+frase_fine = "Sei uscito dal Maglificio Madrid!"
 beccata = true
 doppio_salto = true
 
