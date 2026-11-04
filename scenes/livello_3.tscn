@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scripts/pianta.gd" type="Script" id=14]
 [ext_resource path="res://scripts/talpa.gd" type="Script" id=15]
 [ext_resource path="res://scripts/atmosfera.gd" type="Script" id=16]
+[ext_resource path="res://scripts/uovo_oro.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -37,6 +38,13 @@ script = ExtResource( 2 )
 tipo = 26
 dimensioni = Vector2( 105, 180 )
 solido = false
+
+[node name="Cappello" type="StaticBody2D" parent="Orto"]
+position = Vector2( 85, 468 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 55, 10 )
+attraversabile_da_sotto = true
 
 [node name="Pomodori1" type="StaticBody2D" parent="Orto"]
 z_index = -6
@@ -260,6 +268,10 @@ script = ExtResource( 6 )
 [node name="Nido4" type="Area2D" parent="Nidi"]
 position = Vector2( 3650, 640 )
 script = ExtResource( 6 )
+
+[node name="UovoOro" type="Area2D" parent="."]
+position = Vector2( 112, 468 )
+script = ExtResource( 17 )
 
 [node name="Chicchi" type="Node2D" parent="."]
 

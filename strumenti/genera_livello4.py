@@ -40,6 +40,8 @@ pezzi = [
     ("Scaffale2", 1300, 370, 160, 270, SCF, DECORO),
     ("Ripiano2", 1305, 370, 150, 10, INV, {"attraversabile_da_sotto": "true"}),
 
+    # uovo d'oro segreto: passerella sotto il soffitto, sopra l'operatore della bagher (lancio + doppio salto)
+    ("Passerella", 930, 150, 140, 16, SOP, {"attraversabile_da_sotto": "true"}),
     # 4: soppalco azzurro, con i pilastri, uno scaffale sopra e il transpallet sotto
     ("Soppalco", 3500, 330, 900, 16, SOP, {"attraversabile_da_sotto": "true"}),
     ("Pilastro1", 3520, 346, 14, 294, PIL, DECORO),
@@ -104,4 +106,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello4", "Magazzino", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4975, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               operatori=operatori, coni=coni, atmosfera="magazzino")
+               operatori=operatori, coni=coni, atmosfera="magazzino", uovo=(1000, 150))

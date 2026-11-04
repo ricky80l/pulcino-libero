@@ -8,6 +8,8 @@ const FONT_TITOLO = preload("res://assets/font/fredoka_messaggio.tres")
 const FONT_CARTELLI = preload("res://assets/font/fredoka_piccolo.tres")
 const NEBBIA = preload("res://assets/grafica/mappa/nebbia.png")
 const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.png")
+const UOVO_ORO = preload("res://assets/grafica/oggetti/uovo_oro.png")
+const UOVO_VUOTO = preload("res://assets/grafica/oggetti/uovo_vuoto.png")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 
@@ -299,6 +301,18 @@ func _aggiorna_cartelli():
 			cartello.add_stylebox_override("normal", _tavola(Stile.CONTORNO, 3))
 		# ricalcola l'altezza: con due righe il cartello deve crescere
 		cartello.rect_size = Vector2(200, 0)
+		# l'uovo d'oro segreto del luogo, nell'angolo del cartello: vuoto finché non lo trovi
+		var uovo: TextureRect = cartello.get_node_or_null("Uovo")
+		if uovo == null:
+			uovo = TextureRect.new()
+			uovo.name = "Uovo"
+			uovo.expand = true
+			uovo.rect_size = Vector2(26, 33)
+			uovo.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			cartello.add_child(uovo)
+		uovo.texture = UOVO_ORO if Progressi.uovo_trovato_in(numero) else UOVO_VUOTO
+		uovo.rect_position = Vector2(cartello.rect_size.x - 16, -14)
+		uovo.visible = Progressi.costruito(numero)
 
 
 # ---------------- disegno del paesaggio ----------------

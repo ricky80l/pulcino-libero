@@ -35,6 +35,11 @@ pezzi += [
     ("Tettoia1", 2200, 440, 160, 32, TET, {"attraversabile_da_sotto": "true"}),
     ("Tettoia2", 2400, 330, 160, 32, TET, {"attraversabile_da_sotto": "true"}),
     ("Tettoia3", 2620, 230, 160, 32, TET, {"attraversabile_da_sotto": "true"}),
+    # uovo d'oro segreto: trave sopra i tetti del fienile, in una nicchia chiusa da un sacco da beccare
+    ("Trave", 2810, 100, 50, 16, LEG, {"attraversabile_da_sotto": "true"}),   # ci si atterra saltando dai tetti
+    ("TraveNicchia", 2860, 100, 130, 16, LEG, {}),   # sotto la nicchia è piena: non si entra da sotto
+    ("NicchiaTetto", 2860, -300, 130, 320, INV, {}),
+    ("NicchiaFondo", 2990, -300, 20, 416, INV, {}),
     # 3: varco in alto chiuso da un sacco: si becca saltando, poi si sale sul gradino
     ("Muro3Alto", 3100, 0, 60, 490, LEG, {}),
     ("Muro3Basso", 3100, 560, 60, 80, LEG, {}),
@@ -50,6 +55,7 @@ rompibili = [
     (1060, 640, VASO, 1), (1120, 640, VASO, 1), (1180, 640, VASO, 1),
     (1570, 640, BALLA, 2),
     (3130, 560, SACCO, 1),
+    (2900, 100, SACCO, 1),   # davanti all'uovo d'oro, sulla trave
 ]
 
 # oche arrabbiate: x di partenza, y a terra, quanto passeggiano verso destra
@@ -84,4 +90,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello2", "Cortile", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4220, 610), partenza=(200, 610), limite_destro=4400, proprieta_livello=proprieta,
-               oche=oche, atmosfera="cortile")
+               oche=oche, atmosfera="cortile", uovo=(2960, 100))

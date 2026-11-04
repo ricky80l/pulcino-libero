@@ -39,6 +39,8 @@ pezzi = [
     ("Cassetta7", 3350, 560, 80, 80, CAS, {}),
     ("Cassetta8", 3430, 560, 80, 80, CAS, {}),
     ("Cassetta9", 3430, 480, 80, 80, CAS, {}),
+    # uovo d'oro segreto: mensola alta sopra l'ultimo posatoio (un salto pieno e preciso)
+    ("Mensola", 2840, 120, 110, 16, LEG, {"attraversabile_da_sotto": "true"}),
     # rete esterna con la buca in basso
     ("ReteEsterna", 3700, 0, 30, 580, RET, {}),
 ]
@@ -62,4 +64,5 @@ nidi = [(1160, 640), (1560, 640), (2230, 640), (3270, 640)]
 topi = [(1680, 640, 240)]
 
 scrivi_livello(sys.argv[1], "Livello1", "Pollaio", pezzi, chicchi, nidi, topi,
-               uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, atmosfera="pollaio")
+               uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, atmosfera="pollaio",
+               uovo=(2895, 120))

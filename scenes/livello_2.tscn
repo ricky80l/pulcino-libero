@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
 [ext_resource path="res://scripts/oca.gd" type="Script" id=14]
 [ext_resource path="res://scripts/atmosfera.gd" type="Script" id=15]
+[ext_resource path="res://scripts/uovo_oro.gd" type="Script" id=16]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -222,6 +223,31 @@ tipo = 13
 dimensioni = Vector2( 160, 32 )
 attraversabile_da_sotto = true
 
+[node name="Trave" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2810, 100 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 50, 16 )
+attraversabile_da_sotto = true
+
+[node name="TraveNicchia" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2860, 100 )
+script = ExtResource( 2 )
+tipo = 1
+dimensioni = Vector2( 130, 16 )
+
+[node name="NicchiaTetto" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2860, -300 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 130, 320 )
+
+[node name="NicchiaFondo" type="StaticBody2D" parent="Cortile"]
+position = Vector2( 2990, -300 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 20, 416 )
+
 [node name="Muro3Alto" type="StaticBody2D" parent="Cortile"]
 position = Vector2( 3100, 0 )
 script = ExtResource( 2 )
@@ -292,6 +318,12 @@ script = ExtResource( 13 )
 tipo = 0
 resistenza = 1
 
+[node name="Rompibile7" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 2900, 100 )
+script = ExtResource( 13 )
+tipo = 0
+resistenza = 1
+
 [node name="Nidi" type="Node2D" parent="."]
 
 [node name="Nido1" type="Area2D" parent="Nidi"]
@@ -309,6 +341,10 @@ script = ExtResource( 6 )
 [node name="Nido4" type="Area2D" parent="Nidi"]
 position = Vector2( 3950, 640 )
 script = ExtResource( 6 )
+
+[node name="UovoOro" type="Area2D" parent="."]
+position = Vector2( 2960, 100 )
+script = ExtResource( 16 )
 
 [node name="Chicchi" type="Node2D" parent="."]
 

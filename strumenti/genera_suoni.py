@@ -106,4 +106,10 @@ salva("traballa", tic + tic + tic)
 salva("rotola", mescola(rumore(0.35, volume=0.22, morbidezza=0.92), tono(130, 90, 0.3, armonica=0.3, volume=0.25)))
 # "fffrrr" leggero quando il pulcino apre le ali e comincia a planare
 salva("plana", mescola(rumore(0.45, volume=0.3, morbidezza=0.9), tono(900, 1200, 0.12, vibrato_hz=25, vibrato_ampiezza=0.05, volume=0.18)))
+# "dlin-dlin-dlin!" scintillante dell'uovo d'oro trovato: arpeggio che sale con un luccichio
+arpeggio = []
+for nota in [1047, 1319, 1568, 2093]:
+    arpeggio += tono(nota, nota, 0.09, armonica=0.6, volume=0.35)
+salva("uovo", mescola(arpeggio + tono(2637, 2637, 0.35, vibrato_hz=12, vibrato_ampiezza=0.01, armonica=0.4, volume=0.3),
+                      silenzio(0.1) + rumore(0.3, volume=0.08, morbidezza=0.3)))
 print("suoni creati in", os.path.abspath(CARTELLA))

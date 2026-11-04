@@ -25,6 +25,17 @@ var ultimo_giocato := 1  # dove sta il pulcino sulla mappa
 var nebbia_vista := 1  # fin dove la mappa ha già mostrato la nebbia che si dirada
 var abilita_viste := []  # abilità di cui il giocatore ha già visto l'avviso "Nuova abilità!"
 var dipinto := false  # true = modalità dipinta accesa (vedi Pittura)
+var uova := []  # numeri dei luoghi dove l'uovo d'oro segreto è stato trovato
+
+
+func uovo_trovato_in(numero: int) -> bool:
+	return uova.has(numero)
+
+
+func segna_uovo(numero: int):
+	if not uova.has(numero):
+		uova.append(numero)
+		salva()
 
 
 func abilita_vista(nome: String) -> bool:
@@ -102,7 +113,7 @@ func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
-				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto}))
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova}))
 		f.close()
 
 
@@ -119,3 +130,6 @@ func carica():
 		nebbia_vista = int(dati.get("nebbia_vista", 1))
 		abilita_viste = dati.get("abilita_viste", [])
 		dipinto = bool(dati.get("dipinto", false))
+		uova = []
+		for n in dati.get("uova", []):
+			uova.append(int(n))  # nel file i numeri tornano decimali

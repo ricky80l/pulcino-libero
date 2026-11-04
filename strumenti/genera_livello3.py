@@ -11,6 +11,8 @@ pezzi = [
     # sfondo e decorazioni
     # il paesaggio lontano (cielo, colline con i campi, siepi) è a strati: vedi atmosfera="orto" qui sotto
     ("Spaventapasseri", 60, 460, 105, 180, SPA, NON_SOLIDO),
+    # uovo d'oro segreto: sul cappello dello spaventapasseri, alle spalle della partenza (doppio salto)
+    ("Cappello", 85, 468, 55, 10, INV, {"attraversabile_da_sotto": "true"}),
     ("Pomodori1", 400, 505, 65, 135, POM, NON_SOLIDO),
     ("Pomodori2", 470, 505, 65, 135, POM, NON_SOLIDO),
     ("Pomodori3", 4120, 505, 65, 135, POM, NON_SOLIDO),
@@ -92,4 +94,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello3", "Orto", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4380, 610), partenza=(200, 610), limite_destro=4600, proprieta_livello=proprieta,
-               piante=piante, talpe=talpe, atmosfera="orto")
+               piante=piante, talpe=talpe, atmosfera="orto", uovo=(112, 468))

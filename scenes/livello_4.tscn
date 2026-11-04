@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://scripts/operatore.gd" type="Script" id=14]
 [ext_resource path="res://scripts/coni.gd" type="Script" id=15]
 [ext_resource path="res://scripts/atmosfera.gd" type="Script" id=16]
+[ext_resource path="res://scripts/uovo_oro.gd" type="Script" id=17]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -187,6 +188,13 @@ tipo = 21
 dimensioni = Vector2( 150, 10 )
 attraversabile_da_sotto = true
 
+[node name="Passerella" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 930, 150 )
+script = ExtResource( 2 )
+tipo = 33
+dimensioni = Vector2( 140, 16 )
+attraversabile_da_sotto = true
+
 [node name="Soppalco" type="StaticBody2D" parent="Magazzino"]
 position = Vector2( 3500, 330 )
 script = ExtResource( 2 )
@@ -350,6 +358,10 @@ script = ExtResource( 6 )
 [node name="Nido5" type="Area2D" parent="Nidi"]
 position = Vector2( 4480, 640 )
 script = ExtResource( 6 )
+
+[node name="UovoOro" type="Area2D" parent="."]
+position = Vector2( 1000, 150 )
+script = ExtResource( 17 )
 
 [node name="Chicchi" type="Node2D" parent="."]
 

@@ -77,12 +77,13 @@ valign = 1
 
 def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=(), topi=(), rompibili=(),
                    uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None, oche=(),
-                   piante=(), talpe=(), operatori=(), coni=(), atmosfera=None):
+                   piante=(), talpe=(), operatori=(), coni=(), atmosfera=None, uovo=None):
     """pezzi: (nome, x, y, larghezza, altezza, tipo, extra); rompibili: (x, y, tipo, resistenza);
     oche: (x, y, distanza); piante: (x, y, tipo) con x, y = base a terra;
     operatori: (x, y, chi, verso, potenza) con x, y = tra i piedi, a terra;
     coni: (x, y, verso) con x, y = base del cono in piedi sul ripiano da cui cadono;
     atmosfera: tipo di paesaggio a strati e luce (vedi scripts/atmosfera.gd), per esempio "cortile";
+    uovo: (x, y) base dell'uovo d'oro segreto del luogo;
     proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
     risorse = [
         ("res://scripts/livello.gd", "Script"),
@@ -112,6 +113,8 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         risorse.append(("res://scripts/coni.gd", "Script"))
     if atmosfera:
         risorse.append(("res://scripts/atmosfera.gd", "Script"))
+    if uovo:
+        risorse.append(("res://scripts/uovo_oro.gd", "Script"))
     id_di = {path: i for i, (path, _t) in enumerate(risorse, 1)}
 
     out = [f"[gd_scene load_steps={len(risorse) + 2} format=2]\n"]
@@ -161,6 +164,10 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     out.append('[node name="Nidi" type="Node2D" parent="."]\n')
     for i, (x, y) in enumerate(nidi, 1):
         out.append(f'[node name="Nido{i}" type="Area2D" parent="Nidi"]\nposition = Vector2( {x}, {y} )\nscript = ExtResource( 6 )\n')
+
+    if uovo:
+        out.append(f'[node name="UovoOro" type="Area2D" parent="."]\nposition = Vector2( {uovo[0]}, {uovo[1]} )\n'
+                   f'script = ExtResource( {id_di["res://scripts/uovo_oro.gd"]} )\n')
 
     out.append('[node name="Chicchi" type="Node2D" parent="."]\n')
     for i, (x, y) in enumerate(chicchi, 1):

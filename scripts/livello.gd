@@ -14,6 +14,7 @@ var completato := false
 var chicchi_presi := 0
 var chicchi_totali := 0
 var nido_attivo = null
+var uovo := false  # l'uovo d'oro segreto preso in questa partita
 
 onready var player := $Player
 onready var messaggio := $Interfaccia/Messaggio
@@ -39,6 +40,12 @@ func _ready():
 		annuncio.set_script(preload("res://scripts/annuncio.gd"))
 		add_child(annuncio)
 		annuncio.mostra(abilita_nuova, salva_progressi)
+
+
+func uovo_preso():
+	uovo = true
+	if salva_progressi:
+		Progressi.segna_uovo(numero)
 
 
 func chicco_raccolto():

@@ -18,6 +18,7 @@ const ELENCO := {
 	"traballa": preload("res://assets/suoni/traballa.wav"),
 	"rotola": preload("res://assets/suoni/rotola.wav"),
 	"plana": preload("res://assets/suoni/plana.wav"),
+	"uovo": preload("res://assets/suoni/uovo.wav"),
 	"bu": preload("res://assets/suoni/bu.wav"),
 	"scava": preload("res://assets/suoni/scava.wav"),
 }
