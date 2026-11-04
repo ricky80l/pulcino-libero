@@ -317,8 +317,10 @@
 			}
 
 			// Sul telefono: al primo tocco il gioco va a schermo intero e in orizzontale
-			// (i browser lo permettono solo dopo un tocco; se si esce, torna al tocco successivo)
+			// (i browser lo permettono solo dopo un tocco). Si chiede UNA volta sola: richiederlo
+			// di nuovo farebbe ricomparire ogni volta l'avviso del browser «per uscire dallo schermo intero...»
 			function schermoIntero() {
+				document.removeEventListener('touchend', schermoIntero);
 				var el = document.documentElement;
 				var richiesta = el.requestFullscreen || el.webkitRequestFullscreen;
 				if (!richiesta || document.fullscreenElement || document.webkitFullscreenElement) {
