@@ -26,6 +26,7 @@ var nebbia_vista := 1  # fin dove la mappa ha già mostrato la nebbia che si dir
 var abilita_viste := []  # abilità di cui il giocatore ha già visto l'avviso "Nuova abilità!"
 var dipinto := false  # true = modalità dipinta accesa (vedi Pittura)
 var uova := []  # numeri dei luoghi dove l'uovo d'oro segreto è stato trovato
+var stelle := {}  # numero livello (come testo) -> [tutti i chicchi, uovo d'oro, mai preso]: le migliori ottenute
 
 
 func uovo_trovato_in(numero: int) -> bool:
@@ -52,8 +53,10 @@ func _ready():
 	carica()
 
 
-func livello_finito(numero: int, presi: int, totale: int):
+func livello_finito(numero: int, presi: int, totale: int, nuove_stelle := [false, false, false]):
 	var chiave := str(numero)
+	var vecchie: Array = stelle.get(chiave, [false, false, false])
+	stelle[chiave] = [bool(vecchie[0]) or nuove_stelle[0], bool(vecchie[1]) or nuove_stelle[1], bool(vecchie[2]) or nuove_stelle[2]]
 	if not record.has(chiave) or presi > record[chiave]["presi"]:
 		record[chiave] = {"presi": presi, "totale": totale}
 	sbloccato = int(max(sbloccato, min(numero + 1, LIVELLI.size())))
@@ -113,7 +116,7 @@ func salva():
 	var f := File.new()
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
-				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova}))
+				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova, "stelle": stelle}))
 		f.close()
 
 
@@ -130,6 +133,7 @@ func carica():
 		nebbia_vista = int(dati.get("nebbia_vista", 1))
 		abilita_viste = dati.get("abilita_viste", [])
 		dipinto = bool(dati.get("dipinto", false))
+		stelle = dati.get("stelle", {})
 		uova = []
 		for n in dati.get("uova", []):
 			uova.append(int(n))  # nel file i numeri tornano decimali

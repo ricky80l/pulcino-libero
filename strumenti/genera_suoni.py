@@ -112,4 +112,6 @@ for nota in [1047, 1319, 1568, 2093]:
     arpeggio += tono(nota, nota, 0.09, armonica=0.6, volume=0.35)
 salva("uovo", mescola(arpeggio + tono(2637, 2637, 0.35, vibrato_hz=12, vibrato_ampiezza=0.01, armonica=0.4, volume=0.3),
                       silenzio(0.1) + rumore(0.3, volume=0.08, morbidezza=0.3)))
+# "ting!" di una stellina guadagnata a fine livello (nel gioco sale di tono da una stella all'altra)
+salva("stella", mescola(tono(1568, 1568, 0.25, armonica=0.5, volume=0.4), tono(2349, 2349, 0.3, vibrato_hz=10, vibrato_ampiezza=0.01, volume=0.2)))
 print("suoni creati in", os.path.abspath(CARTELLA))

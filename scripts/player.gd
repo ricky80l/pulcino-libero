@@ -55,6 +55,7 @@ var colpiti := []  # ostacoli già colpiti in questa beccata
 var doppio_usato := false  # il secondo salto si può fare una sola volta prima di toccare terra
 var tenuto := false  # in mano a un operatore del magazzino, che sta per lanciarlo
 var planando := false  # sta scendendo ad ali aperte
+var volte_colpito := 0  # quante volte un nemico l'ha preso in questa partita (per la stellina "mai preso")
 var timer_lancio := 0.0  # dopo un lancio vola senza frenare finché non tocca terra
 
 # --- Planata ---
@@ -79,6 +80,7 @@ func colpito(da_x := 0.0) -> bool:
 	if timer_invulnerabile > 0 or timer_sbalzo > 0 or tenuto:
 		return false
 	timer_sbalzo = durata_sbalzo
+	volte_colpito += 1
 	var lato := 1.0 if position.x >= da_x else -1.0
 	velocita = Vector2(lato * 260, -560)
 	Suoni.suona("colpito")

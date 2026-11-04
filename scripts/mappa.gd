@@ -10,6 +10,8 @@ const NEBBIA = preload("res://assets/grafica/mappa/nebbia.png")
 const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.png")
 const UOVO_ORO = preload("res://assets/grafica/oggetti/uovo_oro.png")
 const UOVO_VUOTO = preload("res://assets/grafica/oggetti/uovo_vuoto.png")
+const STELLA = preload("res://assets/grafica/oggetti/stella.png")
+const STELLA_VUOTA = preload("res://assets/grafica/oggetti/stella_vuota.png")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 
@@ -313,6 +315,25 @@ func _aggiorna_cartelli():
 		uovo.texture = UOVO_ORO if Progressi.uovo_trovato_in(numero) else UOVO_VUOTO
 		uovo.rect_position = Vector2(cartello.rect_size.x - 16, -14)
 		uovo.visible = Progressi.costruito(numero)
+		# le tre stelline migliori, appese sotto il cartello dei luoghi finiti
+		var fila: HBoxContainer = cartello.get_node_or_null("Stelle")
+		if fila == null:
+			fila = HBoxContainer.new()
+			fila.name = "Stelle"
+			fila.add_constant_override("separation", 2)
+			fila.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			for _k in range(3):
+				var s := TextureRect.new()
+				s.expand = true
+				s.rect_min_size = Vector2(22, 22)
+				s.mouse_filter = Control.MOUSE_FILTER_IGNORE
+				fila.add_child(s)
+			cartello.add_child(fila)
+		var prese: Array = Progressi.stelle.get(str(numero), [false, false, false])
+		for k in range(3):
+			fila.get_child(k).texture = STELLA if prese[k] else STELLA_VUOTA
+		fila.rect_position = Vector2(cartello.rect_size.x / 2 - 35, cartello.rect_size.y - 8)
+		fila.visible = Progressi.finito(numero)
 
 
 # ---------------- disegno del paesaggio ----------------

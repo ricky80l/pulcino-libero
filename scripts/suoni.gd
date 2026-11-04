@@ -19,6 +19,7 @@ const ELENCO := {
 	"rotola": preload("res://assets/suoni/rotola.wav"),
 	"plana": preload("res://assets/suoni/plana.wav"),
 	"uovo": preload("res://assets/suoni/uovo.wav"),
+	"stella": preload("res://assets/suoni/stella.wav"),
 	"bu": preload("res://assets/suoni/bu.wav"),
 	"scava": preload("res://assets/suoni/scava.wav"),
 }
@@ -35,11 +36,11 @@ func _ready():
 
 
 # variazione: cambia un po' l'intonazione ogni volta, così non suona sempre uguale
-func suona(nome: String, variazione := 0.08, volume_db := 0.0):
+func suona(nome: String, variazione := 0.08, volume_db := 0.0, tono := 1.0):
 	for lettore in lettori:
 		if not lettore.playing:
 			lettore.stream = ELENCO[nome]
-			lettore.pitch_scale = 1.0 + rand_range(-variazione, variazione)
+			lettore.pitch_scale = tono * (1.0 + rand_range(-variazione, variazione))
 			lettore.volume_db = volume_db
 			lettore.play()
 			return

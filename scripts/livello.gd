@@ -76,14 +76,58 @@ func _on_uscita_body_entered(corpo):
 	if corpo == player and not completato:
 		completato = true
 		player.set_physics_process(false)
+		# le tre stelline: tutti i chicchi, l'uovo d'oro, mai preso dai nemici
+		var stelle := [chicchi_presi == chicchi_totali, uovo, player.volte_colpito == 0]
 		if salva_progressi:
-			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali)
-		var testo := "%s\n\nChicchi: %d / %d\n\n" % [frase_fine, chicchi_presi, chicchi_totali]
+			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali, stelle)
+		_mostra_stelle(stelle)
+		var testo := "\n\n%s\n\nChicchi: %d / %d\n\n" % [frase_fine, chicchi_presi, chicchi_totali]
 		if salva_progressi and not Progressi.costruito(numero + 1):
 			testo += "Per ora il viaggio si ferma qui:\nnuovi luoghi in arrivo!\n\n"
 		testo_fine.text = testo + "Premi salto per tornare alla mappa"
 		messaggio.visible = true
 		Suoni.suona("fine", 0.0)
+
+
+# Le tre stelline in cima al messaggio di fine: compaiono una alla volta, con un "ting!" sempre più acuto
+const STELLA = preload("res://assets/grafica/oggetti/stella.png")
+const STELLA_VUOTA = preload("res://assets/grafica/oggetti/stella_vuota.png")
+const FONT_STELLE = preload("res://assets/font/fredoka_piccolo.tres")
+const NOMI_STELLE := ["Tutti i chicchi", "Uovo d'oro", "Mai preso"]
+
+
+func _mostra_stelle(stelle: Array):
+	var tween := Tween.new()
+	messaggio.add_child(tween)
+	for i in range(3):
+		var stella := TextureRect.new()
+		stella.texture = STELLA if stelle[i] else STELLA_VUOTA
+		stella.expand = true
+		stella.rect_size = Vector2(96, 96)
+		stella.rect_pivot_offset = Vector2(48, 48)
+		stella.rect_position = Vector2(640 - 48 + (i - 1) * 190, 40)
+		stella.rect_scale = Vector2.ZERO
+		stella.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		messaggio.add_child(stella)
+		var nome := Label.new()
+		nome.text = NOMI_STELLE[i]
+		nome.add_font_override("font", FONT_STELLE)
+		nome.add_color_override("font_color", Color(1, 0.96, 0.86) if stelle[i] else Color(1, 0.96, 0.86, 0.5))
+		nome.align = Label.ALIGN_CENTER
+		nome.rect_size = Vector2(190, 30)
+		nome.rect_position = Vector2(640 - 95 + (i - 1) * 190, 138)
+		nome.modulate.a = 0.0
+		messaggio.add_child(nome)
+		var ritardo: float = 0.5 + i * 0.45
+		tween.interpolate_property(stella, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.4, Tween.TRANS_BACK, Tween.EASE_OUT, ritardo)
+		tween.interpolate_property(nome, "modulate:a", 0.0, 1.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, ritardo + 0.1)
+		if stelle[i]:
+			tween.interpolate_callback(self, ritardo, "_suona_stella", i)
+	tween.start()
+
+
+func _suona_stella(i: int):
+	Suoni.suona("stella", 0.0, -2.0, 1.0 + i * 0.12)
 
 
 func _process(_delta):
