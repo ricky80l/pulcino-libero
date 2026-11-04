@@ -7,8 +7,8 @@ const Parti = preload("res://scripts/parti.gd")
 const Effetti = preload("res://scripts/effetti.gd")
 const Stile = preload("res://scripts/stile.gd")
 const FONT = preload("res://assets/font/fredoka_piccolo.tres")
-const CORPO = preload("res://assets/grafica/operatori/corpo.svg")
-const GAMBA = preload("res://assets/grafica/operatori/gamba.svg")
+const CORPO = preload("res://assets/grafica/operatori/corpo.png")
+const GAMBA = preload("res://assets/grafica/operatori/gamba.png")
 
 enum Chi { MORO, BIONDO, INDIANO, MAROCCHINO }
 enum Stato { PRONTO, CARICA, LANCIO, ESULTA }
@@ -82,7 +82,7 @@ func _ready():
 	rng.randomize()
 	prossimo_gesto = rng.randf_range(0.3, 1.5)
 	var nome: String = NOMI[chi]
-	var immagine_braccio: Texture = load("res://assets/grafica/operatori/braccio_%s.svg" % nome)
+	var immagine_braccio: Texture = load("res://assets/grafica/operatori/braccio_%s.png" % nome)
 	add_child(figura)
 	figura.scale.x = verso
 	gamba_sx = Parti.crea(figura, GAMBA, Vector2(22, 6), Vector2(-10, -60))
@@ -90,7 +90,7 @@ func _ready():
 	busto.position = Vector2(0, -55)  # il busto ruota sui fianchi
 	figura.add_child(busto)
 	Parti.crea(busto, CORPO, Vector2(75, 176), Vector2(0, 27))
-	testa = Parti.crea(busto, load("res://assets/grafica/operatori/testa_%s.svg" % nome), Vector2(56, 116), Vector2(0, -58))
+	testa = Parti.crea(busto, load("res://assets/grafica/operatori/testa_%s.png" % nome), Vector2(56, 116), Vector2(0, -58))
 	braccio_sx = Parti.crea(busto, immagine_braccio, Vector2(20, 12), Vector2(-30, -55))
 	braccio_dx = Parti.crea(busto, immagine_braccio, Vector2(20, 12), Vector2(30, -55))
 	_crea_fumetto()

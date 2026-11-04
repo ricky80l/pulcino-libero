@@ -45,6 +45,8 @@ Nomi di file e cartelle in minuscolo con trattini bassi. Commenti nel codice in 
 ## Scelte già fatte (non cambiarle senza chiedermelo)
 
 - **Grafica:** stile cartoon vettoriale. Immagini SVG in `assets/grafica/`, disegnate al doppio della grandezza; i personaggi sono a pezzi animati da codice. I pezzi lunghi del livello (pavimenti, pareti) si disegnano da codice nello stesso stile.
+- **Stile finale (scelto da Riccardo):** i disegni SVG sono le sorgenti; il gioco usa le immagini PNG accanto, create da `strumenti/stile_finale.py` (da rilanciare dopo ogni disegno nuovo o cambiato). Lo strumento raffina (contorni più sottili e del colore dell'oggetto, colori un po' più morbidi) e dipinge ombre e luci: dall'alto per i personaggi (così restano giuste quando si voltano), da in alto a sinistra per gli oggetti fermi. Gli SVG non vengono esportati.
+- **Profondità e luce:** paesaggio a strati che scorrono a velocità diverse (parallasse), raggi di sole o fasci di luce, pollini o polvere nell'aria, ombre a terra sotto i personaggi e luce calda ai bordi (`scripts/atmosfera.gd`); sulla mappa, ombre delle nuvole e degli alberi.
 - **Inquadratura:** telecamera con zoom 0.7, perché il pulcino si veda bene sul telefono.
 - **Animazioni e suoni:** schiaccia-e-allunga, polvere, versi buffi. I suoni sono segnaposto sintetici creati da `strumenti/genera_suoni.py`.
 - **Testi:** font Fredoka (licenza OFL, in `assets/font/`).

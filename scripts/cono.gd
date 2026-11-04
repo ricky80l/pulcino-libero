@@ -5,7 +5,7 @@ extends KinematicBody2D
 
 const Parti = preload("res://scripts/parti.gd")
 const Effetti = preload("res://scripts/effetti.gd")
-const CONO_ROTOLA = preload("res://assets/grafica/magazzino/cono_rotola.svg")
+const CONO_ROTOLA = preload("res://assets/grafica/magazzino/cono_rotola.png")
 const RAGGIO := 15.0
 
 var verso := 1.0  # da che parte rotola

@@ -6,8 +6,8 @@ extends Node2D
 const Stile = preload("res://scripts/stile.gd")
 const FONT_TITOLO = preload("res://assets/font/fredoka_messaggio.tres")
 const FONT_CARTELLI = preload("res://assets/font/fredoka_piccolo.tres")
-const NEBBIA = preload("res://assets/grafica/mappa/nebbia.svg")
-const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.svg")
+const NEBBIA = preload("res://assets/grafica/mappa/nebbia.png")
+const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.png")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 
@@ -153,7 +153,7 @@ func _piu_in_alto(a, b):
 func _crea_luogo(numero: int):
 	var base: Vector2 = POSIZIONI[numero - 1]
 	var disegno := Sprite.new()
-	disegno.texture = load("res://assets/grafica/mappa/%s.svg" % DISEGNI[numero - 1])
+	disegno.texture = load("res://assets/grafica/mappa/%s.png" % DISEGNI[numero - 1])
 	disegno.centered = false
 	disegno.offset = Vector2(-120, -190)
 	disegno.scale = Vector2(0.5, 0.5)

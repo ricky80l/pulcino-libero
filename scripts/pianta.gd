@@ -9,8 +9,8 @@ const Effetti = preload("res://scripts/effetti.gd")
 enum Tipo { GIRASOLE, MAIS }
 
 const IMMAGINI := {
-	Tipo.GIRASOLE: preload("res://assets/grafica/orto/girasole.svg"),
-	Tipo.MAIS: preload("res://assets/grafica/orto/mais.svg"),
+	Tipo.GIRASOLE: preload("res://assets/grafica/orto/girasole.png"),
+	Tipo.MAIS: preload("res://assets/grafica/orto/mais.png"),
 }
 
 export(Tipo) var tipo := Tipo.GIRASOLE  # che pianta è

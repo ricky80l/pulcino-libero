@@ -6,15 +6,15 @@ extends KinematicBody2D
 
 const Parti = preload("res://scripts/parti.gd")
 const Effetti = preload("res://scripts/effetti.gd")
-const CORPO = preload("res://assets/grafica/oca/corpo.svg")
-const ALA = preload("res://assets/grafica/oca/ala.svg")
-const COLLO = preload("res://assets/grafica/oca/collo.svg")
-const BECCO = preload("res://assets/grafica/oca/becco.svg")
-const BECCO_APERTO = preload("res://assets/grafica/oca/becco_aperto.svg")
-const OCCHIO = preload("res://assets/grafica/oca/occhio.svg")
-const OCCHIO_ARRABBIATO = preload("res://assets/grafica/oca/occhio_arrabbiato.svg")
-const OCCHIO_STORDITO = preload("res://assets/grafica/oca/occhio_stordito.svg")
-const ZAMPA = preload("res://assets/grafica/oca/zampa.svg")
+const CORPO = preload("res://assets/grafica/oca/corpo.png")
+const ALA = preload("res://assets/grafica/oca/ala.png")
+const COLLO = preload("res://assets/grafica/oca/collo.png")
+const BECCO = preload("res://assets/grafica/oca/becco.png")
+const BECCO_APERTO = preload("res://assets/grafica/oca/becco_aperto.png")
+const OCCHIO = preload("res://assets/grafica/oca/occhio.png")
+const OCCHIO_ARRABBIATO = preload("res://assets/grafica/oca/occhio_arrabbiato.png")
+const OCCHIO_STORDITO = preload("res://assets/grafica/oca/occhio_stordito.png")
+const ZAMPA = preload("res://assets/grafica/oca/zampa.png")
 
 enum Stato { PASSEGGIA, ALLARME, CARICA, FRENATA, STORDITA }
 

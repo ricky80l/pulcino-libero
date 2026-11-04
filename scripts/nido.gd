@@ -3,9 +3,9 @@ extends Area2D
 # La posizione è il centro del nido, appoggiato a terra.
 
 const Parti = preload("res://scripts/parti.gd")
-const NIDO = preload("res://assets/grafica/oggetti/nido.svg")
-const NIDO_ACCESO = preload("res://assets/grafica/oggetti/nido_acceso.svg")
-const BAGLIORE = preload("res://assets/grafica/oggetti/bagliore.svg")
+const NIDO = preload("res://assets/grafica/oggetti/nido.png")
+const NIDO_ACCESO = preload("res://assets/grafica/oggetti/nido_acceso.png")
+const BAGLIORE = preload("res://assets/grafica/oggetti/bagliore.png")
 
 var acceso := false
 var tempo := 0.0

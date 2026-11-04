@@ -4,40 +4,40 @@ extends Node2D
 # Il pulcino cresce a stadi lungo il viaggio (vedi CLAUDE.md, "Crescita del pulcino").
 
 const Parti = preload("res://scripts/parti.gd")
-const CORPO = preload("res://assets/grafica/pulcino/corpo.svg")
-const OCCHIO = preload("res://assets/grafica/pulcino/occhio.svg")
-const OCCHIO_CHIUSO = preload("res://assets/grafica/pulcino/occhio_chiuso.svg")
-const OCCHIO_X = preload("res://assets/grafica/pulcino/occhio_x.svg")
-const BECCO = preload("res://assets/grafica/pulcino/becco.svg")
-const BECCO_APERTO = preload("res://assets/grafica/pulcino/becco_aperto.svg")
+const CORPO = preload("res://assets/grafica/pulcino/corpo.png")
+const OCCHIO = preload("res://assets/grafica/pulcino/occhio.png")
+const OCCHIO_CHIUSO = preload("res://assets/grafica/pulcino/occhio_chiuso.png")
+const OCCHIO_X = preload("res://assets/grafica/pulcino/occhio_x.png")
+const BECCO = preload("res://assets/grafica/pulcino/becco.png")
+const BECCO_APERTO = preload("res://assets/grafica/pulcino/becco_aperto.png")
 
 # Pezzi di ogni stadio: immagine e perno. "alzata" = quanto si alza il corpo sulle zampe più lunghe;
 # "grandezza" = quanto si allargano i punti dove stanno i pezzi, attorno ai piedi (lo stadio 3 è un po' più grande).
 const STADI := {
 	1: {
 		"corpo": [CORPO, Vector2(50, 50)],
-		"zampa": [preload("res://assets/grafica/pulcino/zampa.svg"), Vector2(12, 2)],
-		"ciuffo": [preload("res://assets/grafica/pulcino/ciuffo.svg"), Vector2(20, 32)],
-		"ala": [preload("res://assets/grafica/pulcino/ala.svg"), Vector2(38, 12)],
+		"zampa": [preload("res://assets/grafica/pulcino/zampa.png"), Vector2(12, 2)],
+		"ciuffo": [preload("res://assets/grafica/pulcino/ciuffo.png"), Vector2(20, 32)],
+		"ala": [preload("res://assets/grafica/pulcino/ala.png"), Vector2(38, 12)],
 		"coda": null,
 		"alzata": 0.0,
 		"grandezza": 1.0,
 	},
 	2: {
 		"corpo": [CORPO, Vector2(50, 50)],
-		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.svg"), Vector2(12, 2)],
-		"ciuffo": [preload("res://assets/grafica/pulcino/stadio2/ciuffo.svg"), Vector2(22, 41)],
-		"ala": [preload("res://assets/grafica/pulcino/stadio2/ala.svg"), Vector2(46, 16)],
-		"coda": [preload("res://assets/grafica/pulcino/stadio2/coda.svg"), Vector2(30, 28)],
+		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.png"), Vector2(12, 2)],
+		"ciuffo": [preload("res://assets/grafica/pulcino/stadio2/ciuffo.png"), Vector2(22, 41)],
+		"ala": [preload("res://assets/grafica/pulcino/stadio2/ala.png"), Vector2(46, 16)],
+		"coda": [preload("res://assets/grafica/pulcino/stadio2/coda.png"), Vector2(30, 28)],
 		"alzata": 4.0,
 		"grandezza": 1.0,
 	},
 	3: {
-		"corpo": [preload("res://assets/grafica/pulcino/stadio3/corpo.svg"), Vector2(55, 55)],
-		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.svg"), Vector2(12, 2)],
-		"ciuffo": [preload("res://assets/grafica/pulcino/stadio3/ciuffo.svg"), Vector2(22, 41)],
-		"ala": [preload("res://assets/grafica/pulcino/stadio3/ala.svg"), Vector2(50, 16)],
-		"coda": [preload("res://assets/grafica/pulcino/stadio3/coda.svg"), Vector2(32, 30)],
+		"corpo": [preload("res://assets/grafica/pulcino/stadio3/corpo.png"), Vector2(55, 55)],
+		"zampa": [preload("res://assets/grafica/pulcino/stadio2/zampa.png"), Vector2(12, 2)],
+		"ciuffo": [preload("res://assets/grafica/pulcino/stadio3/ciuffo.png"), Vector2(22, 41)],
+		"ala": [preload("res://assets/grafica/pulcino/stadio3/ala.png"), Vector2(50, 16)],
+		"coda": [preload("res://assets/grafica/pulcino/stadio3/coda.png"), Vector2(32, 30)],
 		"alzata": 4.0,
 		"grandezza": 1.1,
 	},

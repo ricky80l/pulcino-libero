@@ -9,11 +9,11 @@ const PEZZI = preload("res://scripts/pezzi.gd")
 enum Tipo { SACCO, BALLA, VASO, ZUCCA, SCATOLA }
 
 const IMMAGINI := {
-	Tipo.SACCO: preload("res://assets/grafica/ostacoli/sacco.svg"),
-	Tipo.BALLA: preload("res://assets/grafica/ostacoli/balla.svg"),
-	Tipo.VASO: preload("res://assets/grafica/cortile/vaso.svg"),
-	Tipo.ZUCCA: preload("res://assets/grafica/orto/zucca.svg"),
-	Tipo.SCATOLA: preload("res://assets/grafica/magazzino/scatola_rompibile.svg"),
+	Tipo.SACCO: preload("res://assets/grafica/ostacoli/sacco.png"),
+	Tipo.BALLA: preload("res://assets/grafica/ostacoli/balla.png"),
+	Tipo.VASO: preload("res://assets/grafica/cortile/vaso.png"),
+	Tipo.ZUCCA: preload("res://assets/grafica/orto/zucca.png"),
+	Tipo.SCATOLA: preload("res://assets/grafica/magazzino/scatola_rompibile.png"),
 }
 const MISURE := {Tipo.SACCO: Vector2(60, 70), Tipo.BALLA: Vector2(90, 60), Tipo.VASO: Vector2(55, 62), Tipo.ZUCCA: Vector2(70, 56),
 		Tipo.SCATOLA: Vector2(55, 45)}

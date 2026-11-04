@@ -32,7 +32,7 @@ func _cerca(cartella: String):
 			# nel gioco esportato i file compaiono come "nome.png.import"
 			var nome := f.trim_suffix(".import")
 			if nome.ends_with(".png"):
-				var cartoon := (cartella + "/" + nome).replace(CARTELLA + "grafica/", "res://assets/grafica/").replace(".png", ".svg")
+				var cartoon := (cartella + "/" + nome).replace(CARTELLA + "grafica/", "res://assets/grafica/")
 				if ResourceLoader.exists(cartoon):
 					coppie[cartoon] = cartella + "/" + nome
 		f = dir.get_next()

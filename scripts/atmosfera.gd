@@ -7,7 +7,7 @@ extends Node
 # Dappertutto: ombre morbide a terra sotto i personaggi e una luce calda ai bordi dello schermo.
 
 const STRATO = preload("res://scripts/strato.gd")
-const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.svg")
+const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.png")
 
 export var tipo := "cortile"  # "cortile", "orto", "pollaio" o "magazzino"
 

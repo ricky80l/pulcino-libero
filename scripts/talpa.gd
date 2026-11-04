@@ -6,9 +6,9 @@ extends Area2D
 
 const Parti = preload("res://scripts/parti.gd")
 const Effetti = preload("res://scripts/effetti.gd")
-const TALPA = preload("res://assets/grafica/talpa/talpa.svg")
-const TALPA_BU = preload("res://assets/grafica/talpa/talpa_bu.svg")
-const ZAMPA = preload("res://assets/grafica/talpa/zampa.svg")
+const TALPA = preload("res://assets/grafica/talpa/talpa.png")
+const TALPA_BU = preload("res://assets/grafica/talpa/talpa_bu.png")
+const ZAMPA = preload("res://assets/grafica/talpa/zampa.png")
 
 enum Stato { SOTTO, AVVISO, SU, GIU }
 

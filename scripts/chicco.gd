@@ -3,7 +3,7 @@ extends Area2D
 
 const Effetti = preload("res://scripts/effetti.gd")
 const Parti = preload("res://scripts/parti.gd")
-const IMMAGINE = preload("res://assets/grafica/oggetti/chicco.svg")
+const IMMAGINE = preload("res://assets/grafica/oggetti/chicco.png")
 
 export var ampiezza_ondeggio := 4.0  # quanto sale e scende (pixel)
 

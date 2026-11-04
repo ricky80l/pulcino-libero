@@ -5,7 +5,7 @@ extends Node2D
 # La posizione è la base del cono in piedi, sul ripiano.
 
 const Parti = preload("res://scripts/parti.gd")
-const CONO_IN_PIEDI = preload("res://assets/grafica/magazzino/cono_in_piedi.svg")
+const CONO_IN_PIEDI = preload("res://assets/grafica/magazzino/cono_in_piedi.png")
 const CONO = preload("res://scripts/cono.gd")
 const COLORI := [Color("f4a7b9"), Color("f2f0ea"), Color("5a5a62"), Color("6bbf8a"), Color("d9c29a"),
 		Color("e0584a"), Color("8fb8e8"), Color("f2c14e")]

@@ -25,14 +25,14 @@ var tempo := 0.0
 var pulcino = null
 
 const Parti = preload("res://scripts/parti.gd")
-const CORPO = preload("res://assets/grafica/topo/corpo.svg")
-const ORECCHIO = preload("res://assets/grafica/topo/orecchio.svg")
-const CODA = preload("res://assets/grafica/topo/coda.svg")
-const ZAMPA = preload("res://assets/grafica/topo/zampa.svg")
-const OCCHIO = preload("res://assets/grafica/topo/occhio.svg")
-const OCCHIO_SPAVENTATO = preload("res://assets/grafica/topo/occhio_spaventato.svg")
-const SOPRACCIGLIO = preload("res://assets/grafica/topo/sopracciglio.svg")
-const ESCLAMATIVO = preload("res://assets/grafica/topo/esclamativo.svg")
+const CORPO = preload("res://assets/grafica/topo/corpo.png")
+const ORECCHIO = preload("res://assets/grafica/topo/orecchio.png")
+const CODA = preload("res://assets/grafica/topo/coda.png")
+const ZAMPA = preload("res://assets/grafica/topo/zampa.png")
+const OCCHIO = preload("res://assets/grafica/topo/occhio.png")
+const OCCHIO_SPAVENTATO = preload("res://assets/grafica/topo/occhio_spaventato.png")
+const SOPRACCIGLIO = preload("res://assets/grafica/topo/sopracciglio.png")
+const ESCLAMATIVO = preload("res://assets/grafica/topo/esclamativo.png")
 
 # pezzi del disegno, dentro "aspetto" che si gira verso la direzione di marcia
 var aspetto := Node2D.new()
