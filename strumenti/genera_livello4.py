@@ -3,6 +3,7 @@
 # Al chiuso, come nelle foto di Riccardo. Insegna i lanci degli operatori un passo alla volta:
 # la bagher sopra una colonna di scatoloni, il tiro a canestro oltre la prima fossa, poi due lanci di fila
 # (giravolta oltre la fossa larga, dritti nelle mani della catapulta) fino al soppalco azzurro; poi il portone.
+# I coni di filato cadono dagli scaffali e rotolano: si saltano.
 import sys
 from livelli import *
 
@@ -37,6 +38,7 @@ pezzi = [
     ("Scatolone1c", 1080, 400, 120, 65, SCC, {}),
     ("Scatolone1d", 1085, 320, 110, 80, SCA, {}),
     ("Scaffale2", 1300, 370, 160, 270, SCF, DECORO),
+    ("Ripiano2", 1305, 370, 150, 10, INV, {"attraversabile_da_sotto": "true"}),
 
     # 4: soppalco azzurro, con i pilastri, uno scaffale sopra e il transpallet sotto
     ("Soppalco", 3500, 330, 900, 16, SOP, {"attraversabile_da_sotto": "true"}),
@@ -44,6 +46,7 @@ pezzi = [
     ("Pilastro2", 3943, 346, 14, 294, PIL, DECORO),
     ("Pilastro3", 4366, 346, 14, 294, PIL, DECORO),
     ("ScaffaleSoppalco", 4120, 195, 80, 135, SCF, {"solido": "false", "z_index": "-7"}),
+    ("RipianoSoppalco", 4122, 195, 76, 10, INV, {"attraversabile_da_sotto": "true"}),
     ("Transpallet", 3700, 565, 115, 75, TRP, {}),
     ("Scatolone2a", 3900, 560, 110, 80, SCB, {}),
 
@@ -65,7 +68,7 @@ operatori = [
 rompibili = [
     (820, 640, SCATOLA, 1),
     (1460, 640, SCATOLA, 1),
-    (4010, 330, SCATOLA, 2),   # sul soppalco
+    (4300, 330, SCATOLA, 2),   # sul soppalco, dopo lo scaffale (così non ferma i coni)
 ]
 
 chicchi = [
@@ -83,6 +86,13 @@ chicchi = [
     (4700, 610), (4975, 600),                    # davanti al portone
 ]
 
+# coni di filato che cadono e rotolano: (base del cono in piedi, verso)
+coni = [
+    (440, 370, 1),     # dallo scaffale dell'ingresso: rotola fino ai cartoni, per conoscerlo con calma
+    (1320, 370, -1),   # dallo scaffale dopo la colonna: rotola verso la colonna, si salta
+    (4160, 195, -1),   # dallo scaffale sul soppalco: rotola incontro al pulcino lungo il soppalco
+]
+
 nidi = [(260, 640), (1350, 640), (2150, 640), (3600, 330), (4480, 640)]
 
 proprieta = {
@@ -94,4 +104,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello4", "Magazzino", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4975, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               operatori=operatori)
+               operatori=operatori, coni=coni)

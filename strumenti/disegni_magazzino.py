@@ -100,6 +100,16 @@ PEZZI = {
                 svg(240, 40, f'''<rect x="2" y="2" width="236" height="10" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/>
 <rect x="6" y="12" width="34" height="18" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/><rect x="103" y="12" width="34" height="18" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/><rect x="200" y="12" width="34" height="18" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/>
 <rect x="2" y="28" width="236" height="10" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/>''')),
+    # coni di filato nemici (Tappa 18): disegnati chiari, nel gioco prendono il colore del filato
+    "cono_in_piedi": (60, 100, "Cono di filato in piedi sullo scaffale: traballa prima di cadere",
+                      svg(60, 100, '''<path d="M6 96 L16 14 L44 14 L54 96 Z" fill="#FFFFFF" stroke="#4A4A50" stroke-width="4" stroke-linejoin="round"/>
+<path d="M10 70 L50 70 M12 50 L48 50 M14 32 L46 32" stroke="#000" stroke-opacity="0.12" stroke-width="5"/>
+<rect x="22" y="2" width="16" height="14" fill="#E8D9B8" stroke="#4A4A50" stroke-width="3"/>''')),
+    "cono_rotola": (64, 64, "Cono di filato che rotola: si salta",
+                    svg(64, 64, '''<circle cx="32" cy="32" r="28" fill="#FFFFFF" stroke="#4A4A50" stroke-width="4"/>
+<path d="M32 10 A22 22 0 0 1 54 32 M32 16 A16 16 0 0 1 48 32 M10 32 A22 22 0 0 0 32 54 M16 32 A16 16 0 0 0 32 48" fill="none" stroke="#000" stroke-opacity="0.15" stroke-width="4" stroke-linecap="round"/>
+<circle cx="32" cy="32" r="9" fill="#E8D9B8" stroke="#4A4A50" stroke-width="3"/><circle cx="32" cy="32" r="3.5" fill="#4A4A50"/>
+<path d="M50 14 Q58 6 62 10" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round"/>''')),
     "cartoni_piatti": (260, 230, "Pila di cartoni piatti col foglio bianco sopra: una piattaforma",
                        svg(260, 230, f'''<rect x="6" y="196" width="248" height="30" fill="{LEGNO}" stroke="{LEGNO_SCURO}" stroke-width="3"/>
 <rect x="8" y="22" width="244" height="176" fill="{CARTONE}" stroke="{CARTONE_SCURO}" stroke-width="5"/>

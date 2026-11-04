@@ -99,4 +99,9 @@ raspa = rumore(0.04, volume=0.18, morbidezza=0.6) + silenzio(0.05)
 salva("scava", raspa + raspa + raspa)
 # "boing" morbido della pianta che rimbalza
 salva("boing", tono(160, 520, 0.28, vibrato_hz=18, vibrato_ampiezza=0.12, armonica=0.4, attacco=0.01, volume=0.6))
+# "tic-tic-tic" del cono di filato che traballa sullo scaffale (leggero)
+tic = tono(950, 880, 0.03, armonica=0.8, volume=0.25) + silenzio(0.07)
+salva("traballa", tic + tic + tic)
+# "brrr" morbido del cono che atterra e comincia a rotolare
+salva("rotola", mescola(rumore(0.35, volume=0.22, morbidezza=0.92), tono(130, 90, 0.3, armonica=0.3, volume=0.25)))
 print("suoni creati in", os.path.abspath(CARTELLA))
