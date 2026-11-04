@@ -77,11 +77,12 @@ valign = 1
 
 def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=(), topi=(), rompibili=(),
                    uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None, oche=(),
-                   piante=(), talpe=(), operatori=(), coni=()):
+                   piante=(), talpe=(), operatori=(), coni=(), atmosfera=None):
     """pezzi: (nome, x, y, larghezza, altezza, tipo, extra); rompibili: (x, y, tipo, resistenza);
     oche: (x, y, distanza); piante: (x, y, tipo) con x, y = base a terra;
     operatori: (x, y, chi, verso, potenza) con x, y = tra i piedi, a terra;
     coni: (x, y, verso) con x, y = base del cono in piedi sul ripiano da cui cadono;
+    atmosfera: tipo di paesaggio a strati e luce (vedi scripts/atmosfera.gd), per esempio "cortile";
     proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
     risorse = [
         ("res://scripts/livello.gd", "Script"),
@@ -109,6 +110,8 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         risorse.append(("res://scripts/operatore.gd", "Script"))
     if coni:
         risorse.append(("res://scripts/coni.gd", "Script"))
+    if atmosfera:
+        risorse.append(("res://scripts/atmosfera.gd", "Script"))
     id_di = {path: i for i, (path, _t) in enumerate(risorse, 1)}
 
     out = [f"[gd_scene load_steps={len(risorse) + 2} format=2]\n"]
@@ -175,6 +178,10 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     for i, (x, y, dist) in enumerate(oche, 1):
         out.append(f'[node name="Oca{i}" type="KinematicBody2D" parent="Nemici"]\nposition = Vector2( {x}, {y} )\n'
                    f'script = ExtResource( {id_di["res://scripts/oca.gd"]} )\ndistanza = {dist}.0\n')
+
+    if atmosfera:
+        out.append(f'[node name="Atmosfera" type="Node" parent="."]\n'
+                   f'script = ExtResource( {id_di["res://scripts/atmosfera.gd"]} )\ntipo = "{atmosfera}"\n')
 
     out.append(f'''[node name="Uscita" type="Area2D" parent="."]
 position = Vector2( {uscita[0]}, {uscita[1]} )

@@ -267,7 +267,7 @@ func _aggiorna_cartelli():
 		if Progressi.finito(numero):
 			var r: Dictionary = Progressi.record[str(numero)]
 			testo += "\n%d / %d" % [int(r["presi"]), int(r["totale"])]
-		else:
+		elif not Progressi.LIVELLI[i].get("senza_nuovo", false):
 			testo += "\nnuovo!"
 		cartello.text = testo
 		# il cartello del luogo dove sta il pulcino è evidenziato

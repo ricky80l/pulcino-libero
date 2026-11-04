@@ -9,7 +9,7 @@ NON_SOLIDO = {"solido": "false", "z_index": "-5"}
 
 pezzi = [
     # sfondo
-    ("Paesaggio", 0, 0, 4440, 720, FUO, {"solido": "false", "z_index": "-10"}),
+    # il paesaggio lontano (cielo, colline, cascina, siepi) ora è a strati: vedi atmosfera="cortile" qui sotto
     ("Fienile", 2240, 400, 280, 240, FIE, {"solido": "false", "z_index": "-8"}),
 ]
 # steccato bianco sullo sfondo, all'inizio e alla fine
@@ -84,4 +84,4 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello2", "Cortile", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(4220, 610), partenza=(200, 610), limite_destro=4400, proprieta_livello=proprieta,
-               oche=oche)
+               oche=oche, atmosfera="cortile")

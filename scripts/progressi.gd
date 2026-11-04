@@ -9,7 +9,7 @@ const LIVELLI := [
 	{"nome": "Il pollaio", "scena": "res://scenes/livello_1.tscn"},
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
 	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
-	{"nome": "Maglificio Granada", "scena": "res://scenes/livello_4.tscn"},
+	{"nome": "Maglificio Granada", "scena": "res://scenes/livello_4.tscn", "senza_nuovo": true},  # nome lungo: niente «nuovo!» sul cartello
 	{"nome": "Il prato", "scena": ""},
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
