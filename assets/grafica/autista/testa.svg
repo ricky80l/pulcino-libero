@@ -2,8 +2,8 @@
 <ellipse cx="12" cy="66" rx="9" ry="13" fill="#EBC09A" stroke="#3A2616" stroke-width="4"/>
 <ellipse cx="108" cy="66" rx="9" ry="13" fill="#EBC09A" stroke="#3A2616" stroke-width="4"/>
 <rect x="38" y="96" width="44" height="24" fill="#EBC09A" stroke="#3A2616" stroke-width="4"/>
-<path d="M14 58 Q12 12 60 10 Q108 12 106 58 Q108 104 60 108 Q12 104 14 58 Z" fill="#EBC09A" stroke="#3A2616" stroke-width="5"/>
-<path d="M28 94 Q60 116 92 94" fill="none" stroke="#C99A72" stroke-width="4" stroke-linecap="round"/>
+<path d="M15 57 Q13 12 60 10 Q107 12 105 57 Q106 98 82 106 Q60 112 38 106 Q14 98 15 57 Z" fill="#EBC09A" stroke="#3A2616" stroke-width="5"/>
+<path d="M34 100 Q60 114 86 100" fill="none" stroke="#C99A72" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
 <path d="M20 76 Q24 104 60 106 Q96 104 100 76 Q90 96 60 98 Q30 96 20 76 Z" fill="#3A2618" opacity="0.28"/>
 <path d="M14 52 Q10 14 58 8 Q104 8 106 50 Q98 30 80 26 Q62 34 40 28 Q22 32 14 52 Z" fill="#3A2618" stroke="#1E120A" stroke-width="5" stroke-linejoin="round"/>
 <path d="M32 52 Q42 46 52 51 M68 51 Q78 46 88 52" fill="none" stroke="#3A2618" stroke-width="5" stroke-linecap="round"/>

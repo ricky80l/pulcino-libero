@@ -198,7 +198,7 @@ Il nemico nuovo sono i **coni di filato che rotolano**: cadono dal soppalco o da
 
 Il pulcino resta allo stadio 2 di crescita, come nel cortile e nell'orto.
 
-In fondo al magazzino, davanti al portone, c'è un **furgone azzurro** (come quello della foto di Riccardo, senza marchi) con il portellone aperto: ci si sale sul tetto, dove ci sono dei chicchi. Accanto c'è il suo **autista**, moro e un po' in carne: si gratta la pancia, saluta, guarda l'orologio e si sorprende quando il pulcino gli passa vicino («Ehi, pulcino!»).
+In fondo al magazzino, davanti al portone, c'è un **furgone azzurro** (come quello della foto di Riccardo, senza marchi) con il portellone aperto: ci si sale sul tetto, dove ci sono dei chicchi. Accanto c'è il suo **autista**, moro, robusto con un filo di pancia: si gratta la pancia, saluta, guarda l'orologio e si sorprende quando il pulcino gli passa vicino («Ehi, pulcino!»).
 
 ### Tappa 16 — Gli operatori
 I quattro operatori con il camice blu, ognuno con la sua mossa, animati in modo esagerato (si piegano, caricano il lancio, esultano). Si provano in una piccola area di prova, come per la beccata.

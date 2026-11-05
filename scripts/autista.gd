@@ -1,5 +1,5 @@
 extends Node2D
-# L'autista del furgone del Maglificio Granada: moro, un po' in carne, polo blu e jeans.
+# L'autista del furgone del Maglificio Granada: moro, robusto, polo blu e jeans.
 # Non lancia e non blocca: fa scena. Respira, si gratta la pancia, saluta, guarda l'orologio;
 # quando il pulcino gli passa vicino fa un saltello di sorpresa con un "Ehi, pulcino!".
 # La posizione è tra i piedi, a terra; guarda verso sinistra (verso il furgone e il pulcino che arriva).
@@ -67,7 +67,7 @@ func _process(delta):
 			pulcino = trovati[0]
 	var sx := 0.0
 	var dx := 0.0
-	var su := sin(tempo * 1.5) * 1.5  # respira (la pancia va su e giù)
+	var su := sin(tempo * 1.5) * 1.5  # respira
 	var testa_ang := 0.0
 	var vicino: bool = pulcino != null and global_position.distance_to(pulcino.global_position) < 200
 	if vicino and not sorpreso:
@@ -92,7 +92,7 @@ func _process(delta):
 		var f: float = clamp(tempo_gesto / durata_gesto, 0.0, 1.0)
 		var e := sin(PI * f)
 		match gesto:
-			"pancia":  # si gratta la pancia, soddisfatto
+			"pancia":  # si gratta la pancia, soddisfatto (dopo pranzo)
 				dx = 55.0 * e + sin(TAU * 4.0 * f) * 10.0 * e
 				testa_ang = 4.0 * e
 			"saluta":

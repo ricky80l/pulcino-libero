@@ -1,7 +1,7 @@
 # Disegni SVG del furgone del Maglificio Granada e del suo autista (a pezzi, al doppio della grandezza nel gioco).
 # Il furgone è un furgone alto azzurro visto di lato, con il muso a destra e il portellone dietro aperto:
 # simile a quello della foto di Riccardo, ma senza marchi né scritte vere.
-# L'autista: moro, un po' in carne, polo blu e jeans. Origine tra i piedi, alto circa 340 come gli operatori.
+# L'autista: moro, robusto con un filo di pancia (spalle larghe, viso pieno), polo blu e jeans. Origine tra i piedi, alto circa 340 come gli operatori.
 # Uso: python strumenti/disegni_furgone.py   (dalla cartella del progetto), poi python strumenti/stile_finale.py
 import os
 
@@ -46,12 +46,12 @@ FURGONE = svg(660, 420, f'''<path d="M58 344 L58 92 Q58 62 88 62 L470 62 Q502 62
 <circle cx="500" cy="352" r="56" fill="#2B2B30" stroke="#121214" stroke-width="5"/><circle cx="500" cy="352" r="26" fill="#9AA0A6" stroke="#5E646A" stroke-width="4"/></g>
 <path d="M104 344 Q168 268 232 344 M436 344 Q500 268 564 344" fill="none" stroke="{BORDO}" stroke-width="6"/>''')
 
-# autista: testa tonda e piena, capelli scuri corti, un filo di barba, sorriso largo; perno al collo (60, 118)
+# autista: testa con la mascella decisa, capelli scuri corti, un filo di barba, sorriso largo; perno al collo (60, 118)
 TESTA = svg(120, 124, f'''<ellipse cx="12" cy="66" rx="9" ry="13" fill="{PELLE}" stroke="{LINEA}" stroke-width="4"/>
 <ellipse cx="108" cy="66" rx="9" ry="13" fill="{PELLE}" stroke="{LINEA}" stroke-width="4"/>
 <rect x="38" y="96" width="44" height="24" fill="{PELLE}" stroke="{LINEA}" stroke-width="4"/>
-<path d="M14 58 Q12 12 60 10 Q108 12 106 58 Q108 104 60 108 Q12 104 14 58 Z" fill="{PELLE}" stroke="{LINEA}" stroke-width="5"/>
-<path d="M28 94 Q60 116 92 94" fill="none" stroke="#C99A72" stroke-width="4" stroke-linecap="round"/>
+<path d="M15 57 Q13 12 60 10 Q107 12 105 57 Q106 98 82 106 Q60 112 38 106 Q14 98 15 57 Z" fill="{PELLE}" stroke="{LINEA}" stroke-width="5"/>
+<path d="M34 100 Q60 114 86 100" fill="none" stroke="#C99A72" stroke-width="3.5" stroke-linecap="round" opacity="0.6"/>
 <path d="M20 76 Q24 104 60 106 Q96 104 100 76 Q90 96 60 98 Q30 96 20 76 Z" fill="{CAPELLI}" opacity="0.28"/>
 <path d="M14 52 Q10 14 58 8 Q104 8 106 50 Q98 30 80 26 Q62 34 40 28 Q22 32 14 52 Z" fill="{CAPELLI}" stroke="#1E120A" stroke-width="5" stroke-linejoin="round"/>
 <path d="M32 52 Q42 46 52 51 M68 51 Q78 46 88 52" fill="none" stroke="{CAPELLI}" stroke-width="5" stroke-linecap="round"/>
@@ -62,19 +62,19 @@ TESTA = svg(120, 124, f'''<ellipse cx="12" cy="66" rx="9" ry="13" fill="{PELLE}"
 <ellipse cx="28" cy="80" rx="8" ry="5" fill="#FF8A8A" opacity="0.4"/><ellipse cx="92" cy="80" rx="8" ry="5" fill="#FF8A8A" opacity="0.4"/>
 <path d="M40 88 Q60 104 80 88" fill="#FFFFFF" stroke="{LINEA}" stroke-width="4" stroke-linejoin="round"/>''')
 
-# corpo: polo blu con la pancia tonda; perno in basso al centro (85, 186), spalle in alto a y 10
-CORPO = svg(170, 190, f'''<path d="M30 20 Q52 6 85 6 Q118 6 140 20 L150 96 Q166 150 140 180 Q85 192 30 180 Q4 150 20 96 Z" fill="{POLO}" stroke="{POLO_SCURO}" stroke-width="5" stroke-linejoin="round"/>
+# corpo: polo blu su un busto robusto, spalle larghe e torace ampio; perno in basso al centro (85, 186), spalle in alto a y 10
+CORPO = svg(170, 190, f'''<path d="M14 24 Q48 4 85 4 Q122 4 156 24 L152 100 Q164 142 144 178 Q85 190 26 178 Q6 142 18 100 Z" fill="{POLO}" stroke="{POLO_SCURO}" stroke-width="5" stroke-linejoin="round"/>
+<path d="M34 128 Q85 150 136 128" fill="none" stroke="{POLO_SCURO}" stroke-width="3" opacity="0.5"/>
 <path d="M66 8 L85 34 L104 8" fill="#2A4A78" stroke="{POLO_SCURO}" stroke-width="4" stroke-linejoin="round"/>
 <path d="M85 34 L85 62" stroke="{POLO_SCURO}" stroke-width="3"/><circle cx="85" cy="44" r="3" fill="#E8EEF6"/><circle cx="85" cy="56" r="3" fill="#E8EEF6"/>
-<path d="M40 122 Q85 150 130 122" fill="none" stroke="{POLO_SCURO}" stroke-width="3" opacity="0.6"/>
 <path d="M28 168 Q85 182 142 168 L140 180 Q85 192 30 180 Z" fill="#2A2A30"/>
 <rect x="76" y="166" width="18" height="12" rx="2" fill="#C9A445" stroke="#6A5418" stroke-width="2"/>
 <path d="M104 70 L128 70 L128 88 L104 88 Z" fill="none" stroke="{POLO_SCURO}" stroke-width="3"/>''')
 
 # braccio: manica corta della polo e avambraccio; perno alla spalla (22, 12)
-BRACCIO = svg(44, 136, f'''<path d="M6 10 Q22 0 38 10 L40 52 L4 52 Z" fill="{POLO}" stroke="{POLO_SCURO}" stroke-width="5" stroke-linejoin="round"/>
-<path d="M10 50 L34 50 L32 106 L12 106 Z" fill="{PELLE}" stroke="{LINEA}" stroke-width="4" stroke-linejoin="round"/>
-<ellipse cx="22" cy="118" rx="15" ry="15" fill="{PELLE}" stroke="{LINEA}" stroke-width="4"/>
+BRACCIO = svg(44, 136, f'''<path d="M2 10 Q22 -2 42 10 L44 54 L0 54 Z" fill="{POLO}" stroke="{POLO_SCURO}" stroke-width="5" stroke-linejoin="round"/>
+<path d="M6 52 L38 52 L35 106 L9 106 Z" fill="{PELLE}" stroke="{LINEA}" stroke-width="4" stroke-linejoin="round"/>
+<ellipse cx="22" cy="118" rx="17" ry="16" fill="{PELLE}" stroke="{LINEA}" stroke-width="4"/>
 <path d="M12 116 Q10 126 16 128" fill="none" stroke="{LINEA}" stroke-width="3" stroke-linecap="round"/>''')
 
 # gamba: jeans e scarpe da lavoro; perno in alto (24, 6)
