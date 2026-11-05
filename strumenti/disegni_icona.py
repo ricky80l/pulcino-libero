@@ -3,7 +3,7 @@
 # e Godot la trasforma in icona.png (512×512) per il browser e il telefono.
 # Niente sfumature morbide (Godot le trasforma male in immagine): luci, ombre e aloni sono forme sovrapposte.
 # Uso: python strumenti/disegni_icona.py [cartella per le prove]   (dalla cartella del progetto)
-#      senza cartella scrive strumenti/icona.svg con la versione in VERSIONE (A, B o C; di solito A)
+#      senza cartella scrive strumenti/icona.svg con la versione in VERSIONE (A, B o C; scelta da Riccardo: C)
 import math
 import os
 import sys
@@ -112,5 +112,5 @@ if __name__ == "__main__":
             open(os.path.join(cartella, f"icona_{v}.svg"), "w", encoding="utf-8", newline="\n").write(icona(v))
         print("tre versioni scritte in", cartella)
     else:
-        open(os.path.join(QUI, "icona.svg"), "w", encoding="utf-8", newline="\n").write(icona(os.environ.get("VERSIONE", "A")))
+        open(os.path.join(QUI, "icona.svg"), "w", encoding="utf-8", newline="\n").write(icona(os.environ.get("VERSIONE", "C")))
         print("icona scritta")
