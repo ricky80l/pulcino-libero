@@ -245,7 +245,7 @@ Prima di nasconderle, mostrami dove le metto in ogni luogo.
 **STOP:** le uova sono difficili da trovare ma non impossibili, e trovarle dà soddisfazione.
 
 ### Tappa 22 — Obiettivi e stelline
-Ogni livello ha **tre stelline** facoltative: tutti i chicchi, l'uovo d'oro, finire senza farsi prendere. Il messaggio di fine livello mostra le stelline prese, una alla volta con un suono; sulla mappa si vedono le migliori ottenute in ogni luogo.
+Ogni livello ha **tre stelline** facoltative: tutti i chicchi, l'uovo d'oro, finire senza farsi prendere. Il messaggio di fine livello mostra le stelline prese, una alla volta con un suono; sotto ogni stella un disegnino (chicco, uovo, musetto del nemico del luogo) e cosa è successo davvero («26 su 29 chicchi, ne mancano 3», «Uovo trovato!», «Preso 2 volte»), così si capisce anche alla prima partita; sulla mappa si vedono le migliori ottenute in ogni luogo.
 **STOP:** le stelline sono chiare e fanno venire voglia di rigiocare.
 
 ### Tappa 23 — Chicchi da spendere

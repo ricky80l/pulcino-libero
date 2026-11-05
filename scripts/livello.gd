@@ -80,8 +80,8 @@ func _on_uscita_body_entered(corpo):
 		var stelle := [chicchi_presi == chicchi_totali, uovo, player.volte_colpito == 0]
 		if salva_progressi:
 			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali, stelle)
-		_mostra_stelle(stelle)
-		var testo := "\n\n%s\n\nChicchi: %d / %d\n\n" % [frase_fine, chicchi_presi, chicchi_totali]
+		_mostra_stelle(stelle, player.volte_colpito)
+		var testo := "\n\n\n%s\n\n" % frase_fine
 		if salva_progressi and not Progressi.costruito(numero + 1):
 			testo += "Per ora il viaggio si ferma qui:\nnuovi luoghi in arrivo!\n\n"
 		testo_fine.text = testo + "Premi salto per tornare alla mappa"
@@ -89,38 +89,103 @@ func _on_uscita_body_entered(corpo):
 		Suoni.suona("fine", 0.0)
 
 
-# Le tre stelline in cima al messaggio di fine: compaiono una alla volta, con un "ting!" sempre più acuto
+# Le tre stelline in cima al messaggio di fine: compaiono una alla volta, con un "ting!" sempre più acuto.
+# Sotto ogni stella: un disegnino (chicco, uovo, nemico del luogo) e cosa è successo davvero in partita,
+# così anche chi gioca per la prima volta capisce cosa serve per accenderla.
 const STELLA = preload("res://assets/grafica/oggetti/stella.png")
 const STELLA_VUOTA = preload("res://assets/grafica/oggetti/stella_vuota.png")
 const FONT_STELLE = preload("res://assets/font/fredoka_piccolo.tres")
-const NOMI_STELLE := ["Tutti i chicchi", "Uovo d'oro", "Mai preso"]
+const ICONA_CHICCO = preload("res://assets/grafica/oggetti/chicco.png")
+const ICONA_UOVO = preload("res://assets/grafica/oggetti/uovo_oro.png")
+const ICONA_UOVO_VUOTO = preload("res://assets/grafica/oggetti/uovo_vuoto.png")
+# il nemico del luogo, riconosciuto dal suo script
+const ICONE_NEMICI := {
+	"res://scripts/topo.gd": preload("res://assets/grafica/oggetti/icona_topo.png"),
+	"res://scripts/oca.gd": preload("res://assets/grafica/oggetti/icona_oca.png"),
+	"res://scripts/talpa.gd": preload("res://assets/grafica/talpa/talpa.png"),
+	"res://scripts/coni.gd": preload("res://assets/grafica/magazzino/cono_in_piedi.png"),
+}
+const CREMA := Color(1, 0.96, 0.86)
+const PASSO_STELLE := 320.0
 
 
-func _mostra_stelle(stelle: Array):
+func _icona_nemico():
+	var da_guardare := [self]
+	while not da_guardare.empty():
+		var nodo: Node = da_guardare.pop_back()
+		var copione = nodo.get_script()
+		if copione and ICONE_NEMICI.has(copione.resource_path):
+			return ICONE_NEMICI[copione.resource_path]
+		da_guardare += nodo.get_children()
+	return null
+
+
+func _mostra_stelle(stelle: Array, volte_colpito: int):
 	var tween := Tween.new()
 	messaggio.add_child(tween)
+	var mancano := chicchi_totali - chicchi_presi
+	var righe := []
+	if stelle[0]:
+		righe.append(["Tutti i chicchi!", "%d su %d" % [chicchi_presi, chicchi_totali]])
+	else:
+		righe.append(["%d su %d chicchi" % [chicchi_presi, chicchi_totali], "ne manca 1" if mancano == 1 else "ne mancano %d" % mancano])
+	if stelle[1]:
+		righe.append(["Uovo trovato!", "era ben nascosto"])
+	else:
+		righe.append(["Uovo d'oro", "non trovato: cercalo!"])
+	if stelle[2]:
+		righe.append(["Mai preso!", "bravissimo"])
+	else:
+		righe.append(["Preso 1 volta" if volte_colpito == 1 else "Preso %d volte" % volte_colpito, "prova a non farti prendere"])
+	var icone := [ICONA_CHICCO, ICONA_UOVO if stelle[1] else ICONA_UOVO_VUOTO, _icona_nemico()]
 	for i in range(3):
+		var centro_x: float = 640 + (i - 1) * PASSO_STELLE
+		var ritardo: float = 0.5 + i * 0.45
 		var stella := TextureRect.new()
 		stella.texture = STELLA if stelle[i] else STELLA_VUOTA
 		stella.expand = true
 		stella.rect_size = Vector2(96, 96)
 		stella.rect_pivot_offset = Vector2(48, 48)
-		stella.rect_position = Vector2(640 - 48 + (i - 1) * 190, 40)
+		stella.rect_position = Vector2(centro_x - 48, 28)
 		stella.rect_scale = Vector2.ZERO
 		stella.mouse_filter = Control.MOUSE_FILTER_IGNORE
 		messaggio.add_child(stella)
+		# riga 1: disegnino + cosa è successo
+		var riga := HBoxContainer.new()
+		riga.alignment = BoxContainer.ALIGN_CENTER
+		riga.add_constant_override("separation", 8)
+		riga.rect_size = Vector2(PASSO_STELLE, 40)
+		riga.rect_position = Vector2(centro_x - PASSO_STELLE / 2, 128)
+		riga.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		if icone[i] != null:
+			var icona := TextureRect.new()
+			icona.texture = icone[i]
+			icona.expand = true
+			icona.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			icona.rect_min_size = Vector2(36, 36)
+			icona.mouse_filter = Control.MOUSE_FILTER_IGNORE
+			riga.add_child(icona)
 		var nome := Label.new()
-		nome.text = NOMI_STELLE[i]
+		nome.text = righe[i][0]
 		nome.add_font_override("font", FONT_STELLE)
-		nome.add_color_override("font_color", Color(1, 0.96, 0.86) if stelle[i] else Color(1, 0.96, 0.86, 0.5))
-		nome.align = Label.ALIGN_CENTER
-		nome.rect_size = Vector2(190, 30)
-		nome.rect_position = Vector2(640 - 95 + (i - 1) * 190, 138)
-		nome.modulate.a = 0.0
-		messaggio.add_child(nome)
-		var ritardo: float = 0.5 + i * 0.45
+		nome.add_color_override("font_color", CREMA if stelle[i] else Color(1, 0.96, 0.86, 0.8))
+		riga.add_child(nome)
+		riga.modulate.a = 0.0
+		messaggio.add_child(riga)
+		# riga 2: un piccolo commento (cosa manca, o un complimento)
+		var nota := Label.new()
+		nota.text = righe[i][1]
+		nota.add_font_override("font", FONT_STELLE)
+		nota.add_color_override("font_color", CREMA if stelle[i] else Color("ffe08a"))
+		nota.align = Label.ALIGN_CENTER
+		nota.rect_size = Vector2(PASSO_STELLE / 0.8, 30)
+		nota.rect_scale = Vector2(0.8, 0.8)
+		nota.rect_position = Vector2(centro_x - PASSO_STELLE / 2, 168)
+		nota.modulate.a = 0.0
+		messaggio.add_child(nota)
 		tween.interpolate_property(stella, "rect_scale", Vector2.ZERO, Vector2.ONE, 0.4, Tween.TRANS_BACK, Tween.EASE_OUT, ritardo)
-		tween.interpolate_property(nome, "modulate:a", 0.0, 1.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, ritardo + 0.1)
+		tween.interpolate_property(riga, "modulate:a", 0.0, 1.0, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, ritardo + 0.1)
+		tween.interpolate_property(nota, "modulate:a", 0.0, 0.85, 0.3, Tween.TRANS_LINEAR, Tween.EASE_IN, ritardo + 0.25)
 		if stelle[i]:
 			tween.interpolate_callback(self, ritardo, "_suona_stella", i)
 	tween.start()
