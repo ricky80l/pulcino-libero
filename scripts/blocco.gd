@@ -8,7 +8,7 @@ enum Tipo { PAVIMENTO, LEGNO, CASSETTA, MANGIATOIA, POSATOIO, SBARRE, PARETE, RE
 		TERRA, BOTTE, CARRETTO, TETTOIA, CEPPI, ABBEVERATOIO, STECCATO, FIENILE, CANCELLO,
 		TERRA_ORTO, ACQUA, INVISIBILE, CAVOLO, CARRIOLA, POMODORI, ANNAFFIATOIO, SPAVENTAPASSERI, FRAGOLE, POZZO,
 		MATTONI, LAMIERA, CEMENTO, FOSSA, SOPPALCO, PILASTRO, SCATOLONE_A, SCATOLONE_B, SCATOLONE_C, BANCALE,
-		CARTONI, SCAFFALE, TRANSPALLET, PORTONE, ESTINTORE, CARTELLO_USCITA }
+		CARTONI, SCAFFALE, TRANSPALLET, PORTONE, ESTINTORE, CARTELLO_USCITA, FURGONE }
 
 const IMMAGINI := {
 	Tipo.CASSETTA: preload("res://assets/grafica/pollaio/cassetta.png"),
@@ -39,6 +39,7 @@ const IMMAGINI := {
 	Tipo.PORTONE: preload("res://assets/grafica/magazzino/portone.png"),
 	Tipo.ESTINTORE: preload("res://assets/grafica/magazzino/estintore.png"),
 	Tipo.CARTELLO_USCITA: preload("res://assets/grafica/magazzino/uscita.png"),
+	Tipo.FURGONE: preload("res://assets/grafica/magazzino/furgone.png"),
 }
 const MATTONI_PIASTRELLA := preload("res://assets/grafica/magazzino/mattoni.png")  # si ripete su tutta la parete
 

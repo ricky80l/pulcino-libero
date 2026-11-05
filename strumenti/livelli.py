@@ -5,7 +5,7 @@
 (PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO,
  TER, BOT, CAR, TET, CEP, ABB, STE, FIE, CAN,
  TOR, ACQ, INV, CAV, CRL, POM, ANN, SPA, FRA, POZ,
- MAT, LAM, CEM, FOS, SOP, PIL, SCA, SCB, SCC, BAN, CRT, SCF, TRP, POR, EST, USC) = range(45)
+ MAT, LAM, CEM, FOS, SOP, PIL, SCA, SCB, SCC, BAN, CRT, SCF, TRP, POR, EST, USC, FUR) = range(46)
 # tipi di ostacolo rompibile (stesso ordine di Tipo in scripts/rompibile.gd)
 SACCO, BALLA, VASO, ZUCCA, SCATOLA = range(5)
 # piante che rimbalzano (stesso ordine di Tipo in scripts/pianta.gd)
@@ -77,13 +77,14 @@ valign = 1
 
 def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=(), topi=(), rompibili=(),
                    uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None, oche=(),
-                   piante=(), talpe=(), operatori=(), coni=(), atmosfera=None, uovo=None):
+                   piante=(), talpe=(), operatori=(), coni=(), atmosfera=None, uovo=None, autista=None):
     """pezzi: (nome, x, y, larghezza, altezza, tipo, extra); rompibili: (x, y, tipo, resistenza);
     oche: (x, y, distanza); piante: (x, y, tipo) con x, y = base a terra;
     operatori: (x, y, chi, verso, potenza) con x, y = tra i piedi, a terra;
     coni: (x, y, verso) con x, y = base del cono in piedi sul ripiano da cui cadono;
     atmosfera: tipo di paesaggio a strati e luce (vedi scripts/atmosfera.gd), per esempio "cortile";
     uovo: (x, y) base dell'uovo d'oro segreto del luogo;
+    autista: (x, y) dove sta l'autista del furgone (tra i piedi, a terra);
     proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
     risorse = [
         ("res://scripts/livello.gd", "Script"),
@@ -115,6 +116,8 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         risorse.append(("res://scripts/atmosfera.gd", "Script"))
     if uovo:
         risorse.append(("res://scripts/uovo_oro.gd", "Script"))
+    if autista:
+        risorse.append(("res://scripts/autista.gd", "Script"))
     id_di = {path: i for i, (path, _t) in enumerate(risorse, 1)}
 
     out = [f"[gd_scene load_steps={len(risorse) + 2} format=2]\n"]
@@ -168,6 +171,10 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     if uovo:
         out.append(f'[node name="UovoOro" type="Area2D" parent="."]\nposition = Vector2( {uovo[0]}, {uovo[1]} )\n'
                    f'script = ExtResource( {id_di["res://scripts/uovo_oro.gd"]} )\n')
+
+    if autista:
+        out.append(f'[node name="Autista" type="Node2D" parent="."]\nposition = Vector2( {autista[0]}, {autista[1]} )\n'
+                   f'script = ExtResource( {id_di["res://scripts/autista.gd"]} )\n')
 
     out.append('[node name="Chicchi" type="Node2D" parent="."]\n')
     for i, (x, y) in enumerate(chicchi, 1):

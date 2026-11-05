@@ -8,7 +8,7 @@ import sys
 from livelli import *
 
 DECORO = {"solido": "false", "z_index": "-6"}
-LARGO = 5200
+LARGO = 5650
 
 pezzi = [
     # il capannone: parete di mattoni con gli oblò, soffitto di lamiera, pavimento con due fosse
@@ -18,7 +18,7 @@ pezzi = [
     ("Fossa1", 1680, 640, 350, 80, FOS, {"solido": "false", "z_index": "-1"}),
     ("PavimentoB", 2030, 640, 620, 80, CEM, {}),
     ("Fossa2", 2650, 640, 650, 80, FOS, {"solido": "false", "z_index": "-1"}),
-    ("PavimentoC", 3300, 640, 1900, 80, CEM, {}),
+    ("PavimentoC", 3300, 640, LARGO - 3300, 80, CEM, {}),
     ("MuroSinistro", -40, 0, 40, 720, INV, {}),
     ("MuroDestro", LARGO, 0, 40, 720, INV, {}),
 
@@ -56,8 +56,11 @@ pezzi = [
     ("Cartoni2", 4550, 525, 130, 115, CRT, {}),
     ("Bancale2", 4720, 620, 120, 20, BAN, {}),
     ("Scatolone3a", 4725, 545, 110, 75, SCC, {}),
-    ("Estintore2", 4860, 585, 25, 55, EST, DECORO),
-    ("Portone", 4900, 475, 150, 165, POR, {"solido": "false", "z_index": "-4"}),
+    # il furgone azzurro davanti al portone, col portellone aperto: ci si sale sul tetto dalla colonnina di scatoloni
+    ("Furgone", 4900, 430, 330, 210, FUR, {"solido": "false", "z_index": "-3"}),
+    ("TettoFurgone", 4930, 462, 245, 10, INV, {"attraversabile_da_sotto": "true"}),
+    ("Estintore2", 5380, 585, 25, 55, EST, DECORO),
+    ("Portone", 5440, 475, 150, 165, POR, {"solido": "false", "z_index": "-4"}),
 ]
 
 operatori = [
@@ -85,7 +88,9 @@ chicchi = [
     (3757, 535),                                 # sul transpallet
     (4615, 495),                                 # sui cartoni in fondo
     (4780, 515),                                 # sulla colonnina
-    (4700, 610), (4975, 600),                    # davanti al portone
+    (4700, 610),
+    (4990, 432), (5060, 432), (5130, 432),       # sul tetto del furgone
+    (5515, 600),                                 # davanti al portone
 ]
 
 # coni di filato che cadono e rotolano: (base del cono in piedi, verso)
@@ -105,5 +110,6 @@ proprieta = {
 }
 
 scrivi_livello(sys.argv[1], "Livello4", "Magazzino", pezzi, chicchi, nidi, rompibili=rompibili,
-               uscita=(4975, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               operatori=operatori, coni=coni, atmosfera="magazzino", uovo=(1000, 150))
+               uscita=(5515, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
+               operatori=operatori, coni=coni, atmosfera="magazzino", uovo=(1000, 150),
+               autista=(5300, 640))
