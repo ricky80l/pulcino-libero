@@ -218,6 +218,23 @@ Il livello del magazzino, più grande e più in verticale dell'orto, con il sopp
 I coni di filato che cadono e rotolano, con il filo che si srotola dietro di loro, sistemati nel magazzino dove rendono il livello più vivo senza frustrare. Si vede un attimo prima da dove arrivano, per esempio un cono che traballa sullo scaffale.
 **STOP:** fine del livello 4.
 
+## Tappe di rifacimento: livelli più lunghi ed elaborati (scelta di Riccardo)
+
+Dal primo luogo in poi i livelli crescono decisamente: pollaio circa 5.500, cortile 6.500, orto 7.500, Maglificio Granada 8.500, e i luoghi seguenti ancora di più (circa +1.000 a luogo). Più tratti, percorsi alternativi (una strada alta più difficile con più chicchi e una bassa più facile), piccole zone segrete, gli stessi personaggi e oggetti in combinazioni nuove. Restano uova d'oro, stelline, operatori, furgone e tutto il resto (le uova si spostano se serve).
+Per ogni luogo: prima mostrami tutto il percorso nuovo visto dall'alto, poi costruiscilo.
+
+### Tappa R1 — Il pollaio più lungo
+**STOP:** il pollaio nuovo è più ricco ma resta un tutorial gentile (solo camminare e saltare).
+
+### Tappa R2 — Il cortile più lungo
+**STOP:** il cortile nuovo è più lungo, più vario e si completa bene.
+
+### Tappa R3 — L'orto più lungo
+**STOP:** l'orto nuovo è più lungo, più vario e si completa bene.
+
+### Tappa R4 — Il Maglificio Granada più lungo
+**STOP:** il Maglificio nuovo è più lungo, più vario e si completa bene.
+
 ## Tappe per un viaggio più intrigante (scelte da Riccardo, prima del prato)
 
 Quattro novità che danno voglia di esplorare, rigiocare e arrivare alla fine. Valgono per i luoghi già fatti e per tutti quelli futuri.
