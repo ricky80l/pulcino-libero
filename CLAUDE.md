@@ -235,6 +235,8 @@ Prima di disegnarli mostrami gli accessori e la bancarella.
 
 ### Tappa 24 — Le piume misteriose
 Alla fine di ogni luogo il pulcino trova una **piuma misteriosa**, sempre più grande, di qualcuno che lo aspetta al campanile. Una breve scena senza parole sulla mappa (pochi secondi, si può saltare) racconta il ritrovamento; le piume raccolte si vedono sulla mappa e tracciano la strada verso il campanile. Il mistero si scopre solo alla fine del viaggio.
+
+**Scelta di Riccardo:** alla fine del viaggio c'è una **pulcina**. Entra nella storia a poco a poco attraverso elementi visivi, luogo dopo luogo (per esempio le sue piume, un fiocco, impronte, una sagoma lontana), senza mai mostrarsi del tutto prima del campanile.
 Prima di farle, mostrami la storia scena per scena.
 **STOP:** le scene sono brevi, poetiche e fanno venire voglia di andare avanti.
 
