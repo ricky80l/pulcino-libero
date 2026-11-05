@@ -186,22 +186,28 @@ func _disegna_parete():
 	var larghezza_asse := 64.0
 	var x := 0.0
 	var i := 0
+	var tondi := []
 	while x < dimensioni.x:
 		var w: float = min(larghezza_asse, dimensioni.x - x)
 		var tono := Color("e3bf8a") if i % 2 == 0 else Color("dcb67f")
+		# solo rettangoli e poligoni: la scheda video li disegna tutti insieme in un colpo solo
+		# (righe spesse e cerchi andrebbero disegnati uno per uno, e la parete è lunga quanto il livello)
 		draw_rect(Rect2(x, 0, w, dimensioni.y), tono)
-		draw_line(Vector2(x + 6, 0), Vector2(x + 6, dimensioni.y), Color("ebcd9d"), 2.0)
-		draw_line(Vector2(x, 0), Vector2(x, dimensioni.y), Color("b98f5c"), 3.0)
+		draw_rect(Rect2(x + 5, 0, 2, dimensioni.y), Color("ebcd9d"))
+		draw_rect(Rect2(x - 1.5, 0, 3, dimensioni.y), Color("b98f5c"))
 		for y in [40.0, dimensioni.y - 120.0]:
-			draw_circle(Vector2(x + w / 2, y), 3.0, Color("9a7448"))
+			tondi.append([Vector2(x + w / 2, y), Vector2(3, 3), Color("9a7448")])
 		if rng.randf() < 0.35:
 			var centro := Vector2(x + rng.randf_range(16, w - 16), rng.randf_range(120, dimensioni.y - 200))
-			_ellisse(centro, Vector2(7, 11), Color("c9a06b"))
-			_ellisse(centro, Vector2(3, 5), Color("a87f4f"))
+			tondi.append([centro, Vector2(7, 11), Color("c9a06b")])
+			tondi.append([centro, Vector2(3, 5), Color("a87f4f")])
 		x += larghezza_asse
 		i += 1
 	# zoccolo scuro vicino al pavimento
 	draw_rect(Rect2(0, dimensioni.y - 110, dimensioni.x, 30), Color("c9a06b"))
+	# chiodi e nodi del legno tutti insieme, dopo i rettangoli (alternarli spezzerebbe il gruppo)
+	for t in tondi:
+		_ovale(t[0], t[1], t[2])
 
 
 # Terra battuta con uno strato di paglia sopra
@@ -270,18 +276,26 @@ func _disegna_rete():
 	var filo := Color("7d858f")
 	var passo := 14.0
 	var c := -h
+	var fili := []
 	while c < w + h:
 		# diagonale che scende verso destra: y = x - c
 		var x1: float = max(0.0, c)
 		var x2: float = min(w, h + c)
 		if x2 > x1:
-			draw_line(Vector2(x1, x1 - c), Vector2(x2, x2 - c), filo, 2.0, true)
+			fili.append([Vector2(x1, x1 - c), Vector2(x2, x2 - c)])
 		# diagonale che sale verso destra: y = c - x
 		var x3: float = max(0.0, c - h)
 		var x4: float = min(w, c)
 		if x4 > x3:
-			draw_line(Vector2(x3, c - x3), Vector2(x4, c - x4), filo, 2.0, true)
+			fili.append([Vector2(x3, c - x3), Vector2(x4, c - x4)])
 		c += passo
+	# i fili come strisce sottili (poligoni): la scheda video li disegna tutti insieme;
+	# prima un alone più largo e trasparente, poi il filo, così i bordi restano morbidi
+	var alone := Color(filo.r, filo.g, filo.b, 0.35)
+	for f in fili:
+		_striscia(f[0], f[1], 3.2, alone)
+	for f in fili:
+		_striscia(f[0], f[1], 1.6, filo)
 	# cornice di legno ai lati e fili spezzati in fondo
 	draw_rect(Rect2(0, 0, 5, h), Color("b07a3e"))
 	draw_rect(Rect2(w - 5, 0, 5, h), Color("b07a3e"))
@@ -505,3 +519,18 @@ func _ellisse(centro: Vector2, raggi: Vector2, colore: Color):
 	draw_set_transform(centro, 0, Vector2(raggi.x / raggi.y, 1.0))
 	draw_circle(Vector2.ZERO, raggi.y, colore)
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+
+
+# Ovale pieno fatto con un poligono a 16 lati (si disegna insieme agli altri pezzi, a differenza dei cerchi)
+func _ovale(centro: Vector2, raggi: Vector2, colore: Color):
+	var punti := PoolVector2Array()
+	for k in range(16):
+		var a := TAU * k / 16.0
+		punti.append(centro + Vector2(cos(a) * raggi.x, sin(a) * raggi.y))
+	draw_colored_polygon(punti, colore)
+
+
+# Segmento spesso fatto con un poligono a quattro lati (si disegna insieme agli altri, a differenza delle righe)
+func _striscia(da: Vector2, a: Vector2, spessore: float, colore: Color):
+	var lato := (a - da).normalized().tangent() * spessore * 0.5
+	draw_colored_polygon(PoolVector2Array([da + lato, a + lato, a - lato, da - lato]), colore)
