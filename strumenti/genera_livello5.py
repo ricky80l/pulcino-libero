@@ -8,6 +8,7 @@
 # il ruscello con l'isolotto e il suo soffione (in alto sopra l'acqua, nascosto, l'uovo d'oro),
 # l'ultimo tratto tra tronchi e fascine, la pulcina lontana sulla collinetta, la piuma e il cancelletto.
 # Lungo circa 9.500 (vedi CLAUDE.md, "Livelli sempre più ricchi").
+# Le api ronzanti (Tappa 26) volano avanti e indietro tra i fiori: la prima vicino alla partenza, con calma.
 import sys
 from livelli import *
 
@@ -125,4 +126,9 @@ scrivi_livello(sys.argv[1], "Livello5", "Prato", pezzi, chicchi, nidi, rompibili
                uscita=(9240, 610), partenza=(200, 610), limite_destro=LARGO, proprieta_livello=proprieta,
                atmosfera="prato", uovo=(7300, 130), soffioni=soffioni, correnti=correnti,
                # la pulcina lontana sulla collinetta e la piuma, vicino all'uscita
-               indizi=[(8760, 640, "sagoma", 0.6), (9050, 640, "piuma", 1.25)])
+               indizi=[(8760, 640, "sagoma", 0.6), (9050, 640, "piuma", 1.25)],
+               # api: capo sinistro del giro (a metà dell'onda), lunghezza del giro, quanto sale e scende
+               api=[(500, 535, 200, 30),       # la prima: prato aperto vicino alla partenza, per conoscerla
+                    (5560, 525, 330, 40),      # strada bassa, sopra il tronco
+                    (7660, 540, 320, 45),      # ultimo tratto: nel punto più basso sfiora il pulcino, si passa al momento giusto
+                    (8160, 515, 300, 50)])     # ultimo tratto, vicino al sasso

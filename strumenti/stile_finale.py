@@ -24,7 +24,7 @@ PROGETTO = os.path.dirname(QUI)
 GRAFICA = os.path.join(PROGETTO, "assets", "grafica")
 GODOT = r"C:\Users\ricca\Downloads\Godot_v3.6.3-stable_win64.exe\Godot_v3.6.3-stable_win64.exe"
 
-PERSONAGGI = ("pulcino/", "oca/", "topo/", "talpa/", "operatori/", "accessori/", "autista/")
+PERSONAGGI = ("pulcino/", "oca/", "topo/", "talpa/", "operatori/", "accessori/", "autista/", "ape/")
 SOLO_RAFFINATI = re.compile(r"(occhio|becco|sopracciglio|esclamativo|zampa|bagliore|etichetta|nebbia|vignetta|mattoni"
                             r"|cono_rotola|uscita|gamba|uovo_vuoto|stella_vuota)")
 NON_TOCCARE = ("atmosfera/vignetta",)  # colori già pensati per la luce: si trasformano in immagine e basta

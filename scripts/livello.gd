@@ -108,6 +108,7 @@ const ICONE_NEMICI := {
 	"res://scripts/oca.gd": preload("res://assets/grafica/oggetti/icona_oca.png"),
 	"res://scripts/talpa.gd": preload("res://assets/grafica/talpa/talpa.png"),
 	"res://scripts/coni.gd": preload("res://assets/grafica/magazzino/cono_in_piedi.png"),
+	"res://scripts/ape.gd": preload("res://assets/grafica/oggetti/icona_ape.png"),
 }
 const CREMA := Color(1, 0.96, 0.86)
 const PASSO_STELLE := 320.0

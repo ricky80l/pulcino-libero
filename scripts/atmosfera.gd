@@ -37,6 +37,8 @@ func _prepara():
 			for chi in livello.get_node(gruppo).get_children():
 				if chi is KinematicBody2D:
 					_aggiungi_ombra(livello, chi, 34.0)  # l'oca
+				elif chi.is_in_group("api"):
+					_aggiungi_ombra(livello, chi, 24.0)  # l'ombra dell'ape a terra fa capire quanto vola in alto
 				elif gruppo == "Operatori":
 					_aggiungi_ombra(livello, chi, 40.0)
 

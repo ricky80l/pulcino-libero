@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -18,6 +18,7 @@
 [ext_resource path="res://scripts/indizio_pulcina.gd" type="Script" id=16]
 [ext_resource path="res://scripts/soffione.gd" type="Script" id=17]
 [ext_resource path="res://scripts/corrente.gd" type="Script" id=18]
+[ext_resource path="res://scripts/ape.gd" type="Script" id=19]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -704,6 +705,30 @@ position = Vector2( 9240, 610 )
 script = ExtResource( 5 )
 
 [node name="Nemici" type="Node2D" parent="."]
+
+[node name="Ape1" type="Area2D" parent="Nemici"]
+position = Vector2( 500, 535 )
+script = ExtResource( 19 )
+larghezza_giro = 200.0
+onda = 30.0
+
+[node name="Ape2" type="Area2D" parent="Nemici"]
+position = Vector2( 5560, 525 )
+script = ExtResource( 19 )
+larghezza_giro = 330.0
+onda = 40.0
+
+[node name="Ape3" type="Area2D" parent="Nemici"]
+position = Vector2( 7660, 540 )
+script = ExtResource( 19 )
+larghezza_giro = 320.0
+onda = 45.0
+
+[node name="Ape4" type="Area2D" parent="Nemici"]
+position = Vector2( 8160, 515 )
+script = ExtResource( 19 )
+larghezza_giro = 300.0
+onda = 50.0
 
 [node name="Atmosfera" type="Node" parent="."]
 script = ExtResource( 14 )

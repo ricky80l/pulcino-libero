@@ -120,4 +120,20 @@ salva("curioso", tono(1300, 1150, 0.09, vibrato_hz=20, vibrato_ampiezza=0.02, vo
 # la piuma della pulcina: un soffio d'aria e due campanellini lievi, morbidi (più delicati dell'uovo d'oro)
 salva("piuma", mescola(rumore(0.5, volume=0.12, morbidezza=0.92),
                        silenzio(0.05) + tono(1760, 1760, 0.3, armonica=0.2, volume=0.22) + tono(2217, 2217, 0.4, vibrato_hz=8, vibrato_ampiezza=0.01, armonica=0.2, volume=0.18)))
+# ronzio dell'ape: un "bzzz" che si ripete senza scalini (un secondo esatto, vibrato a giri interi), si sente solo da vicino
+def ronzio():
+    campioni = []
+    fase = 0.0
+    n = FREQ
+    for i in range(n):
+        t = i / FREQ
+        f = 190.0 * (1 + 0.035 * math.sin(2 * math.pi * 7 * t))
+        fase += 2 * math.pi * f / FREQ
+        s = math.sin(fase) + 0.55 * math.sin(2 * fase) + 0.35 * math.sin(3 * fase) + 0.2 * math.sin(5 * fase)
+        battito = 0.85 + 0.15 * math.sin(2 * math.pi * 30 * t)  # le ali che sbattono
+        campioni.append(s * battito * 0.22)
+    return campioni
+
+
+salva("ronzio", ronzio())
 print("suoni creati in", os.path.abspath(CARTELLA))

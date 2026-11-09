@@ -309,3 +309,5 @@ Il livello del prato, con le correnti d'aria e i soffioni giganti.
 ### Tappa 26 — L'ape ronzante
 L'ape, con le sue animazioni esagerate e il suo ronzio, sistemata nel prato dove rende il livello più vivo senza frustrare. Il suo giro si vede bene e il ronzio avvisa quando è vicina. Se tocca il pulcino, lui riparte dall'ultimo nido.
 **STOP:** fine del livello 5.
+
+**Com'è fatta (Tappa 26):** `scripts/ape.gd` (disegni da `strumenti/disegni_ape.py`, suono `ronzio` in loop da `genera_suoni.py`, si sente solo entro circa 560 pixel). Vola avanti e indietro lungo il suo giro ondeggiando, ai capi annusa l'aria e si gira; il giro è segnato da una scia di puntini di polline e la sua ombra a terra dice quanto è in alto; se prende il pulcino fa una giravolta contenta. Nel prato ce ne sono quattro (parametro `api` di `livelli.py`): a piedi sulle prime si passa sotto, sui tronchi e con l'ape dell'ultimo tratto bisogna scegliere il momento. Sotto la stellina «Mai preso» del prato c'è il suo musetto.
