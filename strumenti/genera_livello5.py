@@ -37,15 +37,16 @@ pezzi = [
     ("Mucchio1b", 1560, 460, 200, 100, SAS, {}),
     ("Mucchio1c", 1620, 360, 140, 100, SAS, {}),
 
-    # 3: la prima corrente d'aria (qui sotto, Corrente1) e la rupe: col doppio salto non ci si arriva
-    ("Rupe1a", 3100, 540, 240, 100, SAS, {}),
-    ("Rupe1b", 3115, 420, 210, 120, SAS, {}),
-    ("Rupe1c", 3130, 300, 180, 120, SAS, {}),
+    # 3: la prima corrente d'aria (qui sotto, Corrente1) e la rupe: col doppio salto non ci si arriva.
+    #    Le rupi sono colonne di sassi tutti larghi uguali: nessun gradino scoperto su cui arrampicarsi
+    ("Rupe1a", 3110, 540, 220, 100, SAS, {}),
+    ("Rupe1b", 3110, 420, 220, 120, SAS, {}),
+    ("Rupe1c", 3110, 300, 220, 120, SAS, {}),
 
     # 4: il soffione (qui sotto, Soffione1) e un'altra rupe, poi il terzo fosso
-    ("Rupe2a", 4300, 540, 240, 100, SAS, {}),
-    ("Rupe2b", 4315, 410, 210, 130, SAS, {}),
-    ("Rupe2c", 4330, 290, 180, 120, SAS, {}),
+    ("Rupe2a", 4310, 540, 220, 100, SAS, {}),
+    ("Rupe2b", 4310, 410, 220, 130, SAS, {}),
+    ("Rupe2c", 4310, 290, 220, 120, SAS, {}),
 
     # 5: due strade. In basso: fascine, tronco e sasso. In alto: due correnti e i chicchi in cielo
     ("Tronco2", 5700, 588, 190, 52, TRO, {}),

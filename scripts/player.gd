@@ -56,6 +56,7 @@ var doppio_usato := false  # il secondo salto si può fare una sola volta prima 
 var tenuto := false  # in mano a un operatore del magazzino, che sta per lanciarlo
 var planando := false  # sta scendendo ad ali aperte
 var in_corrente := 0.0  # > 0: una corrente d'aria lo sta sollevando (la tiene viva la corrente stessa, vedi corrente.gd)
+var senza_planare := 1.0  # da quanto non plana: il «frrr» riparte solo dopo una vera pausa (non in cima a una corrente)
 var volte_colpito := 0  # quante volte un nemico l'ha preso in questa partita (per la stellina "mai preso")
 var timer_lancio := 0.0  # dopo un lancio vola senza frenare finché non tocca terra
 
@@ -137,10 +138,11 @@ func _physics_process(delta):
 	# Planata: scendendo con salto tenuto premuto apre le ali (non mentre sale, non a terra)
 	var prima := planando
 	planando = puo_planare and not a_terra and Input.is_action_pressed("jump") and (velocita.y > 0 or in_corrente > 0)
-	if planando and not prima:
+	if planando and not prima and senza_planare > 0.8:
 		Suoni.suona("plana", 0.1, -4.0)
 		aspetto.pigola()
 		Effetti.sbuffo(get_parent(), position, Color(1.0, 0.95, 0.75), 6, 70.0)
+	senza_planare = 0.0 if planando else senza_planare + delta
 
 	var fattore := 1.0 if a_terra else (controllo_planata if planando else controllo_in_aria)
 	if timer_lancio > 0:

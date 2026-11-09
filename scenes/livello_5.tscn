@@ -138,40 +138,40 @@ tipo = 46
 dimensioni = Vector2( 140, 100 )
 
 [node name="Rupe1a" type="StaticBody2D" parent="Prato"]
-position = Vector2( 3100, 540 )
+position = Vector2( 3110, 540 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 240, 100 )
+dimensioni = Vector2( 220, 100 )
 
 [node name="Rupe1b" type="StaticBody2D" parent="Prato"]
-position = Vector2( 3115, 420 )
+position = Vector2( 3110, 420 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 210, 120 )
+dimensioni = Vector2( 220, 120 )
 
 [node name="Rupe1c" type="StaticBody2D" parent="Prato"]
-position = Vector2( 3130, 300 )
+position = Vector2( 3110, 300 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 180, 120 )
+dimensioni = Vector2( 220, 120 )
 
 [node name="Rupe2a" type="StaticBody2D" parent="Prato"]
-position = Vector2( 4300, 540 )
+position = Vector2( 4310, 540 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 240, 100 )
+dimensioni = Vector2( 220, 100 )
 
 [node name="Rupe2b" type="StaticBody2D" parent="Prato"]
-position = Vector2( 4315, 410 )
+position = Vector2( 4310, 410 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 210, 130 )
+dimensioni = Vector2( 220, 130 )
 
 [node name="Rupe2c" type="StaticBody2D" parent="Prato"]
-position = Vector2( 4330, 290 )
+position = Vector2( 4310, 290 )
 script = ExtResource( 2 )
 tipo = 46
-dimensioni = Vector2( 180, 120 )
+dimensioni = Vector2( 220, 120 )
 
 [node name="Tronco2" type="StaticBody2D" parent="Prato"]
 position = Vector2( 5700, 588 )
