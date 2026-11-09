@@ -221,6 +221,47 @@
 			font-size: 18px;
 			line-height: 1.3;
 		}
+
+		/* Invito a installare il gioco come app (si apre a schermo intero, senza l'avviso del browser) */
+		#installa {
+			position: fixed;
+			top: 10px;
+			left: 50%;
+			transform: translate(-50%, -150%);
+			transition: transform 0.45s cubic-bezier(.3,1.4,.6,1);
+			z-index: 10;
+			display: none;
+			align-items: center;
+			gap: 12px;
+			width: min(92vw, 620px);
+			box-sizing: border-box;
+			padding: 8px 12px;
+			background: #fff5dc;
+			border: 3px solid #7a4e12;
+			border-radius: 16px;
+			box-shadow: 0 5px 0 #7a4e12;
+			font-family: 'Fredoka', 'Trebuchet MS', sans-serif;
+			color: #7a4e12;
+			text-align: left;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+		#installa.visibile { transform: translate(-50%, 0); }
+		#installa img { width: 44px; height: 44px; border-radius: 12px; flex: none; }
+		#installa .testo { flex: 1 1 auto; min-width: 0; font-size: 15px; line-height: 1.25; }
+		#installa .testo b { font-size: 16px; }
+		#installa .pulsanti { display: flex; gap: 8px; flex: none; }
+		#installa button {
+			font-family: inherit;
+			font-size: 15px;
+			padding: 6px 12px;
+			border-radius: 12px;
+			border: 3px solid #7a4e12;
+			background: #fff5dc;
+			color: #7a4e12;
+			cursor: pointer;
+		}
+		#installa button.principale { background: #2f9e8f; color: #fff5dc; }
 	</style>
 $GODOT_HEAD_INCLUDE
 </head>
@@ -276,6 +317,12 @@ $GODOT_HEAD_INCLUDE
 
 		<div id='scritta'>Il pulcino sta arrivando…</div>
 		<div id='avviso'></div>
+	</div>
+
+	<div id='installa'>
+		<img src='icona-192.png' alt='' />
+		<div class='testo'></div>
+		<div class='pulsanti'></div>
 	</div>
 
 	<script type='text/javascript' src='$GODOT_URL'></script>
@@ -364,8 +411,88 @@ $GODOT_HEAD_INCLUDE
 				}).then(function() {
 					schermata.classList.add('sparisci');
 					setTimeout(function() { schermata.style.display = 'none'; }, 700);
+					giocoPartito = true;
+					setTimeout(invitaInstallare, 2500);
 				}, mostraErrore);
 			}
+
+			// ---- Invito a installare il gioco come app (solo sul telefono, se non è già installato) ----
+			var giocoPartito = false;
+			var richiestaInstallazione = null;  // Android/Chrome: la finestra di installazione, pronta da aprire
+			var banda = document.getElementById('installa');
+			var bandaTesto = banda.querySelector('.testo');
+			var bandaPulsanti = banda.querySelector('.pulsanti');
+			var suTelefono = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+			var suIphone = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+			var GIORNI_PAUSA = 7;  // dopo «Non ora» non lo ripropone per una settimana
+
+			// i tocchi sul messaggio non devono far partire lo schermo intero del gioco
+			banda.addEventListener('touchend', function(e) { e.stopPropagation(); });
+
+			function ricorda(chiave, valore) {
+				try { localStorage.setItem(chiave, valore); } catch (e) {}
+			}
+			function rimandatoDiRecente() {
+				try {
+					var quando = parseInt(localStorage.getItem('pulcino_installa_rimandato') || '0', 10);
+					return localStorage.getItem('pulcino_installato') === 'si' || (Date.now() - quando) < GIORNI_PAUSA * 86400000;
+				} catch (e) { return false; }
+			}
+			function pulsante(testo, principale, azione) {
+				var b = document.createElement('button');
+				b.textContent = testo;
+				if (principale) { b.className = 'principale'; }
+				b.addEventListener('click', azione);
+				bandaPulsanti.appendChild(b);
+			}
+			function nascondi() {
+				banda.classList.remove('visibile');
+				setTimeout(function() { banda.style.display = 'none'; }, 500);
+			}
+			function mostra() {
+				banda.style.display = 'flex';
+				setTimeout(function() { banda.classList.add('visibile'); }, 30);
+			}
+			function invitaInstallare() {
+				if (comeApp || !suTelefono || rimandatoDiRecente() || banda.style.display === 'flex') {
+					return;
+				}
+				bandaPulsanti.innerHTML = '';
+				if (richiestaInstallazione) {
+					bandaTesto.innerHTML = '<b>Gioca come un\'app!</b><br />Installa il Pulcino Libero: si apre a schermo intero, senza barre né avvisi.';
+					pulsante('Installa', true, function() {
+						nascondi();
+						richiestaInstallazione.prompt();
+						richiestaInstallazione.userChoice.then(function(scelta) {
+							if (scelta.outcome === 'accepted') { ricorda('pulcino_installato', 'si'); }
+							else { ricorda('pulcino_installa_rimandato', String(Date.now())); }
+							richiestaInstallazione = null;
+						});
+					});
+					pulsante('Non ora', false, function() {
+						ricorda('pulcino_installa_rimandato', String(Date.now()));
+						nascondi();
+					});
+					mostra();
+				} else if (suIphone && !navigator.standalone) {
+					bandaTesto.innerHTML = '<b>Gioca a schermo intero!</b><br />Tocca <b>Condividi</b> e poi «<b>Aggiungi alla schermata Home</b>».';
+					pulsante('Ho capito', true, function() {
+						ricorda('pulcino_installa_rimandato', String(Date.now()));
+						nascondi();
+					});
+					mostra();
+				}
+			}
+			// Chrome avvisa quando il gioco si può installare: si tiene da parte la sua finestra per il nostro pulsante
+			window.addEventListener('beforeinstallprompt', function(e) {
+				e.preventDefault();
+				richiestaInstallazione = e;
+				if (giocoPartito) { invitaInstallare(); }
+			});
+			window.addEventListener('appinstalled', function() {
+				ricorda('pulcino_installato', 'si');
+				nascondi();
+			});
 		})();
 	//]]></script>
 </body>
