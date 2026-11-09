@@ -55,6 +55,7 @@ var colpiti := []  # ostacoli già colpiti in questa beccata
 var doppio_usato := false  # il secondo salto si può fare una sola volta prima di toccare terra
 var tenuto := false  # in mano a un operatore del magazzino, che sta per lanciarlo
 var planando := false  # sta scendendo ad ali aperte
+var in_corrente := 0.0  # > 0: una corrente d'aria lo sta sollevando (la tiene viva la corrente stessa, vedi corrente.gd)
 var volte_colpito := 0  # quante volte un nemico l'ha preso in questa partita (per la stellina "mai preso")
 var timer_lancio := 0.0  # dopo un lancio vola senza frenare finché non tocca terra
 
@@ -135,7 +136,7 @@ func _physics_process(delta):
 	var direzione := Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	# Planata: scendendo con salto tenuto premuto apre le ali (non mentre sale, non a terra)
 	var prima := planando
-	planando = puo_planare and not a_terra and velocita.y > 0 and Input.is_action_pressed("jump")
+	planando = puo_planare and not a_terra and Input.is_action_pressed("jump") and (velocita.y > 0 or in_corrente > 0)
 	if planando and not prima:
 		Suoni.suona("plana", 0.1, -4.0)
 		aspetto.pigola()
@@ -188,7 +189,10 @@ func _physics_process(delta):
 
 	# Gravità: più forte in discesa; planando la caduta frena fino a un volo lento
 	var g := gravita if velocita.y < 0 else gravita_caduta
-	if planando:
+	if in_corrente > 0:
+		# dentro una corrente d'aria: sale ad ali aperte, la spinta la dà la corrente (niente gravità né frenata)
+		in_corrente -= delta
+	elif planando:
 		velocita.y = move_toward(velocita.y + g * delta, caduta_planata, 3200.0 * delta)
 	else:
 		velocita.y = min(velocita.y + g * delta, velocita_caduta_max)

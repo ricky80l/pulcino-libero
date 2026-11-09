@@ -304,6 +304,8 @@ Il livello del prato, con le correnti d'aria e i soffioni giganti.
 
 **STOP:** il livello si completa dall'inizio alla fine ed è divertente.
 
+**Com'è fatto (Tappa 25):** `scenes/livello_5.tscn` da `strumenti/genera_livello5.py`, lungo circa 9.500, al posto dell'area di prova della planata (tolta). Pezzi nuovi in `assets/grafica/prato/` (`disegni_prato.py`): sasso col muschio e tronco caduto (si sale sopra; le rupi sono sassi impilati), fascina da beccare (rompibile), fiori, soffione, sagoma della pulcina. Le **correnti d'aria** (`scripts/corrente.gd`) sollevano chi ci sta dentro tenendo premuto salto, anche se ci arriva planando (`player.in_corrente`); il **soffione** (`scripts/soffione.gd`) beccato fa nascere una corrente per 7 secondi e poi ricresce. Fossi e ruscello sono d'acqua. Uovo d'oro in alto sopra il ruscello, raggiungibile dalla corrente del soffione dell'isolotto. Indizio della pulcina: la sua sagoma spunta un attimo sulla collinetta prima dell'uscita, poi la piuma. I chicchi in volo stanno sulle traiettorie registrate.
+
 ### Tappa 26 — L'ape ronzante
 L'ape, con le sue animazioni esagerate e il suo ronzio, sistemata nel prato dove rende il livello più vivo senza frustrare. Il suo giro si vede bene e il ronzio avvisa quando è vicina. Se tocca il pulcino, lui riparte dall'ultimo nido.
 **STOP:** fine del livello 5.

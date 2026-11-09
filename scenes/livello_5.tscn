@@ -1,0 +1,794 @@
+[gd_scene load_steps=20 format=2]
+
+[ext_resource path="res://scripts/livello.gd" type="Script" id=1]
+[ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/controlli_touch.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/chicco.gd" type="Script" id=5]
+[ext_resource path="res://scripts/nido.gd" type="Script" id=6]
+[ext_resource path="res://scripts/topo.gd" type="Script" id=7]
+[ext_resource path="res://assets/grafica/oggetti/etichetta.png" type="Texture" id=8]
+[ext_resource path="res://assets/grafica/oggetti/chicco.png" type="Texture" id=9]
+[ext_resource path="res://assets/font/fredoka_contatore.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/font/fredoka_messaggio.tres" type="DynamicFont" id=11]
+[ext_resource path="res://scripts/pausa.gd" type="Script" id=12]
+[ext_resource path="res://scripts/rompibile.gd" type="Script" id=13]
+[ext_resource path="res://scripts/atmosfera.gd" type="Script" id=14]
+[ext_resource path="res://scripts/uovo_oro.gd" type="Script" id=15]
+[ext_resource path="res://scripts/indizio_pulcina.gd" type="Script" id=16]
+[ext_resource path="res://scripts/soffione.gd" type="Script" id=17]
+[ext_resource path="res://scripts/corrente.gd" type="Script" id=18]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 30, 30 )
+
+[node name="Livello5" type="Node2D"]
+script = ExtResource( 1 )
+numero = 5
+frase_fine = "Hai attraversato il prato!"
+beccata = true
+doppio_salto = true
+planata = true
+abilita_nuova = "planata"
+
+[node name="Prato" type="Node2D" parent="."]
+
+[node name="PratoA" type="StaticBody2D" parent="Prato"]
+position = Vector2( 0, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 1860, 80 )
+
+[node name="PratoB" type="StaticBody2D" parent="Prato"]
+position = Vector2( 2400, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 1020, 80 )
+
+[node name="PratoC" type="StaticBody2D" parent="Prato"]
+position = Vector2( 3900, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 720, 80 )
+
+[node name="PratoD" type="StaticBody2D" parent="Prato"]
+position = Vector2( 5250, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 1500, 80 )
+
+[node name="Fosso1" type="StaticBody2D" parent="Prato"]
+z_index = -1
+position = Vector2( 1860, 680 )
+script = ExtResource( 2 )
+tipo = 20
+dimensioni = Vector2( 540, 40 )
+solido = false
+
+[node name="Fosso2" type="StaticBody2D" parent="Prato"]
+z_index = -1
+position = Vector2( 3420, 680 )
+script = ExtResource( 2 )
+tipo = 20
+dimensioni = Vector2( 480, 40 )
+solido = false
+
+[node name="Fosso3" type="StaticBody2D" parent="Prato"]
+z_index = -1
+position = Vector2( 4620, 680 )
+script = ExtResource( 2 )
+tipo = 20
+dimensioni = Vector2( 630, 40 )
+solido = false
+
+[node name="Ruscello" type="StaticBody2D" parent="Prato"]
+z_index = -1
+position = Vector2( 6750, 680 )
+script = ExtResource( 2 )
+tipo = 20
+dimensioni = Vector2( 800, 40 )
+solido = false
+
+[node name="PratoE" type="StaticBody2D" parent="Prato"]
+position = Vector2( 7550, 640 )
+script = ExtResource( 2 )
+tipo = 8
+dimensioni = Vector2( 1990, 80 )
+
+[node name="MuroSinistro" type="StaticBody2D" parent="Prato"]
+position = Vector2( -40, 0 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 40, 720 )
+
+[node name="MuroDestro" type="StaticBody2D" parent="Prato"]
+position = Vector2( 9500, 0 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 40, 720 )
+
+[node name="Sasso1" type="StaticBody2D" parent="Prato"]
+position = Vector2( 880, 575 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 130, 65 )
+
+[node name="Tronco1" type="StaticBody2D" parent="Prato"]
+position = Vector2( 1100, 588 )
+script = ExtResource( 2 )
+tipo = 47
+dimensioni = Vector2( 190, 52 )
+
+[node name="Mucchio1a" type="StaticBody2D" parent="Prato"]
+position = Vector2( 1500, 560 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 260, 80 )
+
+[node name="Mucchio1b" type="StaticBody2D" parent="Prato"]
+position = Vector2( 1560, 460 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 200, 100 )
+
+[node name="Mucchio1c" type="StaticBody2D" parent="Prato"]
+position = Vector2( 1620, 360 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 140, 100 )
+
+[node name="Rupe1a" type="StaticBody2D" parent="Prato"]
+position = Vector2( 3100, 540 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 240, 100 )
+
+[node name="Rupe1b" type="StaticBody2D" parent="Prato"]
+position = Vector2( 3115, 420 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 210, 120 )
+
+[node name="Rupe1c" type="StaticBody2D" parent="Prato"]
+position = Vector2( 3130, 300 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 180, 120 )
+
+[node name="Rupe2a" type="StaticBody2D" parent="Prato"]
+position = Vector2( 4300, 540 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 240, 100 )
+
+[node name="Rupe2b" type="StaticBody2D" parent="Prato"]
+position = Vector2( 4315, 410 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 210, 130 )
+
+[node name="Rupe2c" type="StaticBody2D" parent="Prato"]
+position = Vector2( 4330, 290 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 180, 120 )
+
+[node name="Tronco2" type="StaticBody2D" parent="Prato"]
+position = Vector2( 5700, 588 )
+script = ExtResource( 2 )
+tipo = 47
+dimensioni = Vector2( 190, 52 )
+
+[node name="Sasso2" type="StaticBody2D" parent="Prato"]
+position = Vector2( 5980, 560 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 150, 80 )
+
+[node name="Mucchio2a" type="StaticBody2D" parent="Prato"]
+position = Vector2( 6450, 560 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 220, 80 )
+
+[node name="Mucchio2b" type="StaticBody2D" parent="Prato"]
+position = Vector2( 6500, 450 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 160, 110 )
+
+[node name="Isolotto" type="StaticBody2D" parent="Prato"]
+position = Vector2( 7050, 575 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 140, 145 )
+
+[node name="Tronco3" type="StaticBody2D" parent="Prato"]
+position = Vector2( 7800, 588 )
+script = ExtResource( 2 )
+tipo = 47
+dimensioni = Vector2( 190, 52 )
+
+[node name="Sasso3" type="StaticBody2D" parent="Prato"]
+position = Vector2( 8300, 575 )
+script = ExtResource( 2 )
+tipo = 46
+dimensioni = Vector2( 130, 65 )
+
+[node name="Cancello" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 9150, 540 )
+script = ExtResource( 2 )
+tipo = 18
+dimensioni = Vector2( 130, 100 )
+solido = false
+
+[node name="Fiori1" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 330, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori2" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 560, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori3" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 1000, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori4" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 1350, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori5" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 2470, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori6" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 2700, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori7" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 3500, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori8" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 4000, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori9" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 4700, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori10" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 5300, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori11" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 5550, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori12" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 6150, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori13" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 7650, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori14" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 8050, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori15" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 8500, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori16" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 8850, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Fiori17" type="StaticBody2D" parent="Prato"]
+z_index = -4
+position = Vector2( 9350, 600 )
+script = ExtResource( 2 )
+tipo = 48
+dimensioni = Vector2( 80, 40 )
+solido = false
+
+[node name="Rompibili" type="Node2D" parent="."]
+
+[node name="Rompibile1" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 720, 640 )
+script = ExtResource( 13 )
+tipo = 5
+resistenza = 1
+
+[node name="Rompibile2" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 1340, 640 )
+script = ExtResource( 13 )
+tipo = 5
+resistenza = 1
+
+[node name="Rompibile3" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 5500, 640 )
+script = ExtResource( 13 )
+tipo = 5
+resistenza = 1
+
+[node name="Rompibile4" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 6270, 640 )
+script = ExtResource( 13 )
+tipo = 5
+resistenza = 2
+
+[node name="Rompibile5" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 8060, 640 )
+script = ExtResource( 13 )
+tipo = 5
+resistenza = 1
+
+[node name="Nidi" type="Node2D" parent="."]
+
+[node name="Nido1" type="Area2D" parent="Nidi"]
+position = Vector2( 450, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido2" type="Area2D" parent="Nidi"]
+position = Vector2( 1430, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido3" type="Area2D" parent="Nidi"]
+position = Vector2( 2480, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido4" type="Area2D" parent="Nidi"]
+position = Vector2( 3960, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido5" type="Area2D" parent="Nidi"]
+position = Vector2( 5320, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido6" type="Area2D" parent="Nidi"]
+position = Vector2( 6400, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido7" type="Area2D" parent="Nidi"]
+position = Vector2( 7620, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido8" type="Area2D" parent="Nidi"]
+position = Vector2( 8600, 640 )
+script = ExtResource( 6 )
+
+[node name="UovoOro" type="Area2D" parent="."]
+position = Vector2( 7300, 130 )
+script = ExtResource( 15 )
+
+[node name="Soffione1" type="StaticBody2D" parent="."]
+position = Vector2( 4150, 640 )
+script = ExtResource( 17 )
+altezza_corrente = 460.0
+
+[node name="Soffione2" type="StaticBody2D" parent="."]
+position = Vector2( 7120, 575 )
+script = ExtResource( 17 )
+altezza_corrente = 450.0
+
+[node name="Corrente1" type="Area2D" parent="."]
+position = Vector2( 2900, 640 )
+script = ExtResource( 18 )
+larghezza = 110.0
+altezza = 470.0
+
+[node name="Corrente2" type="Area2D" parent="."]
+position = Vector2( 5400, 640 )
+script = ExtResource( 18 )
+larghezza = 110.0
+altezza = 430.0
+
+[node name="Corrente3" type="Area2D" parent="."]
+position = Vector2( 5950, 560 )
+script = ExtResource( 18 )
+larghezza = 110.0
+altezza = 300.0
+
+[node name="Indizio1" type="Node2D" parent="."]
+position = Vector2( 8760, 640 )
+script = ExtResource( 16 )
+cosa = "sagoma"
+grandezza = 0.6
+
+[node name="Indizio2" type="Node2D" parent="."]
+position = Vector2( 9050, 640 )
+script = ExtResource( 16 )
+cosa = "piuma"
+grandezza = 1.25
+
+[node name="Chicchi" type="Node2D" parent="."]
+
+[node name="Chicco1" type="Area2D" parent="Chicchi"]
+position = Vector2( 300, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco2" type="Area2D" parent="Chicchi"]
+position = Vector2( 380, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco3" type="Area2D" parent="Chicchi"]
+position = Vector2( 800, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco4" type="Area2D" parent="Chicchi"]
+position = Vector2( 945, 545 )
+script = ExtResource( 5 )
+
+[node name="Chicco5" type="Area2D" parent="Chicchi"]
+position = Vector2( 1195, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco6" type="Area2D" parent="Chicchi"]
+position = Vector2( 1250, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco7" type="Area2D" parent="Chicchi"]
+position = Vector2( 1420, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco8" type="Area2D" parent="Chicchi"]
+position = Vector2( 1560, 530 )
+script = ExtResource( 5 )
+
+[node name="Chicco9" type="Area2D" parent="Chicchi"]
+position = Vector2( 1630, 430 )
+script = ExtResource( 5 )
+
+[node name="Chicco10" type="Area2D" parent="Chicchi"]
+position = Vector2( 1690, 330 )
+script = ExtResource( 5 )
+
+[node name="Chicco11" type="Area2D" parent="Chicchi"]
+position = Vector2( 1945, 210 )
+script = ExtResource( 5 )
+
+[node name="Chicco12" type="Area2D" parent="Chicchi"]
+position = Vector2( 2070, 255 )
+script = ExtResource( 5 )
+
+[node name="Chicco13" type="Area2D" parent="Chicchi"]
+position = Vector2( 2200, 302 )
+script = ExtResource( 5 )
+
+[node name="Chicco14" type="Area2D" parent="Chicchi"]
+position = Vector2( 2330, 350 )
+script = ExtResource( 5 )
+
+[node name="Chicco15" type="Area2D" parent="Chicchi"]
+position = Vector2( 2520, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco16" type="Area2D" parent="Chicchi"]
+position = Vector2( 2900, 500 )
+script = ExtResource( 5 )
+
+[node name="Chicco17" type="Area2D" parent="Chicchi"]
+position = Vector2( 2900, 380 )
+script = ExtResource( 5 )
+
+[node name="Chicco18" type="Area2D" parent="Chicchi"]
+position = Vector2( 2900, 260 )
+script = ExtResource( 5 )
+
+[node name="Chicco19" type="Area2D" parent="Chicchi"]
+position = Vector2( 3190, 270 )
+script = ExtResource( 5 )
+
+[node name="Chicco20" type="Area2D" parent="Chicchi"]
+position = Vector2( 3270, 270 )
+script = ExtResource( 5 )
+
+[node name="Chicco21" type="Area2D" parent="Chicchi"]
+position = Vector2( 3500, 152 )
+script = ExtResource( 5 )
+
+[node name="Chicco22" type="Area2D" parent="Chicchi"]
+position = Vector2( 3620, 196 )
+script = ExtResource( 5 )
+
+[node name="Chicco23" type="Area2D" parent="Chicchi"]
+position = Vector2( 3740, 240 )
+script = ExtResource( 5 )
+
+[node name="Chicco24" type="Area2D" parent="Chicchi"]
+position = Vector2( 4040, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco25" type="Area2D" parent="Chicchi"]
+position = Vector2( 4150, 420 )
+script = ExtResource( 5 )
+
+[node name="Chicco26" type="Area2D" parent="Chicchi"]
+position = Vector2( 4150, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco27" type="Area2D" parent="Chicchi"]
+position = Vector2( 4390, 260 )
+script = ExtResource( 5 )
+
+[node name="Chicco28" type="Area2D" parent="Chicchi"]
+position = Vector2( 4470, 260 )
+script = ExtResource( 5 )
+
+[node name="Chicco29" type="Area2D" parent="Chicchi"]
+position = Vector2( 4720, 150 )
+script = ExtResource( 5 )
+
+[node name="Chicco30" type="Area2D" parent="Chicchi"]
+position = Vector2( 4900, 215 )
+script = ExtResource( 5 )
+
+[node name="Chicco31" type="Area2D" parent="Chicchi"]
+position = Vector2( 5080, 281 )
+script = ExtResource( 5 )
+
+[node name="Chicco32" type="Area2D" parent="Chicchi"]
+position = Vector2( 5600, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco33" type="Area2D" parent="Chicchi"]
+position = Vector2( 5795, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco34" type="Area2D" parent="Chicchi"]
+position = Vector2( 6055, 525 )
+script = ExtResource( 5 )
+
+[node name="Chicco35" type="Area2D" parent="Chicchi"]
+position = Vector2( 6380, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco36" type="Area2D" parent="Chicchi"]
+position = Vector2( 5400, 400 )
+script = ExtResource( 5 )
+
+[node name="Chicco37" type="Area2D" parent="Chicchi"]
+position = Vector2( 5400, 250 )
+script = ExtResource( 5 )
+
+[node name="Chicco38" type="Area2D" parent="Chicchi"]
+position = Vector2( 5600, 218 )
+script = ExtResource( 5 )
+
+[node name="Chicco39" type="Area2D" parent="Chicchi"]
+position = Vector2( 5780, 284 )
+script = ExtResource( 5 )
+
+[node name="Chicco40" type="Area2D" parent="Chicchi"]
+position = Vector2( 6010, 246 )
+script = ExtResource( 5 )
+
+[node name="Chicco41" type="Area2D" parent="Chicchi"]
+position = Vector2( 6130, 200 )
+script = ExtResource( 5 )
+
+[node name="Chicco42" type="Area2D" parent="Chicchi"]
+position = Vector2( 6300, 265 )
+script = ExtResource( 5 )
+
+[node name="Chicco43" type="Area2D" parent="Chicchi"]
+position = Vector2( 6560, 530 )
+script = ExtResource( 5 )
+
+[node name="Chicco44" type="Area2D" parent="Chicchi"]
+position = Vector2( 6580, 420 )
+script = ExtResource( 5 )
+
+[node name="Chicco45" type="Area2D" parent="Chicchi"]
+position = Vector2( 6820, 296 )
+script = ExtResource( 5 )
+
+[node name="Chicco46" type="Area2D" parent="Chicchi"]
+position = Vector2( 6940, 340 )
+script = ExtResource( 5 )
+
+[node name="Chicco47" type="Area2D" parent="Chicchi"]
+position = Vector2( 7040, 376 )
+script = ExtResource( 5 )
+
+[node name="Chicco48" type="Area2D" parent="Chicchi"]
+position = Vector2( 7120, 400 )
+script = ExtResource( 5 )
+
+[node name="Chicco49" type="Area2D" parent="Chicchi"]
+position = Vector2( 7120, 260 )
+script = ExtResource( 5 )
+
+[node name="Chicco50" type="Area2D" parent="Chicchi"]
+position = Vector2( 7380, 284 )
+script = ExtResource( 5 )
+
+[node name="Chicco51" type="Area2D" parent="Chicchi"]
+position = Vector2( 7560, 322 )
+script = ExtResource( 5 )
+
+[node name="Chicco52" type="Area2D" parent="Chicchi"]
+position = Vector2( 7700, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco53" type="Area2D" parent="Chicchi"]
+position = Vector2( 7895, 555 )
+script = ExtResource( 5 )
+
+[node name="Chicco54" type="Area2D" parent="Chicchi"]
+position = Vector2( 8150, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco55" type="Area2D" parent="Chicchi"]
+position = Vector2( 8365, 545 )
+script = ExtResource( 5 )
+
+[node name="Chicco56" type="Area2D" parent="Chicchi"]
+position = Vector2( 8600, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco57" type="Area2D" parent="Chicchi"]
+position = Vector2( 8900, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco58" type="Area2D" parent="Chicchi"]
+position = Vector2( 9240, 610 )
+script = ExtResource( 5 )
+
+[node name="Nemici" type="Node2D" parent="."]
+
+[node name="Atmosfera" type="Node" parent="."]
+script = ExtResource( 14 )
+tipo = "prato"
+
+[node name="Uscita" type="Area2D" parent="."]
+position = Vector2( 9240, 610 )
+
+[node name="Forma" type="CollisionShape2D" parent="Uscita"]
+shape = SubResource( 1 )
+
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 200, 610 )
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 9500
+limit_bottom = 720
+smoothing_enabled = true
+smoothing_speed = 6.0
+zoom = Vector2( 0.7, 0.7 )
+
+[node name="ControlliTouch" parent="." instance=ExtResource( 4 )]
+
+[node name="Pausa" type="CanvasLayer" parent="."]
+script = ExtResource( 12 )
+
+[node name="Interfaccia" type="CanvasLayer" parent="."]
+layer = 2
+
+[node name="Contatore" type="Control" parent="Interfaccia"]
+margin_left = 16.0
+margin_top = 12.0
+margin_right = 176.0
+margin_bottom = 68.0
+rect_pivot_offset = Vector2( 80, 28 )
+mouse_filter = 2
+
+[node name="Tavola" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_right = 160.0
+margin_bottom = 56.0
+mouse_filter = 2
+texture = ExtResource( 8 )
+expand = true
+
+[node name="Icona" type="TextureRect" parent="Interfaccia/Contatore"]
+margin_left = 18.0
+margin_top = 11.0
+margin_right = 44.0
+margin_bottom = 44.0
+mouse_filter = 2
+texture = ExtResource( 9 )
+expand = true
+
+[node name="Numero" type="Label" parent="Interfaccia/Contatore"]
+margin_left = 48.0
+margin_top = 4.0
+margin_right = 152.0
+margin_bottom = 52.0
+custom_fonts/font = ExtResource( 10 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "0 / 0"
+align = 1
+valign = 1
+
+[node name="Messaggio" type="Control" parent="Interfaccia"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="Sfondo" type="ColorRect" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 0.5 )
+
+[node name="Testo" type="Label" parent="Interfaccia/Messaggio"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = ExtResource( 11 )
+custom_colors/font_color = Color( 1, 0.96, 0.86, 1 )
+text = "Sei scappato dal pollaio!
+
+Premi salto per rigiocare"
+align = 1
+valign = 1

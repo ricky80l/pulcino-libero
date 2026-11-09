@@ -22,6 +22,7 @@ const PIUMA = preload("res://assets/grafica/pulcina/piuma.png")
 const IMPRONTA = preload("res://assets/grafica/pulcina/impronta.png")
 const FILO = preload("res://assets/grafica/pulcina/filo.png")
 const FIOCCO = preload("res://assets/grafica/pulcina/fiocco_maglia.png")
+const SAGOMA = preload("res://assets/grafica/prato/sagoma_pulcina.png")
 const INDIZIO = preload("res://scripts/indizio_pulcina.gd")  # per il «?» rosa sopra il pulcino
 const ROSA_PULCINA := Color(1.0, 0.62, 0.76)
 
@@ -620,6 +621,10 @@ func _crea_piuma(n: int) -> Dictionary:
 		4:
 			var fiocco: Sprite = Parti.crea(indizio, FIOCCO, Vector2(60, 40), Vector2(10, -4))
 			fiocco.scale *= 0.75
+		5:
+			var sagoma: Sprite = Parti.crea(indizio, SAGOMA, Vector2(45, 99), Vector2(10, 6))
+			sagoma.scale *= 0.45
+			sagoma.modulate.a = 0.8
 	return {"porta": porta, "piuma": piuma, "indizio": indizio}
 
 

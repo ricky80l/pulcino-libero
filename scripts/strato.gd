@@ -53,6 +53,8 @@ func _draw():
 			_fasci_fessure()
 		"siepi":
 			_siepi()
+		"prato_fiori":
+			_prato_fiori()
 
 
 func _cielo():
@@ -219,3 +221,23 @@ func _siepi():
 		var fx := rng.randf_range(10, larghezza - 10)
 		var fiore: Color = [Color.white, Color("ffd84a"), Color("ff9ec0")][i % 3]
 		_tondo(Vector2(fx, rng.randf_range(588, 630)), 3.5, fiore, 8)
+
+
+# Il prato fiorito lontano (al posto delle siepi): un'onda d'erba chiara piena di fiori di tanti colori
+func _prato_fiori():
+	var punti := PoolVector2Array()
+	var x := 0.0
+	while x <= larghezza + 0.1:
+		var y: float = 596.0 - 12.0 * (0.5 + 0.5 * sin(TAU * x * 4 / larghezza)) - 6.0 * (0.5 + 0.5 * sin(TAU * x * 11 / larghezza + 1.0))
+		punti.append(Vector2(x, y))
+		x += 12.0
+	punti.append(Vector2(larghezza, 760))
+	punti.append(Vector2(0, 760))
+	draw_colored_polygon(punti, Color("8ccf5c"))
+	var rng := RandomNumberGenerator.new()
+	rng.seed = 11
+	var colori := [Color.white, Color("ffd84a"), Color("ff9ec0"), Color("b48cf2"), Color("ff7a6a")]
+	for i in range(90):
+		var fx := rng.randf_range(8, larghezza - 8)
+		_tondo(Vector2(fx, rng.randf_range(592, 640)), rng.randf_range(3.0, 5.0), colori[i % colori.size()], 8)
+

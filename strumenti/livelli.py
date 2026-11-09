@@ -5,9 +5,10 @@
 (PAV, LEG, CAS, MAN, POS, SBA, PAR, RET, ERB, FUO,
  TER, BOT, CAR, TET, CEP, ABB, STE, FIE, CAN,
  TOR, ACQ, INV, CAV, CRL, POM, ANN, SPA, FRA, POZ,
- MAT, LAM, CEM, FOS, SOP, PIL, SCA, SCB, SCC, BAN, CRT, SCF, TRP, POR, EST, USC, FUR) = range(46)
+ MAT, LAM, CEM, FOS, SOP, PIL, SCA, SCB, SCC, BAN, CRT, SCF, TRP, POR, EST, USC, FUR,
+ SAS, TRO, FIO) = range(49)
 # tipi di ostacolo rompibile (stesso ordine di Tipo in scripts/rompibile.gd)
-SACCO, BALLA, VASO, ZUCCA, SCATOLA = range(5)
+SACCO, BALLA, VASO, ZUCCA, SCATOLA, FASCINA = range(6)
 # piante che rimbalzano (stesso ordine di Tipo in scripts/pianta.gd)
 GIRASOLE, MAIS = range(2)
 # operatori del magazzino (stesso ordine di Chi in scripts/operatore.gd)
@@ -78,7 +79,7 @@ valign = 1
 def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=(), topi=(), rompibili=(),
                    uscita=(3900, 610), partenza=(450, 610), limite_destro=4200, proprieta_livello=None, oche=(),
                    piante=(), talpe=(), operatori=(), coni=(), atmosfera=None, uovo=None, autista=None,
-                   indizi=()):
+                   indizi=(), soffioni=(), correnti=()):
     """pezzi: (nome, x, y, larghezza, altezza, tipo, extra); rompibili: (x, y, tipo, resistenza);
     oche: (x, y, distanza); piante: (x, y, tipo) con x, y = base a terra;
     operatori: (x, y, chi, verso, potenza) con x, y = tra i piedi, a terra;
@@ -87,7 +88,9 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     uovo: (x, y) base dell'uovo d'oro segreto del luogo;
     autista: (x, y) dove sta l'autista del furgone (tra i piedi, a terra);
     indizi: indizi della pulcina (Tappa 24): (x, y, cosa, grandezza, {proprietà in più}), cosa = "piuma",
-            "impronte", "filo" o "fiocco"; la piuma va vicino all'uscita, dove il pulcino passa per forza;
+            "impronte", "filo", "fiocco" o "sagoma"; la piuma va vicino all'uscita, dove il pulcino passa per forza;
+    soffioni: (x, y, altezza della corrente che nasce beccandoli) con x, y = base dello stelo, a terra;
+    correnti: correnti d'aria fisse (x, y, larghezza, altezza) con x, y = base della colonna, al centro;
     proprieta_livello: valori da impostare sullo script del livello (es. numero, frase_fine)."""
     risorse = [
         ("res://scripts/livello.gd", "Script"),
@@ -123,6 +126,10 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
         risorse.append(("res://scripts/autista.gd", "Script"))
     if indizi:
         risorse.append(("res://scripts/indizio_pulcina.gd", "Script"))
+    if soffioni:
+        risorse.append(("res://scripts/soffione.gd", "Script"))
+    if correnti:
+        risorse.append(("res://scripts/corrente.gd", "Script"))
     id_di = {path: i for i, (path, _t) in enumerate(risorse, 1)}
 
     out = [f"[gd_scene load_steps={len(risorse) + 2} format=2]\n"]
@@ -180,6 +187,14 @@ def scrivi_livello(percorso, nome_nodo, gruppo_pezzi, pezzi, chicchi=(), nidi=()
     if autista:
         out.append(f'[node name="Autista" type="Node2D" parent="."]\nposition = Vector2( {autista[0]}, {autista[1]} )\n'
                    f'script = ExtResource( {id_di["res://scripts/autista.gd"]} )\n')
+
+    for i, (x, y, altezza) in enumerate(soffioni, 1):
+        out.append(f'[node name="Soffione{i}" type="StaticBody2D" parent="."]\nposition = Vector2( {x}, {y} )\n'
+                   f'script = ExtResource( {id_di["res://scripts/soffione.gd"]} )\naltezza_corrente = {float(altezza)}\n')
+    for i, (x, y, larghezza, altezza) in enumerate(correnti, 1):
+        out.append(f'[node name="Corrente{i}" type="Area2D" parent="."]\nposition = Vector2( {x}, {y} )\n'
+                   f'script = ExtResource( {id_di["res://scripts/corrente.gd"]} )\n'
+                   f'larghezza = {float(larghezza)}\naltezza = {float(altezza)}\n')
 
     for i, (x, y, cosa, grandezza, *altro) in enumerate(indizi, 1):
         extra = "".join(f"{k} = {v}\n" for k, v in (altro[0] if altro else {}).items())

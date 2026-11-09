@@ -9,7 +9,7 @@ extends Node
 const STRATO = preload("res://scripts/strato.gd")
 const VIGNETTA = preload("res://assets/grafica/atmosfera/vignetta.png")
 
-export var tipo := "cortile"  # "cortile", "orto", "pollaio" o "magazzino"
+export var tipo := "cortile"  # "cortile", "orto", "prato", "pollaio" o "magazzino"
 
 var ombre := []  # [chi la proietta, il disegno dell'ombra]
 var sfondo: ParallaxBackground = null
@@ -25,6 +25,8 @@ func _prepara():
 		_paesaggio(livello)
 	if tipo == "pollaio" or tipo == "magazzino":
 		_fasci(livello)
+	if tipo == "prato":
+		_farfalle(livello)
 	_particelle(livello)
 	_vignetta(livello)
 	var pulcino = livello.get_node_or_null("Player")
@@ -45,7 +47,7 @@ func _paesaggio(livello: Node):
 	livello.add_child(sfondo)
 	var colline: String = "campi" if tipo == "orto" else "colline"
 	for s in [["cielo", 0.0, 0.0], ["sole", 0.05, 0.0], ["raggi", 0.05, 0.0], ["nuvole", 0.1, 1800.0],
-			["colline_lontane", 0.2, 2048.0], [colline, 0.4, 2048.0], ["siepi", 0.65, 1536.0]]:
+			["colline_lontane", 0.2, 2048.0], [colline, 0.4, 2048.0], ["prato_fiori" if tipo == "prato" else "siepi", 0.65, 1536.0]]:
 		var strato := ParallaxLayer.new()
 		strato.motion_scale = Vector2(s[1], 1.0)  # in verticale segue il livello
 		if s[2] > 0:
@@ -71,6 +73,23 @@ func _fasci(livello: Node):
 	livello.add_child(fasci)
 
 
+# Farfalle che svolazzano sul prato, sparse lungo tutto il livello
+func _farfalle(livello: Node):
+	var colori := [Color("ff9ec0"), Color("ffd84a"), Color("b48cf2"), Color("8fd0f2")]
+	var x := 500.0
+	var i := 0
+	while x < _larghezza_livello(livello) - 300:
+		var f := Node2D.new()
+		f.set_script(preload("res://scripts/farfalla.gd"))
+		f.position = Vector2(x, 470 + (i % 3) * 45)
+		f.colore = colori[i % colori.size()]
+		f.raggio = Vector2(90, 40)
+		f.z_index = -1
+		livello.add_child(f)
+		x += 850.0 + (i % 2) * 300.0
+		i += 1
+
+
 func _larghezza_livello(livello: Node) -> float:
 	var camera = livello.get_node_or_null("Player/Camera2D")
 	return float(camera.limit_right) if camera else 4000.0
@@ -92,7 +111,7 @@ func _process(delta):
 			continue
 		var da: Vector2 = chi.global_position + Vector2(0, -10)
 		var esclusi: Array = [chi] if chi is CollisionObject2D else []
-		var colpo: Dictionary = spazio.intersect_ray(da, da + Vector2(0, 440), esclusi)
+		var colpo: Dictionary = spazio.intersect_ray(da, da + Vector2(0, 440), esclusi, 1)  # solo il terreno (non i soffioni)
 		if colpo.empty():
 			ombra.visible = false
 			continue

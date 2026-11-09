@@ -10,7 +10,7 @@ const LIVELLI := [
 	{"nome": "Il cortile", "scena": "res://scenes/livello_2.tscn"},
 	{"nome": "L'orto", "scena": "res://scenes/livello_3.tscn"},
 	{"nome": "Maglificio Granada", "scena": "res://scenes/livello_4.tscn", "senza_nuovo": true},  # nome lungo: niente «nuovo!» sul cartello
-	{"nome": "Il prato", "scena": "res://scenes/prova_planata.tscn"},  # provvisorio: area di prova della planata (Tappa 20)
+	{"nome": "Il prato", "scena": "res://scenes/livello_5.tscn"},
 	{"nome": "Il bosco", "scena": ""},
 	{"nome": "Lo stagno", "scena": ""},
 	{"nome": "La collina", "scena": ""},
@@ -19,7 +19,7 @@ const LIVELLI := [
 	{"nome": "Il campanile", "scena": ""},
 ]
 
-const LUOGHI_CON_PIUMA := [1, 2, 3, 4]  # luoghi che hanno già gli indizi della pulcina (Tappa 24)
+const LUOGHI_CON_PIUMA := [1, 2, 3, 4, 5]  # luoghi che hanno già gli indizi della pulcina (Tappa 24)
 
 var sbloccato := 1  # numero del livello più avanti che si può giocare
 var record := {}  # numero livello (come testo) -> {"presi": n, "totale": n}

@@ -11,12 +11,13 @@ const PIUMA = preload("res://assets/grafica/pulcina/piuma.png")
 const IMPRONTA = preload("res://assets/grafica/pulcina/impronta.png")
 const FILO = preload("res://assets/grafica/pulcina/filo.png")
 const FIOCCO = preload("res://assets/grafica/pulcina/fiocco_maglia.png")
+const SAGOMA = preload("res://assets/grafica/prato/sagoma_pulcina.png")
 const BAGLIORE = preload("res://assets/grafica/oggetti/bagliore.png")
 const FONT = preload("res://assets/font/fredoka_messaggio.tres")
 
 const ROSA := Color(1.0, 0.62, 0.76)
 
-export var cosa := "piuma"  # "piuma", "impronte", "filo" o "fiocco"
+export var cosa := "piuma"  # "piuma", "impronte", "filo", "fiocco" o "sagoma" (la pulcina lontana)
 export var grandezza := 1.0  # la piuma è sempre più grande di luogo in luogo
 export var numero_impronte := 6
 export var passo_impronte := 46.0
@@ -29,6 +30,7 @@ var tempo := 0.0
 var prossima_scintilla := 0.5
 var pulcino = null
 var presa := false
+var sagoma_vista := false
 
 
 func _ready():
@@ -56,11 +58,32 @@ func _ready():
 		"fiocco":
 			Parti.crea(disegno, FIOCCO, Vector2(60, 40), Vector2.ZERO)
 			disegno.scale = Vector2(grandezza, grandezza)
+		"sagoma":  # la pulcina lontana, in cima a una collinetta dello sfondo: spunta un attimo e sparisce
+			z_index = -8
+			raggio_curiosita = 620.0
+			var collina := Polygon2D.new()
+			var punti := PoolVector2Array()
+			for k in range(25):
+				var ang := PI + k * PI / 24.0
+				punti.append(Vector2(cos(ang) * 230.0, sin(ang) * 120.0))
+			collina.polygon = punti
+			collina.color = Color("93cb67")
+			add_child(collina)
+			move_child(disegno, get_child_count() - 1)
+			Parti.crea(disegno, SAGOMA, Vector2(45, 99), Vector2.ZERO)
+			disegno.scale = Vector2(grandezza, grandezza)
+			disegno.position = Vector2(0, -60)
+			disegno.modulate.a = 0.0
+			centro = Vector2(0, -150)
+			alone.visible = false
 	alone.position = centro
 
 
 func _process(delta):
 	if presa:
+		return
+	if cosa == "sagoma":
+		_process_sagoma()
 		return
 	tempo += delta
 	if cosa == "piuma":
@@ -142,3 +165,29 @@ func _prendi():
 	tween.start()
 	yield(tween, "tween_all_completed")
 	visible = false
+
+
+# La sagoma: quando il pulcino si avvicina spunta in cima alla collinetta, resta un attimo, poi si abbassa e sparisce
+func _process_sagoma():
+	if sagoma_vista:
+		return
+	if pulcino == null or not is_instance_valid(pulcino):
+		var trovati: Array = get_tree().get_nodes_in_group("pulcino")
+		if trovati.empty():
+			return
+		pulcino = trovati[0]
+	if abs(pulcino.global_position.x - global_position.x) > raggio_curiosita:
+		return
+	sagoma_vista = true
+	_curiosita()
+	var tween := Tween.new()
+	add_child(tween)
+	tween.interpolate_property(disegno, "position:y", -60.0, -118.0, 0.7, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.interpolate_property(disegno, "modulate:a", 0.0, 1.0, 0.5)
+	tween.interpolate_property(disegno, "position:y", -118.0, -60.0, 0.8, Tween.TRANS_SINE, Tween.EASE_IN, 2.6)
+	tween.interpolate_property(disegno, "modulate:a", 1.0, 0.0, 0.6, Tween.TRANS_LINEAR, Tween.EASE_IN, 2.8)
+	tween.start()
+	for k in range(3):
+		yield(get_tree().create_timer(0.7), "timeout")
+		Effetti.sbuffo(get_parent(), position + Vector2(rand_range(-20, 20), -150), ROSA.lightened(0.3), 4, 40.0)
+
