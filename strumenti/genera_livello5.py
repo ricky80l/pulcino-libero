@@ -90,7 +90,7 @@ correnti = [
 chicchi = [
     (300, 610), (380, 610),                                  # partenza
     (800, 610), (945, 545), (1195, 555), (1250, 555), (1420, 610),   # fascine, sasso, tronco
-    (1560, 530), (1630, 430), (1690, 330),                   # su per il mucchio di sassi
+    (1540, 530), (1590, 430), (1690, 330),                   # su per il mucchio di sassi (sui gradini scoperti)
     (1945, 210), (2070, 255), (2200, 302), (2330, 350),      # la prima planata (sulla traiettoria vera)
     (2520, 610),
     (2900, 500), (2900, 380), (2900, 260),                   # nella prima corrente
@@ -102,7 +102,7 @@ chicchi = [
     (4720, 150), (4900, 215), (5080, 281),                   # planando oltre il terzo fosso
     (5600, 610), (5795, 555), (6055, 525), (6380, 610),      # strada bassa
     (5400, 400), (5400, 250), (5600, 218), (5780, 284), (6010, 246), (6130, 200), (6300, 265),   # strada alta, in cielo
-    (6560, 530), (6580, 420),                                # sul mucchio prima del ruscello
+    (6475, 530), (6580, 420),                                # sul mucchio prima del ruscello (sui gradini scoperti)
     (6820, 296), (6940, 340), (7040, 376),                   # planando verso l'isolotto
     (7120, 400), (7120, 260),                                # nella corrente del soffione dell'isolotto
     (7380, 284), (7560, 322),                                # dall'isolotto all'altra riva

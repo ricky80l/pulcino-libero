@@ -500,11 +500,11 @@ position = Vector2( 1420, 610 )
 script = ExtResource( 5 )
 
 [node name="Chicco8" type="Area2D" parent="Chicchi"]
-position = Vector2( 1560, 530 )
+position = Vector2( 1540, 530 )
 script = ExtResource( 5 )
 
 [node name="Chicco9" type="Area2D" parent="Chicchi"]
-position = Vector2( 1630, 430 )
+position = Vector2( 1590, 430 )
 script = ExtResource( 5 )
 
 [node name="Chicco10" type="Area2D" parent="Chicchi"]
@@ -640,7 +640,7 @@ position = Vector2( 6300, 265 )
 script = ExtResource( 5 )
 
 [node name="Chicco43" type="Area2D" parent="Chicchi"]
-position = Vector2( 6560, 530 )
+position = Vector2( 6475, 530 )
 script = ExtResource( 5 )
 
 [node name="Chicco44" type="Area2D" parent="Chicchi"]
