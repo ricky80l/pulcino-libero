@@ -10,6 +10,10 @@
 	<meta name='mobile-web-app-capable' content='yes' />
 	<meta name='apple-mobile-web-app-capable' content='yes' />
 	<meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
+	<!-- il gioco come app (scelta di Riccardo): installato sulla schermata Home parte già a schermo intero
+	     e in orizzontale, senza l'avviso del browser. manifest.json e aiutante.js li scrive strumenti/versione_web.py -->
+	<link rel='manifest' href='manifest.json' />
+	<meta name='theme-color' content='#2f9e8f' />
 	<title>Il Pulcino Libero</title>
 	<style type='text/css'>
 		@font-face {
@@ -335,8 +339,15 @@
 					}).catch(function() {});
 				}
 			}
-			if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
+			// aperto come app dalla schermata Home è già a schermo intero: non si chiede niente (niente avviso)
+			var comeApp = window.matchMedia && (window.matchMedia('(display-mode: fullscreen)').matches
+					|| window.matchMedia('(display-mode: standalone)').matches);
+			if (!comeApp && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
 				document.addEventListener('touchend', schermoIntero, { passive: true });
+			}
+			// l'aiutante che rende il gioco installabile come app (non tiene niente in memoria)
+			if ('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('aiutante.js').catch(function() {});
 			}
 
 			if (!Engine.isWebGLAvailable()) {

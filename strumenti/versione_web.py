@@ -9,6 +9,9 @@ import hashlib
 import json
 import os
 import re
+import time
+
+from PIL import Image
 
 QUI = os.path.dirname(os.path.abspath(__file__))
 DOCS = os.path.join(QUI, "..", "docs")
@@ -37,5 +40,49 @@ grandezze[nome] = os.path.getsize(os.path.join(DOCS, nome))
 config["fileSizes"] = grandezze
 config["mainPack"] = nome
 testo = testo.replace(trovato.group(0), "const GODOT_CONFIG = %s;" % json.dumps(config, separators=(",", ":")))
-open(PAGINA, "w", encoding="utf-8", newline="\n").write(testo)
+# a volte Windows (o l'antivirus) tiene occupato il file per un attimo: si riprova
+for prova in range(10):
+    try:
+        open(PAGINA, "w", encoding="utf-8", newline="\n").write(testo)
+        break
+    except OSError:
+        if prova == 9:
+            raise
+        time.sleep(0.5)
 print("Pacchetto del gioco:", nome)
+
+# Il gioco come app (scelta di Riccardo): la "carta d'identità" per Chrome, le icone e un aiutante.
+# Installato sulla schermata Home parte a schermo intero e in orizzontale, senza l'avviso del browser.
+VERDE = "#2f9e8f"  # lo sfondo dell'icona
+with open(os.path.join(DOCS, "manifest.json"), "w", encoding="utf-8", newline="\n") as f:
+    json.dump({
+        "name": "Il Pulcino Libero",
+        "short_name": "Pulcino Libero",
+        "start_url": "./index.html",
+        "scope": "./",
+        "display": "fullscreen",
+        "orientation": "landscape",
+        "background_color": VERDE,
+        "theme_color": VERDE,
+        "icons": [
+            {"src": "icona-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any"},
+            {"src": "icona-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any"},
+            {"src": "icona-maschera-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable"},
+        ],
+    }, f, ensure_ascii=False, indent=1)
+# l'aiutante non tiene niente in memoria: ogni richiesta va in rete come sempre (l'impronta continua a funzionare)
+with open(os.path.join(DOCS, "aiutante.js"), "w", encoding="utf-8", newline="\n") as f:
+    f.write("// Aiutante del gioco come app: serve a Chrome per poterlo installare sulla schermata Home.\n"
+            "// Non tiene niente in memoria: ogni richiesta va in rete come sempre.\n"
+            "self.addEventListener('install', function () { self.skipWaiting(); });\n"
+            "self.addEventListener('activate', function (e) { e.waitUntil(self.clients.claim()); });\n"
+            "self.addEventListener('fetch', function (e) { e.respondWith(fetch(e.request)); });\n")
+# icone: quella del gioco, e una con un po' di margine per le icone tonde di Android ("maskable")
+icona = Image.open(os.path.join(QUI, "..", "icona.png")).convert("RGBA")
+icona.resize((512, 512), Image.LANCZOS).save(os.path.join(DOCS, "icona-512.png"))
+icona.resize((192, 192), Image.LANCZOS).save(os.path.join(DOCS, "icona-192.png"))
+maschera = Image.new("RGBA", (512, 512), VERDE)
+piccola = icona.resize((400, 400), Image.LANCZOS)
+maschera.alpha_composite(piccola, (56, 56))
+maschera.save(os.path.join(DOCS, "icona-maschera-512.png"))
+print("App: manifest.json, aiutante.js e icone scritti")
