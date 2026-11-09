@@ -43,9 +43,7 @@ func _ready():
 
 
 func uovo_preso():
-	uovo = true
-	if salva_progressi:
-		Progressi.segna_uovo(numero)
+	uovo = true  # si salva solo se il livello viene finito (vedi _on_uscita_body_entered)
 
 
 func chicco_raccolto():
@@ -79,6 +77,9 @@ func _on_uscita_body_entered(corpo):
 		# le tre stelline: tutti i chicchi, l'uovo d'oro, mai preso dai nemici
 		var stelle := [chicchi_presi == chicchi_totali, uovo, player.volte_colpito == 0]
 		if salva_progressi:
+			# tutto (uovo, chicchi, stelline, borsellino) conta solo arrivando all'uscita
+			if uovo:
+				Progressi.segna_uovo(numero)
 			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali, stelle)
 		_mostra_stelle(stelle, player.volte_colpito)
 		var testo := "\n\n\n%s\n\n" % frase_fine
