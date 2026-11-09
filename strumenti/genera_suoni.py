@@ -114,4 +114,10 @@ salva("uovo", mescola(arpeggio + tono(2637, 2637, 0.35, vibrato_hz=12, vibrato_a
                       silenzio(0.1) + rumore(0.3, volume=0.08, morbidezza=0.3)))
 # "ting!" di una stellina guadagnata a fine livello (nel gioco sale di tono da una stella all'altra)
 salva("stella", mescola(tono(1568, 1568, 0.25, armonica=0.5, volume=0.4), tono(2349, 2349, 0.3, vibrato_hz=10, vibrato_ampiezza=0.01, volume=0.2)))
+# "pio?" curioso del pulcino davanti a un indizio della pulcina: due note, la seconda che sale come una domanda
+salva("curioso", tono(1300, 1150, 0.09, vibrato_hz=20, vibrato_ampiezza=0.02, volume=0.45) + silenzio(0.05)
+      + tono(1150, 1900, 0.16, vibrato_hz=18, vibrato_ampiezza=0.02, volume=0.45))
+# la piuma della pulcina: un soffio d'aria e due campanellini lievi, morbidi (più delicati dell'uovo d'oro)
+salva("piuma", mescola(rumore(0.5, volume=0.12, morbidezza=0.92),
+                       silenzio(0.05) + tono(1760, 1760, 0.3, armonica=0.2, volume=0.22) + tono(2217, 2217, 0.4, vibrato_hz=8, vibrato_ampiezza=0.01, armonica=0.2, volume=0.18)))
 print("suoni creati in", os.path.abspath(CARTELLA))

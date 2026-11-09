@@ -127,4 +127,6 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello2", "Cortile", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(6320, 610), partenza=(200, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               oche=oche, atmosfera="cortile", uovo=(2960, 100))
+               oche=oche, atmosfera="cortile", uovo=(2960, 100),
+               # impronte piccole nel fango che passano il cancelletto verso l'orto, e la piuma
+               indizi=[(6120, 656, "impronte", 1.0, {"numero_impronte": 7}), (6205, 640, "piuma", 0.75)])

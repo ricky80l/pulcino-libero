@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scripts/livello.gd" type="Script" id=1]
 [ext_resource path="res://scripts/blocco.gd" type="Script" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://scripts/talpa.gd" type="Script" id=15]
 [ext_resource path="res://scripts/atmosfera.gd" type="Script" id=16]
 [ext_resource path="res://scripts/uovo_oro.gd" type="Script" id=17]
+[ext_resource path="res://scripts/indizio_pulcina.gd" type="Script" id=18]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30, 30 )
@@ -439,6 +440,19 @@ script = ExtResource( 6 )
 [node name="UovoOro" type="Area2D" parent="."]
 position = Vector2( 112, 468 )
 script = ExtResource( 17 )
+
+[node name="Indizio1" type="Node2D" parent="."]
+position = Vector2( 7300, 550 )
+script = ExtResource( 18 )
+cosa = "filo"
+grandezza = 1.4
+rotation_degrees = 8.0
+
+[node name="Indizio2" type="Node2D" parent="."]
+position = Vector2( 7190, 640 )
+script = ExtResource( 18 )
+cosa = "piuma"
+grandezza = 0.9
 
 [node name="Chicchi" type="Node2D" parent="."]
 

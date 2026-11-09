@@ -142,4 +142,6 @@ proprieta = {
 
 scrivi_livello(sys.argv[1], "Livello3", "Orto", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(7310, 610), partenza=(200, 610), limite_destro=LARGO, proprieta_livello=proprieta,
-               piante=piante, talpe=talpe, atmosfera="orto", uovo=(112, 468))
+               piante=piante, talpe=talpe, atmosfera="orto", uovo=(112, 468),
+               # un filo rosa impigliato al cancelletto, e la piuma
+               indizi=[(7300, 550, "filo", 1.4, {"rotation_degrees": 8.0}), (7190, 640, "piuma", 0.9)])

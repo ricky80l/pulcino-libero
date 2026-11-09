@@ -80,6 +80,9 @@ func _on_uscita_body_entered(corpo):
 			# tutto (uovo, chicchi, stelline, borsellino) conta solo arrivando all'uscita
 			if uovo:
 				Progressi.segna_uovo(numero)
+			# la piuma misteriosa: c'è nei luoghi con gli indizi della pulcina, e si trova sempre all'uscita
+			if not get_tree().get_nodes_in_group("piuma_pulcina").empty():
+				Progressi.segna_piuma(numero)
 			Progressi.livello_finito(numero, chicchi_presi, chicchi_totali, stelle)
 		_mostra_stelle(stelle, player.volte_colpito)
 		var testo := "\n\n\n%s\n\n" % frase_fine

@@ -259,6 +259,15 @@ Alla fine di ogni luogo il pulcino trova una **piuma misteriosa**, sempre più g
 
 **Scelta di Riccardo:** alla fine del viaggio c'è una **pulcina**. Entra nella storia a poco a poco attraverso elementi visivi, luogo dopo luogo (per esempio le sue piume, un fiocco, impronte, una sagoma lontana), senza mai mostrarsi del tutto prima del campanile.
 Prima di farle, mostrami la storia scena per scena.
+
+**Storia scelta (Riccardo):** la pulcina è **crema con la punta delle piume rosa**; il suo segno è un **fiocco rosa lavorato a maglia** (diverso dal fiocco della bancarella), fatto col filo del Maglificio. La piuma si trova da sola all'uscita (conta solo finendo il livello); la scena sulla mappa (circa 4 secondi, si salta con un tocco, una volta sola per luogo) fa volare la piuma lungo il sentiero, dove resta posata: piume sempre più grandi, una scia verso la nebbia del campanile. Indizi luogo per luogo:
+1. pollaio: piuma piccolissima impigliata nella rete, sulla buca d'uscita;
+2. cortile: impronte piccole nel fango davanti al cancelletto, verso l'orto;
+3. orto: un filo rosa impigliato al cancelletto d'uscita (tutti gli indizi stanno vicino all'uscita, dove si passa per forza);
+4. Maglificio: il fiocco a maglia sul tetto del furgone, l'autista lo indica sorpreso;
+5. prato: sagoma lontana su una collina; 6. bosco: un pigolio lontano che risponde; 7. stagno: il riflesso del fiocco nell'acqua; 8. collina: la sagoma più vicina saluta controluce; 9. grotta: disegno di due pulcini sulla roccia; 10. paese: un'ombra che corre sul muro verso il campanile; 11. campanile: lei, finalmente (da decidere).
+Per ora si fanno i luoghi 1–4; gli altri insieme ai loro livelli.
+**Come si capisce che sono indizi:** tutto quello che è della pulcina è crema e rosa (nient'altro nel gioco è rosa) e luccica piano di rosa; quando il pulcino ci passa vicino frena un istante, gli spunta un «?» rosa e fa «pio?» (suono `curioso`); sulla mappa la piuma si posa insieme al suo indizio. Indizi nei livelli: `scripts/indizio_pulcina.gd` (parametro `indizi` di `livelli.py`); scena e scia sulla mappa in `mappa.gd`; `Progressi.piume` / `piume_viste`. Un luogo nuovo con la piuma va aggiunto a `Progressi.LUOGHI_CON_PIUMA`.
 **STOP:** le scene sono brevi, poetiche e fanno venire voglia di andare avanti.
 
 ## Tappe del livello 5 (prato)

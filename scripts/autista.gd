@@ -1,7 +1,8 @@
 extends Node2D
 # L'autista del furgone del Maglificio Granada: moro, robusto, polo blu e jeans.
 # Non lancia e non blocca: fa scena. Respira, si gratta la pancia, saluta, guarda l'orologio;
-# quando il pulcino gli passa vicino fa un saltello di sorpresa con un "Ehi, pulcino!".
+# quando il pulcino gli passa vicino fa un saltello di sorpresa con un "Ehi, pulcino!", poi indica il fiocco
+# a maglia sul tetto del furgone ("Guarda!"): un indizio della pulcina (Tappa 24). Ogni tanto lo indica anche da solo.
 # La posizione è tra i piedi, a terra; guarda verso sinistra (verso il furgone e il pulcino che arriva).
 
 const Parti = preload("res://scripts/parti.gd")
@@ -82,7 +83,7 @@ func _process(delta):
 	if gesto == "":
 		prossimo_gesto -= delta
 		if prossimo_gesto <= 0:
-			var scelte := ["pancia", "saluta", "orologio", "pancia"]
+			var scelte := ["pancia", "saluta", "orologio", "pancia", "indica"]
 			var nuovo: String = scelte[rng.randi() % scelte.size()]
 			gesto = nuovo
 			durata_gesto = rng.randf_range(1.4, 2.2)
@@ -100,14 +101,26 @@ func _process(delta):
 			"orologio":
 				dx = 95.0 * e
 				testa_ang = 8.0 * e
+			"indica":  # punta il braccio verso il furgone, dove c'è il fiocco rosa
+				sx = 100.0 * min(1.0, f * 4.0) * min(1.0, (1.0 - f) * 4.0)
+				testa_ang = -6.0 * e
 			"sorpresa":  # saltello e braccia su
 				sx = 120.0 * e
 				dx = -120.0 * e
 				su -= abs(sin(PI * 2.0 * f)) * 14.0
 		if f >= 1.0:
-			gesto = ""
-			prossimo_gesto = rng.randf_range(0.8, 2.0)
 			fumetto.visible = false
+			if gesto == "sorpresa":
+				# dopo la sorpresa indica il fiocco al pulcino
+				gesto = "indica"
+				durata_gesto = 2.0
+				tempo_gesto = 0.0
+				fumetto.text = "Guarda!"
+				fumetto.visible = true
+			else:
+				gesto = ""
+				prossimo_gesto = rng.randf_range(0.8, 2.0)
+				fumetto.text = "Ehi, pulcino!"
 	braccio_sx.rotation_degrees = 10.0 + sx
 	braccio_dx.rotation_degrees = -10.0 + dx
 	busto.position.y = -55 + su

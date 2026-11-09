@@ -19,6 +19,8 @@ const LIVELLI := [
 	{"nome": "Il campanile", "scena": ""},
 ]
 
+const LUOGHI_CON_PIUMA := [1, 2, 3, 4]  # luoghi che hanno già gli indizi della pulcina (Tappa 24)
+
 var sbloccato := 1  # numero del livello più avanti che si può giocare
 var record := {}  # numero livello (come testo) -> {"presi": n, "totale": n}
 var ultimo_giocato := 1  # dove sta il pulcino sulla mappa
@@ -30,6 +32,8 @@ var stelle := {}  # numero livello (come testo) -> [tutti i chicchi, uovo d'oro,
 var borsellino := 0  # chicchi da spendere alla bancarella: tutti quelli raccolti nelle partite finite
 var comprati := []  # accessori comprati (vedi scripts/accessori.gd)
 var indossati := {}  # posto ("testa", "occhi", "collo") -> accessorio indossato
+var piume := []  # luoghi finiti in cui il pulcino ha trovato la piuma misteriosa (Tappa 24)
+var piume_viste := []  # luoghi di cui la mappa ha già mostrato la scena della piuma
 
 
 func compra(nome: String, prezzo: int) -> bool:
@@ -58,6 +62,18 @@ func uovo_trovato_in(numero: int) -> bool:
 func segna_uovo(numero: int):
 	if not uova.has(numero):
 		uova.append(numero)
+		salva()
+
+
+func segna_piuma(numero: int):
+	if not piume.has(numero):
+		piume.append(numero)
+		salva()
+
+
+func segna_piuma_vista(numero: int):
+	if not piume_viste.has(numero):
+		piume_viste.append(numero)
 		salva()
 
 
@@ -140,7 +156,8 @@ func salva():
 	if f.open(FILE, File.WRITE) == OK:
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
 				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova, "stelle": stelle,
-				"borsellino": borsellino, "comprati": comprati, "indossati": indossati}))
+				"borsellino": borsellino, "comprati": comprati, "indossati": indossati,
+				"piume": piume, "piume_viste": piume_viste}))
 		f.close()
 
 
@@ -170,3 +187,14 @@ func carica():
 		uova = []
 		for n in dati.get("uova", []):
 			uova.append(int(n))  # nel file i numeri tornano decimali
+		piume = []
+		for n in dati.get("piume", []):
+			piume.append(int(n))
+		if not dati.has("piume"):
+			# primo avvio con le piume: i luoghi già finiti (con gli indizi) danno la loro piuma, e la mappa ne mostra le scene
+			for chiave in record.keys():
+				if LUOGHI_CON_PIUMA.has(int(chiave)):
+					piume.append(int(chiave))
+		piume_viste = []
+		for n in dati.get("piume_viste", []):
+			piume_viste.append(int(n))

@@ -15,6 +15,15 @@ const STELLA_VUOTA = preload("res://assets/grafica/oggetti/stella_vuota.png")
 const FARFALLA = preload("res://scripts/farfalla.gd")
 const PULCINO = preload("res://scripts/pulcino_mappa.gd")
 const BANCARELLA = preload("res://scripts/bancarella.gd")
+const Parti = preload("res://scripts/parti.gd")
+const Effetti = preload("res://scripts/effetti.gd")
+# la pulcina misteriosa (Tappa 24): le sue piume e i suoi indizi lungo il sentiero
+const PIUMA = preload("res://assets/grafica/pulcina/piuma.png")
+const IMPRONTA = preload("res://assets/grafica/pulcina/impronta.png")
+const FILO = preload("res://assets/grafica/pulcina/filo.png")
+const FIOCCO = preload("res://assets/grafica/pulcina/fiocco_maglia.png")
+const INDIZIO = preload("res://scripts/indizio_pulcina.gd")  # per il «?» rosa sopra il pulcino
+const ROSA_PULCINA := Color(1.0, 0.62, 0.76)
 
 const DISEGNI := ["pollaio", "cortile", "orto", "magazzino", "prato", "bosco", "stagno", "collina", "grotta", "paese", "campanile"]
 # dove sta ogni luogo (base del disegno, sul sentiero)
@@ -45,6 +54,10 @@ var selettore_stile := Button.new()  # Stile: Cartoon / Dipinto
 var sentiero_aperto_fino := 1  # ultimo luogo raggiungibile: fin lì il sentiero è pieno, poi pallido
 var sfondo_dipinto: Sprite = null  # prato ridipinto (modalità dipinta), al posto di quello disegnato da codice
 var solo_terreno := false  # true solo per gli strumenti: prepara prato, fiume, alberi e sentiero e basta
+var piume_posate := []  # piume (e indizi) già posate lungo il sentiero: ogni tanto luccicano
+var prossima_scintilla := 1.0
+var scena_in_corso := false  # la scena della piuma: mentre va, i comandi la fanno saltare
+var salta_scena := false
 
 
 func _ready():
@@ -86,6 +99,21 @@ func _ready():
 	_crea_nuvole()
 	_aggiorna_cartelli()
 	update()
+
+	# Le piume della pulcina: quelle già viste restano posate sul sentiero; per le nuove c'è la scena
+	var da_mostrare := []
+	for n in Progressi.piume:
+		if n >= POSIZIONI.size():
+			continue
+		if Progressi.piume_viste.has(n):
+			piume_posate.append(_crea_piuma(n)["porta"])
+		else:
+			da_mostrare.append(n)
+	if not da_mostrare.empty():
+		da_mostrare.sort()
+		yield(get_tree().create_timer(0.6), "timeout")
+		for n in da_mostrare:
+			yield(_scena_piuma(n), "completed")
 
 	# Luoghi appena sbloccati e già costruiti: la nebbia si dirada e il pulcino ci va da solo
 	if ultimo > Progressi.nebbia_vista:
@@ -442,6 +470,20 @@ func _process(delta):
 	else:
 		pulcino.fermo()
 
+	# le piume posate luccicano piano di rosa, una alla volta
+	prossima_scintilla -= delta
+	if prossima_scintilla <= 0 and not piume_posate.empty():
+		prossima_scintilla = rand_range(0.9, 1.8)
+		var porta: Node2D = piume_posate[randi() % piume_posate.size()]
+		Effetti.sbuffo(self, porta.position + Vector2(rand_range(-10, 10), rand_range(-14, 2)), ROSA_PULCINA.lightened(0.3), 3, 30.0)
+
+	# durante la scena della piuma i comandi servono solo a saltarla
+	if scena_in_corso:
+		if Input.is_action_just_pressed("jump") or Input.is_action_just_pressed("ui_accept") \
+				or Input.is_action_just_pressed("move_right") or Input.is_action_just_pressed("move_left"):
+			salta_scena = true
+		return
+
 	# tastiera: frecce per spostarsi, salto per entrare
 	if Input.is_action_just_pressed("move_right"):
 		_vai_a(meta + 1)
@@ -472,6 +514,12 @@ func _arrivato():
 
 
 func _unhandled_input(evento):
+	# durante la scena della piuma un tocco la salta
+	if scena_in_corso:
+		if (evento is InputEventMouseButton and evento.pressed) or (evento is InputEventScreenTouch and evento.pressed):
+			salta_scena = true
+			get_tree().set_input_as_handled()
+		return
 	# tocco o clic su un luogo: vale il disegno e anche il suo cartello
 	if evento is InputEventMouseButton and evento.pressed and evento.button_index == BUTTON_LEFT:
 		var punto := get_global_mouse_position()
@@ -537,3 +585,99 @@ func _dirada_nebbia(numero: int):
 	nebbia.modulate.a = 1.0
 	_aggiorna_cartelli()
 	tween.queue_free()
+
+
+# ---------------- la pulcina misteriosa (Tappa 24) ----------------
+
+# Dove si posa la piuma del luogo n: a metà del sentiero verso il luogo dopo, un po' sotto
+func _punto_piuma(n: int) -> Vector2:
+	var da: float = distanze[n - 1]
+	var a: float = distanze[int(min(n, distanze.size() - 1))]
+	return sentiero.interpolate_baked(lerp(da, a, 0.5)) + Vector2(0, 24)
+
+
+# La piuma del luogo n (sempre più grande) con accanto il suo indizio
+func _crea_piuma(n: int) -> Dictionary:
+	var porta := Node2D.new()
+	porta.position = _punto_piuma(n)
+	add_child(porta)
+	var piuma := Node2D.new()
+	porta.add_child(piuma)
+	Parti.crea(piuma, PIUMA, Vector2(35, 146), Vector2.ZERO)
+	piuma.scale = Vector2.ONE * (0.62 + 0.1 * n)
+	piuma.rotation_degrees = -62.0  # posata sul prato, quasi distesa
+	var indizio := Node2D.new()
+	indizio.position = Vector2(34, -4)
+	porta.add_child(indizio)
+	match n:
+		2:
+			for k in range(3):
+				var orma: Sprite = Parti.crea(indizio, IMPRONTA, Vector2(18, 15), Vector2(k * 20, -4 if k % 2 == 0 else 4))
+				orma.scale *= 1.0
+		3:
+			var filo: Sprite = Parti.crea(indizio, FILO, Vector2(70, 22), Vector2(8, 0))
+			filo.scale *= 0.75
+		4:
+			var fiocco: Sprite = Parti.crea(indizio, FIOCCO, Vector2(60, 40), Vector2(10, -4))
+			fiocco.scale *= 0.75
+	return {"porta": porta, "piuma": piuma, "indizio": indizio}
+
+
+# Scena senza parole (circa 4 secondi, si salta con un tocco): la piuma esce dal luogo appena finito,
+# vola leggera lungo il sentiero e si posa; accanto compare l'indizio; il pulcino si volta e si chiede chi sarà
+func _scena_piuma(n: int):
+	scena_in_corso = true
+	salta_scena = false
+	yield(get_tree(), "idle_frame")
+	var parti := _crea_piuma(n)
+	var porta: Node2D = parti["porta"]
+	var piuma: Node2D = parti["piuma"]
+	var indizio: Node2D = parti["indizio"]
+	var arrivo: Vector2 = porta.position
+	var partenza: Vector2 = POSIZIONI[n - 1] + Vector2(0, -95)
+	var rotazione_finale: float = piuma.rotation
+	var scala_finale: Vector2 = piuma.scale
+	indizio.modulate.a = 0.0
+	porta.position = partenza
+	Suoni.suona("piuma", 0.0, -2.0)
+	Effetti.sbuffo(self, partenza, ROSA_PULCINA, 14, 120.0)
+	var t := 0.0
+	var scia := 0.0
+	while t < 1.0 and not salta_scena:
+		yield(get_tree(), "idle_frame")
+		var d := get_process_delta_time()
+		t = min(1.0, t + d / 2.6)
+		var dolce := t * t * (3.0 - 2.0 * t)
+		porta.position = partenza.linear_interpolate(arrivo, dolce) \
+				+ Vector2(sin(t * TAU * 1.5) * 22.0 * (1.0 - t), -sin(t * PI) * 70.0)
+		piuma.rotation = lerp(sin(t * TAU * 2.0) * 0.6, rotazione_finale, dolce)
+		piuma.scale = scala_finale * lerp(0.3, 1.0, min(1.0, t * 2.5))
+		scia -= d
+		if scia <= 0:
+			scia = 0.12
+			Effetti.sbuffo(self, porta.position, ROSA_PULCINA.lightened(0.3), 2, 30.0)
+	porta.position = arrivo
+	piuma.rotation = rotazione_finale
+	piuma.scale = scala_finale
+	# si posa: compare l'indizio, il pulcino si volta verso la piuma e fa «pio?»
+	Effetti.sbuffo(self, arrivo, ROSA_PULCINA, 10, 90.0)
+	var tween := Tween.new()
+	add_child(tween)
+	tween.interpolate_property(indizio, "modulate:a", 0.0, 1.0, 0.4)
+	tween.interpolate_property(indizio, "scale", Vector2(0.3, 0.3), Vector2.ONE, 0.4, Tween.TRANS_BACK, Tween.EASE_OUT)
+	tween.start()
+	pulcino.cammina(sign(arrivo.x - pulcino.position.x))
+	pulcino.fermo()
+	pulcino.pigola()
+	Suoni.suona("curioso", 0.04, -3.0)
+	INDIZIO.mostra_domanda(pulcino, Vector2(0, -62))
+	var attesa := 0.0
+	while attesa < 1.4 and not salta_scena:
+		yield(get_tree(), "idle_frame")
+		attesa += get_process_delta_time()
+	indizio.modulate.a = 1.0
+	indizio.scale = Vector2.ONE
+	tween.queue_free()
+	piume_posate.append(porta)
+	Progressi.segna_piuma_vista(n)
+	scena_in_corso = false

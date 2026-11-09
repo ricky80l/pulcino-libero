@@ -90,4 +90,6 @@ topi = [(1650, 640, 260), (3055, 640, 140)]  # il secondo tra la mangiatoia rial
 
 scrivi_livello(sys.argv[1], "Livello1", "Pollaio", pezzi, chicchi, nidi, topi,
                uscita=(5250, 610), partenza=(450, 610), limite_destro=LARGO, atmosfera="pollaio",
-               uovo=(3945, 120))
+               uovo=(3945, 120),
+               # la piuma misteriosa, piccolissima, impigliata nella rete proprio sulla buca d'uscita
+               indizi=[(5015, 600, "piuma", 0.7, {"rotation_degrees": -25.0})])

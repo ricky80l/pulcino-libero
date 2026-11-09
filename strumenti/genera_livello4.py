@@ -181,4 +181,6 @@ proprieta = {
 scrivi_livello(sys.argv[1], "Livello4", "Magazzino", pezzi, chicchi, nidi, rompibili=rompibili,
                uscita=(8585, 610), partenza=(150, 610), limite_destro=LARGO, proprieta_livello=proprieta,
                operatori=operatori, coni=coni, atmosfera="magazzino", uovo=(1000, 150),
-               autista=(8370, 640))
+               autista=(8370, 640),
+               # il fiocco a maglia sul tetto del furgone (l'autista lo indica), e la piuma
+               indizi=[(8120, 446, "fiocco", 1.0), (8440, 640, "piuma", 1.1)])
