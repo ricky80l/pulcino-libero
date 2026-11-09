@@ -36,7 +36,7 @@ z_index = -10
 position = Vector2( 0, 0 )
 script = ExtResource( 2 )
 tipo = 29
-dimensioni = Vector2( 5650, 720 )
+dimensioni = Vector2( 8700, 720 )
 solido = false
 
 [node name="Soffitto" type="StaticBody2D" parent="Magazzino"]
@@ -44,7 +44,7 @@ z_index = -9
 position = Vector2( 0, 0 )
 script = ExtResource( 2 )
 tipo = 30
-dimensioni = Vector2( 5650, 80 )
+dimensioni = Vector2( 8700, 80 )
 solido = false
 
 [node name="PavimentoA" type="StaticBody2D" parent="Magazzino"]
@@ -65,21 +65,35 @@ solido = false
 position = Vector2( 2030, 640 )
 script = ExtResource( 2 )
 tipo = 31
-dimensioni = Vector2( 620, 80 )
+dimensioni = Vector2( 1620, 80 )
 
 [node name="Fossa2" type="StaticBody2D" parent="Magazzino"]
 z_index = -1
-position = Vector2( 2650, 640 )
+position = Vector2( 3650, 640 )
 script = ExtResource( 2 )
 tipo = 32
 dimensioni = Vector2( 650, 80 )
 solido = false
 
 [node name="PavimentoC" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 3300, 640 )
+position = Vector2( 4300, 640 )
 script = ExtResource( 2 )
 tipo = 31
-dimensioni = Vector2( 2350, 80 )
+dimensioni = Vector2( 2400, 80 )
+
+[node name="Fossa3" type="StaticBody2D" parent="Magazzino"]
+z_index = -1
+position = Vector2( 6700, 640 )
+script = ExtResource( 2 )
+tipo = 32
+dimensioni = Vector2( 260, 80 )
+solido = false
+
+[node name="PavimentoD" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 6960, 640 )
+script = ExtResource( 2 )
+tipo = 31
+dimensioni = Vector2( 1740, 80 )
 
 [node name="MuroSinistro" type="StaticBody2D" parent="Magazzino"]
 position = Vector2( -40, 0 )
@@ -88,7 +102,7 @@ tipo = 21
 dimensioni = Vector2( 40, 720 )
 
 [node name="MuroDestro" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 5650, 0 )
+position = Vector2( 8700, 0 )
 script = ExtResource( 2 )
 tipo = 21
 dimensioni = Vector2( 40, 720 )
@@ -196,8 +210,126 @@ tipo = 33
 dimensioni = Vector2( 140, 16 )
 attraversabile_da_sotto = true
 
+[node name="Scaffale3" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 2250, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Scaffale3a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2255, 498 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale3b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2255, 434 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale3c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2255, 370 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale4" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 2550, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Scaffale4a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2555, 498 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale4b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2555, 434 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale4c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2555, 370 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale5" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 2900, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Scaffale5a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2905, 498 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale5b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2905, 434 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale5c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2905, 370 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Passerella2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 2640, 200 )
+script = ExtResource( 2 )
+tipo = 33
+dimensioni = Vector2( 200, 16 )
+attraversabile_da_sotto = true
+
+[node name="Cartoni3" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3150, 525 )
+script = ExtResource( 2 )
+tipo = 39
+dimensioni = Vector2( 130, 115 )
+
+[node name="Bancale3" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3350, 620 )
+script = ExtResource( 2 )
+tipo = 38
+dimensioni = Vector2( 120, 20 )
+
+[node name="Scatolone3p" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3355, 545 )
+script = ExtResource( 2 )
+tipo = 35
+dimensioni = Vector2( 110, 75 )
+
+[node name="Scatolone3q" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 3360, 465 )
+script = ExtResource( 2 )
+tipo = 36
+dimensioni = Vector2( 100, 80 )
+
 [node name="Soppalco" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 3500, 330 )
+position = Vector2( 4500, 330 )
 script = ExtResource( 2 )
 tipo = 33
 dimensioni = Vector2( 900, 16 )
@@ -205,7 +337,7 @@ attraversabile_da_sotto = true
 
 [node name="Pilastro1" type="StaticBody2D" parent="Magazzino"]
 z_index = -6
-position = Vector2( 3520, 346 )
+position = Vector2( 4520, 346 )
 script = ExtResource( 2 )
 tipo = 34
 dimensioni = Vector2( 14, 294 )
@@ -213,7 +345,7 @@ solido = false
 
 [node name="Pilastro2" type="StaticBody2D" parent="Magazzino"]
 z_index = -6
-position = Vector2( 3943, 346 )
+position = Vector2( 4943, 346 )
 script = ExtResource( 2 )
 tipo = 34
 dimensioni = Vector2( 14, 294 )
@@ -221,7 +353,7 @@ solido = false
 
 [node name="Pilastro3" type="StaticBody2D" parent="Magazzino"]
 z_index = -6
-position = Vector2( 4366, 346 )
+position = Vector2( 5366, 346 )
 script = ExtResource( 2 )
 tipo = 34
 dimensioni = Vector2( 14, 294 )
@@ -229,59 +361,170 @@ solido = false
 
 [node name="ScaffaleSoppalco" type="StaticBody2D" parent="Magazzino"]
 z_index = -7
-position = Vector2( 4120, 195 )
+position = Vector2( 5120, 195 )
 script = ExtResource( 2 )
 tipo = 40
 dimensioni = Vector2( 80, 135 )
 solido = false
 
 [node name="RipianoSoppalco" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 4122, 195 )
+position = Vector2( 5122, 195 )
 script = ExtResource( 2 )
 tipo = 21
 dimensioni = Vector2( 76, 10 )
 attraversabile_da_sotto = true
 
 [node name="Transpallet" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 3700, 565 )
+position = Vector2( 4700, 565 )
 script = ExtResource( 2 )
 tipo = 41
 dimensioni = Vector2( 115, 75 )
 
 [node name="Scatolone2a" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 3900, 560 )
+position = Vector2( 4900, 560 )
 script = ExtResource( 2 )
 tipo = 36
 dimensioni = Vector2( 110, 80 )
 
+[node name="Soppalco2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 5560, 330 )
+script = ExtResource( 2 )
+tipo = 33
+dimensioni = Vector2( 760, 16 )
+attraversabile_da_sotto = true
+
+[node name="Pilastro4" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 5580, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="Pilastro5" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 5940, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="Pilastro6" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 6300, 346 )
+script = ExtResource( 2 )
+tipo = 34
+dimensioni = Vector2( 14, 294 )
+solido = false
+
+[node name="ScaffaleSoppalco2" type="StaticBody2D" parent="Magazzino"]
+z_index = -7
+position = Vector2( 5950, 195 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 80, 135 )
+solido = false
+
+[node name="RipianoSoppalco2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 5952, 195 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 76, 10 )
+attraversabile_da_sotto = true
+
+[node name="Cartoni4" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 5700, 525 )
+script = ExtResource( 2 )
+tipo = 39
+dimensioni = Vector2( 130, 115 )
+
+[node name="Bancale4" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 6340, 620 )
+script = ExtResource( 2 )
+tipo = 38
+dimensioni = Vector2( 120, 20 )
+
+[node name="Scatolone4a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 6345, 545 )
+script = ExtResource( 2 )
+tipo = 35
+dimensioni = Vector2( 110, 75 )
+
+[node name="Scatolone4b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 6350, 465 )
+script = ExtResource( 2 )
+tipo = 36
+dimensioni = Vector2( 100, 80 )
+
+[node name="Transpallet2" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 7100, 565 )
+script = ExtResource( 2 )
+tipo = 41
+dimensioni = Vector2( 115, 75 )
+
+[node name="Cartoni5" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 7250, 525 )
+script = ExtResource( 2 )
+tipo = 39
+dimensioni = Vector2( 130, 115 )
+
+[node name="Scaffale6" type="StaticBody2D" parent="Magazzino"]
+z_index = -6
+position = Vector2( 7400, 370 )
+script = ExtResource( 2 )
+tipo = 40
+dimensioni = Vector2( 160, 270 )
+solido = false
+
+[node name="Scaffale6a" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 7405, 498 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale6b" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 7405, 434 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
+[node name="Scaffale6c" type="StaticBody2D" parent="Magazzino"]
+position = Vector2( 7405, 370 )
+script = ExtResource( 2 )
+tipo = 21
+dimensioni = Vector2( 150, 10 )
+attraversabile_da_sotto = true
+
 [node name="Cartoni2" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 4550, 525 )
+position = Vector2( 7620, 525 )
 script = ExtResource( 2 )
 tipo = 39
 dimensioni = Vector2( 130, 115 )
 
 [node name="Bancale2" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 4720, 620 )
+position = Vector2( 7790, 620 )
 script = ExtResource( 2 )
 tipo = 38
 dimensioni = Vector2( 120, 20 )
 
 [node name="Scatolone3a" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 4725, 545 )
+position = Vector2( 7795, 545 )
 script = ExtResource( 2 )
 tipo = 37
 dimensioni = Vector2( 110, 75 )
 
 [node name="Furgone" type="StaticBody2D" parent="Magazzino"]
 z_index = -3
-position = Vector2( 4900, 430 )
+position = Vector2( 7970, 430 )
 script = ExtResource( 2 )
 tipo = 45
 dimensioni = Vector2( 330, 210 )
 solido = false
 
 [node name="TettoFurgone" type="StaticBody2D" parent="Magazzino"]
-position = Vector2( 4930, 462 )
+position = Vector2( 8000, 462 )
 script = ExtResource( 2 )
 tipo = 21
 dimensioni = Vector2( 245, 10 )
@@ -289,7 +532,7 @@ attraversabile_da_sotto = true
 
 [node name="Estintore2" type="StaticBody2D" parent="Magazzino"]
 z_index = -6
-position = Vector2( 5380, 585 )
+position = Vector2( 8450, 585 )
 script = ExtResource( 2 )
 tipo = 43
 dimensioni = Vector2( 25, 55 )
@@ -297,7 +540,7 @@ solido = false
 
 [node name="Portone" type="StaticBody2D" parent="Magazzino"]
 z_index = -4
-position = Vector2( 5440, 475 )
+position = Vector2( 8510, 475 )
 script = ExtResource( 2 )
 tipo = 42
 dimensioni = Vector2( 150, 165 )
@@ -318,7 +561,25 @@ tipo = 4
 resistenza = 1
 
 [node name="Rompibile3" type="StaticBody2D" parent="Rompibili"]
-position = Vector2( 4300, 330 )
+position = Vector2( 2470, 640 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 1
+
+[node name="Rompibile4" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 5300, 330 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 2
+
+[node name="Rompibile5" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 6020, 640 )
+script = ExtResource( 13 )
+tipo = 4
+resistenza = 1
+
+[node name="Rompibile6" type="StaticBody2D" parent="Rompibili"]
+position = Vector2( 6240, 330 )
 script = ExtResource( 13 )
 tipo = 4
 resistenza = 2
@@ -340,14 +601,14 @@ verso = 1.0
 potenza = 1.1
 
 [node name="Operatore3" type="Node2D" parent="Operatori"]
-position = Vector2( 2560, 640 )
+position = Vector2( 3560, 640 )
 script = ExtResource( 14 )
 chi = 3
 verso = 1.0
 potenza = 1.0
 
 [node name="Operatore4" type="Node2D" parent="Operatori"]
-position = Vector2( 3352, 640 )
+position = Vector2( 4352, 640 )
 script = ExtResource( 14 )
 chi = 2
 verso = 1.0
@@ -368,11 +629,27 @@ position = Vector2( 2150, 640 )
 script = ExtResource( 6 )
 
 [node name="Nido4" type="Area2D" parent="Nidi"]
-position = Vector2( 3600, 330 )
+position = Vector2( 3090, 640 )
 script = ExtResource( 6 )
 
 [node name="Nido5" type="Area2D" parent="Nidi"]
-position = Vector2( 4480, 640 )
+position = Vector2( 4600, 330 )
+script = ExtResource( 6 )
+
+[node name="Nido6" type="Area2D" parent="Nidi"]
+position = Vector2( 5640, 330 )
+script = ExtResource( 6 )
+
+[node name="Nido7" type="Area2D" parent="Nidi"]
+position = Vector2( 6560, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido8" type="Area2D" parent="Nidi"]
+position = Vector2( 7040, 640 )
+script = ExtResource( 6 )
+
+[node name="Nido9" type="Area2D" parent="Nidi"]
+position = Vector2( 7570, 640 )
 script = ExtResource( 6 )
 
 [node name="UovoOro" type="Area2D" parent="."]
@@ -380,7 +657,7 @@ position = Vector2( 1000, 150 )
 script = ExtResource( 17 )
 
 [node name="Autista" type="Node2D" parent="."]
-position = Vector2( 5300, 640 )
+position = Vector2( 8370, 640 )
 script = ExtResource( 18 )
 
 [node name="Chicchi" type="Node2D" parent="."]
@@ -422,59 +699,151 @@ position = Vector2( 2300, 610 )
 script = ExtResource( 5 )
 
 [node name="Chicco10" type="Area2D" parent="Chicchi"]
-position = Vector2( 2850, 470 )
+position = Vector2( 2335, 340 )
 script = ExtResource( 5 )
 
 [node name="Chicco11" type="Area2D" parent="Chicchi"]
-position = Vector2( 3050, 480 )
+position = Vector2( 2630, 340 )
 script = ExtResource( 5 )
 
 [node name="Chicco12" type="Area2D" parent="Chicchi"]
-position = Vector2( 3650, 300 )
+position = Vector2( 2980, 340 )
 script = ExtResource( 5 )
 
 [node name="Chicco13" type="Area2D" parent="Chicchi"]
-position = Vector2( 3800, 300 )
+position = Vector2( 2680, 170 )
 script = ExtResource( 5 )
 
 [node name="Chicco14" type="Area2D" parent="Chicchi"]
-position = Vector2( 4200, 300 )
+position = Vector2( 2740, 170 )
 script = ExtResource( 5 )
 
 [node name="Chicco15" type="Area2D" parent="Chicchi"]
-position = Vector2( 4300, 300 )
+position = Vector2( 2800, 170 )
 script = ExtResource( 5 )
 
 [node name="Chicco16" type="Area2D" parent="Chicchi"]
-position = Vector2( 3757, 535 )
+position = Vector2( 2470, 560 )
 script = ExtResource( 5 )
 
 [node name="Chicco17" type="Area2D" parent="Chicchi"]
-position = Vector2( 4615, 495 )
+position = Vector2( 3215, 495 )
 script = ExtResource( 5 )
 
 [node name="Chicco18" type="Area2D" parent="Chicchi"]
-position = Vector2( 4780, 515 )
+position = Vector2( 3410, 435 )
 script = ExtResource( 5 )
 
 [node name="Chicco19" type="Area2D" parent="Chicchi"]
-position = Vector2( 4700, 610 )
+position = Vector2( 3500, 610 )
 script = ExtResource( 5 )
 
 [node name="Chicco20" type="Area2D" parent="Chicchi"]
-position = Vector2( 4990, 432 )
+position = Vector2( 3850, 470 )
 script = ExtResource( 5 )
 
 [node name="Chicco21" type="Area2D" parent="Chicchi"]
-position = Vector2( 5060, 432 )
+position = Vector2( 4050, 480 )
 script = ExtResource( 5 )
 
 [node name="Chicco22" type="Area2D" parent="Chicchi"]
-position = Vector2( 5130, 432 )
+position = Vector2( 4650, 300 )
 script = ExtResource( 5 )
 
 [node name="Chicco23" type="Area2D" parent="Chicchi"]
-position = Vector2( 5515, 600 )
+position = Vector2( 4800, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco24" type="Area2D" parent="Chicchi"]
+position = Vector2( 5200, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco25" type="Area2D" parent="Chicchi"]
+position = Vector2( 5300, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco26" type="Area2D" parent="Chicchi"]
+position = Vector2( 4757, 535 )
+script = ExtResource( 5 )
+
+[node name="Chicco27" type="Area2D" parent="Chicchi"]
+position = Vector2( 5480, 280 )
+script = ExtResource( 5 )
+
+[node name="Chicco28" type="Area2D" parent="Chicchi"]
+position = Vector2( 5700, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco29" type="Area2D" parent="Chicchi"]
+position = Vector2( 5850, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco30" type="Area2D" parent="Chicchi"]
+position = Vector2( 6100, 300 )
+script = ExtResource( 5 )
+
+[node name="Chicco31" type="Area2D" parent="Chicchi"]
+position = Vector2( 5765, 495 )
+script = ExtResource( 5 )
+
+[node name="Chicco32" type="Area2D" parent="Chicchi"]
+position = Vector2( 6080, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco33" type="Area2D" parent="Chicchi"]
+position = Vector2( 6400, 435 )
+script = ExtResource( 5 )
+
+[node name="Chicco34" type="Area2D" parent="Chicchi"]
+position = Vector2( 6760, 520 )
+script = ExtResource( 5 )
+
+[node name="Chicco35" type="Area2D" parent="Chicchi"]
+position = Vector2( 6830, 480 )
+script = ExtResource( 5 )
+
+[node name="Chicco36" type="Area2D" parent="Chicchi"]
+position = Vector2( 6900, 520 )
+script = ExtResource( 5 )
+
+[node name="Chicco37" type="Area2D" parent="Chicchi"]
+position = Vector2( 7157, 535 )
+script = ExtResource( 5 )
+
+[node name="Chicco38" type="Area2D" parent="Chicchi"]
+position = Vector2( 7315, 495 )
+script = ExtResource( 5 )
+
+[node name="Chicco39" type="Area2D" parent="Chicchi"]
+position = Vector2( 7480, 340 )
+script = ExtResource( 5 )
+
+[node name="Chicco40" type="Area2D" parent="Chicchi"]
+position = Vector2( 7685, 495 )
+script = ExtResource( 5 )
+
+[node name="Chicco41" type="Area2D" parent="Chicchi"]
+position = Vector2( 7850, 515 )
+script = ExtResource( 5 )
+
+[node name="Chicco42" type="Area2D" parent="Chicchi"]
+position = Vector2( 7770, 610 )
+script = ExtResource( 5 )
+
+[node name="Chicco43" type="Area2D" parent="Chicchi"]
+position = Vector2( 8060, 432 )
+script = ExtResource( 5 )
+
+[node name="Chicco44" type="Area2D" parent="Chicchi"]
+position = Vector2( 8130, 432 )
+script = ExtResource( 5 )
+
+[node name="Chicco45" type="Area2D" parent="Chicchi"]
+position = Vector2( 8200, 432 )
+script = ExtResource( 5 )
+
+[node name="Chicco46" type="Area2D" parent="Chicchi"]
+position = Vector2( 8585, 600 )
 script = ExtResource( 5 )
 
 [node name="Nemici" type="Node2D" parent="."]
@@ -490,7 +859,22 @@ script = ExtResource( 15 )
 verso = -1.0
 
 [node name="Coni3" type="Node2D" parent="Nemici"]
-position = Vector2( 4160, 195 )
+position = Vector2( 3040, 370 )
+script = ExtResource( 15 )
+verso = -1.0
+
+[node name="Coni4" type="Node2D" parent="Nemici"]
+position = Vector2( 5160, 195 )
+script = ExtResource( 15 )
+verso = -1.0
+
+[node name="Coni5" type="Node2D" parent="Nemici"]
+position = Vector2( 5990, 195 )
+script = ExtResource( 15 )
+verso = -1.0
+
+[node name="Coni6" type="Node2D" parent="Nemici"]
+position = Vector2( 7520, 370 )
 script = ExtResource( 15 )
 verso = -1.0
 
@@ -499,7 +883,7 @@ script = ExtResource( 16 )
 tipo = "magazzino"
 
 [node name="Uscita" type="Area2D" parent="."]
-position = Vector2( 5515, 610 )
+position = Vector2( 8585, 610 )
 
 [node name="Forma" type="CollisionShape2D" parent="Uscita"]
 shape = SubResource( 1 )
@@ -511,7 +895,7 @@ position = Vector2( 150, 610 )
 current = true
 limit_left = 0
 limit_top = 0
-limit_right = 5650
+limit_right = 8700
 limit_bottom = 720
 smoothing_enabled = true
 smoothing_speed = 6.0
