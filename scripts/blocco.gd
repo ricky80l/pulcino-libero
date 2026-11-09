@@ -238,14 +238,15 @@ func _disegna_pavimento():
 
 # Asse o palo di legno con contorno e venature
 func _disegna_legno():
+	# solo rettangoli e poligoni, raggruppati: la scheda video li disegna in pochi colpi
 	var r := Rect2(Vector2.ZERO, dimensioni)
 	draw_rect(r, Color("b07a3e"))
 	draw_rect(Rect2(4, 0, 6, dimensioni.y), Color("c99a5c"))
+	_cornice(r, CONTORNO, 3.0)
 	var y := 40.0
 	while y < dimensioni.y:
-		draw_line(Vector2(dimensioni.x * 0.3, y), Vector2(dimensioni.x * 0.7, y + 18), LEGNO_SCURO, 2.0, true)
+		_striscia(Vector2(dimensioni.x * 0.3, y), Vector2(dimensioni.x * 0.7, y + 18), 2.0, LEGNO_SCURO)
 		y += 90.0
-	draw_rect(r, CONTORNO, false, 3.0)
 
 
 # Sbarre di metallo della gabbia (pezzi sottili = un tubo, pezzi larghi = tante sbarre)

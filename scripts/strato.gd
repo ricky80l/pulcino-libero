@@ -2,6 +2,8 @@ extends Node2D
 # Un piano del paesaggio lontano, dentro uno strato di parallasse (vedi atmosfera.gd).
 # Si disegna da solo secondo il tipo. Le colline si ripetono ogni "larghezza" pixel senza scalini.
 # Le altezze sono quelle del livello: il prato davanti è a 640.
+# Per il peso sul telefono: solo rettangoli e poligoni (niente cerchi né linee spesse), raggruppati per tipo,
+# così la scheda video li disegna in pochi colpi.
 
 var tipo := ""
 var larghezza := 2048.0
@@ -65,9 +67,9 @@ func _cielo():
 func _sole():
 	var c := Vector2(170, 290)
 	for i in range(6):
-		draw_circle(c, 130 - i * 14, Color(1.0, 0.95, 0.7, 0.07))  # alone caldo
-	draw_circle(c, 52, Color("ffe27a"))
-	draw_circle(c, 44, Color("fff1b3"))
+		_tondo(c, 130 - i * 14, Color(1.0, 0.95, 0.7, 0.07), 40)  # alone caldo
+	_tondo(c, 52, Color("ffe27a"), 32)
+	_tondo(c, 44, Color("fff1b3"), 32)
 
 
 func _raggi():
@@ -89,9 +91,9 @@ func _nuvole():
 		var c: Vector2 = n[0]
 		var s: float = n[1]
 		for d in [Vector2(-34, 8), Vector2(0, -10), Vector2(34, 4), Vector2(62, 12), Vector2(-60, 14)]:
-			draw_circle(c + d * s, 30 * s, Color(0.88, 0.94, 0.98))
+			_tondo(c + d * s, 30 * s, Color(0.88, 0.94, 0.98), 24)
 		for d in [Vector2(-34, 4), Vector2(0, -14), Vector2(34, 0), Vector2(62, 8), Vector2(-60, 10)]:
-			draw_circle(c + d * s, 27 * s, Color.white)
+			_tondo(c + d * s, 27 * s, Color.white, 24)
 
 
 # Colline: somma di onde che si ripetono esattamente ogni "larghezza" (onde: [altezza, quante volte, fase])
@@ -109,7 +111,13 @@ func _colline(base: float, onde: Array, colore: Color, luce: Color):
 	punti.append(Vector2(larghezza, 760))
 	punti.append(Vector2(0, 760))
 	draw_colored_polygon(punti, colore)
-	draw_polyline(cresta, luce, 6.0, true)  # bordo più chiaro dove batte il sole
+	# bordo più chiaro dove batte il sole: una fascia larga 6 lungo la cresta, fatta come un poligono solo
+	var fascia := PoolVector2Array()
+	for q in cresta:
+		fascia.append(q + Vector2(0, -3))
+	for k in range(cresta.size() - 1, -1, -1):
+		fascia.append(cresta[k] + Vector2(0, 3))
+	draw_colored_polygon(fascia, luce)
 
 
 func _y_collina(x: float) -> float:
@@ -125,11 +133,27 @@ func _case_e_alberi():
 	draw_rect(Rect2(x + 28, y - 26, 14, 26), Color("9c7b5a"))
 	draw_rect(Rect2(x + 90, y - 30, 40, 30), Color("d6b48e"))
 	draw_colored_polygon(PoolVector2Array([Vector2(x + 86, y - 28), Vector2(x + 110, y - 46), Vector2(x + 134, y - 28)]), Color("b8664f"))
-	for t in [180.0, 260.0, 760.0, 1180.0, 1260.0, 1620.0, 1890.0]:
+	_alberi([180.0, 260.0, 760.0, 1180.0, 1260.0, 1620.0, 1890.0])
+
+
+# Alberi tondi sulla collina: prima tutti i tronchi, poi tutte le chiome, poi tutti i riflessi
+func _alberi(dove: Array):
+	for t in dove:
 		var ty: float = _y_collina(t) + 10
 		draw_rect(Rect2(t - 4, ty - 26, 8, 26), Color("8a6a48"))
-		draw_circle(Vector2(t, ty - 40), 24, Color("5f9e45"))
-		draw_circle(Vector2(t - 7, ty - 47), 10, Color("78b85a"))
+	for t in dove:
+		_tondo(Vector2(t, _y_collina(t) + 10 - 40), 24, Color("5f9e45"), 24)
+	for t in dove:
+		_tondo(Vector2(t - 7, _y_collina(t) + 10 - 47), 10, Color("78b85a"), 14)
+
+
+# Cerchio pieno fatto con un poligono
+func _tondo(centro: Vector2, raggio: float, colore: Color, lati := 20):
+	var punti := PoolVector2Array()
+	for k in range(lati):
+		var a := TAU * k / float(lati)
+		punti.append(centro + Vector2(cos(a), sin(a)) * raggio)
+	draw_colored_polygon(punti, colore)
 
 
 # Campi coltivati a strisce sulle colline (orto), con qualche albero
@@ -137,22 +161,23 @@ func _campi():
 	var colori := [Color("a7c95a"), Color("c9b45a"), Color("8fbf4e"), Color("d6a85a")]
 	var x := 0.0
 	var i := 0
+	var solchi := []
 	while x < larghezza:
 		var largo := 150.0 + (i % 3) * 40.0
 		var y1: float = _y_collina(x) + 14
 		var y2: float = _y_collina(x + largo) + 14
 		var c: Color = colori[i % colori.size()]
 		draw_colored_polygon(PoolVector2Array([Vector2(x, y1), Vector2(x + largo, y2), Vector2(x + largo, y2 + 46), Vector2(x, y1 + 46)]), c)
-		# solchi
 		for k in range(1, 4):
-			draw_line(Vector2(x, y1 + k * 11), Vector2(x + largo, y2 + k * 11), c.darkened(0.12), 2.0)
+			solchi.append([Vector2(x, y1 + k * 11), Vector2(x + largo, y2 + k * 11), c.darkened(0.12)])
 		x += largo + 30.0
 		i += 1
-	for t in [300.0, 980.0, 1500.0, 1840.0]:
-		var ty: float = _y_collina(t) + 10
-		draw_rect(Rect2(t - 4, ty - 26, 8, 26), Color("8a6a48"))
-		draw_circle(Vector2(t, ty - 40), 24, Color("5f9e45"))
-		draw_circle(Vector2(t - 7, ty - 47), 10, Color("78b85a"))
+	# solchi: strisce sottili, dopo tutti i campi
+	for q in solchi:
+		var da: Vector2 = q[0]
+		var a: Vector2 = q[1]
+		draw_colored_polygon(PoolVector2Array([da + Vector2(0, -1), a + Vector2(0, -1), a + Vector2(0, 1), da + Vector2(0, 1)]), q[2])
+	_alberi([300.0, 980.0, 1500.0, 1840.0])
 
 
 # Fasci di luce dai lucernari del soffitto del magazzino (stessi punti di _disegna_lamiera in blocco.gd)
@@ -193,4 +218,4 @@ func _siepi():
 	for i in range(40):
 		var fx := rng.randf_range(10, larghezza - 10)
 		var fiore: Color = [Color.white, Color("ffd84a"), Color("ff9ec0")][i % 3]
-		draw_circle(Vector2(fx, rng.randf_range(588, 630)), 3.5, fiore)
+		_tondo(Vector2(fx, rng.randf_range(588, 630)), 3.5, fiore, 8)

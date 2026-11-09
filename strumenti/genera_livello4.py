@@ -131,7 +131,7 @@ chicchi = [
     (625, 495),                                  # sui cartoni
     (900, 610),
     (1140, 290), (1140, 230),                    # in cima alla colonna e sopra
-    (1760, 430), (1880, 410),                    # sopra la prima fossa
+    (1775, 315), (1900, 285),                    # sopra la prima fossa, sulla traiettoria del canestro
     (2300, 610),
     (2335, 340), (2630, 340), (2980, 340),       # in cima agli scaffali del corridoio
     (2680, 170), (2740, 170), (2800, 170),       # sulla passerella alta
@@ -139,15 +139,15 @@ chicchi = [
     (3215, 495),                                 # sui cartoni
     (3410, 435),                                 # in cima alla pila di scatoloni
     (3500, 610),
-    (3850, 470), (4050, 480),                    # sopra la fossa larga
+    (3830, 428), (4040, 410),                    # sopra la fossa larga, sulla traiettoria della giravolta
     (4650, 300), (4800, 300), (5200, 300), (5300, 300),   # sul soppalco
     (4757, 535),                                 # sul transpallet
-    (5480, 280),                                 # sopra il vuoto tra i soppalchi
+    (5490, 165),                                 # sopra il vuoto tra i soppalchi (in cima al salto)
     (5700, 300), (5850, 300), (6100, 300),       # sul secondo soppalco
     (5765, 495),                                 # sui cartoni sotto il secondo soppalco
     (6080, 610),                                 # dietro la scatola sotto il secondo soppalco
     (6400, 435),                                 # sulla scala di scatoloni
-    (6760, 520), (6830, 480), (6900, 520),       # sopra la buca di carico
+    (6760, 510), (6830, 465), (6910, 335),       # sopra la buca di carico, sul doppio salto preso dal bordo
     (7157, 535),                                 # sul secondo transpallet
     (7315, 495),                                 # sui cartoni
     (7480, 340),                                 # in cima all'ultimo scaffale
