@@ -311,3 +311,20 @@ L'ape, con le sue animazioni esagerate e il suo ronzio, sistemata nel prato dove
 **STOP:** fine del livello 5.
 
 **Com'è fatta (Tappa 26):** `scripts/ape.gd` (disegni da `strumenti/disegni_ape.py`, suono `ronzio` in loop da `genera_suoni.py`, si sente solo entro circa 560 pixel). Vola avanti e indietro lungo il suo giro ondeggiando, ai capi annusa l'aria e si gira; il giro è segnato da una scia di puntini di polline e la sua ombra a terra dice quanto è in alto; se prende il pulcino fa una giravolta contenta. Nel prato ce ne sono quattro (parametro `api` di `livelli.py`): a piedi sulle prime si passa sotto, sui tronchi e con l'ape dell'ultimo tratto bisogna scegliere il momento. Sotto la stellina «Mai preso» del prato c'è il suo musetto.
+
+## Tappe della musica e dei suoni veri (scelte di Riccardo)
+
+Il gioco oggi non ha musica e i suoni sono segnaposto sintetici. Scelte fatte:
+- **Origine:** raccolte libere che permettono anche la vendita (CC0 o CC BY con l'autore nei Crediti). Claude non può ascoltare l'audio: propone i candidati con i link, Riccardo ascolta e sceglie, e si scarica solo quello che approva.
+- **Stile della musica:** acustica e serena (chitarra, ukulele, fischiettio, glockenspiel).
+- **Quantità:** tre brani: mappa, luoghi all'aperto (cortile, orto, prato), luoghi al chiuso (pollaio, Maglificio). Ogni brano accorciato e compresso a circa 1 MB.
+- **Interruttori:** Musica e Suoni separati, nel menu di pausa e sulla mappa; il telefono ricorda la scelta.
+
+### Tappa 27 — La musica
+I tre brani scelti da Riccardo, che partono piano e si ripetono; gli interruttori Musica e Suoni; gli autori nei Crediti.
+**STOP:** la musica piace, non stanca e si spegne facilmente.
+
+### Tappa 28 — I suoni veri
+Al posto dei suoni sintetici: versi veri per pulcino, topo, oca, talpa e ape; rumori veri per beccate, rotture, chicchi, uovo, stelline, nido e fine livello. Prima di sostituirli, Riccardo ascolta i candidati.
+**STOP:** i suoni nuovi sono più belli dei vecchi e non danno fastidio.
+
