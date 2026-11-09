@@ -396,13 +396,14 @@ func _disegna_mattoni():
 	draw_set_transform(Vector2.ZERO, 0, Vector2(0.5, 0.5))  # la piastrella è disegnata al doppio
 	draw_texture_rect(MATTONI_PIASTRELLA, Rect2(Vector2.ZERO, dimensioni * 2), true)
 	draw_set_transform(Vector2.ZERO, 0, Vector2.ONE)
+	# oblò: solo poligoni, così la scheda video li disegna tutti insieme (la parete è lunga quanto il livello)
 	var x := 330.0
 	while x < dimensioni.x - 30:
 		var c := Vector2(x, 160)
-		draw_circle(c, 24, Color("8c9096"))
-		draw_circle(c, 20, Color("5e646a"))
-		draw_circle(c, 17, Color("eaf4fa"))
-		draw_arc(c, 11, -2.4, -1.2, 8, Color.white, 3.0, true)
+		_ovale(c, Vector2(24, 24), Color("8c9096"), 28)
+		_ovale(c, Vector2(20, 20), Color("5e646a"), 28)
+		_ovale(c, Vector2(17, 17), Color("eaf4fa"), 28)
+		_spicchio(c, 9.5, 12.5, -2.4, -1.2, Color.white)
 		x += 650.0
 
 
@@ -410,23 +411,33 @@ func _disegna_mattoni():
 func _disegna_lamiera():
 	var w := dimensioni.x
 	var h := dimensioni.y
+	# solo rettangoli pieni (anche le cornici): la scheda video li disegna tutti insieme
 	draw_rect(Rect2(0, 0, w, h - 12), Color("c9cccf"))
 	var x := 0.0
 	while x < w:
 		draw_rect(Rect2(x, 0, 6, h - 12), Color("b5babf"))
 		x += 12.0
+	# raggruppati per colore (prima tutti i vetri, poi tutte le cornici): ogni cambio di colore spezza il gruppo
+	var lucernari := []
 	x = 180.0
 	while x < w - 150:
-		draw_rect(Rect2(x, 8, 150, h - 30), Color("eef6fb"))
-		draw_rect(Rect2(x, 8, 150, h - 30), Color("9da3a8"), false, 3.0)
+		lucernari.append(Rect2(x, 8, 150, h - 30))
 		x += 460.0
+	for r in lucernari:
+		draw_rect(r, Color("eef6fb"))
+	for r in lucernari:
+		_cornice(r, Color("9da3a8"), 3.0)
 	draw_rect(Rect2(0, h - 14, w, 12), Color("a8adb3"))
-	draw_line(Vector2(0, h - 2), Vector2(w, h - 2), Color("7e848a"), 2.0)
+	draw_rect(Rect2(0, h - 3, w, 2), Color("7e848a"))
+	var lampade := []
 	x = 100.0
 	while x < w - 80:
-		draw_rect(Rect2(x, h - 2, 80, 6), Color("f5f8fa"))
-		draw_rect(Rect2(x, h - 2, 80, 6), Color("9da3a8"), false, 1.5)
+		lampade.append(Rect2(x, h - 2, 80, 6))
 		x += 260.0
+	for r in lampade:
+		draw_rect(r, Color("f5f8fa"))
+	for r in lampade:
+		_cornice(r, Color("9da3a8"), 1.5)
 
 
 # Pavimento di cemento grigio chiaro con i giunti
@@ -522,10 +533,10 @@ func _ellisse(centro: Vector2, raggi: Vector2, colore: Color):
 
 
 # Ovale pieno fatto con un poligono a 16 lati (si disegna insieme agli altri pezzi, a differenza dei cerchi)
-func _ovale(centro: Vector2, raggi: Vector2, colore: Color):
+func _ovale(centro: Vector2, raggi: Vector2, colore: Color, lati := 16):
 	var punti := PoolVector2Array()
-	for k in range(16):
-		var a := TAU * k / 16.0
+	for k in range(lati):
+		var a := TAU * k / float(lati)
 		punti.append(centro + Vector2(cos(a) * raggi.x, sin(a) * raggi.y))
 	draw_colored_polygon(punti, colore)
 
@@ -534,3 +545,24 @@ func _ovale(centro: Vector2, raggi: Vector2, colore: Color):
 func _striscia(da: Vector2, a: Vector2, spessore: float, colore: Color):
 	var lato := (a - da).normalized().tangent() * spessore * 0.5
 	draw_colored_polygon(PoolVector2Array([da + lato, a + lato, a - lato, da - lato]), colore)
+
+
+# Cornice di un rettangolo fatta con quattro rettangoli pieni (come draw_rect vuoto, ma si disegna insieme agli altri)
+func _cornice(r: Rect2, colore: Color, spessore: float):
+	var m := spessore * 0.5
+	draw_rect(Rect2(r.position.x - m, r.position.y - m, r.size.x + spessore, spessore), colore)
+	draw_rect(Rect2(r.position.x - m, r.end.y - m, r.size.x + spessore, spessore), colore)
+	draw_rect(Rect2(r.position.x - m, r.position.y + m, spessore, r.size.y - spessore), colore)
+	draw_rect(Rect2(r.end.x - m, r.position.y + m, spessore, r.size.y - spessore), colore)
+
+
+# Spicchio di anello (un riflesso curvo) fatto con un poligono
+func _spicchio(centro: Vector2, raggio_dentro: float, raggio_fuori: float, da: float, a: float, colore: Color):
+	var punti := PoolVector2Array()
+	for k in range(9):
+		var ang: float = lerp(da, a, k / 8.0)
+		punti.append(centro + Vector2(cos(ang), sin(ang)) * raggio_fuori)
+	for k in range(8, -1, -1):
+		var ang: float = lerp(da, a, k / 8.0)
+		punti.append(centro + Vector2(cos(ang), sin(ang)) * raggio_dentro)
+	draw_colored_polygon(punti, colore)
