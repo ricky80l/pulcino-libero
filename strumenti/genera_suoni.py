@@ -47,7 +47,14 @@ def mescola(*tracce):
     return [sum(t[i] for t in tracce if i < len(t)) for i in range(lunghezza)]
 
 
+# Suoni sostituiti da suoni veri nella Tappa 28 (vedi strumenti/prepara_suoni.py): qui non si toccano più
+SUONI_VERI = {"doppio", "colpito", "curioso", "atterra", "chicco", "becco", "botta", "rotto", "traballa", "rotola",
+              "squittio", "starnazzo", "bu", "scava", "plana", "stella"}
+
+
 def salva(nome, campioni):
+    if nome in SUONI_VERI:
+        return
     os.makedirs(CARTELLA, exist_ok=True)
     with wave.open(os.path.join(CARTELLA, nome + ".wav"), "wb") as f:
         f.setnchannels(1)

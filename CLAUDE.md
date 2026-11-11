@@ -330,3 +330,5 @@ I tre brani scelti da Riccardo, che partono piano e si ripetono; gli interruttor
 Al posto dei suoni sintetici: versi veri per pulcino, topo, oca, talpa e ape; rumori veri per beccate, rotture, chicchi, uovo, stelline, nido e fine livello. Prima di sostituirli, Riccardo ascolta i candidati.
 **STOP:** i suoni nuovi sono più belli dei vecchi e non danno fastidio.
 
+**Com'è fatta (Tappa 28):** `strumenti/prepara_suoni.py` prepara per ogni suono tre candidati (A, B, C) da raccolte CC0 di OpenGameArt (pigolii veri «Peeps», pacchetti di Kenney: interfaccia, RPG, fanfare; squittio, trombetta per l'oca, versi buffi, fruscii) e una pagina di ascolto; con `--scelte` scrive i scelti in `assets/suoni/`. Scelte di Riccardo: nuovi doppio, colpito, curioso, atterra, chicco, becco, botta, rotto, traballa, rotola, squittio, starnazzo, bu, scava, plana, stella; restano sintetici salto, boing, nido, uovo, fine, piuma e il ronzio dell'ape. `genera_suoni.py` non tocca più i suoni veri (`SUONI_VERI`). Gli autori dei suoni sono nei Crediti.
+

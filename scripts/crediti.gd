@@ -18,6 +18,8 @@ Realizzato con Godot Engine (godotengine.org).
 Musica di Kevin MacLeod (incompetech.com), con licenza Creative Commons Attribuzione 4.0 (http://creativecommons.org/licenses/by/4.0/):
 "Easy Lemon" (la mappa), "Carefree" (i luoghi all'aperto), "Cheery Monday" (i luoghi al chiuso). I brani sono stati accorciati e sfumati.
 
+Suoni: Kenney (www.kenney.nl), Technopeasant, AntumDeluge, EzduzziteH e altri autori di OpenGameArt.org, con licenza CC0 (pubblico dominio); alcuni tagliati, uniti o cambiati di tono.
+
 Carattere Fredoka: Copyright 2016 The Fredoka Project Authors (https://github.com/hafontia/Fredoka-One), distribuito con licenza SIL Open Font License, versione 1.1 (scripts.sil.org/OFL).
 
 Parti di questo software sono copyright (c) The FreeType Project (www.freetype.org). Tutti i diritti riservati.
