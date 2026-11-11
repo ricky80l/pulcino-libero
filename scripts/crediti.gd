@@ -11,6 +11,8 @@ const TESTO := """IL PULCINO LIBERO
 
 Ideato e diretto da Riccardo.
 
+© 2026 Riccardo. Tutti i diritti riservati: il gioco, i suoi personaggi, i disegni e i livelli non si possono copiare, modificare o ripubblicare senza permesso.
+
 Sviluppato con l'assistenza di strumenti di intelligenza artificiale (Claude, Anthropic).
 
 Realizzato con Godot Engine (godotengine.org).

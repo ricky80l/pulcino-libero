@@ -387,11 +387,15 @@ $GODOT_HEAD_INCLUDE
 			// aperto come app dalla schermata Home è già a schermo intero: non si chiede niente (niente avviso)
 			var comeApp = window.matchMedia && (window.matchMedia('(display-mode: fullscreen)').matches
 					|| window.matchMedia('(display-mode: standalone)').matches);
-			if (!comeApp && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
+			// dentro la pagina di un negozio (itch.io mostra il gioco in un riquadro): niente schermo intero automatico,
+			// niente installazione come app e niente invito: ci pensa il negozio con i suoi pulsanti
+			var incorporato = false;
+			try { incorporato = window.self !== window.top; } catch (e) { incorporato = true; }
+			if (!comeApp && !incorporato && ('ontouchstart' in window || navigator.maxTouchPoints > 0)) {
 				document.addEventListener('touchend', schermoIntero, { passive: true });
 			}
 			// l'aiutante che rende il gioco installabile come app (non tiene niente in memoria)
-			if ('serviceWorker' in navigator) {
+			if (!incorporato && 'serviceWorker' in navigator) {
 				navigator.serviceWorker.register('aiutante.js').catch(function() {});
 			}
 
@@ -454,7 +458,7 @@ $GODOT_HEAD_INCLUDE
 				setTimeout(function() { banda.classList.add('visibile'); }, 30);
 			}
 			function invitaInstallare() {
-				if (comeApp || !suTelefono || rimandatoDiRecente() || banda.style.display === 'flex') {
+				if (comeApp || incorporato || !suTelefono || rimandatoDiRecente() || banda.style.display === 'flex') {
 					return;
 				}
 				bandaPulsanti.innerHTML = '';
