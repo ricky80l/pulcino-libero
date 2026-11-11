@@ -34,6 +34,8 @@ var comprati := []  # accessori comprati (vedi scripts/accessori.gd)
 var indossati := {}  # posto ("testa", "occhi", "collo") -> accessorio indossato
 var piume := []  # luoghi finiti in cui il pulcino ha trovato la piuma misteriosa (Tappa 24)
 var piume_viste := []  # luoghi di cui la mappa ha già mostrato la scena della piuma
+var musica_attiva := true  # interruttore Musica (menu di pausa e mappa)
+var suoni_attivi := true  # interruttore Suoni
 
 
 func compra(nome: String, prezzo: int) -> bool:
@@ -157,7 +159,7 @@ func salva():
 		f.store_string(to_json({"sbloccato": sbloccato, "record": record,
 				"ultimo_giocato": ultimo_giocato, "nebbia_vista": nebbia_vista, "abilita_viste": abilita_viste, "dipinto": dipinto, "uova": uova, "stelle": stelle,
 				"borsellino": borsellino, "comprati": comprati, "indossati": indossati,
-				"piume": piume, "piume_viste": piume_viste}))
+				"piume": piume, "piume_viste": piume_viste, "musica_attiva": musica_attiva, "suoni_attivi": suoni_attivi}))
 		f.close()
 
 
@@ -198,3 +200,5 @@ func carica():
 		piume_viste = []
 		for n in dati.get("piume_viste", []):
 			piume_viste.append(int(n))
+		musica_attiva = bool(dati.get("musica_attiva", true))
+		suoni_attivi = bool(dati.get("suoni_attivi", true))

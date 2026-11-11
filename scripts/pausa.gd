@@ -9,6 +9,8 @@ const FONT_GRANDE = preload("res://assets/font/fredoka_messaggio.tres")
 var pulsante_pausa := Button.new()
 var pannello := Control.new()
 var primo_pulsante: Button
+var interruttore_musica: Button
+var interruttore_suoni: Button
 
 
 func _ready():
@@ -34,7 +36,7 @@ func _ready():
 	velo.anchor_bottom = 1.0
 	pannello.add_child(velo)
 	var colonna := VBoxContainer.new()
-	colonna.rect_position = Vector2(440, 140)
+	colonna.rect_position = Vector2(440, 100)
 	colonna.rect_min_size = Vector2(400, 0)
 	colonna.add_constant_override("separation", 22)
 	pannello.add_child(colonna)
@@ -47,6 +49,40 @@ func _ready():
 	primo_pulsante = _voce(colonna, "Continua", "chiudi")
 	_voce(colonna, "Ricomincia", "_ricomincia")
 	_voce(colonna, "Torna alla mappa", "_mappa")
+	# interruttori Musica e Suoni, affiancati
+	var riga := HBoxContainer.new()
+	riga.add_constant_override("separation", 20)
+	colonna.add_child(riga)
+	interruttore_musica = _interruttore(riga, "_cambia_musica")
+	interruttore_suoni = _interruttore(riga, "_cambia_suoni")
+	_scrivi_interruttori()
+
+
+func _interruttore(riga: Control, metodo: String) -> Button:
+	var b := Button.new()
+	b.rect_min_size = Vector2(190, 84)
+	Stile.pulsante_legno(b, FONT_PICCOLO)
+	b.connect("pressed", self, metodo)
+	riga.add_child(b)
+	return b
+
+
+func _cambia_musica():
+	Suoni.imposta_musica(not Progressi.musica_attiva)
+	_scrivi_interruttori()
+
+
+func _cambia_suoni():
+	Suoni.imposta_suoni(not Progressi.suoni_attivi)
+	_scrivi_interruttori()
+	Suoni.suona("chicco")  # così si sente subito che i suoni sono tornati
+
+
+func _scrivi_interruttori():
+	interruttore_musica.text = "Musica: sì" if Progressi.musica_attiva else "Musica: no"
+	interruttore_suoni.text = "Suoni: sì" if Progressi.suoni_attivi else "Suoni: no"
+	interruttore_musica.modulate.a = 1.0 if Progressi.musica_attiva else 0.7
+	interruttore_suoni.modulate.a = 1.0 if Progressi.suoni_attivi else 0.7
 
 
 func _voce(colonna: Control, testo: String, metodo: String) -> Button:

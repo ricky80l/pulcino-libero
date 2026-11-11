@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/aperto.ogg-3af1d20157286e5bcaff1c247f6227d3.oggstr"
+
+[deps]
+
+source_file="res://assets/musica/aperto.ogg"
+dest_files=[ "res://.import/aperto.ogg-3af1d20157286e5bcaff1c247f6227d3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

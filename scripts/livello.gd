@@ -23,8 +23,12 @@ onready var contatore := $Interfaccia/Contatore
 onready var numero_chicchi := $Interfaccia/Contatore/Numero
 
 
+const LUOGHI_AL_CHIUSO := [1, 4]  # pollaio e Maglificio: musica "chiuso"; gli altri: "aperto"
+
+
 func _ready():
 	add_to_group("livello")
+	Suoni.musica_di("chiuso" if LUOGHI_AL_CHIUSO.has(numero) else "aperto")
 	Pittura.entra(filename.get_file().get_basename())
 	messaggio.visible = false
 	$Uscita.connect("body_entered", self, "_on_uscita_body_entered")
@@ -90,6 +94,7 @@ func _on_uscita_body_entered(corpo):
 			testo += "Per ora il viaggio si ferma qui:\nnuovi luoghi in arrivo!\n\n"
 		testo_fine.text = testo + "Premi salto per tornare alla mappa"
 		messaggio.visible = true
+		Suoni.abbassa_musica()
 		Suoni.suona("fine", 0.0)
 
 

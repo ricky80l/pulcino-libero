@@ -54,6 +54,7 @@ func _ready():
 	voce.max_distance = 560.0
 	voce.attenuation = 2.0
 	voce.volume_db = -3.0
+	voce.bus = "Suoni"  # si spegne con l'interruttore Suoni
 	add_child(voce)
 	voce.play(rand_range(0.0, 0.9))
 	# la scia di polline che mostra il suo giro, disegnata una volta sola nel livello

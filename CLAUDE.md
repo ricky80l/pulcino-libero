@@ -324,6 +324,8 @@ Il gioco oggi non ha musica e i suoni sono segnaposto sintetici. Scelte fatte:
 I tre brani scelti da Riccardo, che partono piano e si ripetono; gli interruttori Musica e Suoni; gli autori nei Crediti.
 **STOP:** la musica piace, non stanca e si spegne facilmente.
 
+**Com'è fatta (Tappa 27):** brani di Kevin MacLeod (incompetech.com, CC BY 4.0, citati nei Crediti): «Easy Lemon» sulla mappa e nei Crediti, «Carefree» nei luoghi all'aperto, «Cheery Monday» in pollaio e Maglificio (`livello.gd`, `LUOGHI_AL_CHIUSO`). Preparati da `strumenti/prepara_musica.py` (accorciati, sfumati, stesso volume, OGG da circa 1 MB) in `assets/musica/`; gli originali non stanno nel progetto. `Suoni.musica_di(nome)` fa sfumare un brano nell'altro; a fine livello `Suoni.abbassa_musica()` lascia sentire la fanfara. Due canali audio, «Musica» e «Suoni» (anche il ronzio dell'ape), spenti dagli interruttori nel menu di pausa e sulla mappa; `Progressi.musica_attiva` / `suoni_attivi` li ricordano.
+
 ### Tappa 28 — I suoni veri
 Al posto dei suoni sintetici: versi veri per pulcino, topo, oca, talpa e ape; rumori veri per beccate, rotture, chicchi, uovo, stelline, nido e fine livello. Prima di sostituirli, Riccardo ascolta i candidati.
 **STOP:** i suoni nuovi sono più belli dei vecchi e non danno fastidio.

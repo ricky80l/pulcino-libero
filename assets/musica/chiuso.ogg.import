@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/chiuso.ogg-5245f5e902d7b9c453b5ea3dc55eb8a3.oggstr"
+
+[deps]
+
+source_file="res://assets/musica/chiuso.ogg"
+dest_files=[ "res://.import/chiuso.ogg-5245f5e902d7b9c453b5ea3dc55eb8a3.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

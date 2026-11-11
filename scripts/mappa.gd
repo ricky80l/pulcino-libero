@@ -52,6 +52,8 @@ var tempo := 0.0
 
 var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il paesaggio
 var selettore_stile := Button.new()  # Stile: Cartoon / Dipinto
+var interruttore_musica := Button.new()  # Musica: sì / no
+var interruttore_suoni := Button.new()  # Suoni: sì / no
 var sentiero_aperto_fino := 1  # ultimo luogo raggiungibile: fin lì il sentiero è pieno, poi pallido
 var sfondo_dipinto: Sprite = null  # prato ridipinto (modalità dipinta), al posto di quello disegnato da codice
 var solo_terreno := false  # true solo per gli strumenti: prepara prato, fiume, alberi e sentiero e basta
@@ -69,6 +71,7 @@ func _ready():
 		set_process_unhandled_input(false)
 		return
 	Pittura.entra("mappa")
+	Suoni.musica_di("mappa")
 	interfaccia.layer = 2
 	add_child(interfaccia)
 	# la nebbia si dirada solo sui luoghi già costruiti (gli altri sono "in arrivo")
@@ -256,6 +259,39 @@ func _crea_titolo_e_aiuto():
 	selettore_stile.connect("pressed", self, "_cambia_stile")
 	interfaccia.add_child(selettore_stile)
 	_scrivi_stile()
+
+	# interruttori Musica e Suoni (il telefono ricorda la scelta)
+	interruttore_musica.focus_mode = Control.FOCUS_NONE
+	interruttore_musica.rect_position = Vector2(1120 - 16 - 200, 84)
+	interruttore_musica.rect_min_size = Vector2(200, 56)
+	Stile.pulsante_legno(interruttore_musica, FONT_CARTELLI)
+	interruttore_musica.connect("pressed", self, "_cambia_musica")
+	interfaccia.add_child(interruttore_musica)
+	interruttore_suoni.focus_mode = Control.FOCUS_NONE
+	interruttore_suoni.rect_position = Vector2(1120, 84)
+	interruttore_suoni.rect_min_size = Vector2(140, 56)
+	Stile.pulsante_legno(interruttore_suoni, FONT_CARTELLI)
+	interruttore_suoni.connect("pressed", self, "_cambia_suoni")
+	interfaccia.add_child(interruttore_suoni)
+	_scrivi_interruttori()
+
+
+func _cambia_musica():
+	Suoni.imposta_musica(not Progressi.musica_attiva)
+	_scrivi_interruttori()
+
+
+func _cambia_suoni():
+	Suoni.imposta_suoni(not Progressi.suoni_attivi)
+	_scrivi_interruttori()
+	Suoni.suona("chicco")  # così si sente subito che i suoni sono tornati
+
+
+func _scrivi_interruttori():
+	interruttore_musica.text = "Musica: sì" if Progressi.musica_attiva else "Musica: no"
+	interruttore_suoni.text = "Suoni: sì" if Progressi.suoni_attivi else "Suoni: no"
+	interruttore_musica.modulate.a = 1.0 if Progressi.musica_attiva else 0.7
+	interruttore_suoni.modulate.a = 1.0 if Progressi.suoni_attivi else 0.7
 
 
 # Modalità dipinta: il prato ridipinto (con il sentiero aperto fin dove serve) al posto del disegno da codice
