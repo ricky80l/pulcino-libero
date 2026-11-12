@@ -119,6 +119,26 @@ func musica_di(nome: String):
 	sfumatura.start()
 
 
+# Nel browser l'audio si sblocca solo al primo tocco (o tasto): un brano partito prima si perde.
+# Al primo tocco, quindi, il brano in corso riparte da capo (sfumando), così la mappa ha la sua musica da subito.
+var audio_sbloccato := false
+
+
+func _input(evento):
+	if audio_sbloccato:
+		return
+	var tocco: bool = (evento is InputEventScreenTouch or evento is InputEventMouseButton or evento is InputEventKey) and evento.is_pressed()
+	if not tocco:
+		return
+	audio_sbloccato = true
+	set_process_input(false)
+	if OS.has_feature("JavaScript") and musica_attuale != "":
+		var nome := musica_attuale
+		musica_attuale = ""
+		musica.stop()
+		musica_di(nome)
+
+
 # A fine livello la musica si abbassa, così si sente la fanfara
 func abbassa_musica():
 	sfumatura.stop_all()
