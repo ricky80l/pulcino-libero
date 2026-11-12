@@ -175,7 +175,7 @@ func carica():
 		ultimo_giocato = int(dati.get("ultimo_giocato", 1))
 		nebbia_vista = int(dati.get("nebbia_vista", 1))
 		abilita_viste = dati.get("abilita_viste", [])
-		dipinto = bool(dati.get("dipinto", false))
+		dipinto = false  # il selettore dello stile è stato tolto (scelta di Riccardo): si gioca sempre in stile cartoon
 		stelle = dati.get("stelle", {})
 		comprati = dati.get("comprati", [])
 		indossati = dati.get("indossati", {})

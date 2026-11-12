@@ -51,7 +51,6 @@ var tempo := 0.0
 
 
 var interfaccia := CanvasLayer.new()  # cartelli, titolo e pulsanti, sopra il paesaggio
-var selettore_stile := Button.new()  # Stile: Cartoon / Dipinto
 var interruttore_musica := Button.new()  # Musica: sì / no
 var interruttore_suoni := Button.new()  # Suoni: sì / no
 var sentiero_aperto_fino := 1  # ultimo luogo raggiungibile: fin lì il sentiero è pieno, poi pallido
@@ -245,20 +244,11 @@ func _crea_titolo_e_aiuto():
 	var bancarella := Button.new()
 	bancarella.text = "Bancarella"
 	bancarella.focus_mode = Control.FOCUS_NONE
-	bancarella.rect_position = Vector2(1120 - 16 - 240 - 16 - 200, 16)
+	bancarella.rect_position = Vector2(1120 - 16 - 200, 16)
 	bancarella.rect_min_size = Vector2(200, 56)
 	Stile.pulsante_legno(bancarella, FONT_CARTELLI)
 	bancarella.connect("pressed", self, "_apri_bancarella")
 	interfaccia.add_child(bancarella)
-
-	# selettore dello stile (Cartoon / Dipinto): vale per i luoghi che hanno la versione dipinta
-	selettore_stile.focus_mode = Control.FOCUS_NONE
-	selettore_stile.rect_position = Vector2(1120 - 16 - 240, 16)
-	selettore_stile.rect_min_size = Vector2(240, 56)
-	Stile.pulsante_legno(selettore_stile, FONT_CARTELLI)
-	selettore_stile.connect("pressed", self, "_cambia_stile")
-	interfaccia.add_child(selettore_stile)
-	_scrivi_stile()
 
 	# interruttori Musica e Suoni (il telefono ricorda la scelta)
 	interruttore_musica.focus_mode = Control.FOCUS_NONE
@@ -315,15 +305,6 @@ func _apri_bancarella():
 	b.set_script(BANCARELLA)
 	add_child(b)
 	b.apri()
-
-
-func _cambia_stile():
-	Pittura.imposta(not Progressi.dipinto)
-	_scrivi_stile()
-
-
-func _scrivi_stile():
-	selettore_stile.text = "Stile: Dipinto" if Progressi.dipinto else "Stile: Cartoon"
 
 
 func _crea_nuvole():
